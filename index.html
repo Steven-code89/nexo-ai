@@ -104,7 +104,19 @@
 
   /* ── NAV ── */
   nav { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 5vw; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(244,246,251,0.92); backdrop-filter: blur(12px); z-index: 100; }
-  .logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.3rem; letter-spacing: -0.04em; color: var(--ink); }
+  .logo {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.3rem;
+    letter-spacing: -0.04em; color: var(--ink); text-decoration: none;
+    transition: opacity 0.2s; cursor: pointer; display: inline-block;
+  }
+  .logo:hover { opacity: 0.75; }
+  /* Flash animation when clicking logo to go home */
+  @keyframes homeFlash {
+    0%   { opacity: 1; transform: scale(1); }
+    30%  { opacity: 0.4; transform: scale(0.97); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  .logo.flashing { animation: homeFlash 0.4s ease; }
   .logo .logo-ai { color: var(--accent); }
   .nav-right { display: flex; gap: 1.5rem; align-items: center; }
   .nav-links-text { display: flex; gap: 2rem; align-items: center; }
@@ -154,15 +166,15 @@
   .how-inner .section-label { color: #93c5fd; } /* azul claro — contraste suficiente sobre fondo oscuro */
   .how-inner h2 { color: var(--paper); }
   .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 3rem; margin-top: 3rem; }
-  .step-num { font-family: 'Space Grotesk', sans-serif; font-size: 3.5rem; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 1rem; }
+  .step-num { font-family: 'Space Grotesk', sans-serif; font-size: 3.5rem; font-weight: 700; color: #ffffff; line-height: 1; margin-bottom: 1rem; text-shadow: 0 0 20px rgba(96,165,250,0.8), 0 2px 8px rgba(0,0,0,0.5); }
   .step h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
   .step p { font-size: 0.875rem; color: rgba(244,246,251,0.55); line-height: 1.7; }
 
   /* ── PRICING ── */
   .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
   .price-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 2rem; position: relative; }
-  .price-card.featured { border: 2px solid var(--accent); box-shadow: 0 0 0 4px rgba(37,99,235,0.08); }
-  .featured-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 1rem; border-radius: 100px; white-space: nowrap; }
+
+  .featured-badge { display: none; }
   .plan-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.9rem; margin-bottom: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
   .plan-price { font-family: 'Space Grotesk', sans-serif; font-size: 2.75rem; font-weight: 700; letter-spacing: -0.04em; line-height: 1; margin-bottom: 0.35rem; color: var(--ink); }
   .plan-price sup { font-size: 1.2rem; vertical-align: top; margin-top: 0.5rem; display: inline-block; }
@@ -170,6 +182,141 @@
   .plan-features { list-style: none; margin-bottom: 2rem; }
   .plan-features li { font-size: 0.875rem; color: var(--muted); padding: 0.45rem 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.6rem; }
   .plan-features li::before { content: ''; width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0; background: #dbeafe url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8l3 3 7-7' stroke='%232563eb' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+
+
+  /* ══ PRICING CARD HOVER EFFECTS ══════════════════════════════════ */
+
+  /* Base upgrade for all price cards */
+  .price-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+  }
+  .price-card:hover {
+    transform: translateY(-6px);
+  }
+
+  /* ── INICIAL: Typing cursor effect — like writing code ── */
+  .price-card.plan-inicial {
+    position: relative;
+  }
+  .price-card.plan-inicial::before {
+    content: '< / >';
+    position: absolute; top: 1rem; right: 1rem;
+    font-family: monospace; font-size: 0.7rem; font-weight: 700;
+    color: rgba(37,99,235,0.08); letter-spacing: 0.1em;
+    transition: color 0.3s, transform 0.3s;
+    transform: scale(0.8);
+  }
+  .price-card.plan-inicial::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+  }
+  .price-card.plan-inicial:hover::before {
+    color: rgba(37,99,235,0.5);
+    transform: scale(1) rotate(5deg);
+  }
+  .price-card.plan-inicial:hover::after {
+    transform: scaleX(1);
+  }
+  .price-card.plan-inicial:hover {
+    box-shadow: 0 12px 40px rgba(37,99,235,0.15);
+    border-color: rgba(37,99,235,0.4);
+  }
+  .price-card.plan-inicial:hover .plan-price {
+    color: var(--accent);
+    transition: color 0.3s;
+  }
+
+  /* ── CRECIMIENTO: Neural network pulse — glowing nodes ── */
+  .price-card.plan-crecimiento {
+    position: relative;
+  }
+  @keyframes neuralPulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(37,99,235,0), 0 12px 40px rgba(37,99,235,0.2); }
+    50%      { box-shadow: 0 0 0 8px rgba(37,99,235,0.08), 0 20px 50px rgba(37,99,235,0.35); }
+  }
+  .price-card.plan-crecimiento:hover {
+    animation: neuralPulse 2s ease-in-out infinite;
+    border-color: var(--accent);
+  }
+  .price-card.plan-crecimiento::before {
+    content: '⬡ ⬡ ⬡';
+    position: absolute; top: 0.75rem; right: 0.85rem;
+    font-size: 0.6rem; letter-spacing: 0.3em;
+    color: rgba(37,99,235,0.08);
+    transition: color 0.4s, letter-spacing 0.4s;
+  }
+  .price-card.plan-crecimiento:hover::before {
+    color: rgba(37,99,235,0.4);
+    letter-spacing: 0.5em;
+  }
+  .price-card.plan-crecimiento:hover .plan-name {
+    color: var(--muted); /* keep plan name color neutral */
+    transition: color 0.3s;
+  }
+  .price-card.plan-crecimiento:hover .plan-price {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: all 0.3s;
+  }
+
+  /* ── EMPRESARIAL: Holographic shimmer ── */
+  @keyframes shimmer {
+    0%   { background-position: -200% center; }
+    100% { background-position:  200% center; }
+  }
+  .price-card.plan-empresarial {
+    position: relative;
+  }
+  .price-card.plan-empresarial::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 20%,
+      rgba(37,99,235,0.04) 30%,
+      rgba(147,197,253,0.12) 45%,
+      rgba(96,165,250,0.08) 50%,
+      rgba(37,99,235,0.04) 60%,
+      transparent 70%
+    );
+    background-size: 200% auto;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    border-radius: 20px;
+  }
+  .price-card.plan-empresarial:hover::after {
+    opacity: 1;
+    animation: shimmer 2s linear infinite;
+  }
+  .price-card.plan-empresarial:hover {
+    box-shadow: 0 16px 50px rgba(37,99,235,0.2), 0 0 0 1px rgba(37,99,235,0.2);
+    border-color: rgba(147,197,253,0.6);
+  }
+  .price-card.plan-empresarial::before {
+    content: '✦';
+    position: absolute; top: 0.85rem; right: 1rem;
+    font-size: 1rem; color: rgba(37,99,235,0.1);
+    transition: color 0.3s, transform 0.5s;
+    transform: rotate(0deg);
+  }
+  .price-card.plan-empresarial:hover::before {
+    color: rgba(37,99,235,0.5);
+    transform: rotate(180deg);
+  }
+  .price-card.plan-empresarial:hover .plan-price {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: all 0.3s;
+  }
 
   /* ── CONTACT ── */
   .cta-section { padding: 6rem 5vw; text-align: center; max-width: 680px; margin: 0 auto; }
@@ -187,6 +334,183 @@
 
   /* ── FOOTER ── */
   footer { border-top: 1px solid var(--border); padding: 2rem 5vw; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.8rem; color: var(--muted); }
+
+
+  /* ══ SERVICE CARDS HOVER ══════════════════════════════════════════ */
+  .service-card {
+    position: relative;
+    transition: transform 0.3s ease, background 0.3s ease;
+    overflow: hidden;
+  }
+  .service-card:hover {
+    transform: translateY(-4px);
+    background: #f0f5ff !important;
+  }
+
+  /* Animated gradient border on hover */
+  .service-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 0;
+    background: linear-gradient(135deg, rgba(37,99,235,0.06), rgba(147,197,253,0.1), rgba(37,99,235,0.04));
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+  }
+  .service-card:hover::after { opacity: 1; }
+
+  /* Icon bounce on hover */
+  .service-card:hover .service-icon {
+    animation: iconBounce 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  @keyframes iconBounce {
+    0%   { transform: scale(1) rotate(0deg); }
+    40%  { transform: scale(1.25) rotate(-8deg); }
+    70%  { transform: scale(0.95) rotate(4deg); }
+    100% { transform: scale(1) rotate(0deg); }
+  }
+
+  /* Slide-up price tag on hover */
+  .service-card .service-price {
+    transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.3s;
+  }
+  .service-card:hover .service-price {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* Title color shift */
+  .service-card h3 {
+    transition: color 0.3s;
+  }
+  .service-card:hover h3 { color: var(--accent); }
+
+  /* Subtle left accent bar */
+  .service-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 20%; bottom: 20%;
+    width: 3px;
+    background: var(--accent);
+    border-radius: 0 3px 3px 0;
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+  }
+  .service-card:hover::before { transform: scaleY(1); }
+
+
+  /* Center cards: accent bar on TOP and BOTTOM */
+  .service-card.card-center::before {
+    left: 20%; right: 20%; top: 0; bottom: auto;
+    width: auto; height: 3px;
+    border-radius: 0 0 3px 3px;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+  .service-card.card-center::after {
+    pointer-events: none;
+  }
+  .service-card.card-center:hover::before { transform: scaleX(1); }
+
+  /* Bottom bar for center cards using a box-shadow trick */
+  .service-card.card-center {
+    box-shadow: inset 0 0 0 0 var(--accent);
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  }
+  .service-card.card-center:hover {
+    box-shadow: inset 0 -3px 0 0 var(--accent);
+  }
+
+  /* Right-column cards: accent bar on right instead of left */
+  .service-card.card-right::before {
+    left: auto;
+    right: 0;
+    border-radius: 3px 0 0 3px;
+  }
+
+
+
+  /* ══ HOW SECTION — ANIMATED BACKGROUND ═══════════════════════════ */
+
+  /* Animated gradient background */
+  @keyframes gradientShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .how-section {
+    background: linear-gradient(-45deg, #0b1120, #0f1a2e, #111827, #0d1527, #0b1120, #131f35);
+    background-size: 600% 600%;
+    animation: gradientShift 8s ease infinite;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Floating particles in background */
+  .how-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(30,58,138,0.25) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(15,23,42,0.4) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(17,24,39,0.3) 0%, transparent 60%);
+    animation: particleFloat 8s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+  @keyframes particleFloat {
+    0%   { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(10px, -15px) scale(1.05); }
+  }
+
+  /* Step numbers — glow + count-up feel on hover */
+  .step-num {
+    position: relative;
+    display: inline-block;
+    transition: transform 0.3s ease, text-shadow 0.3s ease;
+    cursor: default;
+  }
+  .step:hover .step-num {
+    transform: scale(1.15) translateY(-4px);
+    text-shadow: 0 0 30px rgba(147,197,253,1), 0 0 60px rgba(96,165,250,0.7), 0 2px 8px rgba(0,0,0,0.5);
+  }
+
+  /* Step card hover */
+  .step {
+    position: relative;
+    padding: 1.5rem;
+    border-radius: 16px;
+    transition: background 0.3s ease;
+    cursor: default;
+  }
+  .step:hover {
+    background: rgba(255,255,255,0.04);
+  }
+
+  /* Animated underline on step title */
+  .step h3 {
+    position: relative;
+    display: inline-block;
+  }
+  .step h3::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0;
+    width: 0; height: 2px;
+    background: var(--accent-light);
+    transition: width 0.4s ease;
+    border-radius: 2px;
+  }
+  .step:hover h3::after { width: 100%; }
+
+  /* Connector line between steps (decorative) */
+  .steps {
+    position: relative;
+  }
+
+
 
   /* ── ADMIN OVERLAY ── */
   #admin-overlay { display: none; position: fixed; inset: 0; z-index: 9999; background: var(--paper); overflow-y: auto; }
@@ -280,7 +604,7 @@
 
 <!-- PUBLIC PAGE -->
 <nav aria-label="Navegación principal">
-  <div class="logo">Nexo<span class="logo-ai"> AI</span></div>
+  <a class="logo" href="#" onclick="goHome(event)" aria-label="Nexo AI — Ir al inicio">Nexo<span class="logo-ai"> AI</span></a>
   <div class="nav-right">
     <div class="nav-links-text">
       <a href="#services" data-es="Servicios" data-en="Services">Servicios</a>
@@ -298,7 +622,7 @@
 <div class="hero">
   <div class="hero-tag" data-es="Tecnología inteligente para negocios locales" data-en="Smart technology for local business">Tecnología inteligente para negocios locales</div>
   <h1 fetchpriority="high" data-es="Tu negocio, <em>conectado al futuro</em> con IA." data-en="Your business, <em>connected to the future</em> with AI.">Tu negocio, <em>conectado al futuro</em> con IA.</h1>
-  <p class="hero-sub" data-es="Ayudo a pequeñas empresas a ahorrar tiempo, atraer más clientes y crecer — con páginas web profesionales, software a medida e inteligencia artificial." data-en="I help small businesses save time, attract more clients and grow — with professional websites, custom software and artificial intelligence.">Ayudo a pequeñas empresas a ahorrar tiempo, atraer más clientes y crecer — con páginas web profesionales, software a medida e inteligencia artificial.</p>
+  <p class="hero-sub" data-es="Ayudamos a pequeñas empresas a ahorrar tiempo, atraer más clientes y crecer — con páginas web profesionales, software a medida e inteligencia artificial." data-en="We help small businesses save time, attract more clients and grow — with professional websites, custom software and artificial intelligence.">Ayudamos a pequeñas empresas a ahorrar tiempo, atraer más clientes y crecer — con páginas web profesionales, software a medida e inteligencia artificial.</p>
   <div class="hero-actions">
     <a href="#contact" class="btn-primary" data-es="Agenda una llamada gratis de 20 min" data-en="Book a free 20-min call">Agenda una llamada gratis de 20 min</a>
     <a href="#services" class="btn-ghost" data-es="Ver mis servicios" data-en="See what I offer">Ver mis servicios</a>
@@ -309,7 +633,7 @@
 <div class="proof-strip">
   <span><strong data-es="✓ Configuración rápida" data-en="✓ Fast setup">✓ Configuración rápida</strong> — <span data-es="listo en días, no meses" data-en="live in days, not months">listo en días, no meses</span></span>
   <span><strong data-es="✓ Tarifa mensual fija" data-en="✓ Flat monthly fee">✓ Tarifa mensual fija</strong> — <span data-es="sin sorpresas en la factura" data-en="no surprise bills">sin sorpresas en la factura</span></span>
-  <span><strong data-es="✓ Soporte local" data-en="✓ Local support">✓ Soporte local</strong> — <span data-es="persona real, ayuda real" data-en="real person, real help">persona real, ayuda real</span></span>
+  <span><strong data-es="✓ Soporte local" data-en="✓ Local support">✓ Soporte local</strong> — <span data-es="equipo real, ayuda real" data-en="real team, real help">equipo real, ayuda real</span></span>
   <span><strong data-es="✓ Personalizado" data-en="✓ Personalized">✓ Personalizado</strong> — <span data-es="se ajusta a tus necesidades" data-en="tailored to your needs">se ajusta a tus necesidades</span></span>
   <span data-es="✓ Compatible con tus herramientas actuales" data-en="✓ Works with your existing tools">✓ Compatible con tus herramientas actuales</span>
 </div>
@@ -324,13 +648,13 @@
       <p data-es="Diseño y desarrollo páginas web profesionales, rápidas y adaptadas a celular — para que tus clientes te encuentren y confíen en tu negocio desde el primer clic." data-en="I design and build professional, fast, mobile-friendly websites — so your clients find you and trust your business from the first click.">Diseño y desarrollo páginas web profesionales, rápidas y adaptadas a celular — para que tus clientes te encuentren y confíen en tu negocio desde el primer clic.</p>
       <span class="service-price" data-es="Desde $350 página completa" data-en="From $350 full website">Desde $350 página completa</span>
     </div>
-    <div class="service-card">
+    <div class="service-card card-center">
       <div class="service-icon icon-indigo">💻</div>
       <h3 data-es="Desarrollo de Software a Medida" data-en="Custom Software Development">Desarrollo de Software a Medida</h3>
       <p data-es="Sistemas internos, apps web o herramientas digitales diseñadas específicamente para los procesos de tu negocio — sin pagar por funciones que no vas a usar." data-en="Internal systems, web apps or digital tools designed specifically for your business processes — without paying for features you'll never use.">Sistemas internos, apps web o herramientas digitales diseñadas específicamente para los procesos de tu negocio — sin pagar por funciones que no vas a usar.</p>
-      <span class="service-price" data-es="Desde $500 — cotización personalizada" data-en="From $500 — custom quote">Desde $500 — cotización personalizada</span>
+      <span class="service-price" data-es="Cotización personalizada" data-en="Custom quote">Cotización personalizada</span>
     </div>
-    <div class="service-card">
+    <div class="service-card card-right">
       <div class="service-icon icon-blue">🤖</div>
       <h3 data-es="Bot de Atención al Cliente con IA" data-en="AI Customer Support Bot">Bot de Atención al Cliente con IA</h3>
       <p data-es="Un chatbot en tu sitio web que responde preguntas frecuentes 24/7, agenda citas y captura leads — incluso mientras duermes." data-en="A chatbot on your website that answers FAQs 24/7, books appointments, and captures leads — even while you sleep.">Un chatbot en tu sitio web que responde preguntas frecuentes 24/7, agenda citas y captura leads — incluso mientras duermes.</p>
@@ -342,13 +666,13 @@
       <p data-es="Publicaciones semanales para redes sociales, blogs y newsletters — generadas y programadas automáticamente con la voz de tu marca." data-en="Weekly social media posts, blogs and newsletters — generated and scheduled automatically using your brand voice.">Publicaciones semanales para redes sociales, blogs y newsletters — generadas y programadas automáticamente con la voz de tu marca.</p>
       <span class="service-price" data-es="Desde $99/mes" data-en="From $99/mo">Desde $99/mes</span>
     </div>
-    <div class="service-card">
+    <div class="service-card card-center">
       <div class="service-icon icon-indigo">📧</div>
       <h3 data-es="Automatización de Correos y Seguimientos" data-en="Email & Follow-up Automation">Automatización de Correos y Seguimientos</h3>
       <p data-es="Seguimientos, solicitudes de reseñas y recordatorios de citas — enviados automáticamente a la persona correcta en el momento indicado." data-en="Follow-ups, review requests and appointment reminders — sent automatically to the right person at the right time.">Seguimientos, solicitudes de reseñas y recordatorios de citas — enviados automáticamente a la persona correcta en el momento indicado.</p>
       <span class="service-price" data-es="Desde $120 instalación + $39/mes" data-en="From $120 setup + $39/mo">Desde $120 instalación + $39/mes</span>
     </div>
-    <div class="service-card">
+    <div class="service-card card-right">
       <div class="service-icon icon-sky">⚙️</div>
       <h3 data-es="Flujos de Trabajo Personalizados" data-en="Custom AI Workflows">Flujos de Trabajo Personalizados</h3>
       <p data-es="¿Alguna tarea consume demasiado tiempo en tu equipo? La automatizamos. Cotizaciones, facturas, inventario — lo que sea repetitivo." data-en="Got a task eating up your team's time? Let's automate it. Quotes, invoices, inventory — anything repetitive.">¿Alguna tarea consume demasiado tiempo en tu equipo? La automatizamos. Cotizaciones, facturas, inventario — lo que sea repetitivo.</p>
@@ -362,10 +686,10 @@
     <p class="section-label" data-es="El proceso" data-en="The process">El proceso</p>
     <h2 data-es="Simple desde el inicio hasta los resultados" data-en="Simple from start to results">Simple desde el inicio hasta los resultados</h2>
     <div class="steps">
-      <div class="step"><div class="step-num">01</div><h3 data-es="Llamada de diagnóstico gratis" data-en="Free audit call">Llamada de diagnóstico gratis</h3><p data-es="Hablamos 20 minutos sobre tu negocio. Identifico dónde la tecnología puede ahorrarte más tiempo o dinero." data-en="We talk for 20 minutes about your business. I find where technology can save you the most time or money.">Hablamos 20 minutos sobre tu negocio. Identifico dónde la tecnología puede ahorrarte más tiempo o dinero.</p></div>
-      <div class="step"><div class="step-num">02</div><h3 data-es="Propuesta en 48 horas" data-en="Proposal in 48h">Propuesta en 48 horas</h3><p data-es="Recibes un plan claro con las herramientas, el tiempo y el costo exacto. Sin sorpresas." data-en="You get a clear plan with exact tools, timeline, and cost. No surprises.">Recibes un plan claro con las herramientas, el tiempo y el costo exacto. Sin sorpresas.</p></div>
-      <div class="step"><div class="step-num">03</div><h3 data-es="Configuración y lanzamiento" data-en="Setup & launch">Configuración y lanzamiento</h3><p data-es="Yo construyo y pruebo todo. Recibes una explicación completa para que entiendas qué está pasando." data-en="I build and test everything. You get a full walkthrough so you understand what's happening.">Yo construyo y pruebo todo. Recibes una explicación completa para que entiendas qué está pasando.</p></div>
-      <div class="step"><div class="step-num">04</div><h3 data-es="Soporte continuo" data-en="Ongoing support">Soporte continuo</h3><p data-es="Revisiones mensuales, ajustes y mejoras incluidas. Siempre estoy a un mensaje de distancia." data-en="Monthly check-ins, tweaks and improvements included. I'm always one message away.">Revisiones mensuales, ajustes y mejoras incluidas. Siempre estoy a un mensaje de distancia.</p></div>
+      <div class="step"><div class="step-num">1</div><h3 data-es="Llamada de diagnóstico gratis" data-en="Free audit call">Llamada de diagnóstico gratis</h3><p data-es="Hablamos 20 minutos sobre tu negocio. Identificamos dónde la tecnología puede ahorrarte más tiempo o dinero." data-en="We talk for 20 minutes about your business. We identify where technology can save you the most time or money.">Hablamos 20 minutos sobre tu negocio. Identificamos dónde la tecnología puede ahorrarte más tiempo o dinero.</p></div>
+      <div class="step"><div class="step-num">2</div><h3 data-es="Propuesta en 48 horas" data-en="Proposal in 48h">Propuesta en 48 horas</h3><p data-es="Recibes un plan claro con las herramientas, el tiempo y el costo exacto. Sin sorpresas." data-en="You get a clear plan with exact tools, timeline, and cost. No surprises.">Recibes un plan claro con las herramientas, el tiempo y el costo exacto. Sin sorpresas.</p></div>
+      <div class="step"><div class="step-num">3</div><h3 data-es="Configuración y lanzamiento" data-en="Setup & launch">Configuración y lanzamiento</h3><p data-es="Construimos y probamos todo. Recibes una explicación completa para que entiendas qué está pasando." data-en="We build and test everything. You get a full walkthrough so you understand what's happening.">Construimos y probamos todo. Recibes una explicación completa para que entiendas qué está pasando.</p></div>
+      <div class="step"><div class="step-num">4</div><h3 data-es="Soporte continuo" data-en="Ongoing support">Soporte continuo</h3><p data-es="Revisiones mensuales, ajustes y mejoras incluidas. Siempre estamos a un mensaje de distancia." data-en="Monthly check-ins, tweaks and improvements included. We're always one message away.">Revisiones mensuales, ajustes y mejoras incluidas. Siempre estamos a un mensaje de distancia.</p></div>
     </div>
   </div>
 </div>
@@ -374,7 +698,7 @@
   <p class="section-label" data-es="Precios" data-en="Pricing">Precios</p>
   <h2 data-es="Planes claros, sin tarifas ocultas" data-en="Straightforward plans, no hidden fees">Planes claros, sin tarifas ocultas</h2>
   <div class="pricing-grid">
-    <div class="price-card">
+    <div class="price-card plan-inicial">
       <div class="plan-name" data-es="Inicial" data-en="Starter">Inicial</div>
       <div class="plan-price"><sup>$</sup>99</div>
       <div class="plan-period" data-es="por mes" data-en="per month">por mes</div>
@@ -386,8 +710,7 @@
       </ul>
       <a href="#contact" class="btn-ghost" style="display:block;text-align:center;" data-es="Comenzar" data-en="Get started">Comenzar</a>
     </div>
-    <div class="price-card featured">
-      <div class="featured-badge" data-es="Más popular" data-en="Most popular">Más popular</div>
+    <div class="price-card plan-crecimiento featured">
       <div class="plan-name" data-es="Crecimiento" data-en="Growth">Crecimiento</div>
       <div class="plan-price"><sup>$</sup>249</div>
       <div class="plan-period" data-es="por mes" data-en="per month">por mes</div>
@@ -398,9 +721,9 @@
         <li data-es="Llamada quincenal de seguimiento" data-en="Bi-weekly check-in call">Llamada quincenal de seguimiento</li>
         <li data-es="Reporte mensual de rendimiento" data-en="Monthly performance report">Reporte mensual de rendimiento</li>
       </ul>
-      <a href="#contact" class="btn-primary" style="display:block;text-align:center;" data-es="Comenzar" data-en="Get started">Comenzar</a>
+      <a href="#contact" class="btn-ghost" style="display:block;text-align:center;" data-es="Comenzar" data-en="Get started">Comenzar</a>
     </div>
-    <div class="price-card">
+    <div class="price-card plan-empresarial">
       <div class="plan-name" data-es="Empresarial" data-en="Business">Empresarial</div>
       <div class="plan-price"><sup>$</sup>449</div>
       <div class="plan-period" data-es="por mes" data-en="per month">por mes</div>
@@ -419,10 +742,10 @@
 <div class="cta-section" id="contact">
   <p class="section-label" data-es="Contacto" data-en="Get in touch">Contacto</p>
   <h2 data-es="Encontremos tu primera victoria digital" data-en="Let's find your first digital win">Encontremos tu primera victoria digital</h2>
-  <p data-es="Cuéntame un poco sobre tu negocio y te respondo en menos de 24 horas con ideas — completamente gratis, sin ningún compromiso." data-en="Tell me a bit about your business and I'll get back to you within 24 hours with ideas — completely free, no obligation.">Cuéntame un poco sobre tu negocio y te respondo en menos de 24 horas con ideas — completamente gratis, sin ningún compromiso.</p>
+  <p data-es="Cuéntanos un poco sobre tu negocio y te respondemos en menos de 24 horas con ideas — completamente gratis, sin ningún compromiso." data-en="Tell us a bit about your business and we'll get back to you within 24 hours with ideas — completely free, no obligation.">Cuéntanos un poco sobre tu negocio y te respondemos en menos de 24 horas con ideas — completamente gratis, sin ningún compromiso.</p>
   <div class="form-success" id="form-success">
     <h3 data-es="¡Mensaje enviado! 🎉" data-en="Message sent! 🎉">¡Mensaje enviado! 🎉</h3>
-    <p data-es="Te respondo en menos de 24 horas. ¡Gracias por tu interés!" data-en="I'll get back to you within 24 hours. Thanks for reaching out!">Te respondo en menos de 24 horas. ¡Gracias por tu interés!</p>
+    <p data-es="Te respondemos en menos de 24 horas. ¡Gracias por tu interés!" data-en="We'll get back to you within 24 hours. Thanks for reaching out!">Te respondemos en menos de 24 horas. ¡Gracias por tu interés!</p>
   </div>
   <form class="contact-form" id="contact-form" onsubmit="handleSubmit(event)">
     <div class="form-row">
@@ -452,32 +775,46 @@
 </main><!-- /main -->
 
 <footer>
-  <div class="logo">Nexo<span class="logo-ai"> AI</span></div>
+  <a class="logo" href="#" onclick="goHome(event)" aria-label="Nexo AI — Ir al inicio">Nexo<span class="logo-ai"> AI</span></a>
   <span data-es="© 2025 Nexo AI. Todos los derechos reservados." data-en="© 2025 Nexo AI. All rights reserved.">© 2025 Nexo AI. Todos los derechos reservados.</span>
   <span style="cursor:pointer;opacity:0.25;font-size:0.7rem;" onclick="openAdmin()" title="Admin">⚙</span>
 </footer>
 
-<!-- defer: el navegador descarga Supabase en paralelo sin bloquear el render.
-     Se ejecuta cuando el HTML termina de parsear. Como Supabase solo se usa
-     al enviar el form o abrir el admin, esto no afecta la funcionalidad. -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+
 <script>
 const SUPABASE_URL    = 'https://siddjvgshubezcxnxuoi.supabase.co';
 const SUPABASE_KEY    = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpZGRqdmdzaHViZXpjeG54dW9pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwNzM5NjEsImV4cCI6MjA5MjY0OTk2MX0.ZtNyrDmM19RSvM_uY8D1ResmyzEiRBjaXp7osbqovE8';
 const ADMIN_PASSWORD  = 'zaq12wsx';
 
 const isConfigured = SUPABASE_URL !== 'TU_SUPABASE_URL';
-// sb se inicializa después de que Supabase cargue (defer)
-// usamos una función para obtenerlo siempre actualizado
+
+// ── LAZY LOAD SUPABASE ────────────────────────────────────────────
+// En vez de cargar Supabase siempre (48KB), lo cargamos solo cuando
+// el usuario realmente lo necesita: al enviar el form o abrir admin.
+// Esto elimina Supabase del critical path completamente.
 let _sb = null;
-function getSb() {
-  if (!_sb && isConfigured && typeof supabase !== 'undefined') {
-    _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-  }
-  return _sb;
+let _sbLoading = null;
+
+function loadSupabase() {
+  // Si ya está cargado, devolvemos inmediatamente
+  if (_sb) return Promise.resolve(_sb);
+  // Si ya está cargando, esperamos esa promesa
+  if (_sbLoading) return _sbLoading;
+  // Primera vez: inyectamos el script dinámicamente
+  _sbLoading = new Promise(function(resolve, reject) {
+    var script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+    script.onload = function() {
+      _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      resolve(_sb);
+    };
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+  return _sbLoading;
 }
-// Alias para compatibilidad con el resto del código
-Object.defineProperty(window, 'sb', { get: getSb });
+
+function getSb() { return _sb; }
 let currentLang = 'es';
 
 function setLang(lang) {
@@ -507,6 +844,7 @@ async function handleSubmit(e) {
   };
   if(!isConfigured){ showFormSuccess(); return; }
   try {
+    await loadSupabase();
     var r=await getSb().from('mensajes').insert([payload]);
     if(r.error) throw r.error;
     showFormSuccess();
@@ -525,6 +863,7 @@ function showFormSuccess(){
 function openAdmin(){
   document.getElementById('admin-overlay').classList.add('active');
   if(!isConfigured) document.getElementById('config-notice').style.display='block';
+  if(isConfigured) loadSupabase(); // precarga al abrir admin
   if(sessionStorage.getItem('admin_ok')==='1') showMessagesPanel();
 }
 
@@ -583,6 +922,42 @@ async function markRead(id){ await getSb().from('mensajes').update({leido:true})
 async function deleteMsg(id){ if(!confirm('¿Eliminar este mensaje?')) return; await getSb().from('mensajes').delete().eq('id',id); loadMessages(); }
 function esc(s){ return s?String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'):''; }
 document.addEventListener('keydown',function(e){ if(e.key==='Escape') adminLogout(); });
+
+// ── ROBOT SCROLL TRIGGER ──────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  var wrapper = document.getElementById('robot-wrapper');
+  var target  = document.getElementById('services');
+  if (!wrapper || !target) return;
+
+  function checkScroll() {
+    if (window.chatOpen) return;
+    var rect = target.getBoundingClientRect();
+    // Show when services section reached, hide when scrolled back above it
+    if (rect.top < window.innerHeight * 0.8) {
+      wrapper.classList.add('peeking');
+      wrapper.classList.add('was-peeking');
+    } else {
+      wrapper.classList.remove('peeking');
+    }
+  }
+
+  window.addEventListener('scroll', checkScroll, { passive: true });
+  setTimeout(checkScroll, 300);
+});
+
+// ── HOME BUTTON ───────────────────────────────────────────────────
+// Smooth scroll al top con efecto flash en el logo
+function goHome(e) {
+  e.preventDefault();
+  var logo = document.querySelector('nav .logo');
+  // Efecto flash
+  logo.classList.add('flashing');
+  logo.addEventListener('animationend', function() {
+    logo.classList.remove('flashing');
+  }, { once: true });
+  // Scroll suave al top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 </script>
 
 <!-- ════ CHATBOT WIDGET ════ -->
@@ -592,25 +967,17 @@ document.addEventListener('keydown',function(e){ if(e.key==='Escape') adminLogou
     width:60px; height:60px; border-radius:50%;
     background:var(--accent); color:#fff; border:none; cursor:pointer;
     box-shadow:0 8px 28px rgba(37,99,235,0.45);
-    display:flex; align-items:center; justify-content:center;
+    display:flex; align-items:center; justify-content:center; position:relative;
     font-size:1.5rem; transition:transform 0.2s, box-shadow 0.2s;
     animation:pulse-ring 2.5s ease-out infinite;
-  will-change:box-shadow;
   }
   #chat-bubble:hover{transform:scale(1.08);}
-  @keyframes pulse-ring{
-    0%{box-shadow:0 0 0 0 rgba(37,99,235,0.5),0 8px 28px rgba(37,99,235,0.45);}
-    70%{box-shadow:0 0 0 14px rgba(37,99,235,0),0 8px 28px rgba(37,99,235,0.45);}
-    100%{box-shadow:0 0 0 0 rgba(37,99,235,0),0 8px 28px rgba(37,99,235,0.45);}
+  
+    70%  { transform: scale(1.6); opacity: 0; }
+    100% { transform: scale(1.6); opacity: 0; }
   }
-  #chat-label {
-    position:fixed; bottom:2.1rem; right:5.25rem; z-index:8000;
-    background:var(--ink); color:var(--paper); font-family:'Plus Jakarta Sans',sans-serif;
-    font-size:0.8rem; font-weight:600; padding:0.45rem 0.95rem;
-    border-radius:100px; white-space:nowrap; pointer-events:none;
-    box-shadow:0 4px 14px rgba(0,0,0,0.18);
-    animation:fadeInLabel 0.6s 1.5s ease both;
-  }
+  
+  
   @keyframes fadeInLabel{from{opacity:0;transform:translateX(8px);}to{opacity:1;transform:translateX(0);}}
   #chat-window {
     position:fixed; bottom:5.5rem; right:1.75rem; z-index:8000;
@@ -653,11 +1020,189 @@ document.addEventListener('keydown',function(e){ if(e.key==='Escape') adminLogou
   #chat-send{width:38px;height:38px;border-radius:50%;background:var(--accent);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:background 0.15s,transform 0.1s;flex-shrink:0;}
   #chat-send:hover{background:var(--accent-dark);transform:scale(1.05);}
   #chat-send:disabled{background:var(--border);cursor:not-allowed;transform:none;}
+
+  /* ══ ROBOT MASCOT ══════════════════════════════════════════════ */
+  #robot-wrapper {
+    position: fixed;
+    bottom: 0;
+    right: 2rem;
+    z-index: 8000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateY(180px);
+    transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: pointer;
+    user-select: none;
+  }
+  #robot-wrapper.peeking {
+    transform: translateY(20px);
+  }
+  #robot-wrapper.open {
+    transform: translateY(180px);
+  }
+
+  /* Speech bubble */
+  #robot-bubble {
+    background: white;
+    border: 2px solid var(--accent);
+    border-radius: 16px 16px 16px 4px;
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ink);
+    white-space: nowrap;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 4px 16px rgba(37,99,235,0.15);
+    opacity: 0;
+    transform: scale(0.8) translateY(8px);
+    transition: opacity 0.4s 0.6s ease, transform 0.4s 0.6s ease;
+    pointer-events: none;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  #robot-wrapper.peeking #robot-bubble {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  /* Robot SVG container */
+  #robot-svg-wrap {
+    filter: drop-shadow(0 8px 20px rgba(37,99,235,0.3));
+  }
+
+  /* Wave arm animation */
+  @keyframes wave {
+    0%,100% { transform: rotate(0deg); }
+    20%      { transform: rotate(25deg); }
+    40%      { transform: rotate(-10deg); }
+    60%      { transform: rotate(20deg); }
+    80%      { transform: rotate(-5deg); }
+  }
+  #robot-arm-right {
+    transform-origin: 18px 8px;
+    animation: wave 1.8s ease-in-out 1.2s 3;
+  }
+
+  /* Eye blink */
+  @keyframes blink {
+    0%,90%,100% { transform: scaleY(1); }
+    95%          { transform: scaleY(0.1); }
+  }
+  .robot-eye {
+    transform-origin: center;
+    animation: blink 3.5s ease-in-out infinite;
+  }
+  .robot-eye:last-child { animation-delay: 0.1s; }
+
+  /* Antenna pulse */
+  @keyframes antennaPulse {
+    0%,100% { fill: #93c5fd; r: 3; }
+    50%      { fill: #2563eb; r: 4.5; }
+  }
+  #antenna-dot { animation: antennaPulse 1.5s ease-in-out infinite; }
+
+  /* Body float */
+  @keyframes float {
+    0%,100% { transform: translateY(0px); }
+    50%      { transform: translateY(-4px); }
+  }
+  #robot-body-group { animation: float 3s ease-in-out infinite; }
+
+  /* Mini bubble when chat open */
+  #robot-mini {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 2rem;
+    z-index: 8000;
+    width: 52px;
+    height: 52px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(37,99,235,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: none;
+  }
+  #robot-mini:hover { transform: scale(1.1); }
+
+  @media (max-width: 480px) {
+    #robot-wrapper { right: 1rem; }
+    #robot-mini { right: 1rem; }
+  }
+
 </style>
 
-<div id="chat-label">✨ ¡Pruébame!</div>
 
-<button id="chat-bubble" onclick="toggleChat()" aria-label="Abrir chat">💬</button>
+
+<!-- ══ ROBOT MASCOT ══════════════════════════════════════════════ -->
+<div id="robot-wrapper" onclick="toggleChat()" role="button" aria-label="Abrir chat con asistente de IA">
+
+  <!-- Speech bubble -->
+  <div id="robot-bubble">¡Hola! ¿En qué te ayudo? 🤖</div>
+
+  <!-- Robot SVG -->
+  <div id="robot-svg-wrap">
+    <svg width="80" height="100" viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg">
+      <g id="robot-body-group">
+
+        <!-- Antenna -->
+        <line x1="40" y1="8" x2="40" y2="18" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round"/>
+        <circle id="antenna-dot" cx="40" cy="5" r="3" fill="#93c5fd"/>
+
+        <!-- Head -->
+        <rect x="16" y="18" width="48" height="36" rx="10" fill="#2563eb"/>
+        <!-- Head shine -->
+        <rect x="20" y="21" width="18" height="6" rx="3" fill="rgba(255,255,255,0.15)"/>
+
+        <!-- Eyes -->
+        <g class="robot-eye">
+          <rect x="24" y="28" width="12" height="12" rx="3" fill="white"/>
+          <circle cx="30" cy="34" r="3.5" fill="#1d4ed8"/>
+          <circle cx="31.5" cy="32.5" r="1.2" fill="white"/>
+        </g>
+        <g class="robot-eye">
+          <rect x="44" y="28" width="12" height="12" rx="3" fill="white"/>
+          <circle cx="50" cy="34" r="3.5" fill="#1d4ed8"/>
+          <circle cx="51.5" cy="32.5" r="1.2" fill="white"/>
+        </g>
+
+        <!-- Mouth -->
+        <path d="M30 46 Q40 52 50 46" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+        <!-- Body -->
+        <rect x="18" y="58" width="44" height="32" rx="8" fill="#3b82f6"/>
+        <!-- Body panel -->
+        <rect x="26" y="65" width="28" height="18" rx="5" fill="rgba(255,255,255,0.12)"/>
+        <!-- Buttons -->
+        <circle cx="33" cy="74" r="3" fill="#93c5fd"/>
+        <circle cx="40" cy="74" r="3" fill="#bfdbfe"/>
+        <circle cx="47" cy="74" r="3" fill="#2563eb"/>
+
+        <!-- Left arm (static) -->
+        <rect x="5" y="60" width="11" height="22" rx="5" fill="#2563eb"/>
+        <circle cx="10.5" cy="84" r="5" fill="#1d4ed8"/>
+
+        <!-- Right arm (waving) -->
+        <g id="robot-arm-right">
+          <rect x="64" y="58" width="11" height="22" rx="5" fill="#2563eb"/>
+          <circle cx="69.5" cy="82" r="5" fill="#1d4ed8"/>
+        </g>
+
+        <!-- Legs -->
+        <rect x="24" y="90" width="12" height="8" rx="4" fill="#1d4ed8"/>
+        <rect x="44" y="90" width="12" height="8" rx="4" fill="#1d4ed8"/>
+
+      </g>
+    </svg>
+  </div>
+</div>
+
+<!-- Mini button shown when chat is open -->
+<div id="robot-mini" onclick="toggleChat()" aria-label="Cerrar chat">✕</div>
 
 <div id="chat-window">
   <div class="chat-header">
@@ -679,9 +1224,9 @@ document.addEventListener('keydown',function(e){ if(e.key==='Escape') adminLogou
 
 <script>
 (function(){
-  var chatOpen=false, chatHistory=[], isTyping=false, labelHidden=false, qrStep=0;
+  window.chatOpen=false; var chatHistory=[], isTyping=false, qrStep=0;
 
-  var SYSTEM = "Eres Nexo, el asistente virtual de Nexo AI, empresa de tecnología e IA para pequeños negocios en Costa Rica.\n\nSERVICIOS:\n- Páginas web profesionales (desde $350)\n- Software a medida (desde $500)\n- Chatbot de IA 24/7 (desde $150 instalación + $49/mes)\n- Contenido redes sociales con IA (desde $99/mes)\n- Automatización de correos (desde $120 + $39/mes)\n- Flujos de trabajo personalizados (cotización)\n\nPLANES MENSUALES:\n- Inicial $99/mes: 1 automatización, soporte correo\n- Crecimiento $249/mes: 3 automatizaciones, chatbot, soporte prioritario\n- Empresarial $449/mes: todo ilimitado, desarrollo web incluido\n\nPROCESO: llamada gratis 20min → propuesta 48h → configuración → soporte continuo.\n\nPERSONALIDAD: amigable, directo, respuestas cortas (máx 3-4 líneas). Español por defecto, inglés si el usuario escribe en inglés. Si muestran interés, invita a agendar la llamada gratis. Eres la demostración en vivo del producto.";
+  var SYSTEM = "Eres Nexo, el asistente virtual de Nexo AI, empresa de tecnología e IA para pequeños negocios en Costa Rica.\n\nSERVICIOS:\n- Páginas web profesionales (desde $350)\n- Software a medida (desde $500)\n- Chatbot de IA 24/7 (desde $150 instalación + $49/mes)\n- Contenido redes sociales con IA (desde $99/mes)\n- Automatización de correos (desde $120 + $39/mes)\n- Flujos de trabajo personalizados (cotización)\n\nPLANES MENSUALES:\n- Inicial $99/mes: 1 automatización, soporte correo\n- Crecimiento $249/mes: 3 automatizaciones, chatbot, soporte prioritario\n- Empresarial $449/mes: todo ilimitado, desarrollo web incluido\n\nPROCESO: llamada gratis 20min → propuesta 48h → configuración → soporte continuo.\n\nPERSONALIDAD: amigable, directo, respuestas cortas (máx 3-4 líneas). Español por defecto, inglés si el usuario escribe en inglés. Si muestran interés, invita a agendar la llamada gratis con nuestro equipo. Eres la demostración en vivo del producto.";
 
   var QR = [
     ['¿Qué servicios ofrecen?','¿Cuánto cuesta una web?','¿Cómo funciona el chatbot?'],
@@ -689,17 +1234,28 @@ document.addEventListener('keydown',function(e){ if(e.key==='Escape') adminLogou
   ];
 
   window.toggleChat = function(){
-    chatOpen = !chatOpen;
+    window.chatOpen = !window.chatOpen;
     document.getElementById('chat-window').classList.toggle('open', chatOpen);
-    document.getElementById('chat-bubble').textContent = chatOpen ? '✕' : '💬';
-    if(!labelHidden){ document.getElementById('chat-label').style.display='none'; labelHidden=true; }
-    if(chatOpen && chatHistory.length===0){
+    // Show/hide robot vs mini button
+    var wrapper = document.getElementById('robot-wrapper');
+    var mini = document.getElementById('robot-mini');
+    if (window.chatOpen) {
+      wrapper.classList.add('open');
+      mini.style.display = 'flex';
+    } else {
+      wrapper.classList.remove('open');
+      if (wrapper.classList.contains('was-peeking')) {
+        wrapper.classList.add('peeking');
+      }
+      mini.style.display = 'none';
+    }
+    if(window.chatOpen && chatHistory.length===0){
       setTimeout(function(){
         addBot('¡Hola! 👋 Soy **Nexo**, el asistente de Nexo AI.\n\n¿En qué puedo ayudarte hoy? Puedo contarte sobre nuestros servicios, precios, o cómo podemos hacer crecer tu negocio con IA.');
         showQR(0);
       }, 400);
     }
-    if(chatOpen) setTimeout(function(){ document.getElementById('chat-input').focus(); }, 300);
+    if(window.chatOpen) setTimeout(function(){ document.getElementById('chat-input').focus(); }, 300);
   };
 
   function addBot(text){ chatHistory.push({role:'assistant',content:text}); render(); }
