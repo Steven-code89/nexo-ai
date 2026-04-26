@@ -52,8 +52,9 @@
 <!-- FUENTES: preconnect acelera la carga, display=swap evita texto invisible -->
 <!-- FUENTES LOCALES: más rápidas que Google Fonts porque vienen del mismo servidor -->
 <!-- preload le dice al navegador: descargá esta fuente YA, antes que cualquier otra cosa -->
+<!-- preload solo para las fuentes críticas: la que se ve primero (regular)
+     y la de los títulos (700). Las demás cargan solas sin bloquear. -->
 <link rel="preload" href="/fonts/plus-jakarta-sans-v12-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/plus-jakarta-sans-v12-latin-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/space-grotesk-v22-latin-700.woff2" as="font" type="font/woff2" crossorigin>
 <style>
   /* ── FUENTES LOCALES ─────────────────────────────────────────────
@@ -459,14 +460,27 @@
   <span style="cursor:pointer;opacity:0.25;font-size:0.7rem;" onclick="openAdmin()" title="Admin">⚙</span>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- defer: el navegador descarga Supabase en paralelo sin bloquear el render.
+     Se ejecuta cuando el HTML termina de parsear. Como Supabase solo se usa
+     al enviar el form o abrir el admin, esto no afecta la funcionalidad. -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <script>
 const SUPABASE_URL    = 'https://siddjvgshubezcxnxuoi.supabase.co';
 const SUPABASE_KEY    = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpZGRqdmdzaHViZXpjeG54dW9pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwNzM5NjEsImV4cCI6MjA5MjY0OTk2MX0.ZtNyrDmM19RSvM_uY8D1ResmyzEiRBjaXp7osbqovE8';
 const ADMIN_PASSWORD  = 'zaq12wsx';
 
 const isConfigured = SUPABASE_URL !== 'TU_SUPABASE_URL';
-const sb = isConfigured ? supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
+// sb se inicializa después de que Supabase cargue (defer)
+// usamos una función para obtenerlo siempre actualizado
+let _sb = null;
+function getSb() {
+  if (!_sb && isConfigured && typeof supabase !== 'undefined') {
+    _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  }
+  return _sb;
+}
+// Alias para compatibilidad con el resto del código
+Object.defineProperty(window, 'sb', { get: getSb });
 let currentLang = 'es';
 
 function setLang(lang) {
@@ -496,7 +510,7 @@ async function handleSubmit(e) {
   };
   if(!isConfigured){ showFormSuccess(); return; }
   try {
-    var r=await sb.from('mensajes').insert([payload]);
+    var r=await getSb().from('mensajes').insert([payload]);
     if(r.error) throw r.error;
     showFormSuccess();
   } catch(ex) {
@@ -543,7 +557,7 @@ async function loadMessages(){
   c.innerHTML='<div class="loading-msgs">Cargando mensajes...</div>';
   if(!isConfigured){ c.innerHTML='<div class="no-msgs"><div class="icon">⚙️</div><p>Configura Supabase para ver mensajes.</p></div>'; return; }
   try {
-    var r=await sb.from('mensajes').select('*').order('created_at',{ascending:false});
+    var r=await getSb().from('mensajes').select('*').order('created_at',{ascending:false});
     if(r.error) throw r.error;
     var msgs=r.data;
     document.getElementById('unread-count').textContent=msgs.filter(function(m){return !m.leido;}).length;
@@ -568,8 +582,8 @@ async function loadMessages(){
   } catch(ex){ console.error(ex); c.innerHTML='<div class="no-msgs"><div class="icon">⚠️</div><p>Error al cargar mensajes.</p></div>'; }
 }
 
-async function markRead(id){ await sb.from('mensajes').update({leido:true}).eq('id',id); loadMessages(); }
-async function deleteMsg(id){ if(!confirm('¿Eliminar este mensaje?')) return; await sb.from('mensajes').delete().eq('id',id); loadMessages(); }
+async function markRead(id){ await getSb().from('mensajes').update({leido:true}).eq('id',id); loadMessages(); }
+async function deleteMsg(id){ if(!confirm('¿Eliminar este mensaje?')) return; await getSb().from('mensajes').delete().eq('id',id); loadMessages(); }
 function esc(s){ return s?String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'):''; }
 document.addEventListener('keydown',function(e){ if(e.key==='Escape') adminLogout(); });
 </script>
@@ -584,6 +598,7 @@ document.addEventListener('keydown',function(e){ if(e.key==='Escape') adminLogou
     display:flex; align-items:center; justify-content:center;
     font-size:1.5rem; transition:transform 0.2s, box-shadow 0.2s;
     animation:pulse-ring 2.5s ease-out infinite;
+  will-change:box-shadow;
   }
   #chat-bubble:hover{transform:scale(1.08);}
   @keyframes pulse-ring{
