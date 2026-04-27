@@ -184,6 +184,85 @@
   .plan-features li::before { content: ''; width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0; background: #dbeafe url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8l3 3 7-7' stroke='%232563eb' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
 
 
+
+  /* ══ ACCORDION DARK OVERRIDE (MOBILE) ════════════════════════════ */
+  @media (max-width: 768px) {
+    .services-grid {
+      background: rgba(37,99,235,0.1);
+      border: 1px solid rgba(37,99,235,0.2);
+      border-radius: 16px;
+      grid-template-columns: 1fr;
+    }
+    .service-card {
+      background: rgba(11,17,32,0.6) !important;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(37,99,235,0.15) !important;
+      padding: 0 !important;
+      transform: none !important;
+    }
+    .service-card:last-child { border-bottom: none !important; }
+
+    .service-card-header {
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    /* No emoji icon on mobile — show a small dot indicator instead */
+    .service-icon { display: none; }
+
+    .service-card-header-text h3 {
+      font-size: 0.9rem;
+      color: #e2e8f0;
+      font-weight: 600;
+      margin: 0;
+    }
+    .accordion-arrow {
+      color: rgba(147,197,253,0.5);
+      font-size: 0.65rem;
+    }
+    .service-card.open .accordion-arrow { color: #93c5fd; }
+
+    /* Left accent dot */
+    .service-card-header::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(37,99,235,0.4);
+      flex-shrink: 0;
+      transition: background 0.3s;
+    }
+    .service-card.open .service-card-header::before {
+      background: #3b82f6;
+      box-shadow: 0 0 8px rgba(59,130,246,0.6);
+    }
+
+    .service-card-body {
+      padding: 0 1.25rem !important;
+      border-top: 0;
+    }
+    .service-card.open .service-card-body {
+      padding: 0 1.25rem 1.1rem !important;
+      border-top: 1px solid rgba(37,99,235,0.1);
+    }
+    .service-card-body p {
+      color: rgba(148,163,184,0.85);
+      font-size: 0.83rem;
+      line-height: 1.65;
+      margin-bottom: 0.65rem;
+    }
+    .service-card.open { background: rgba(37,99,235,0.08) !important; }
+
+    /* Remove color backgrounds per type on mobile */
+    .service-card.open.icon-type-blue,
+    .service-card.open.icon-type-indigo,
+    .service-card.open.icon-type-sky { background: rgba(37,99,235,0.08) !important; }
+
+    /* Remove glow lines on mobile */
+    .service-card::before { display: none; }
+    .service-card::after  { display: none; }
+  }
+
   /* ══ PRICING CARD HOVER EFFECTS ══════════════════════════════════ */
 
   /* Base upgrade for all price cards */
@@ -638,45 +717,87 @@
   <span data-es="✓ Compatible con tus herramientas actuales" data-en="✓ Works with your existing tools">✓ Compatible con tus herramientas actuales</span>
 </div>
 
-<div class="section" id="services">
+<div class="section section-dark" id="services">
   <p class="section-label" data-es="Lo que hago" data-en="What I do">Lo que hago</p>
   <h2 data-es="Servicios digitales para hacer crecer tu negocio" data-en="Digital services to grow your business">Servicios digitales para hacer crecer tu negocio</h2>
   <div class="services-grid">
-    <div class="service-card">
-      <div class="service-icon icon-blue">🌐</div>
-      <h3 data-es="Desarrollo de Páginas Web" data-en="Website Development">Desarrollo de Páginas Web</h3>
-      <p data-es="Diseño y desarrollo páginas web profesionales, rápidas y adaptadas a celular — para que tus clientes te encuentren y confíen en tu negocio desde el primer clic." data-en="I design and build professional, fast, mobile-friendly websites — so your clients find you and trust your business from the first click.">Diseño y desarrollo páginas web profesionales, rápidas y adaptadas a celular — para que tus clientes te encuentren y confíen en tu negocio desde el primer clic.</p>
-      <span class="service-price" data-es="Desde $350 página completa" data-en="From $350 full website">Desde $350 página completa</span>
+    <div class="service-card" icon-type-blue>
+      <!-- Accordion header (mobile) / normal header (desktop) -->
+      <div class="service-card-header" onclick="toggleAccordion(this)">
+        <div class="service-icon icon-blue">🌐</div>
+        <div class="service-card-header-text"><h3 data-es="Desarrollo de Páginas Web" data-en="Website Development">Desarrollo de Páginas Web</h3></div>
+        <span class="accordion-arrow">▼</span>
+      </div>
+      <!-- Desktop icon + title (hidden on mobile via CSS) -->
+      <div class="service-card-body">
+        <p data-es="Diseño y desarrollo páginas web profesionales, rápidas y adaptadas a celular — para que tus clientes te encuentren y confíen en tu negocio desde el primer clic." data-en="I design and build professional, fast, mobile-friendly websites — so your clients find you and trust your business from the first click.">Diseño y desarrollo páginas web profesionales, rápidas y adaptadas a celular — para que tus clientes te encuentren y confíen en tu negocio desde el primer clic.</p>
+        <span class="service-price" data-es="Desde $350 página completa" data-en="From $350 full website">Desde $350 página completa</span>
+      </div>
     </div>
-    <div class="service-card card-center">
-      <div class="service-icon icon-indigo">💻</div>
-      <h3 data-es="Desarrollo de Software a Medida" data-en="Custom Software Development">Desarrollo de Software a Medida</h3>
-      <p data-es="Sistemas internos, apps web o herramientas digitales diseñadas específicamente para los procesos de tu negocio — sin pagar por funciones que no vas a usar." data-en="Internal systems, web apps or digital tools designed specifically for your business processes — without paying for features you'll never use.">Sistemas internos, apps web o herramientas digitales diseñadas específicamente para los procesos de tu negocio — sin pagar por funciones que no vas a usar.</p>
-      <span class="service-price" data-es="Cotización personalizada" data-en="Custom quote">Cotización personalizada</span>
+    <div class="service-card card-center" icon-type-indigo>
+      <!-- Accordion header (mobile) / normal header (desktop) -->
+      <div class="service-card-header" onclick="toggleAccordion(this)">
+        <div class="service-icon icon-indigo">💻</div>
+        <div class="service-card-header-text"><h3 data-es="Desarrollo de Software a Medida" data-en="Custom Software Development">Desarrollo de Software a Medida</h3></div>
+        <span class="accordion-arrow">▼</span>
+      </div>
+      <!-- Desktop icon + title (hidden on mobile via CSS) -->
+      <div class="service-card-body">
+        <p data-es="Sistemas internos, apps web o herramientas digitales diseñadas específicamente para los procesos de tu negocio — sin pagar por funciones que no vas a usar." data-en="Internal systems, web apps or digital tools designed specifically for your business processes — without paying for features you'll never use.">Sistemas internos, apps web o herramientas digitales diseñadas específicamente para los procesos de tu negocio — sin pagar por funciones que no vas a usar.</p>
+        <span class="service-price" data-es="Cotización personalizada" data-en="Custom quote">Cotización personalizada</span>
+      </div>
     </div>
-    <div class="service-card card-right">
-      <div class="service-icon icon-blue">🤖</div>
-      <h3 data-es="Bot de Atención al Cliente con IA" data-en="AI Customer Support Bot">Bot de Atención al Cliente con IA</h3>
-      <p data-es="Un chatbot en tu sitio web que responde preguntas frecuentes 24/7, agenda citas y captura leads — incluso mientras duermes." data-en="A chatbot on your website that answers FAQs 24/7, books appointments, and captures leads — even while you sleep.">Un chatbot en tu sitio web que responde preguntas frecuentes 24/7, agenda citas y captura leads — incluso mientras duermes.</p>
-      <span class="service-price" data-es="Desde $150 instalación + $49/mes" data-en="From $150 setup + $49/mo">Desde $150 instalación + $49/mes</span>
+    <div class="service-card card-right" icon-type-blue>
+      <!-- Accordion header (mobile) / normal header (desktop) -->
+      <div class="service-card-header" onclick="toggleAccordion(this)">
+        <div class="service-icon icon-blue">🤖</div>
+        <div class="service-card-header-text"><h3 data-es="Bot de Atención al Cliente con IA" data-en="AI Customer Support Bot">Bot de Atención al Cliente con IA</h3></div>
+        <span class="accordion-arrow">▼</span>
+      </div>
+      <!-- Desktop icon + title (hidden on mobile via CSS) -->
+      <div class="service-card-body">
+        <p data-es="Un chatbot en tu sitio web que responde preguntas frecuentes 24/7, agenda citas y captura leads — incluso mientras duermes." data-en="A chatbot on your website that answers FAQs 24/7, books appointments, and captures leads — even while you sleep.">Un chatbot en tu sitio web que responde preguntas frecuentes 24/7, agenda citas y captura leads — incluso mientras duermes.</p>
+        <span class="service-price" data-es="Desde $150 instalación + $49/mes" data-en="From $150 setup + $49/mo">Desde $150 instalación + $49/mes</span>
+      </div>
     </div>
-    <div class="service-card">
-      <div class="service-icon icon-sky">📝</div>
-      <h3 data-es="Contenido y Redes Sociales con IA" data-en="AI Content & Social Media">Contenido y Redes Sociales con IA</h3>
-      <p data-es="Publicaciones semanales para redes sociales, blogs y newsletters — generadas y programadas automáticamente con la voz de tu marca." data-en="Weekly social media posts, blogs and newsletters — generated and scheduled automatically using your brand voice.">Publicaciones semanales para redes sociales, blogs y newsletters — generadas y programadas automáticamente con la voz de tu marca.</p>
-      <span class="service-price" data-es="Desde $99/mes" data-en="From $99/mo">Desde $99/mes</span>
+    <div class="service-card" icon-type-sky>
+      <!-- Accordion header (mobile) / normal header (desktop) -->
+      <div class="service-card-header" onclick="toggleAccordion(this)">
+        <div class="service-icon icon-sky">📝</div>
+        <div class="service-card-header-text"><h3 data-es="Contenido y Redes Sociales con IA" data-en="AI Content & Social Media">Contenido y Redes Sociales con IA</h3></div>
+        <span class="accordion-arrow">▼</span>
+      </div>
+      <!-- Desktop icon + title (hidden on mobile via CSS) -->
+      <div class="service-card-body">
+        <p data-es="Publicaciones semanales para redes sociales, blogs y newsletters — generadas y programadas automáticamente con la voz de tu marca." data-en="Weekly social media posts, blogs and newsletters — generated and scheduled automatically using your brand voice.">Publicaciones semanales para redes sociales, blogs y newsletters — generadas y programadas automáticamente con la voz de tu marca.</p>
+        <span class="service-price" data-es="Desde $99/mes" data-en="From $99/mo">Desde $99/mes</span>
+      </div>
     </div>
-    <div class="service-card card-center">
-      <div class="service-icon icon-indigo">📧</div>
-      <h3 data-es="Automatización de Correos y Seguimientos" data-en="Email & Follow-up Automation">Automatización de Correos y Seguimientos</h3>
-      <p data-es="Seguimientos, solicitudes de reseñas y recordatorios de citas — enviados automáticamente a la persona correcta en el momento indicado." data-en="Follow-ups, review requests and appointment reminders — sent automatically to the right person at the right time.">Seguimientos, solicitudes de reseñas y recordatorios de citas — enviados automáticamente a la persona correcta en el momento indicado.</p>
-      <span class="service-price" data-es="Desde $120 instalación + $39/mes" data-en="From $120 setup + $39/mo">Desde $120 instalación + $39/mes</span>
+    <div class="service-card card-center" icon-type-indigo>
+      <!-- Accordion header (mobile) / normal header (desktop) -->
+      <div class="service-card-header" onclick="toggleAccordion(this)">
+        <div class="service-icon icon-indigo">📧</div>
+        <div class="service-card-header-text"><h3 data-es="Automatización de Correos y Seguimientos" data-en="Email & Follow-up Automation">Automatización de Correos y Seguimientos</h3></div>
+        <span class="accordion-arrow">▼</span>
+      </div>
+      <!-- Desktop icon + title (hidden on mobile via CSS) -->
+      <div class="service-card-body">
+        <p data-es="Seguimientos, solicitudes de reseñas y recordatorios de citas — enviados automáticamente a la persona correcta en el momento indicado." data-en="Follow-ups, review requests and appointment reminders — sent automatically to the right person at the right time.">Seguimientos, solicitudes de reseñas y recordatorios de citas — enviados automáticamente a la persona correcta en el momento indicado.</p>
+        <span class="service-price" data-es="Desde $120 instalación + $39/mes" data-en="From $120 setup + $39/mo">Desde $120 instalación + $39/mes</span>
+      </div>
     </div>
-    <div class="service-card card-right">
-      <div class="service-icon icon-sky">⚙️</div>
-      <h3 data-es="Flujos de Trabajo Personalizados" data-en="Custom AI Workflows">Flujos de Trabajo Personalizados</h3>
-      <p data-es="¿Alguna tarea consume demasiado tiempo en tu equipo? La automatizamos. Cotizaciones, facturas, inventario — lo que sea repetitivo." data-en="Got a task eating up your team's time? Let's automate it. Quotes, invoices, inventory — anything repetitive.">¿Alguna tarea consume demasiado tiempo en tu equipo? La automatizamos. Cotizaciones, facturas, inventario — lo que sea repetitivo.</p>
-      <span class="service-price" data-es="Cotización personalizada" data-en="Custom quote">Cotización personalizada</span>
+    <div class="service-card card-right" icon-type-sky>
+      <!-- Accordion header (mobile) / normal header (desktop) -->
+      <div class="service-card-header" onclick="toggleAccordion(this)">
+        <div class="service-icon icon-sky">⚙️</div>
+        <div class="service-card-header-text"><h3 data-es="Flujos de Trabajo Personalizados" data-en="Custom AI Workflows">Flujos de Trabajo Personalizados</h3></div>
+        <span class="accordion-arrow">▼</span>
+      </div>
+      <!-- Desktop icon + title (hidden on mobile via CSS) -->
+      <div class="service-card-body">
+        <p data-es="¿Alguna tarea consume demasiado tiempo en tu equipo? La automatizamos. Cotizaciones, facturas, inventario — lo que sea repetitivo." data-en="Got a task eating up your team's time? Let's automate it. Quotes, invoices, inventory — anything repetitive.">¿Alguna tarea consume demasiado tiempo en tu equipo? La automatizamos. Cotizaciones, facturas, inventario — lo que sea repetitivo.</p>
+        <span class="service-price" data-es="Cotización personalizada" data-en="Custom quote">Cotización personalizada</span>
+      </div>
     </div>
   </div>
 </div>
@@ -945,6 +1066,73 @@ document.addEventListener('DOMContentLoaded', function() {
   setTimeout(checkScroll, 300);
 });
 
+
+// ── ACCORDION (mobile services) ──────────────────────────────────
+window.toggleAccordion = function(header) {
+  if (window.innerWidth > 768) return;
+  var card = header.closest('.service-card');
+  var isOpen = card.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.service-card.open').forEach(function(c) {
+    c.classList.remove('open');
+  });
+  // Open clicked if was closed
+  if (!isOpen) card.classList.add('open');
+};
+
+// ── PROOF STRIP SCROLL (mobile) ───────────────────────────────────
+(function() {
+  var items = document.querySelectorAll('.proof-item-mobile');
+  var dots  = document.querySelectorAll('.proof-dot');
+  var total = items.length;
+  var current = 0;
+  var stripEl = document.getElementById('proof-strip-mobile');
+  if (!stripEl) return;
+
+  function showItem(index) {
+    items[current].classList.remove('active');
+    items[current].classList.add('exit-up');
+    dots[current].classList.remove('active');
+    setTimeout(function() {
+      items[current].classList.remove('exit-up');
+      current = index;
+      items[current].classList.add('active');
+      dots[current].classList.add('active');
+    }, 350);
+  }
+
+  var lastScrollY = window.scrollY;
+  var ticking = false;
+  var stripTop = 0;
+
+  function getStripTop() {
+    stripTop = stripEl.getBoundingClientRect().top + window.scrollY;
+  }
+
+  window.addEventListener('scroll', function() {
+    if (window.innerWidth > 768) return;
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        var scrollY = window.scrollY;
+        var delta = scrollY - lastScrollY;
+        var stripVisible = stripEl.getBoundingClientRect().top < window.innerHeight &&
+                           stripEl.getBoundingClientRect().bottom > 0;
+
+        if (stripVisible && Math.abs(delta) > 30) {
+          if (delta > 0 && current < total - 1) {
+            showItem(current + 1);
+          } else if (delta < 0 && current > 0) {
+            showItem(current - 1);
+          }
+          lastScrollY = scrollY;
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+})();
+
 // ── HOME BUTTON ───────────────────────────────────────────────────
 // Smooth scroll al top con efecto flash en el logo
 function goHome(e) {
@@ -1020,6 +1208,190 @@ function goHome(e) {
   #chat-send{width:38px;height:38px;border-radius:50%;background:var(--accent);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:background 0.15s,transform 0.1s;flex-shrink:0;}
   #chat-send:hover{background:var(--accent-dark);transform:scale(1.05);}
   #chat-send:disabled{background:var(--border);cursor:not-allowed;transform:none;}
+
+  /* ══ PROOF STRIP MOBILE ═══════════════════════════════════════════ */
+  @media (max-width: 768px) {
+    .proof-strip {
+      display: none; /* hide original on mobile */
+    }
+    .proof-strip-mobile {
+      background: var(--ink);
+      padding: 1.5rem 5vw;
+      position: relative;
+      overflow: hidden;
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .proof-item-mobile {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.875rem;
+      color: rgba(244,246,251,0.85);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      text-align: center;
+      padding: 0 1rem;
+    }
+    .proof-item-mobile.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .proof-item-mobile.exit-up {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    .proof-item-mobile strong {
+      color: #fff;
+      font-weight: 700;
+    }
+    .proof-dots {
+      position: absolute;
+      bottom: 0.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 5px;
+    }
+    .proof-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: rgba(244,246,251,0.25);
+      transition: background 0.3s;
+    }
+    .proof-dot.active { background: var(--accent-light); }
+  }
+  @media (min-width: 769px) {
+    .proof-strip-mobile { display: none; }
+  }
+
+  /* ══ SERVICES ACCORDION (MOBILE) ═════════════════════════════════ */
+  @media (max-width: 768px) {
+    .services-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .service-card {
+      padding: 0;
+      border-bottom: 1px solid var(--border);
+      transform: none !important; /* disable hover lift on mobile */
+      cursor: pointer;
+    }
+    .service-card:last-child { border-bottom: none; }
+
+    /* Accordion header — always visible */
+    .service-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 1rem 1.25rem;
+      user-select: none;
+    }
+    .service-icon {
+      margin-bottom: 0;
+      flex-shrink: 0;
+      width: 38px; height: 38px;
+    }
+    .service-card-header-text {
+      flex: 1;
+    }
+    .service-card-header-text h3 {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+    }
+    .accordion-arrow {
+      font-size: 0.75rem;
+      color: var(--muted);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+    .service-card.open .accordion-arrow {
+      transform: rotate(180deg);
+    }
+
+    /* Accordion body — hidden by default */
+    .service-card-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease, background 0.3s ease;
+      padding: 0 1.25rem;
+    }
+    .service-card.open .service-card-body {
+      max-height: 200px;
+      padding: 0 1.25rem 1.25rem;
+    }
+    .service-card-body p {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Color background when open — per icon type */
+    .service-card.open.icon-type-blue   { background: #eff6ff; }
+    .service-card.open.icon-type-indigo { background: #eef2ff; }
+    .service-card.open.icon-type-sky    { background: #f0f9ff; }
+
+    /* Icon bounce on open */
+    .service-card.open .service-icon {
+      animation: iconBounce 0.5s cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    /* Disable desktop hover bar effects on mobile */
+    .service-card::before,
+    .service-card::after { display: none; }
+    .service-card:hover { transform: none; background: inherit; }
+    .service-card:hover h3 { color: inherit; }
+    .service-card:hover .service-price { background: var(--paper); color: var(--ink); border-color: var(--border); transform: none; }
+  }
+
+  /* On desktop, hide the accordion structure — show normal layout */
+  @media (min-width: 769px) {
+    .service-card-header { display: none; }
+    .service-card-body { max-height: none !important; padding: 0 !important; overflow: visible !important; }
+    .accordion-arrow { display: none; }
+    /* Restore desktop card padding */
+    .service-card { padding: 2.25rem; }
+  }
+
+  /* ══ ROBOT MOBILE ═════════════════════════════════════════════════ */
+  @media (max-width: 768px) {
+    #robot-wrapper {
+      right: 1rem;
+    }
+    #robot-svg-wrap svg {
+      width: 56px;
+      height: 70px;
+    }
+    #robot-bubble {
+      font-size: 0.72rem;
+      padding: 0.4rem 0.75rem;
+      white-space: nowrap;
+    }
+    /* Chat window full-screen on mobile */
+    #chat-window {
+      bottom: 0;
+      right: 0;
+      left: 0;
+      width: 100%;
+      max-width: 100%;
+      border-radius: 20px 20px 0 0;
+      max-height: 85vh;
+    }
+    #robot-mini {
+      right: 1rem;
+      bottom: 1rem;
+    }
+  }
+
 
   /* ══ ROBOT MASCOT ══════════════════════════════════════════════ */
   #robot-wrapper {
