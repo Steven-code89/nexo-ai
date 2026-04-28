@@ -152,13 +152,13 @@
   .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; background: var(--border); }
   .service-card { background: var(--card-bg); padding: 2.25rem; transition: background 0.2s; }
   .service-card:hover { background: #f8faff; }
-  .service-icon { width: 46px; height: 46px; border-radius: 12px; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
-  .icon-blue   { background: #dbeafe; }
-  .icon-indigo { background: #e0e7ff; }
-  .icon-sky    { background: #e0f2fe; }
-  .service-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.6rem; letter-spacing: -0.02em; }
-  .service-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.7; }
-  .service-price { display: inline-block; margin-top: 1.25rem; font-size: 0.78rem; font-weight: 700; background: var(--paper); border: 1px solid var(--border); border-radius: 100px; padding: 0.25rem 0.85rem; color: var(--ink); }
+  
+  
+  
+  
+  
+  
+  
 
   /* ── HOW IT WORKS ── */
   .how-section { background: var(--ink); color: var(--paper); padding: 5rem 5vw; }
@@ -185,82 +185,135 @@
 
 
 
-  /* ══ ACCORDION DARK OVERRIDE (MOBILE) ════════════════════════════ */
+
+  /* ══ MOBILE SERVICES ACCORDION — CLEAN REDESIGN ══════════════════ */
   @media (max-width: 768px) {
     .services-grid {
-      background: rgba(37,99,235,0.1);
-      border: 1px solid rgba(37,99,235,0.2);
-      border-radius: 16px;
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr !important;
+      gap: 0.5rem !important;
+      background: transparent !important;
+      border: none !important;
+      border-radius: 0 !important;
     }
+
     .service-card {
-      background: rgba(11,17,32,0.6) !important;
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(37,99,235,0.15) !important;
+      background: rgba(255,255,255,0.04) !important;
+      border: 1px solid rgba(37,99,235,0.2) !important;
+      border-radius: 14px !important;
       padding: 0 !important;
+      overflow: hidden;
       transform: none !important;
+      transition: border-color 0.3s, background 0.3s !important;
     }
-    .service-card:last-child { border-bottom: none !important; }
+    .service-card.open {
+      background: rgba(37,99,235,0.09) !important;
+      border-color: rgba(59,130,246,0.5) !important;
+    }
+    .service-card::before,
+    .service-card::after { display: none !important; }
+    .service-card:hover { transform: none !important; }
+    .service-card:hover h3 { color: inherit !important; }
 
+    /* Animations show on open, not hover on mobile */
+    .service-card .card-anim { opacity: 0 !important; }
+    .service-card.open .card-anim {
+      opacity: 1 !important;
+      position: absolute !important;
+      bottom: 0.75rem !important;
+      left: auto !important;
+      right: 1.1rem !important;
+      width: 44px !important;
+      height: 44px !important;
+      margin-top: 0 !important;
+      display: block !important;
+      z-index: 5 !important;
+    }
+    /* Give body relative positioning so absolute child works */
+    .service-card.open .service-card-body {
+      position: relative !important;
+    }
+
+
+    /* Header */
     .service-card-header {
-      padding: 1rem 1.25rem;
-      display: flex;
+      display: flex !important;
       align-items: center;
-      gap: 1rem;
+      gap: 0.85rem;
+      padding: 0.95rem 1.1rem;
+      cursor: pointer;
     }
-    /* No emoji icon on mobile — show a small dot indicator instead */
-    .service-icon { display: none; }
 
+    /* Icon — keep visible and styled */
+    
+
+    .service-card-header-text { flex: 1; }
     .service-card-header-text h3 {
-      font-size: 0.9rem;
-      color: #e2e8f0;
-      font-weight: 600;
-      margin: 0;
+      font-family: 'Space Grotesk', sans-serif !important;
+      font-size: 0.875rem !important;
+      font-weight: 700 !important;
+      color: #94a3b8 !important;
+      margin: 0 !important;
+      transition: color 0.3s;
     }
+    .service-card.open .service-card-header-text h3 {
+      color: #f1f5f9 !important;
+    }
+
+    /* Toggle — clean circle with chevron */
     .accordion-arrow {
-      color: rgba(147,197,253,0.5);
-      font-size: 0.65rem;
-    }
-    .service-card.open .accordion-arrow { color: #93c5fd; }
-
-    /* Left accent dot */
-    .service-card-header::before {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: rgba(37,99,235,0.4);
+      width: 24px !important; height: 24px !important;
+      border-radius: 50% !important;
+      border: 1px solid rgba(37,99,235,0.3) !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      font-size: 0.55rem !important;
+      color: rgba(147,197,253,0.5) !important;
       flex-shrink: 0;
-      transition: background 0.3s;
+      transition: all 0.3s !important;
+      transform: rotate(0deg) !important;
     }
-    .service-card.open .service-card-header::before {
-      background: #3b82f6;
-      box-shadow: 0 0 8px rgba(59,130,246,0.6);
+    .service-card.open .accordion-arrow {
+      background: rgba(37,99,235,0.25) !important;
+      border-color: rgba(59,130,246,0.5) !important;
+      color: #93c5fd !important;
+      transform: rotate(180deg) !important;
     }
 
+    /* Body */
     .service-card-body {
-      padding: 0 1.25rem !important;
-      border-top: 0;
+      max-height: 0 !important;
+      overflow: hidden !important;
+      padding: 0 1.1rem !important;
+      border-top: 1px solid transparent;
+      transition: max-height 0.4s ease, padding 0.3s, border-color 0.3s !important;
     }
     .service-card.open .service-card-body {
-      padding: 0 1.25rem 1.1rem !important;
-      border-top: 1px solid rgba(37,99,235,0.1);
+      max-height: 250px !important;
+      padding: 0.8rem 1.1rem 1rem !important;
+      border-top-color: rgba(37,99,235,0.12) !important;
     }
     .service-card-body p {
-      color: rgba(148,163,184,0.85);
-      font-size: 0.83rem;
-      line-height: 1.65;
-      margin-bottom: 0.65rem;
+      font-size: 0.82rem !important;
+      color: rgba(148,163,184,0.9) !important;
+      line-height: 1.65 !important;
+      margin-bottom: 0.6rem !important;
     }
-    .service-card.open { background: rgba(37,99,235,0.08) !important; }
+    
+    .service-card:hover 
+  }
 
-    /* Remove color backgrounds per type on mobile */
-    .service-card.open.icon-type-blue,
-    .service-card.open.icon-type-indigo,
-    .service-card.open.icon-type-sky { background: rgba(37,99,235,0.08) !important; }
-
-    /* Remove glow lines on mobile */
-    .service-card::before { display: none; }
-    .service-card::after  { display: none; }
+  @media (min-width: 769px) {
+    .proof-strip-mobile { display: none !important; }
+    .service-card-header { display: none !important; }
+    .service-card-body {
+      max-height: none !important;
+      overflow: visible !important;
+      padding: 0 !important;
+      border-top: none !important;
+    }
+    .accordion-arrow { display: none !important; }
+    .service-card { padding: 2rem 1.75rem !important; }
   }
 
   /* ══ PRICING CARD HOVER EFFECTS ══════════════════════════════════ */
@@ -415,6 +468,110 @@
   footer { border-top: 1px solid var(--border); padding: 2rem 5vw; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.8rem; color: var(--muted); }
 
 
+
+  /* ══ SECTION DARK — SERVICES ════════════════════════════════════ */
+  .section-dark {
+    background: linear-gradient(160deg, #060d1a 0%, #0b1628 40%, #080f1e 70%, #060d1a 100%);
+    position: relative;
+    overflow: hidden;
+    max-width: 100%;
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+  .section-dark > * { position: relative; z-index: 1; }
+  .section-dark::before {
+    content: '';
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse at 15% 25%, rgba(37,99,235,0.14) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 75%, rgba(14,165,233,0.09) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .section-dark .section-label { color: rgba(147,197,253,0.7) !important; }
+  .section-dark h2 { color: #f1f5f9 !important; }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(37,99,235,0.18);
+    border: 1px solid rgba(37,99,235,0.25);
+    border-radius: 18px;
+    overflow: visible;
+    position: relative;
+  }
+  .service-card {
+    background: rgba(6,13,26,0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 2rem 1.75rem;
+    transition: background 0.35s ease, transform 0.35s cubic-bezier(0.34,1.3,0.64,1), box-shadow 0.35s ease;
+    position: relative;
+    overflow: visible;
+    cursor: default;
+  }
+  .service-card:hover {
+    background: rgba(37,99,235,0.13) !important;
+    transform: none !important;
+  }
+  .service-card::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, transparent 30%, rgba(147,197,253,0.05) 50%, transparent 70%);
+    opacity: 0; transition: opacity 0.4s; pointer-events: none;
+  }
+  .service-card:hover::after { opacity: 1; }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 18%; bottom: 18%; width: 2px;
+    background: linear-gradient(to bottom, transparent, rgba(59,130,246,0.9), transparent);
+    transform: scaleY(0); transition: transform 0.4s ease; border-radius: 2px;
+  }
+  .service-card.card-right::before { left: auto; right: 0; }
+  .service-card.card-center::before {
+    left: 12%; right: 12%; top: 0; bottom: auto;
+    width: auto; height: 2px;
+    background: linear-gradient(to right, transparent, rgba(59,130,246,0.9), transparent);
+    transform: scaleX(0);
+  }
+  .service-card:hover::before { transform: scaleY(1); }
+  .service-card.card-center:hover::before { transform: scaleX(1); }
+  .service-card.card-center:hover { box-shadow: inset 0 -2px 0 rgba(59,130,246,0.5); }
+
+  .service-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    margin-bottom: 1.25rem;
+    display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+  }
+  .icon-blue   { background: rgba(37,99,235,0.2);  border: 1px solid rgba(37,99,235,0.35); }
+  .icon-indigo { background: rgba(99,102,241,0.2); border: 1px solid rgba(99,102,241,0.35); }
+  .icon-sky    { background: rgba(14,165,233,0.2); border: 1px solid rgba(14,165,233,0.35); }
+  .service-card:hover .service-icon { animation: iconBounce 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+
+  .service-card h3 {
+    font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem;
+    font-weight: 700; margin-bottom: 0.6rem; letter-spacing: -0.02em;
+    color: #cbd5e1; transition: color 0.3s;
+  }
+  .service-card:hover h3 { color: #fff !important; }
+  .service-card p { font-size: 0.85rem; color: rgba(148,163,184,0.8); line-height: 1.7; }
+  .service-price {
+    display: inline-block; margin-top: 1.1rem;
+    font-size: 0.75rem; font-weight: 600;
+    background: rgba(37,99,235,0.15); border: 1px solid rgba(37,99,235,0.35);
+    border-radius: 100px; padding: 0.25rem 0.85rem; color: #93c5fd;
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
+  }
+  .service-card:hover .service-price {
+    background: rgba(37,99,235,0.35); color: #fff;
+    border-color: rgba(59,130,246,0.6); transform: none !important;
+  }
+  @media (max-width: 900px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+
   /* ══ SERVICE CARDS HOVER ══════════════════════════════════════════ */
   .service-card {
     position: relative;
@@ -423,7 +580,7 @@
   }
   .service-card:hover {
     transform: translateY(-4px);
-    background: #f0f5ff !important;
+    background: rgba(37,99,235,0.13) !important;
   }
 
   /* Animated gradient border on hover */
@@ -440,9 +597,7 @@
   .service-card:hover::after { opacity: 1; }
 
   /* Icon bounce on hover */
-  .service-card:hover .service-icon {
-    animation: iconBounce 0.5s cubic-bezier(0.34,1.56,0.64,1);
-  }
+  .service-card:hover 
   @keyframes iconBounce {
     0%   { transform: scale(1) rotate(0deg); }
     40%  { transform: scale(1.25) rotate(-8deg); }
@@ -451,20 +606,11 @@
   }
 
   /* Slide-up price tag on hover */
-  .service-card .service-price {
-    transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.3s;
-  }
-  .service-card:hover .service-price {
-    background: var(--accent);
-    color: #fff;
-    border-color: var(--accent);
-    transform: translateY(-2px);
-  }
+  .service-card 
+  .service-card:hover 
 
   /* Title color shift */
-  .service-card h3 {
-    transition: color 0.3s;
-  }
+  
   .service-card:hover h3 { color: var(--accent); }
 
   /* Subtle left accent bar */
@@ -712,9 +858,34 @@
 <div class="proof-strip">
   <span><strong data-es="✓ Configuración rápida" data-en="✓ Fast setup">✓ Configuración rápida</strong> — <span data-es="listo en días, no meses" data-en="live in days, not months">listo en días, no meses</span></span>
   <span><strong data-es="✓ Tarifa mensual fija" data-en="✓ Flat monthly fee">✓ Tarifa mensual fija</strong> — <span data-es="sin sorpresas en la factura" data-en="no surprise bills">sin sorpresas en la factura</span></span>
-  <span><strong data-es="✓ Soporte local" data-en="✓ Local support">✓ Soporte local</strong> — <span data-es="equipo real, ayuda real" data-en="real team, real help">equipo real, ayuda real</span></span>
+  <span><strong data-es="✓ Equipo real" data-en="✓ Real team">✓ Equipo real</strong> — <span data-es="ayuda real" data-en="real help">ayuda real</span></span>
   <span><strong data-es="✓ Personalizado" data-en="✓ Personalized">✓ Personalizado</strong> — <span data-es="se ajusta a tus necesidades" data-en="tailored to your needs">se ajusta a tus necesidades</span></span>
   <span data-es="✓ Compatible con tus herramientas actuales" data-en="✓ Works with your existing tools">✓ Compatible con tus herramientas actuales</span>
+</div>
+<!-- PROOF STRIP MOBILE -->
+<div class="proof-strip-mobile" id="proof-strip-mobile">
+  <div class="proof-item-mobile active" data-index="0">
+    <span><strong>✓ Configuración rápida</strong> — listo en días, no meses</span>
+  </div>
+  <div class="proof-item-mobile" data-index="1">
+    <span><strong>✓ Tarifa mensual fija</strong> — sin sorpresas en la factura</span>
+  </div>
+  <div class="proof-item-mobile" data-index="2">
+    <span><strong>✓ Equipo real</strong> — ayuda real</span>
+  </div>
+  <div class="proof-item-mobile" data-index="3">
+    <span><strong>✓ Personalizado</strong> — se ajusta a tus necesidades</span>
+  </div>
+  <div class="proof-item-mobile" data-index="4">
+    <span>✓ Compatible con tus herramientas actuales</span>
+  </div>
+  <div class="proof-dots">
+    <div class="proof-dot active"></div>
+    <div class="proof-dot"></div>
+    <div class="proof-dot"></div>
+    <div class="proof-dot"></div>
+    <div class="proof-dot"></div>
+  </div>
 </div>
 
 <div class="section section-dark" id="services">
@@ -725,79 +896,162 @@
       <!-- Accordion header (mobile) / normal header (desktop) -->
       <div class="service-card-header" onclick="toggleAccordion(this)">
         <div class="service-icon icon-blue">🌐</div>
-        <div class="service-card-header-text"><h3 data-es="Desarrollo de Páginas Web" data-en="Website Development">Desarrollo de Páginas Web</h3></div>
+      <div class="service-card-header-text"><h3 data-es="Desarrollo de Páginas Web" data-en="Website Development">Desarrollo de Páginas Web</h3></div>
         <span class="accordion-arrow">▼</span>
       </div>
       <!-- Desktop icon + title (hidden on mobile via CSS) -->
       <div class="service-card-body">
         <p data-es="Diseño y desarrollo páginas web profesionales, rápidas y adaptadas a celular — para que tus clientes te encuentren y confíen en tu negocio desde el primer clic." data-en="I design and build professional, fast, mobile-friendly websites — so your clients find you and trust your business from the first click.">Diseño y desarrollo páginas web profesionales, rápidas y adaptadas a celular — para que tus clientes te encuentren y confíen en tu negocio desde el primer clic.</p>
         <span class="service-price" data-es="Desde $350 página completa" data-en="From $350 full website">Desde $350 página completa</span>
+      <div class="card-anim">
+        <svg class="anim-browser" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="6" width="48" height="40" rx="4" stroke="rgba(59,130,246,0.5)" stroke-width="1.5"/>
+          <line x1="2" y1="14" x2="50" y2="14" stroke="rgba(59,130,246,0.5)" stroke-width="1.5"/>
+          <circle cx="8" cy="10" r="2" fill="#ef4444"/>
+          <circle cx="15" cy="10" r="2" fill="#f59e0b"/>
+          <circle cx="22" cy="10" r="2" fill="#22c55e"/>
+          <line class="line1" x1="8" y1="22" x2="44" y2="22" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
+          <line class="line2" x1="8" y1="29" x2="36" y2="29" stroke="#93c5fd" stroke-width="1.5" stroke-linecap="round"/>
+          <line class="line3" x1="8" y1="36" x2="28" y2="36" stroke="#93c5fd" stroke-width="1.5" stroke-linecap="round"/>
+          <rect class="cursor" x="29" y="33" width="2" height="6" fill="#3b82f6" rx="1"/>
+        </svg>
       </div>
+        </div>
     </div>
     <div class="service-card card-center" icon-type-indigo>
       <!-- Accordion header (mobile) / normal header (desktop) -->
       <div class="service-card-header" onclick="toggleAccordion(this)">
         <div class="service-icon icon-indigo">💻</div>
-        <div class="service-card-header-text"><h3 data-es="Desarrollo de Software a Medida" data-en="Custom Software Development">Desarrollo de Software a Medida</h3></div>
+      <div class="service-card-header-text"><h3 data-es="Desarrollo de Software a Medida" data-en="Custom Software Development">Desarrollo de Software a Medida</h3></div>
         <span class="accordion-arrow">▼</span>
       </div>
       <!-- Desktop icon + title (hidden on mobile via CSS) -->
       <div class="service-card-body">
         <p data-es="Sistemas internos, apps web o herramientas digitales diseñadas específicamente para los procesos de tu negocio — sin pagar por funciones que no vas a usar." data-en="Internal systems, web apps or digital tools designed specifically for your business processes — without paying for features you'll never use.">Sistemas internos, apps web o herramientas digitales diseñadas específicamente para los procesos de tu negocio — sin pagar por funciones que no vas a usar.</p>
         <span class="service-price" data-es="Cotización personalizada" data-en="Custom quote">Cotización personalizada</span>
+      <div class="card-anim">
+        <svg class="anim-code" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="4" width="48" height="44" rx="4" stroke="rgba(99,102,241,0.4)" stroke-width="1.5"/>
+          <line class="code-line" x1="8" y1="16" x2="44" y2="16" stroke="#818cf8" stroke-width="2" stroke-linecap="round"/>
+          <line class="code-line" x1="12" y1="23" x2="38" y2="23" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"/>
+          <line class="code-line" x1="8" y1="30" x2="30" y2="30" stroke="#818cf8" stroke-width="2" stroke-linecap="round"/>
+          <line class="code-line" x1="12" y1="37" x2="42" y2="37" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"/>
+          <text x="6" y="14" fill="#4f46e5" font-size="7" font-family="monospace">{'{'}</text>
+          <text x="6" y="42" fill="#4f46e5" font-size="7" font-family="monospace">{'}'}</text>
+        </svg>
       </div>
+        </div>
     </div>
     <div class="service-card card-right" icon-type-blue>
       <!-- Accordion header (mobile) / normal header (desktop) -->
       <div class="service-card-header" onclick="toggleAccordion(this)">
         <div class="service-icon icon-blue">🤖</div>
-        <div class="service-card-header-text"><h3 data-es="Bot de Atención al Cliente con IA" data-en="AI Customer Support Bot">Bot de Atención al Cliente con IA</h3></div>
+      <div class="service-card-header-text"><h3 data-es="Bot de Atención al Cliente con IA" data-en="AI Customer Support Bot">Bot de Atención al Cliente con IA</h3></div>
         <span class="accordion-arrow">▼</span>
       </div>
       <!-- Desktop icon + title (hidden on mobile via CSS) -->
       <div class="service-card-body">
         <p data-es="Un chatbot en tu sitio web que responde preguntas frecuentes 24/7, agenda citas y captura leads — incluso mientras duermes." data-en="A chatbot on your website that answers FAQs 24/7, books appointments, and captures leads — even while you sleep.">Un chatbot en tu sitio web que responde preguntas frecuentes 24/7, agenda citas y captura leads — incluso mientras duermes.</p>
         <span class="service-price" data-es="Desde $150 instalación + $49/mes" data-en="From $150 setup + $49/mo">Desde $150 instalación + $49/mes</span>
+      <div class="card-anim">
+        <svg class="anim-radar" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle class="wave" cx="26" cy="26" r="4" stroke="#3b82f6" stroke-width="1.5" fill="none"/>
+          <circle class="wave" cx="26" cy="26" r="4" stroke="#3b82f6" stroke-width="1.5" fill="none"/>
+          <circle class="wave" cx="26" cy="26" r="4" stroke="#3b82f6" stroke-width="1.5" fill="none"/>
+          <circle cx="26" cy="26" r="5" fill="#2563eb"/>
+          <circle cx="26" cy="26" r="2.5" fill="#93c5fd"/>
+        </svg>
       </div>
+        </div>
     </div>
     <div class="service-card" icon-type-sky>
       <!-- Accordion header (mobile) / normal header (desktop) -->
       <div class="service-card-header" onclick="toggleAccordion(this)">
         <div class="service-icon icon-sky">📝</div>
-        <div class="service-card-header-text"><h3 data-es="Contenido y Redes Sociales con IA" data-en="AI Content & Social Media">Contenido y Redes Sociales con IA</h3></div>
+      <div class="service-card-header-text"><h3 data-es="Contenido y Redes Sociales con IA" data-en="AI Content & Social Media">Contenido y Redes Sociales con IA</h3></div>
         <span class="accordion-arrow">▼</span>
       </div>
       <!-- Desktop icon + title (hidden on mobile via CSS) -->
       <div class="service-card-body">
         <p data-es="Publicaciones semanales para redes sociales, blogs y newsletters — generadas y programadas automáticamente con la voz de tu marca." data-en="Weekly social media posts, blogs and newsletters — generated and scheduled automatically using your brand voice.">Publicaciones semanales para redes sociales, blogs y newsletters — generadas y programadas automáticamente con la voz de tu marca.</p>
         <span class="service-price" data-es="Desde $99/mes" data-en="From $99/mo">Desde $99/mes</span>
+      <div class="card-anim">
+        <svg class="anim-social" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Thumb up -->
+          <g class="icon" style="transform-origin:10px 44px">
+            <path d="M4 38 Q4 32 8 30 L12 22 Q13 19 16 20 L16 30 L20 30 L20 44 L8 44 Q4 44 4 40Z" fill="#3b82f6" opacity="0.9"/>
+          </g>
+          <!-- Heart -->
+          <g class="icon" style="transform-origin:26px 44px">
+            <path d="M26 42 Q18 36 18 30 Q18 26 22 26 Q24 26 26 28 Q28 26 30 26 Q34 26 34 30 Q34 36 26 42Z" fill="#f43f5e" opacity="0.9"/>
+          </g>
+          <!-- Share arrows -->
+          <g class="icon" style="transform-origin:42px 44px">
+            <path d="M36 38 L44 34 L36 30" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M44 34 Q44 42 36 42 L38 40" stroke="#22c55e" stroke-width="2" stroke-linecap="round"/>
+          </g>
+        </svg>
       </div>
+        </div>
     </div>
     <div class="service-card card-center" icon-type-indigo>
       <!-- Accordion header (mobile) / normal header (desktop) -->
       <div class="service-card-header" onclick="toggleAccordion(this)">
         <div class="service-icon icon-indigo">📧</div>
-        <div class="service-card-header-text"><h3 data-es="Automatización de Correos y Seguimientos" data-en="Email & Follow-up Automation">Automatización de Correos y Seguimientos</h3></div>
+      <div class="service-card-header-text"><h3 data-es="Automatización de Correos y Seguimientos" data-en="Email & Follow-up Automation">Automatización de Correos y Seguimientos</h3></div>
         <span class="accordion-arrow">▼</span>
       </div>
       <!-- Desktop icon + title (hidden on mobile via CSS) -->
       <div class="service-card-body">
         <p data-es="Seguimientos, solicitudes de reseñas y recordatorios de citas — enviados automáticamente a la persona correcta en el momento indicado." data-en="Follow-ups, review requests and appointment reminders — sent automatically to the right person at the right time.">Seguimientos, solicitudes de reseñas y recordatorios de citas — enviados automáticamente a la persona correcta en el momento indicado.</p>
         <span class="service-price" data-es="Desde $120 instalación + $39/mes" data-en="From $120 setup + $39/mo">Desde $120 instalación + $39/mes</span>
+      <div class="card-anim">
+        <svg class="anim-email" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="14" width="44" height="30" rx="3" stroke="rgba(99,102,241,0.5)" stroke-width="1.5"/>
+          <polyline class="flap" points="4,14 26,32 48,14" stroke="#818cf8" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+          <polyline class="check" points="16,32 23,39 36,24" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="40" cy="14" r="7" fill="#0b1120"/>
+          <polyline class="check" points="36,14 39,17 44,11" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
       </div>
+        </div>
     </div>
     <div class="service-card card-right" icon-type-sky>
       <!-- Accordion header (mobile) / normal header (desktop) -->
       <div class="service-card-header" onclick="toggleAccordion(this)">
         <div class="service-icon icon-sky">⚙️</div>
-        <div class="service-card-header-text"><h3 data-es="Flujos de Trabajo Personalizados" data-en="Custom AI Workflows">Flujos de Trabajo Personalizados</h3></div>
+      <div class="service-card-header-text"><h3 data-es="Flujos de Trabajo Personalizados" data-en="Custom AI Workflows">Flujos de Trabajo Personalizados</h3></div>
         <span class="accordion-arrow">▼</span>
       </div>
       <!-- Desktop icon + title (hidden on mobile via CSS) -->
       <div class="service-card-body">
         <p data-es="¿Alguna tarea consume demasiado tiempo en tu equipo? La automatizamos. Cotizaciones, facturas, inventario — lo que sea repetitivo." data-en="Got a task eating up your team's time? Let's automate it. Quotes, invoices, inventory — anything repetitive.">¿Alguna tarea consume demasiado tiempo en tu equipo? La automatizamos. Cotizaciones, facturas, inventario — lo que sea repetitivo.</p>
         <span class="service-price" data-es="Cotización personalizada" data-en="Custom quote">Cotización personalizada</span>
+      <div class="card-anim">
+        <svg class="anim-gear" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g class="gear-big">
+            <circle cx="20" cy="20" r="8" stroke="#0ea5e9" stroke-width="2" fill="none"/>
+            <circle cx="20" cy="20" r="3" fill="#0ea5e9"/>
+            <rect x="18.5" y="8" width="3" height="5" rx="1.5" fill="#0ea5e9"/>
+            <rect x="18.5" y="27" width="3" height="5" rx="1.5" fill="#0ea5e9"/>
+            <rect x="8" y="18.5" width="5" height="3" rx="1.5" fill="#0ea5e9"/>
+            <rect x="27" y="18.5" width="5" height="3" rx="1.5" fill="#0ea5e9"/>
+            <rect x="10.9" y="10.9" width="3" height="5" rx="1.5" fill="#0ea5e9" transform="rotate(45 12.4 13.4)"/>
+            <rect x="26.1" y="26.1" width="3" height="5" rx="1.5" fill="#0ea5e9" transform="rotate(45 27.6 28.6)"/>
+            <rect x="26.1" y="10.9" width="3" height="5" rx="1.5" fill="#0ea5e9" transform="rotate(-45 27.6 13.4)"/>
+            <rect x="10.9" y="26.1" width="3" height="5" rx="1.5" fill="#0ea5e9" transform="rotate(-45 12.4 28.6)"/>
+          </g>
+          <g class="gear-small">
+            <circle cx="38" cy="34" r="5" stroke="#38bdf8" stroke-width="1.5" fill="none"/>
+            <circle cx="38" cy="34" r="2" fill="#38bdf8"/>
+            <rect x="36.5" y="26.5" width="3" height="4" rx="1.5" fill="#38bdf8"/>
+            <rect x="36.5" y="37.5" width="3" height="4" rx="1.5" fill="#38bdf8"/>
+            <rect x="30.5" y="32.5" width="4" height="3" rx="1.5" fill="#38bdf8"/>
+            <rect x="41.5" y="32.5" width="4" height="3" rx="1.5" fill="#38bdf8"/>
+          </g>
+        </svg>
       </div>
+        </div>
     </div>
   </div>
 </div>
@@ -1211,11 +1465,8 @@ function goHome(e) {
 
   /* ══ PROOF STRIP MOBILE ═══════════════════════════════════════════ */
   @media (max-width: 768px) {
-    .proof-strip {
-      display: none; /* hide original on mobile */
-    }
-    .proof-strip-mobile {
-      background: var(--ink);
+    .proof-strip { display: none !important; }
+    .proof-strip-mobile { background: var(--ink);
       padding: 1.5rem 5vw;
       position: relative;
       overflow: hidden;
@@ -1267,7 +1518,7 @@ function goHome(e) {
     .proof-dot.active { background: var(--accent-light); }
   }
   @media (min-width: 769px) {
-    .proof-strip-mobile { display: none; }
+    .proof-strip-mobile { display: flex !important; display: none; }
   }
 
   /* ══ SERVICES ACCORDION (MOBILE) ═════════════════════════════════ */
@@ -1296,11 +1547,7 @@ function goHome(e) {
       padding: 1rem 1.25rem;
       user-select: none;
     }
-    .service-icon {
-      margin-bottom: 0;
-      flex-shrink: 0;
-      width: 38px; height: 38px;
-    }
+    
     .service-card-header-text {
       flex: 1;
     }
@@ -1341,26 +1588,18 @@ function goHome(e) {
     .service-card.open.icon-type-sky    { background: #f0f9ff; }
 
     /* Icon bounce on open */
-    .service-card.open .service-icon {
-      animation: iconBounce 0.5s cubic-bezier(0.34,1.56,0.64,1);
-    }
+    .service-card.open 
 
     /* Disable desktop hover bar effects on mobile */
     .service-card::before,
     .service-card::after { display: none; }
     .service-card:hover { transform: none; background: inherit; }
     .service-card:hover h3 { color: inherit; }
-    .service-card:hover .service-price { background: var(--paper); color: var(--ink); border-color: var(--border); transform: none; }
+    .service-card:hover 
   }
 
   /* On desktop, hide the accordion structure — show normal layout */
-  @media (min-width: 769px) {
-    .service-card-header { display: none; }
-    .service-card-body { max-height: none !important; padding: 0 !important; overflow: visible !important; }
-    .accordion-arrow { display: none; }
-    /* Restore desktop card padding */
-    .service-card { padding: 2.25rem; }
-  }
+  
 
   /* ══ ROBOT MOBILE ═════════════════════════════════════════════════ */
   @media (max-width: 768px) {
@@ -1392,6 +1631,146 @@ function goHome(e) {
     }
   }
 
+
+
+  /* ══ SERVICE CARDS — ZOOM HOVER ══════════════════════════════════ */
+  .services-grid {
+    transition: none;
+  }
+  .service-card {
+    transition: transform 0.35s cubic-bezier(0.34,1.3,0.64,1),
+                background 0.35s ease,
+                box-shadow 0.35s ease,
+                z-index 0s;
+    z-index: 1;
+  }
+  .service-card:hover {
+    transform: scale(1.045) !important;
+    z-index: 20 !important;
+    box-shadow: 0 8px 40px rgba(37,99,235,0.3), 0 0 0 1px rgba(59,130,246,0.5) !important;
+    overflow: visible !important;
+  }
+  /* Siblings slightly dim when one is hovered */
+  .services-grid:hover .service-card:not(:hover) {
+    opacity: 0.75;
+    transform: scale(0.98) !important;
+  }
+
+  /* ── SVG Animation container ── */
+  .card-anim {
+    position: absolute;
+    bottom: 0.75rem; right: 0.75rem;
+    width: 52px; height: 52px;
+    opacity: 0;
+    transition: opacity 0.4s ease 0.15s;
+    pointer-events: none;
+    z-index: 20;
+  }
+  .service-card:hover .card-anim {
+    opacity: 1;
+  }
+
+  /* ── 1. Browser window (Páginas web) ── */
+  @keyframes cursorBlink {
+    0%,49%{ opacity:1; } 50%,100%{ opacity:0; }
+  }
+  @keyframes drawLine {
+    from { stroke-dashoffset: 60; }
+    to   { stroke-dashoffset: 0; }
+  }
+  .anim-browser .line1 {
+    stroke-dasharray: 60; stroke-dashoffset: 60;
+    animation: drawLine 0.5s 0.1s ease forwards;
+  }
+  .anim-browser .line2 {
+    stroke-dasharray: 40; stroke-dashoffset: 40;
+    animation: drawLine 0.4s 0.35s ease forwards;
+  }
+  .anim-browser .line3 {
+    stroke-dasharray: 25; stroke-dashoffset: 25;
+    animation: drawLine 0.3s 0.55s ease forwards;
+  }
+  .anim-browser .cursor {
+    animation: cursorBlink 0.7s 0.6s infinite;
+  }
+
+  /* ── 2. Code typewriter (Software) ── */
+  @keyframes typeIn {
+    from { stroke-dashoffset: 80; }
+    to   { stroke-dashoffset: 0; }
+  }
+  .anim-code .code-line {
+    stroke-dasharray: 80; stroke-dashoffset: 80;
+  }
+  .anim-code .code-line:nth-child(1) { animation: typeIn 0.4s 0s ease forwards; }
+  .anim-code .code-line:nth-child(2) { animation: typeIn 0.4s 0.25s ease forwards; }
+  .anim-code .code-line:nth-child(3) { animation: typeIn 0.3s 0.5s ease forwards; }
+  .anim-code .code-line:nth-child(4) { animation: typeIn 0.35s 0.7s ease forwards; }
+
+  /* ── 3. Radar waves (Bot IA) ── */
+  @keyframes radarPulse {
+    0%   { r: 4;  opacity: 0.9; }
+    100% { r: 24; opacity: 0; }
+  }
+  .anim-radar .wave {
+    transform-origin: center;
+    animation: radarPulse 1.4s ease-out infinite;
+  }
+  .anim-radar .wave:nth-child(2) { animation-delay: 0.4s; }
+  .anim-radar .wave:nth-child(3) { animation-delay: 0.8s; }
+
+  /* ── 4. Floating likes (Contenido) ── */
+  @keyframes floatUp {
+    0%   { transform: translateY(0) scale(0.5); opacity: 0; }
+    20%  { opacity: 1; }
+    100% { transform: translateY(-36px) scale(1); opacity: 0; }
+  }
+  .anim-social .icon {
+    animation: floatUp 1.4s ease-out infinite;
+    transform-box: fill-box;
+  }
+  .anim-social .icon:nth-child(1) { animation-delay: 0s; }
+  .anim-social .icon:nth-child(2) { animation-delay: 0.4s; }
+  .anim-social .icon:nth-child(3) { animation-delay: 0.8s; }
+
+  /* ── 5. Envelope open + check (Automatización) ── */
+  @keyframes envelopeOpen {
+    0%,40%  { d: path("M4 14 L26 4 L48 14"); }
+    60%,100%{ d: path("M4 14 L26 24 L48 14"); }
+  }
+  @keyframes checkDraw {
+    from { stroke-dashoffset: 30; }
+    to   { stroke-dashoffset: 0; }
+  }
+  @keyframes checkAppear {
+    0%,50% { opacity:0; }
+    60%,100%{ opacity:1; }
+  }
+  .anim-email .flap {
+    animation: envelopeOpen 1.2s ease-in-out infinite;
+  }
+  .anim-email .check {
+    stroke-dasharray: 30; stroke-dashoffset: 30;
+    animation: checkDraw 0.4s 0.7s ease forwards, checkAppear 1.2s ease infinite;
+  }
+
+  /* ── 6. Spinning gears (Flujos) ── */
+  @keyframes gearSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  @keyframes gearSpinReverse {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(-360deg); }
+  }
+  .anim-gear .gear-big {
+    transform-origin: 20px 20px;
+    animation: gearSpin 2s linear infinite;
+  }
+  .anim-gear .gear-small {
+    transform-origin: 38px 34px;
+    animation: gearSpinReverse 1.3s linear infinite;
+  }
 
   /* ══ ROBOT MASCOT ══════════════════════════════════════════════ */
   #robot-wrapper {
