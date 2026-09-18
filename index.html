@@ -546,6 +546,17 @@
   .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
   .contact-form textarea { min-height: 110px; resize: vertical; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-field-group { display: flex; flex-direction: column; gap: 0.6rem; }
+  .form-group-label { font-size: 0.82rem; font-weight: 600; color: var(--muted); }
+  .chip-select { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .chip-option {
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.85rem; font-weight: 600;
+    color: var(--ink); background: var(--card-bg); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 0.55rem 1.05rem; cursor: pointer; transition: all 0.15s ease;
+  }
+  .chip-option:hover { border-color: var(--accent); }
+  .chip-option.is-selected { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .chip-option:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   .form-success { background: #dbeafe; border-radius: 14px; padding: 1.5rem; text-align: center; display: none; opacity: 0; transition: opacity 0.25s ease; }
   .contact-form { transition: opacity 0.2s ease; }
   .form-success h3 { font-family: 'Space Grotesk', sans-serif; color: var(--accent-dark); margin-bottom: 0.4rem; }
@@ -678,6 +689,132 @@
     .service-row-price--quote + .service-cta { grid-column: 1 / -1; justify-self: start; }
   }
 
+
+  /* ══ WHAT'S BEHIND EACH PROJECT — PINNED HORIZONTAL SCROLL ════════
+     .wc-tall provides scroll distance; .wc-pin sticks at 100vh while
+     .wc-track is translated horizontally by JS in proportion to scroll
+     progress. Falls back to a normal stacked layout on mobile/reduced
+     motion (see media queries below and the JS guard). */
+  .wc-tall { position: relative; height: 220vh; }
+  .wc-pin { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--paper); padding: 4vh 5vw; box-sizing: border-box; }
+  .wc-frame {
+    position: relative; width: min(1100px, 100%); height: min(560px, 88vh);
+    border: 1px solid var(--border); border-radius: 24px; background: var(--card-bg);
+    box-shadow: 0 24px 60px rgba(11,17,32,0.08); overflow: hidden;
+  }
+  .wc-frame__bg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.5; pointer-events: none; }
+  .wc-frame__bg .sn-line { fill: none; stroke: var(--accent); stroke-width: 1; stroke-linecap: round; opacity: 0.16; }
+  .wc-frame__bg .sn-node { fill: var(--accent2); opacity: 0.28; }
+  .wc-track { display: flex; height: 100%; will-change: transform; }
+  .wc-panel { position: relative; width: 100%; flex-shrink: 0; box-sizing: border-box; padding: 3.5rem 4rem; display: flex; flex-direction: column; justify-content: center; }
+  .wc-panel__num { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; font-weight: 700; color: var(--accent); margin-bottom: 1rem; }
+  .wc-panel h3 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.6rem, 3.2vw, 2.2rem); font-weight: 700; letter-spacing: -0.02em; color: var(--ink); max-width: 480px; margin-bottom: 1rem; }
+  .wc-panel p { font-size: 1.02rem; color: var(--muted); line-height: 1.65; max-width: 460px; margin-bottom: 1.5rem; }
+  .wc-panel__tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  @media (max-width: 899px), (prefers-reduced-motion: reduce) {
+    .wc-tall { height: auto !important; }
+    .wc-pin { position: static !important; height: auto !important; overflow: visible !important; display: block !important; padding: 3rem 0; }
+    .wc-frame { width: 100% !important; height: auto !important; border: none; box-shadow: none; border-radius: 0; }
+    .wc-frame__bg { display: none; }
+    .wc-track { display: block !important; transform: none !important; height: auto; }
+    .wc-panel { width: 100% !important; padding: 0; }
+    .wc-panel + .wc-panel { margin-top: 3rem; }
+  }
+
+  /* ══ SITE TYPES — DARK TAB SWITCHER ════════════════════════════════ */
+  .dt-section { background: var(--ink); color: var(--paper); padding: 5rem 5vw; }
+  .dt-inner { max-width: 1100px; margin: 0 auto; }
+  .dt-inner h2 { color: var(--paper); }
+  .dt-grid { display: grid; grid-template-columns: 260px 1fr; gap: 2.5rem; align-items: start; }
+  .dt-tabs { display: flex; flex-direction: column; gap: 0.4rem; }
+  .dt-tab {
+    text-align: left; background: none; border: none; border-radius: 10px; cursor: pointer;
+    padding: 0.9rem 1rem; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.95rem; font-weight: 600;
+    color: rgba(244,246,251,0.55); transition: background 0.2s ease, color 0.2s ease;
+  }
+  .dt-tab:hover { color: var(--paper); }
+  .dt-tab.is-active { background: rgba(244,246,251,0.08); color: var(--paper); }
+  .dt-tab:focus-visible { outline: 2px solid var(--accent-light); outline-offset: 2px; }
+  .dt-panels { position: relative; }
+  .dt-panel { display: none; background: rgba(244,246,251,0.03); border: 1px solid rgba(244,246,251,0.1); border-radius: 18px; padding: 2.5rem; }
+  .dt-panel.is-active { display: block; }
+  .dt-panel h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.85rem; }
+  .dt-panel > p { color: rgba(244,246,251,0.7); font-size: 0.98rem; line-height: 1.65; margin-bottom: 1.5rem; max-width: 560px; }
+  .dt-checklist { list-style: none; padding: 0; margin: 0 0 1.75rem; display: flex; flex-direction: column; gap: 0.75rem; }
+  .dt-checklist li { position: relative; padding-left: 1.6rem; font-size: 0.92rem; color: rgba(244,246,251,0.85); }
+  .dt-checklist li::before { content: '✓'; position: absolute; left: 0; color: var(--accent-light); font-weight: 700; }
+  .dt-fit { font-size: 0.88rem; color: rgba(244,246,251,0.6); border-top: 1px solid rgba(244,246,251,0.1); padding-top: 1.25rem; }
+  .dt-fit strong { color: var(--paper); }
+  @media (max-width: 720px) {
+    .dt-grid { grid-template-columns: 1fr; }
+    .dt-tabs { flex-direction: row; flex-wrap: wrap; }
+    .dt-panel { padding: 1.75rem; }
+  }
+
+  /* ══ INDUSTRIES — STACKING CARDS (pure CSS sticky, no JS) ═════════
+     Each .ind-card is sticky with a slightly larger `top` than the one
+     before it, so as you scroll each new card settles a bit lower than
+     the last instead of covering it — a "peeking deck" effect. */
+  #industries { max-width: 1100px; }
+  .ind-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: start; }
+  .ind-aside { position: sticky; top: 6rem; align-self: start; }
+  .ind-aside h2 { text-align: left; margin: 0 0 1rem 0; max-width: none; }
+  .ind-aside p { color: var(--muted); font-size: 0.98rem; max-width: 380px; margin: 0 0 1.5rem; }
+  .ind-count { display: inline-block; font-family: 'Space Grotesk', sans-serif; font-size: 0.78rem; font-weight: 700; color: var(--accent); letter-spacing: 0.02em; padding-top: 0.75rem; border-top: 2px solid var(--accent); }
+  .ind-stack { display: flex; flex-direction: column; }
+  .ind-card {
+    position: sticky;
+    background: var(--card-bg); border: 1px solid var(--border); border-radius: 18px;
+    padding: 2.25rem; box-shadow: 0 16px 40px rgba(11,17,32,0.07);
+  }
+  .ind-card + .ind-card { margin-top: 1.5rem; }
+  .ind-card:nth-child(1) { top: 6rem; }
+  .ind-card:nth-child(2) { top: 7.6rem; }
+  .ind-card:nth-child(3) { top: 9.2rem; }
+  .ind-card:nth-child(4) { top: 10.8rem; }
+  .ind-card:nth-child(5) { top: 12.4rem; }
+  .ind-card:nth-child(6) { top: 14rem; }
+  .ind-card:nth-child(7) { top: 15.6rem; }
+  .ind-card__icon { width: 26px; height: 26px; color: var(--accent); margin-bottom: 1.1rem; }
+  .ind-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 0.6rem; }
+  .ind-card p { font-size: 0.95rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.25rem; max-width: 480px; }
+  .ind-spacer { height: 16rem; }
+  @media (max-width: 900px) {
+    .ind-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .ind-aside { position: static; }
+    .ind-card { position: static; padding: 1.75rem; }
+    .ind-card + .ind-card { margin-top: 1rem; }
+    .ind-spacer { display: none; }
+  }
+
+  /* ══ FAQ — CSS-ONLY ACCORDION ═════════════════════════════════════ */
+  #faq { max-width: 780px; }
+  .faq-list { border-top: 1px solid var(--border); }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-q {
+    width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+    background: none; border: none; cursor: pointer; text-align: left; padding: 1.4rem 0;
+    font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; font-weight: 600; color: var(--ink);
+  }
+  .faq-icon { position: relative; width: 18px; height: 18px; flex-shrink: 0; }
+  .faq-icon::before, .faq-icon::after {
+    content: ''; position: absolute; background: var(--accent); border-radius: 2px;
+    transition: transform 0.25s ease;
+  }
+  .faq-icon::before { top: 8px; left: 0; width: 18px; height: 2px; }
+  .faq-icon::after { top: 0; left: 8px; width: 2px; height: 18px; }
+  .faq-item.open .faq-icon::after { transform: rotate(90deg); }
+  .faq-a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.35s ease; }
+  .faq-item.open .faq-a { grid-template-rows: 1fr; }
+  .faq-a-inner { overflow: hidden; }
+  .faq-a-inner p { color: var(--muted); font-size: 0.95rem; line-height: 1.65; padding: 0 2.5rem 1.4rem 0; }
+  @media (prefers-reduced-motion: reduce) {
+    .faq-a, .faq-icon::before, .faq-icon::after { transition: none; }
+  }
+  @media (max-width: 720px) {
+    .faq-q { font-size: 0.98rem; }
+    .faq-a-inner p { padding-right: 1.5rem; }
+  }
 
   /* ══ PRICING MOBILE — COMPACT ════════════════════════════════════ */
   @media (max-width: 768px) {
@@ -1099,6 +1236,111 @@
   </div>
 </div>
 
+<div class="wc-tall" id="wc-tall">
+  <div class="wc-pin">
+    <div class="wc-frame" id="wc-frame">
+      <svg class="wc-frame__bg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+        <path class="sn-line" d="M60,420 L220,300 L400,360 L560,180 L740,240"/>
+        <path class="sn-line" d="M220,300 L260,120"/>
+        <path class="sn-line" d="M400,360 L620,420"/>
+        <circle class="sn-node" cx="60" cy="420" r="4"/>
+        <circle class="sn-node" cx="220" cy="300" r="4"/>
+        <circle class="sn-node" cx="260" cy="120" r="4"/>
+        <circle class="sn-node" cx="400" cy="360" r="4"/>
+        <circle class="sn-node" cx="560" cy="180" r="4"/>
+        <circle class="sn-node" cx="620" cy="420" r="4"/>
+        <circle class="sn-node" cx="740" cy="240" r="4"/>
+      </svg>
+      <div class="wc-track">
+      <div class="wc-panel">
+        <span class="wc-panel__num">01</span>
+        <h3 data-es="Construido para cargar rápido" data-en="Built to load fast">Construido para cargar rápido</h3>
+        <p data-es="Sitios en HTML, CSS y JavaScript puro: sin frameworks pesados ni procesos de build que se puedan romper. Lo que ves es exactamente lo que se sirve al navegador." data-en="Sites in plain HTML, CSS and JavaScript: no heavy frameworks or build steps that can break. What you see is exactly what gets served to the browser.">Sitios en HTML, CSS y JavaScript puro: sin frameworks pesados ni procesos de build que se puedan romper. Lo que ves es exactamente lo que se sirve al navegador.</p>
+        <div class="wc-panel__tags">
+          <span class="service-chip">HTML5</span><span class="service-chip">CSS3</span><span class="service-chip">JavaScript</span>
+        </div>
+      </div>
+      <div class="wc-panel">
+        <span class="wc-panel__num">02</span>
+        <h3 data-es="Con backend real cuando lo necesitás" data-en="With a real backend when you need one">Con backend real cuando lo necesitás</h3>
+        <p data-es="Formularios, bases de datos y autenticación con Supabase; hosting y despliegue continuo con Netlify. La misma base que usa este sitio." data-en="Forms, databases and auth with Supabase; hosting and continuous deployment with Netlify. The same setup running this site.">Formularios, bases de datos y autenticación con Supabase; hosting y despliegue continuo con Netlify. La misma base que usa este sitio.</p>
+        <div class="wc-panel__tags">
+          <span class="service-chip">Supabase</span><span class="service-chip">Netlify</span>
+        </div>
+      </div>
+      <div class="wc-panel">
+        <span class="wc-panel__num">03</span>
+        <h3 data-es="Con inteligencia artificial donde suma" data-en="With AI where it actually helps">Con inteligencia artificial donde suma</h3>
+        <p data-es="Chatbots y automatizaciones conectados a modelos de IA para responder, agendar y dar seguimiento sin que tengas que estar pendiente todo el día." data-en="Chatbots and automations connected to AI models to answer, book and follow up without you having to watch it all day.">Chatbots y automatizaciones conectados a modelos de IA para responder, agendar y dar seguimiento sin que tengas que estar pendiente todo el día.</p>
+        <div class="wc-panel__tags">
+          <span class="service-chip">Chatbot IA</span><span class="service-chip">Automatización</span>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="dt-section" id="dt-section">
+  <div class="dt-inner">
+    <h2 data-es="Tipos de página que puedo construir" data-en="Types of sites I can build">Tipos de página que puedo construir</h2>
+    <div class="dt-grid">
+      <div class="dt-tabs" role="tablist" aria-label="Tipos de página">
+        <button type="button" class="dt-tab is-active" role="tab" aria-selected="true" data-target="dt-panel-0" data-es="Landing page" data-en="Landing page">Landing page</button>
+        <button type="button" class="dt-tab" role="tab" aria-selected="false" data-target="dt-panel-1" data-es="Sitio informativo" data-en="Informational site">Sitio informativo</button>
+        <button type="button" class="dt-tab" role="tab" aria-selected="false" data-target="dt-panel-2" data-es="Tienda en línea" data-en="Online store">Tienda en línea</button>
+        <button type="button" class="dt-tab" role="tab" aria-selected="false" data-target="dt-panel-3" data-es="App o sistema a medida" data-en="Custom app or system">App o sistema a medida</button>
+      </div>
+      <div class="dt-panels">
+        <div class="dt-panel is-active" id="dt-panel-0">
+          <h3 data-es="Landing page" data-en="Landing page">Landing page</h3>
+          <p data-es="Una sola página enfocada en un objetivo: que el visitante llame, escriba o compre. Ideal para lanzar rápido y medir qué tan bien convierte." data-en="A single page focused on one goal: getting the visitor to call, message or buy. Great for launching fast and measuring conversion.">Una sola página enfocada en un objetivo: que el visitante llame, escriba o compre. Ideal para lanzar rápido y medir qué tan bien convierte.</p>
+          <ul class="dt-checklist">
+            <li data-es="Carga en segundos" data-en="Loads in seconds">Carga en segundos</li>
+            <li data-es="Un solo llamado a la acción, claro" data-en="One clear call to action">Un solo llamado a la acción, claro</li>
+            <li data-es="Optimizada para anuncios y campañas" data-en="Optimized for ads and campaigns">Optimizada para anuncios y campañas</li>
+            <li data-es="Lista en 1-2 semanas" data-en="Ready in 1-2 weeks">Lista en 1-2 semanas</li>
+          </ul>
+          <div class="dt-fit"><strong data-es="Ideal para:" data-en="Great for:">Ideal para:</strong> <span data-es="negocios que necesitan validar una oferta o campaña rápido." data-en="businesses that need to validate an offer or campaign fast.">negocios que necesitan validar una oferta o campaña rápido.</span></div>
+        </div>
+        <div class="dt-panel" id="dt-panel-1">
+          <h3 data-es="Sitio informativo" data-en="Informational site">Sitio informativo</h3>
+          <p data-es="Varias páginas (inicio, servicios, nosotros, contacto) para negocios que necesitan presencia completa y encontrarse en Google." data-en="Multiple pages (home, services, about, contact) for businesses that need a full presence and to be found on Google.">Varias páginas (inicio, servicios, nosotros, contacto) para negocios que necesitan presencia completa y encontrarse en Google.</p>
+          <ul class="dt-checklist">
+            <li data-es="Estructura pensada para SEO" data-en="Structure built for SEO">Estructura pensada para SEO</li>
+            <li data-es="Fácil de actualizar vos mismo" data-en="Easy to update yourself">Fácil de actualizar vos mismo</li>
+            <li data-es="Formulario de contacto integrado" data-en="Built-in contact form">Formulario de contacto integrado</li>
+            <li data-es="Crece con tu negocio" data-en="Grows with your business">Crece con tu negocio</li>
+          </ul>
+          <div class="dt-fit"><strong data-es="Ideal para:" data-en="Great for:">Ideal para:</strong> <span data-es="negocios que quieren una presencia profesional permanente." data-en="businesses that want a permanent professional presence.">negocios que quieren una presencia profesional permanente.</span></div>
+        </div>
+        <div class="dt-panel" id="dt-panel-2">
+          <h3 data-es="Tienda en línea" data-en="Online store">Tienda en línea</h3>
+          <p data-es="Catálogo, carrito y cobro en línea para negocios que venden producto directo al cliente, sin depender solo de redes sociales." data-en="Catalog, cart and online checkout for businesses that sell direct to customers, not just through social media.">Catálogo, carrito y cobro en línea para negocios que venden producto directo al cliente, sin depender solo de redes sociales.</p>
+          <ul class="dt-checklist">
+            <li data-es="Inventario y catálogo administrable" data-en="Manageable inventory and catalog">Inventario y catálogo administrable</li>
+            <li data-es="Pagos en línea integrados" data-en="Built-in online payments">Pagos en línea integrados</li>
+            <li data-es="Notificaciones de pedidos automáticas" data-en="Automatic order notifications">Notificaciones de pedidos automáticas</li>
+            <li data-es="Funciona igual en celular" data-en="Works the same on mobile">Funciona igual en celular</li>
+          </ul>
+          <div class="dt-fit"><strong data-es="Ideal para:" data-en="Great for:">Ideal para:</strong> <span data-es="negocios que ya venden por WhatsApp o redes y quieren un canal propio." data-en="businesses that already sell over WhatsApp or social and want their own channel.">negocios que ya venden por WhatsApp o redes y quieren un canal propio.</span></div>
+        </div>
+        <div class="dt-panel" id="dt-panel-3">
+          <h3 data-es="App o sistema a medida" data-en="Custom app or system">App o sistema a medida</h3>
+          <p data-es="Software hecho para tu operación específica: paneles, flujos internos o herramientas que ningún producto genérico resuelve igual." data-en="Software built for your specific operation: dashboards, internal workflows or tools no off-the-shelf product solves the same way.">Software hecho para tu operación específica: paneles, flujos internos o herramientas que ningún producto genérico resuelve igual.</p>
+          <ul class="dt-checklist">
+            <li data-es="Se adapta a tu flujo real de trabajo" data-en="Adapts to your real workflow">Se adapta a tu flujo real de trabajo</li>
+            <li data-es="Roles y permisos según tu equipo" data-en="Roles and permissions for your team">Roles y permisos según tu equipo</li>
+            <li data-es="Se integra con lo que ya usás" data-en="Integrates with what you already use">Se integra con lo que ya usás</li>
+            <li data-es="Evoluciona con el negocio" data-en="Evolves with the business">Evoluciona con el negocio</li>
+          </ul>
+          <div class="dt-fit"><strong data-es="Ideal para:" data-en="Great for:">Ideal para:</strong> <span data-es="negocios con procesos que ya no caben en hojas de cálculo." data-en="businesses with processes that have outgrown spreadsheets.">negocios con procesos que ya no caben en hojas de cálculo.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="how-section">
   <div class="how-inner">
     <h2 data-es="Simple desde el inicio hasta los resultados" data-en="Simple from start to results">Simple desde el inicio hasta los resultados</h2>
@@ -1288,6 +1530,88 @@
   </div>
 </div>
 
+<div class="section" id="industries">
+  <div class="ind-grid">
+    <aside class="ind-aside">
+      <div class="ind-aside__in">
+        <h2 data-es="Para negocios como el tuyo" data-en="For businesses like yours">Para negocios como el tuyo</h2>
+        <p data-es="Cada rubro opera distinto. Entra al tuyo y mira qué tipo de página o sistema tiene más sentido para tu operación." data-en="Every industry runs differently. Find yours and see what kind of site or system makes sense for your operation.">Cada rubro opera distinto. Entra al tuyo y mira qué tipo de página o sistema tiene más sentido para tu operación.</p>
+        <span class="ind-count" data-es="07 tipos de negocio" data-en="07 business types">07 tipos de negocio</span>
+      </div>
+    </aside>
+    <div class="ind-stack">
+      <article class="ind-card">
+        <svg class="ind-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M9 8v3a1.5 1.5 0 0 0 3 0V8"/></svg>
+        <h3 data-es="Restaurantes y cafés" data-en="Restaurants & cafés">Restaurantes y cafés</h3>
+        <p data-es="Sistemas que ordenan negocios donde el día a día depende de pedidos, reservas y un menú siempre actualizado." data-en="Systems for businesses where the day-to-day depends on orders, reservations and a menu that's always up to date.">Sistemas que ordenan negocios donde el día a día depende de pedidos, reservas y un menú siempre actualizado.</p>
+        <div class="service-chips">
+          <span class="service-chip">Restaurantes</span><span class="service-chip">Cafeterías</span>
+          <span class="service-chip">Food trucks</span><span class="service-chip">Bares</span>
+          <span class="service-chip">Reposterías</span>
+        </div>
+      </article>
+      <article class="ind-card">
+        <svg class="ind-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg>
+        <h3 data-es="Clínicas y consultorios" data-en="Clinics & practices">Clínicas y consultorios</h3>
+        <p data-es="Sistemas que ordenan citas, historiales y recordatorios para negocios donde la confianza y la puntualidad lo son todo." data-en="Systems for appointments, records and reminders for businesses where trust and punctuality matter most.">Sistemas que ordenan citas, historiales y recordatorios para negocios donde la confianza y la puntualidad lo son todo.</p>
+        <div class="service-chips">
+          <span class="service-chip">Médicos</span><span class="service-chip">Dentistas</span>
+          <span class="service-chip">Psicólogos</span><span class="service-chip">Fisioterapia</span>
+          <span class="service-chip">Veterinarias</span>
+        </div>
+      </article>
+      <article class="ind-card">
+        <svg class="ind-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <h3 data-es="Tiendas y retail" data-en="Shops & retail">Tiendas y retail</h3>
+        <p data-es="Sistemas que ordenan inventario, catálogo y ventas para negocios que mueven producto todos los días." data-en="Systems for inventory, catalog and sales for businesses that move product every day.">Sistemas que ordenan inventario, catálogo y ventas para negocios que mueven producto todos los días.</p>
+        <div class="service-chips">
+          <span class="service-chip">Boutiques</span><span class="service-chip">Tiendas de barrio</span>
+          <span class="service-chip">Ferreterías</span><span class="service-chip">Librerías</span>
+          <span class="service-chip">Mascotas</span>
+        </div>
+      </article>
+      <article class="ind-card">
+        <svg class="ind-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="11" rx="2"/><path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+        <h3 data-es="Servicios profesionales" data-en="Professional services">Servicios profesionales</h3>
+        <p data-es="Sistemas que ordenan negocios donde la operación gira alrededor de clientes, expedientes y horas facturables." data-en="Systems for businesses built around clients, case files and billable hours.">Sistemas que ordenan negocios donde la operación gira alrededor de clientes, expedientes y horas facturables.</p>
+        <div class="service-chips">
+          <span class="service-chip">Abogados</span><span class="service-chip">Contadores</span>
+          <span class="service-chip">Consultores</span><span class="service-chip">Arquitectos</span>
+          <span class="service-chip">Ingenieros</span>
+        </div>
+      </article>
+      <article class="ind-card">
+        <svg class="ind-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11 12 4l8 7"/><path d="M6 10v9h12v-9"/></svg>
+        <h3 data-es="Bienes raíces" data-en="Real estate">Bienes raíces</h3>
+        <p data-es="Sistemas que ordenan propiedades, visitas y seguimiento para negocios donde cada cliente potencial cuenta." data-en="Systems for listings, showings and follow-up for businesses where every lead counts.">Sistemas que ordenan propiedades, visitas y seguimiento para negocios donde cada cliente potencial cuenta.</p>
+        <div class="service-chips">
+          <span class="service-chip">Corredores</span><span class="service-chip">Desarrolladoras</span>
+          <span class="service-chip">Administradoras</span><span class="service-chip">Alquileres</span>
+        </div>
+      </article>
+      <article class="ind-card">
+        <svg class="ind-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 6.5a4 4 0 0 0-5.4 4.8L4 16.4V19h2.6l5.1-5.1a4 4 0 0 0 4.8-5.4l-2.6 2.6-2-2 2.6-2.6Z"/></svg>
+        <h3 data-es="Talleres y servicios técnicos" data-en="Workshops & technical services">Talleres y servicios técnicos</h3>
+        <p data-es="Sistemas que ordenan citas, cotizaciones y seguimiento para negocios donde el trabajo se hace con las manos." data-en="Systems for appointments, quotes and follow-up for hands-on, technical businesses.">Sistemas que ordenan citas, cotizaciones y seguimiento para negocios donde el trabajo se hace con las manos.</p>
+        <div class="service-chips">
+          <span class="service-chip">Talleres automotrices</span><span class="service-chip">Electricistas</span>
+          <span class="service-chip">Plomería</span><span class="service-chip">Cerrajería</span>
+        </div>
+      </article>
+      <article class="ind-card">
+        <svg class="ind-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6M2 10v4M20 9v6M22 10v4M6 12h12"/></svg>
+        <h3 data-es="Gimnasios y bienestar" data-en="Gyms & wellness">Gimnasios y bienestar</h3>
+        <p data-es="Sistemas que ordenan negocios donde la operación gira alrededor de membresías, clases y agenda de citas." data-en="Systems for businesses built around memberships, classes and booking.">Sistemas que ordenan negocios donde la operación gira alrededor de membresías, clases y agenda de citas.</p>
+        <div class="service-chips">
+          <span class="service-chip">Gimnasios</span><span class="service-chip">Yoga y pilates</span>
+          <span class="service-chip">Spas</span><span class="service-chip">Entrenadores</span>
+        </div>
+      </article>
+      <div class="ind-spacer" aria-hidden="true"></div>
+    </div>
+  </div>
+</div>
+
 <div class="section" id="pricing">
   <h2 data-es="Planes claros, sin tarifas ocultas" data-en="Straightforward plans, no hidden fees">Planes claros, sin tarifas ocultas</h2>
   <div class="pricing-grid">
@@ -1332,6 +1656,61 @@
   </div>
 </div>
 
+<div class="section" id="faq">
+  <h2 data-es="Preguntas que nos hacen seguido" data-en="Questions we get a lot">Preguntas que nos hacen seguido</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button type="button" class="faq-q" aria-expanded="false">
+        <span data-es="¿Cuánto tiempo tarda un proyecto?" data-en="How long does a project take?">¿Cuánto tiempo tarda un proyecto?</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner"><p data-es="Depende del alcance: una página informativa suele estar lista en 1-2 semanas. Un sistema con automatización o software a medida toma entre 3 y 6 semanas. Te doy un tiempo exacto después de la llamada de diagnóstico." data-en="It depends on scope: an informational site is usually ready in 1-2 weeks. A system with automation or custom software takes 3 to 6 weeks. I'll give you an exact timeline after the diagnostic call.">Depende del alcance: una página informativa suele estar lista en 1-2 semanas. Un sistema con automatización o software a medida toma entre 3 y 6 semanas. Te doy un tiempo exacto después de la llamada de diagnóstico.</p></div></div>
+    </div>
+    <div class="faq-item">
+      <button type="button" class="faq-q" aria-expanded="false">
+        <span data-es="¿Cómo es el esquema de pago?" data-en="How does payment work?">¿Cómo es el esquema de pago?</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner"><p data-es="Para proyectos de pago único, como páginas web, trabajo con 50% de adelanto y 50% contra entrega. Los servicios mensuales (automatización, contenido, email) se facturan mes a mes, sin contratos largos." data-en="For one-time projects like websites, I work with 50% upfront and 50% on delivery. Monthly services (automation, content, email) are billed month to month, with no long contracts.">Para proyectos de pago único, como páginas web, trabajo con 50% de adelanto y 50% contra entrega. Los servicios mensuales (automatización, contenido, email) se facturan mes a mes, sin contratos largos.</p></div></div>
+    </div>
+    <div class="faq-item">
+      <button type="button" class="faq-q" aria-expanded="false">
+        <span data-es="¿Quién hace los textos y las imágenes?" data-en="Who writes the copy and creates the images?">¿Quién hace los textos y las imágenes?</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner"><p data-es="Te ayudo a estructurar y redactar el contenido con IA a partir de la información de tu negocio. Si ya tenés fotos o textos propios los uso directamente; si no, buscamos juntos las mejores opciones." data-en="I help structure and write the content with AI based on your business info. If you already have your own photos or copy I use them directly; if not, we find the best options together.">Te ayudo a estructurar y redactar el contenido con IA a partir de la información de tu negocio. Si ya tenés fotos o textos propios los uso directamente; si no, buscamos juntos las mejores opciones.</p></div></div>
+    </div>
+    <div class="faq-item">
+      <button type="button" class="faq-q" aria-expanded="false">
+        <span data-es="¿Qué pasa después de que entregas el sitio?" data-en="What happens after the site is delivered?">¿Qué pasa después de que entregas el sitio?</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner"><p data-es="Queda funcionando y con soporte incluido durante el primer mes para ajustes menores. Después podés contratar soporte continuo o pedirme cambios puntuales cuando los necesites." data-en="It stays live with support included for the first month for minor adjustments. After that you can hire ongoing support or ask for one-off changes whenever you need them.">Queda funcionando y con soporte incluido durante el primer mes para ajustes menores. Después podés contratar soporte continuo o pedirme cambios puntuales cuando los necesites.</p></div></div>
+    </div>
+    <div class="faq-item">
+      <button type="button" class="faq-q" aria-expanded="false">
+        <span data-es="¿Puedo actualizar el contenido yo mismo?" data-en="Can I update the content myself?">¿Puedo actualizar el contenido yo mismo?</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner"><p data-es="Sí. Para sitios informativos dejo todo listo para que edites textos e imágenes sin tocar código. Si el proyecto usa un sistema con base de datos, te doy un panel simple para manejarlo." data-en="Yes. For informational sites I leave everything ready so you can edit text and images without touching code. If the project uses a system with a database, I give you a simple panel to manage it.">Sí. Para sitios informativos dejo todo listo para que edites textos e imágenes sin tocar código. Si el proyecto usa un sistema con base de datos, te doy un panel simple para manejarlo.</p></div></div>
+    </div>
+    <div class="faq-item">
+      <button type="button" class="faq-q" aria-expanded="false">
+        <span data-es="¿Qué pasa con el dominio y el hosting?" data-en="What about the domain and hosting?">¿Qué pasa con el dominio y el hosting?</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner"><p data-es="Podés usar un dominio que ya tengas o te ayudo a comprarlo. El hosting queda a tu nombre desde el día uno — no dependés de mí para mantener tu sitio en línea." data-en="You can use a domain you already have or I'll help you buy one. Hosting is in your name from day one — you're not dependent on me to keep your site online.">Podés usar un dominio que ya tengas o te ayudo a comprarlo. El hosting queda a tu nombre desde el día uno — no dependés de mí para mantener tu sitio en línea.</p></div></div>
+    </div>
+    <div class="faq-item">
+      <button type="button" class="faq-q" aria-expanded="false">
+        <span data-es="¿Trabajás con negocios fuera de Costa Rica?" data-en="Do you work with businesses outside Costa Rica?">¿Trabajás con negocios fuera de Costa Rica?</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner"><p data-es="Sí, todo el trabajo se hace en remoto: llamadas, entregas y soporte funcionan igual sin importar dónde estés." data-en="Yes, all the work happens remotely: calls, delivery and support work the same no matter where you are.">Sí, todo el trabajo se hace en remoto: llamadas, entregas y soporte funcionan igual sin importar dónde estés.</p></div></div>
+    </div>
+  </div>
+</div>
+
 <div class="cta-section" id="contact">
   <h2 data-es="Encontremos tu primera victoria digital" data-en="Let's find your first digital win">Encontremos tu primera victoria digital</h2>
   <p data-es="Cuéntanos un poco sobre tu negocio y te respondemos en menos de 24 horas con ideas — completamente gratis, sin ningún compromiso." data-en="Tell us a bit about your business and we'll get back to you within 24 hours with ideas — completely free, no obligation.">Cuéntanos un poco sobre tu negocio y te respondemos en menos de 24 horas con ideas — completamente gratis, sin ningún compromiso.</p>
@@ -1350,16 +1729,18 @@
       <input type="email" id="f-correo" data-ph-es="Correo electrónico" data-ph-en="Email address" placeholder="Correo electrónico" required>
       <input type="tel" id="f-telefono" data-ph-es="Teléfono (opcional)" data-ph-en="Phone (optional)" placeholder="Teléfono (opcional)">
     </div>
-    <label for="f-reto" class="sr-only" data-es="¿Qué necesitas?" data-en="What do you need?">¿Qué necesitas?</label>
-    <select id="f-reto" aria-label="¿Qué necesitas?">
-      <option value="" disabled selected data-es="¿Qué necesitas?" data-en="What do you need?">¿Qué necesitas?</option>
-      <option data-es="Página web profesional" data-en="Professional website">Página web profesional</option>
-      <option data-es="Software o sistema a medida" data-en="Custom software or system">Software o sistema a medida</option>
-      <option data-es="Chatbot o automatización con IA" data-en="Chatbot or AI automation">Chatbot o automatización con IA</option>
-      <option data-es="Contenido para redes sociales" data-en="Social media content">Contenido para redes sociales</option>
-      <option data-es="No sé por dónde empezar" data-en="Not sure where to start">No sé por dónde empezar</option>
-      <option data-es="Algo más" data-en="Something else">Algo más</option>
-    </select>
+    <div class="form-field-group">
+      <span class="form-group-label" data-es="¿Qué necesitás?" data-en="What do you need?">¿Qué necesitás?</span>
+      <div class="chip-select" id="f-reto-chips" role="radiogroup" aria-label="¿Qué necesitás?">
+        <button type="button" class="chip-option" role="radio" aria-checked="false" data-value="Página web profesional" data-es="Página web profesional" data-en="Professional website">Página web profesional</button>
+        <button type="button" class="chip-option" role="radio" aria-checked="false" data-value="Software o sistema a medida" data-es="Software o sistema a medida" data-en="Custom software or system">Software o sistema a medida</button>
+        <button type="button" class="chip-option" role="radio" aria-checked="false" data-value="Chatbot o automatización con IA" data-es="Chatbot o automatización con IA" data-en="Chatbot or AI automation">Chatbot o automatización con IA</button>
+        <button type="button" class="chip-option" role="radio" aria-checked="false" data-value="Contenido para redes sociales" data-es="Contenido para redes sociales" data-en="Social media content">Contenido para redes sociales</button>
+        <button type="button" class="chip-option" role="radio" aria-checked="false" data-value="No sé por dónde empezar" data-es="No sé por dónde empezar" data-en="Not sure where to start">No sé por dónde empezar</button>
+        <button type="button" class="chip-option" role="radio" aria-checked="false" data-value="Algo más" data-es="Algo más" data-en="Something else">Algo más</button>
+      </div>
+      <input type="hidden" id="f-reto">
+    </div>
     <textarea id="f-mensaje" data-ph-es="Cuéntame más sobre tu negocio... (opcional)" data-ph-en="Tell me a bit more about your business... (optional)" placeholder="Cuéntame más sobre tu negocio... (opcional)"></textarea>
     <div class="form-error" id="form-error">Hubo un error al enviar. Por favor intenta de nuevo.</div>
     <button type="submit" class="btn-glass" id="submit-btn" style="align-self:center;" data-es="Enviar mi consulta gratis" data-en="Send my free request">Enviar mi consulta gratis</button>
@@ -1423,8 +1804,22 @@ function setLang(lang) {
     if(t.indexOf('<')!==-1) el.innerHTML=t; else el.textContent=t;
   });
   document.querySelectorAll('[data-ph-'+lang+']').forEach(function(el){ el.placeholder=el.getAttribute('data-ph-'+lang); });
-  document.querySelectorAll('#f-reto option[data-'+lang+']').forEach(function(o){ o.textContent=o.getAttribute('data-'+lang); });
 }
+
+(function() {
+  var group = document.getElementById('f-reto-chips');
+  var hidden = document.getElementById('f-reto');
+  if (!group || !hidden) return;
+  group.querySelectorAll('.chip-option').forEach(function(chip) {
+    chip.addEventListener('click', function() {
+      group.querySelectorAll('.chip-option').forEach(function(c) {
+        c.classList.remove('is-selected'); c.setAttribute('aria-checked', 'false');
+      });
+      chip.classList.add('is-selected'); chip.setAttribute('aria-checked', 'true');
+      hidden.value = chip.getAttribute('data-value');
+    });
+  });
+})();
 
 async function handleSubmit(e) {
   e.preventDefault();
@@ -1889,6 +2284,60 @@ function goHome(e) {
     });
   }, { threshold: 0.3 });
   sectionObserver.observe(container);
+})();
+
+// ── PINNED HORIZONTAL SCROLL ("lo que hay detrás") ────────────────
+(function() {
+  var tall = document.getElementById('wc-tall');
+  var frame = document.getElementById('wc-frame');
+  var track = document.querySelector('.wc-track');
+  if (!tall || !frame || !track) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!window.matchMedia('(min-width: 900px)').matches) return;
+
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var rect = tall.getBoundingClientRect();
+    var scrollableDist = tall.offsetHeight - window.innerHeight;
+    if (scrollableDist <= 0) return;
+    var progress = Math.min(Math.max(-rect.top / scrollableDist, 0), 1);
+    var maxTranslate = track.scrollWidth - frame.clientWidth;
+    track.style.transform = 'translateX(-' + Math.max(progress * maxTranslate, 0) + 'px)';
+  }
+  function onScroll() {
+    if (!ticking) { requestAnimationFrame(update); ticking = true; }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
+})();
+
+// ── SITE TYPES TAB SWITCHER ───────────────────────────────────────
+(function() {
+  var tabs = document.querySelectorAll('.dt-tab');
+  if (!tabs.length) return;
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      tabs.forEach(function(t) { t.classList.remove('is-active'); t.setAttribute('aria-selected', 'false'); });
+      document.querySelectorAll('.dt-panel').forEach(function(p) { p.classList.remove('is-active'); });
+      tab.classList.add('is-active'); tab.setAttribute('aria-selected', 'true');
+      var panel = document.getElementById(tab.getAttribute('data-target'));
+      if (panel) panel.classList.add('is-active');
+    });
+  });
+})();
+
+// ── FAQ ACCORDION ───────────────────────────────────────────────
+(function() {
+  document.querySelectorAll('.faq-q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.faq-item');
+      var open = item.classList.contains('open');
+      item.classList.toggle('open', !open);
+      btn.setAttribute('aria-expanded', String(!open));
+    });
+  });
 })();
 
 // ── HERO NETWORK PARALLAX ─────────────────────────────────────────
