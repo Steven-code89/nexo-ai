@@ -399,135 +399,6 @@
 
 
 
-  /* ══ MOBILE SERVICES ACCORDION — CLEAN REDESIGN ══════════════════ */
-  @media (max-width: 768px) {
-    .services-grid {
-      grid-template-columns: 1fr !important;
-      gap: 0.5rem !important;
-      background: transparent !important;
-      border: none !important;
-      border-radius: 0 !important;
-    }
-
-    .service-card {
-      background: rgba(255,255,255,0.04) !important;
-      border: 1px solid rgba(37,99,235,0.2) !important;
-      border-radius: 14px !important;
-      padding: 0 !important;
-      overflow: hidden;
-      transform: none !important;
-      transition: border-color 0.3s, background 0.3s !important;
-    }
-    .service-card.open {
-      background: rgba(37,99,235,0.09) !important;
-      border-color: rgba(59,130,246,0.5) !important;
-    }
-    .service-card::before,
-    .service-card::after { display: none !important; }
-    .service-card:hover { transform: none !important; }
-    .service-card:hover h3 { color: inherit !important; }
-
-    /* Animations show on open, not hover on mobile */
-    .service-card .card-anim { opacity: 0 !important; }
-    .service-card.open .card-anim {
-      opacity: 1 !important;
-      position: absolute !important;
-      bottom: 0.75rem !important;
-      left: auto !important;
-      right: 1.1rem !important;
-      width: 44px !important;
-      height: 44px !important;
-      margin-top: 0 !important;
-      display: block !important;
-      z-index: 5 !important;
-    }
-    /* Give body relative positioning so absolute child works */
-    .service-card.open .service-card-body {
-      position: relative !important;
-    }
-
-
-    /* Header */
-    .service-card-header {
-      display: flex !important;
-      align-items: center;
-      gap: 0.85rem;
-      padding: 0.95rem 1.1rem;
-      cursor: pointer;
-    }
-
-    /* Icon — keep visible and styled */
-    
-
-    .service-card-header-text { flex: 1; }
-    .service-card-header-text h3 {
-      font-family: 'Space Grotesk', sans-serif !important;
-      font-size: 0.875rem !important;
-      font-weight: 700 !important;
-      color: #94a3b8 !important;
-      margin: 0 !important;
-      transition: color 0.3s;
-    }
-    .service-card.open .service-card-header-text h3 {
-      color: #f1f5f9 !important;
-    }
-
-    /* Toggle — clean circle with chevron */
-    .accordion-arrow {
-      width: 24px !important; height: 24px !important;
-      border-radius: 50% !important;
-      border: 1px solid rgba(37,99,235,0.3) !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      font-size: 0.55rem !important;
-      color: rgba(147,197,253,0.5) !important;
-      flex-shrink: 0;
-      transition: background 0.3s, border-color 0.3s, color 0.3s, transform 0.3s !important;
-      transform: rotate(0deg) !important;
-    }
-    .service-card.open .accordion-arrow {
-      background: rgba(37,99,235,0.25) !important;
-      border-color: rgba(59,130,246,0.5) !important;
-      color: #93c5fd !important;
-      transform: rotate(180deg) !important;
-    }
-
-    /* Body */
-    .service-card-body {
-      max-height: 0 !important;
-      overflow: hidden !important;
-      padding: 0 1.1rem !important;
-      border-top: 1px solid transparent;
-      transition: max-height 0.4s ease, padding 0.3s, border-color 0.3s !important;
-    }
-    .service-card.open .service-card-body {
-      max-height: 340px !important;
-      padding: 0.8rem 1.1rem 1rem !important;
-      border-top-color: rgba(37,99,235,0.12) !important;
-    }
-    .service-card-body p {
-      font-size: 0.82rem !important;
-      color: rgba(148,163,184,0.9) !important;
-      line-height: 1.65 !important;
-      margin-bottom: 0.6rem !important;
-    }
-    
-    .service-card:hover 
-  }
-
-  @media (min-width: 769px) {
-    .service-card-header { display: block !important; cursor: default !important; }
-    .service-card-body {
-      max-height: none !important;
-      overflow: visible !important;
-      padding: 0 !important;
-      border-top: none !important;
-    }
-    .accordion-arrow { display: none !important; }
-    .service-card { padding: 2rem 1.75rem !important; }
-  }
-
   /* ══ PRICING CARD HOVER EFFECTS ══════════════════════════════════ */
 
   /* Base upgrade for all price cards */
@@ -720,142 +591,91 @@
 
 
 
-  /* ══ SECTION DARK — SERVICES ════════════════════════════════════ */
-  .section-dark {
-    background: linear-gradient(160deg, #060d1a 0%, #0b1628 40%, #080f1e 70%, #060d1a 100%);
-    position: relative;
-    overflow: hidden;
-    max-width: 100%;
-    padding-left: 5vw;
-    padding-right: 5vw;
-  }
-  .section-dark > * { position: relative; z-index: 1; }
-  .section-dark::before {
-    content: '';
-    position: absolute; inset: 0; z-index: 0;
-    background:
-      radial-gradient(ellipse at 15% 25%, rgba(37,99,235,0.14) 0%, transparent 55%),
-      radial-gradient(ellipse at 85% 75%, rgba(14,165,233,0.09) 0%, transparent 55%);
-    pointer-events: none;
-  }
-  .section-dark { padding-top: 4rem; padding-bottom: 4rem; }
-  .section-dark .services-network { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: visible; opacity: 0.4; }
-  .services-network .sn-line { fill: none; stroke: var(--accent); stroke-width: 1; stroke-linecap: round; opacity: 0.3; }
-  .services-network .sn-node { fill: var(--accent2); opacity: 0.45; }
-  .section-dark h2 { color: #f1f5f9 !important; margin-bottom: 0.75rem; margin-left: auto; margin-right: auto; text-align: center; }
-  .section-sub { color: rgba(203,213,225,0.7); font-size: 0.98rem; max-width: 560px; margin: 0 auto 1.75rem; text-align: center; }
+  /* ══ SERVICES — EDITORIAL INDEX ══════════════════════════════════
+     No cards, no borders around content — numbered rows, generous
+     whitespace, typography carries the hierarchy. Light section, same
+     as Hero/Proyectos, so Services stops being the odd dark slab out. */
+  #services { position: relative; overflow: hidden; max-width: 100%; padding-left: 5vw; padding-right: 5vw; }
+  #services > * { position: relative; z-index: 1; }
+  #services .services-network { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: visible; opacity: 0.5; }
+  .services-network .sn-line { fill: none; stroke: var(--accent); stroke-width: 1; stroke-linecap: round; opacity: 0.14; }
+  .services-network .sn-node { fill: var(--accent2); opacity: 0.22; }
+  #services h2 { margin-bottom: 0.75rem; margin-left: auto; margin-right: auto; text-align: center; }
+  .section-sub { color: var(--muted); font-size: 0.98rem; max-width: 560px; margin: 0 auto 1.75rem; text-align: center; }
 
-  .services-grid {
+  .services-list { max-width: 880px; margin: 3rem auto 0; }
+  .service-row {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: rgba(37,99,235,0.18);
-    border: 1px solid rgba(37,99,235,0.25);
-    border-radius: 18px;
-    overflow: visible;
-    position: relative;
+    grid-template-columns: 1fr 10rem 10rem;
+    align-items: center;
+    column-gap: 2rem;
+    padding: 2.25rem 1rem;
+    border-top: 1px solid var(--border);
+    transition: background 0.25s ease;
   }
-  /* Three tiers, not six equal boxes: 1 flagship (full width) → 2 medium
-     (half width) → 4 compact (quarter width). */
-  .service-card.flagship { grid-column: span 4; }
-  .service-card.medium { grid-column: span 2; }
-  .service-card.compact { grid-column: span 1; }
-  .service-card {
-    background: rgba(6,13,26,0.8);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    padding: 1.5rem 1.5rem;
-    transition: background 0.35s ease;
-    position: relative;
-    overflow: visible;
-    cursor: default;
+  .services-list .service-row:last-child { border-bottom: 1px solid var(--border); }
+  @media (hover: hover) and (pointer: fine) {
+    .service-row:hover { background: rgba(37,99,235,0.035); }
   }
-  .service-card.flagship { padding: 1.75rem 2rem; }
-  .service-card:hover { background: rgba(37,99,235,0.13) !important; }
+  .service-row-main h3 {
+    font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 700;
+    letter-spacing: -0.02em; color: var(--ink); margin-bottom: 0.5rem;
+  }
+  .service-row-main p { font-size: 0.95rem; color: var(--muted); line-height: 1.6; max-width: 480px; }
+  .service-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.85rem; }
+  .service-chip {
+    font-family: ui-monospace, 'Cascadia Code', 'SF Mono', Consolas, 'Ubuntu Mono', monospace;
+    font-size: 0.68rem; font-weight: 600; letter-spacing: -0.01em;
+    color: var(--muted); background: #f5f5fa; border: none; border-radius: 7px;
+    padding: 0.28rem 0.6rem;
+    box-shadow: -2px -2px 6px 0 #fff, 2px 2px 6px 0 rgba(29,13,202,0.07);
+  }
+  .service-row-price { display: flex; flex-direction: column; align-items: flex-end; text-align: right; gap: 0.1rem; }
+  .price-label { font-size: 0.78rem; color: var(--muted); }
+  .price-amount { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; }
+  .price-note { font-size: 0.76rem; color: var(--muted); }
+  .service-row-price--quote .price-amount--text { font-size: 0.9rem; font-weight: 600; color: var(--muted); text-align: right; }
 
-  .service-icon {
-    width: 38px; height: 38px; border-radius: 9px;
-    margin-bottom: 0.85rem;
-    display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
-    transition: transform 0.25s ease;
-  }
-  .service-card.flagship .service-icon { transform: scale(1.15); transform-origin: left top; }
-  .icon-blue   { background: rgba(37,99,235,0.2);  border: 1px solid rgba(37,99,235,0.35); }
-  .icon-indigo { background: rgba(99,102,241,0.2); border: 1px solid rgba(99,102,241,0.35); }
-  .icon-sky    { background: rgba(14,165,233,0.2); border: 1px solid rgba(14,165,233,0.35); }
-  .service-card:hover .service-icon { transform: scale(1.1); }
-  .service-card.flagship:hover .service-icon { transform: scale(1.25); }
-
-  .service-card h3 {
-    font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem;
-    font-weight: 700; margin-bottom: 0.45rem; letter-spacing: -0.02em;
-    color: #e2e8f0; transition: color 0.3s;
-  }
-  .service-card.flagship h3 { font-size: 1.35rem; }
-  .service-card:hover h3 { color: #fff !important; }
-  .service-card p { font-size: 0.9rem; color: rgba(203,213,225,0.82); line-height: 1.55; }
-  .service-card.flagship p { max-width: 420px; font-size: 0.95rem; }
-
-  /* ── Flagship: text left, website preview right — fills the row
-     instead of leaving empty space under a two-line paragraph. ── */
-  .flagship-body { display: flex; align-items: center; gap: 2.5rem; }
-  .flagship-content { flex: 1 1 320px; min-width: 0; }
-  .flagship-preview { flex: 0 0 280px; max-width: 280px; }
-  .flagship-preview svg { display: block; width: 100%; height: auto; }
-
-  /* Flagship preview "builds itself" on hover — chrome fills in, text
-     streams onto the page, then the code panel types its lines and
-     blinks a cursor. Reinforces "we build websites" for the flagship
-     service instead of a static mockup. Desktop-only element (hidden
-     below 900px), so gating to real hover is safe. */
-  .flagship-preview .fp-el {
-    opacity: 0;
-    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.23,1,0.32,1);
-  }
-  .flagship-preview .fp-draw { transform: scaleX(0.2); transform-box: fill-box; transform-origin: left center; }
-  .flagship-preview .fp-pop { transform: scale(0.8); transform-box: fill-box; transform-origin: center; }
-  .flagship-preview .fp-fade { transform: translateY(6px); }
-  .flagship-preview .fp-cursor { opacity: 0; }
-  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-    .service-card.flagship:hover .flagship-preview .fp-el { opacity: 1; transform: none; }
-    .service-card.flagship:hover .flagship-preview .fp-cursor {
-      animation: fpBlink 0.9s steps(1) 1.05s infinite;
-    }
-  }
-  @keyframes fpBlink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
-  @media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
-    .flagship-preview .fp-el { opacity: 1; transform: none; }
-  }
-
-  /* ── Price as typographic hierarchy, not a pill ── */
-  .service-price-block { display: flex; align-items: baseline; gap: 0.4rem; margin-top: 0.9rem; flex-wrap: wrap; }
-  .price-label { font-size: 0.78rem; color: rgba(203,213,225,0.7); }
-  .price-amount { font-family: 'Space Grotesk', sans-serif; font-size: 1.45rem; font-weight: 700; color: #fff; letter-spacing: -0.02em; }
-  .service-card.flagship .price-amount { font-size: 1.9rem; }
-  .price-note { font-size: 0.76rem; color: rgba(148,163,184,0.8); flex-basis: 100%; }
-  .service-price-block--quote .price-amount--text { font-size: 0.95rem; font-weight: 600; color: rgba(203,213,225,0.75); }
-
-  /* ── CTA link with arrow, not a label ── */
+  /* ── CTA link with arrow, not a label ──
+     padding+negative margin enlarges the tap target to ~44px without
+     shifting the visual layout (WCAG 2.5.8 / touch-target guidance). */
   .service-cta {
-    display: inline-flex; align-items: center; gap: 0.4rem;
-    margin-top: 0.85rem; font-size: 0.88rem; font-weight: 700;
-    color: #93c5fd; text-decoration: none; transition: color 0.2s;
+    display: inline-flex; align-items: center; gap: 0.4rem; justify-self: end;
+    font-size: 0.88rem; font-weight: 700; color: var(--energy); text-decoration: none;
+    white-space: nowrap; padding: 0.6rem 0.3rem; margin: -0.6rem -0.3rem; border-radius: 6px;
+    transition: color 0.2s;
   }
-  .service-cta:hover { color: #fff; }
+  .service-cta:hover { color: var(--energy-dark); }
+  .service-cta:focus-visible { outline: 2px solid var(--energy); outline-offset: 2px; }
   .service-cta .cta-arrow { transition: transform 0.25s ease; }
   .service-cta:hover .cta-arrow { transform: translateX(4px); }
-  .services-trust { text-align: center; padding-top: 2rem; margin-top: 2rem; border-top: 1px solid rgba(148,163,184,0.15); }
-  .services-trust h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 700; color: #f1f5f9; margin-bottom: 0.5rem; }
-  .services-trust p { color: rgba(203,213,225,0.8); font-size: 0.92rem; max-width: 440px; margin: 0 auto; }
-  .services-trust .service-cta { margin-top: 1rem; font-size: 0.9rem; }
+  .services-trust { text-align: center; padding-top: 3rem; margin-top: 1rem; }
+  .services-trust h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--ink); margin-bottom: 0.5rem; }
+  .services-trust p { color: var(--muted); font-size: 0.92rem; max-width: 440px; margin: 0 auto; }
+  .services-trust .service-cta { margin-top: 1rem; font-size: 0.9rem; justify-self: center; }
 
-  @media (max-width: 900px) {
-    .services-grid { grid-template-columns: repeat(2, 1fr); }
-    .service-card.flagship { grid-column: span 2; }
-    .service-card.medium, .service-card.compact { grid-column: span 1; }
-    /* The preview needs real width to read; below desktop it costs more
-       scroll than it earns, especially inside the mobile accordion. */
-    .flagship-preview { display: none; }
+  @media (max-width: 720px) {
+    .services-list { padding: 0 0.6rem; }
+    .service-row {
+      grid-template-columns: 1fr auto;
+      grid-template-areas: "main main" "price cta";
+      row-gap: 1.1rem; column-gap: 1rem;
+      padding: 2rem 0.25rem;
+    }
+    .service-row-main { grid-area: main; }
+    .service-row-main h3 { font-size: 1.3rem; }
+    .service-row-price {
+      grid-area: price; align-items: flex-start; text-align: left;
+      flex-direction: row; gap: 0.5rem; flex-wrap: wrap; align-self: end;
+    }
+    .service-cta {
+      grid-area: cta; justify-self: end; align-self: end;
+      border: 1.5px solid var(--energy); border-radius: 100px;
+      padding: 0.5rem 1rem; margin: 0;
+    }
+    .service-cta:hover, .service-cta:focus-visible { background: var(--energy); color: #fff; }
+    .service-row-price--quote { display: none; }
+    .service-row-price--quote + .service-cta { grid-column: 1 / -1; justify-self: start; }
   }
 
 
@@ -1117,14 +937,14 @@
   <h1 fetchpriority="high" data-es="Tu negocio, <em>conectado al futuro</em> con IA." data-en="Your business, <em>connected to the future</em> with AI.">Tu negocio, <em>conectado al futuro</em> con IA.</h1>
   <p class="hero-sub" data-es="Ayudamos a pequeñas empresas a ahorrar tiempo, atraer más clientes y crecer — con páginas web profesionales, software a medida e inteligencia artificial." data-en="We help small businesses save time, attract more clients and grow — with professional websites, custom software and artificial intelligence.">Ayudamos a pequeñas empresas a ahorrar tiempo, atraer más clientes y crecer — con páginas web profesionales, software a medida e inteligencia artificial.</p>
   <div class="hero-actions">
-    <a href="#contact" class="btn-primary btn-primary--energy" data-es="Agenda una llamada gratis de 20 min" data-en="Book a free 20-min call">Agenda una llamada gratis de 20 min</a>
+    <a href="#contact" class="btn-primary btn-primary--energy" onclick="event.preventDefault(); Cal.ns['30min']('modal', {calLink:'steven-jimenez-nexo/30min', config:{layout:'month_view'}});" data-es="Agenda una llamada gratis de 20 min" data-en="Book a free 20-min call">Agenda una llamada gratis de 20 min</a>
     <a href="#services" class="btn-ghost" data-es="Ver mis servicios" data-en="See what I offer">Ver mis servicios</a>
   </div>
   <p class="hero-note" data-es="Sin tecnicismos. Sin contratos largos. Solo resultados." data-en="No tech jargon. No long contracts. Just results.">Sin tecnicismos. Sin contratos largos. Solo resultados.</p>
   <div class="hero-glow" aria-hidden="true"></div>
 </div>
 
-<div class="section section-dark" id="services">
+<div class="section" id="services">
   <svg class="services-network" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
     <path class="sn-line" d="M860,50 L955,125"/>
     <path class="sn-line" d="M860,50 L790,145"/>
@@ -1140,242 +960,134 @@
   </svg>
   <h2 data-es="Soluciones digitales que hacen avanzar tu negocio" data-en="Digital solutions that move your business forward">Soluciones digitales que hacen avanzar tu negocio</h2>
   <p class="section-sub" data-es="Diseño, desarrollo y automatización para convertir más, ahorrar tiempo y trabajar mejor." data-en="Design, development and automation to convert more, save time and work better.">Diseño, desarrollo y automatización para convertir más, ahorrar tiempo y trabajar mejor.</p>
-  <div class="services-grid">
 
-    <!-- FLAGSHIP: Páginas Web — horizontal, with a persistent website preview -->
-    <div class="service-card flagship" icon-type-blue>
-      <div class="service-card-header" onclick="toggleAccordion(this)">
-        <div class="service-icon icon-blue"><svg style="color:#3b82f6;width:22px;height:22px" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="10" cy="10" r="8"/><path d="M10 2c-2 2-3.5 4.5-3.5 8s1.5 6 3.5 8"/><path d="M10 2c2 2 3.5 4.5 3.5 8s-1.5 6-3.5 8"/><path d="M2 10h16"/><path d="M2.5 7h15M2.5 13h15"/></svg></div>
-      <div class="service-card-header-text"><h3 data-es="Páginas web que convierten" data-en="Websites that convert">Páginas web que convierten</h3></div>
-        <span class="accordion-arrow">▼</span>
-      </div>
-      <div class="service-card-body flagship-body">
-        <div class="flagship-content">
-          <p data-es="Diseñamos y desarrollamos sitios rápidos, modernos y optimizados para convertir visitantes en clientes." data-en="We design and build fast, modern sites optimized to turn visitors into clients.">Diseñamos y desarrollamos sitios rápidos, modernos y optimizados para convertir visitantes en clientes.</p>
-          <div class="service-price-block">
-            <span class="price-label" data-es="Desde" data-en="From">Desde</span>
-            <span class="price-amount">$350</span>
-            <span class="price-note" data-es="Pago único" data-en="One-time">Pago único</span>
-          </div>
-          <a href="#contact" class="service-cta"><span data-es="Ver servicio" data-en="View service">Ver servicio</span><span class="cta-arrow" aria-hidden="true">→</span></a>
-        </div>
-        <div class="flagship-preview" aria-hidden="true">
-          <svg viewBox="0 0 280 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="1" y="1" width="278" height="198" rx="10" fill="rgba(255,255,255,0.02)" stroke="rgba(59,130,246,0.35)" stroke-width="1.5"/>
-            <line x1="1" y1="28" x2="279" y2="28" stroke="rgba(59,130,246,0.25)" stroke-width="1"/>
-            <circle cx="16" cy="14" r="3" fill="#ef4444"/>
-            <circle cx="27" cy="14" r="3" fill="#f59e0b"/>
-            <circle cx="38" cy="14" r="3" fill="#22c55e"/>
-            <rect class="fp-el fp-draw" style="transition-delay:0s" x="90" y="8" width="150" height="12" rx="6" fill="rgba(255,255,255,0.06)"/>
-            <rect class="fp-el fp-draw" style="transition-delay:0.08s" x="18" y="46" width="100" height="10" rx="3" fill="#e2e8f0"/>
-            <rect class="fp-el fp-draw" style="transition-delay:0.16s" x="18" y="60" width="70" height="10" rx="3" fill="#3b82f6"/>
-            <rect class="fp-el fp-fade" style="transition-delay:0.24s" x="18" y="82" width="110" height="5" rx="2.5" fill="rgba(226,232,240,0.4)"/>
-            <rect class="fp-el fp-fade" style="transition-delay:0.30s" x="18" y="92" width="95" height="5" rx="2.5" fill="rgba(226,232,240,0.4)"/>
-            <rect class="fp-el fp-fade" style="transition-delay:0.36s" x="18" y="102" width="80" height="5" rx="2.5" fill="rgba(226,232,240,0.4)"/>
-            <rect class="fp-el fp-pop" style="transition-delay:0.44s" x="18" y="120" width="64" height="20" rx="10" fill="#2563eb"/>
-            <rect class="fp-el fp-fade" style="transition-delay:0.52s" x="30" y="127" width="40" height="6" rx="3" fill="white" opacity="0.9"/>
-            <rect x="148" y="46" width="114" height="100" rx="8" fill="url(#previewGrad)"/>
-            <!-- Code editor panel: status bar + syntax-colored lines typing in, then a blinking cursor -->
-            <rect class="fp-el fp-pop" style="transition-delay:0.56s" x="160" y="120" width="76" height="18" rx="9" fill="#0b1120" stroke="rgba(59,130,246,0.4)"/>
-            <circle class="fp-el fp-pop" style="transition-delay:0.62s" cx="172" cy="129" r="4" fill="#22c55e"/>
-            <rect class="fp-el fp-draw" style="transition-delay:0.64s" x="182" y="126" width="46" height="6" rx="3" fill="#cbd5e1"/>
-            <rect class="fp-el fp-draw" style="transition-delay:0.68s" x="160" y="58" width="60" height="6" rx="3" fill="#93c5fd"/>
-            <rect class="fp-el fp-draw" style="transition-delay:0.74s" x="160" y="72" width="44" height="6" rx="3" fill="#f1f5f9" opacity="0.55"/>
-            <rect class="fp-el fp-draw" style="transition-delay:0.80s" x="160" y="86" width="70" height="6" rx="3" fill="#a78bfa"/>
-            <rect class="fp-el fp-draw" style="transition-delay:0.86s" x="160" y="100" width="36" height="6" rx="3" fill="#34d399"/>
-            <rect class="fp-el fp-cursor" x="198" y="100" width="2" height="6" fill="#ffffff"/>
-            <rect class="fp-el fp-fade" style="transition-delay:0.92s" x="18" y="160" width="60" height="26" rx="6" fill="rgba(59,130,246,0.08)" stroke="rgba(59,130,246,0.2)"/>
-            <rect class="fp-el fp-fade" style="transition-delay:0.98s" x="86" y="160" width="60" height="26" rx="6" fill="rgba(59,130,246,0.08)" stroke="rgba(59,130,246,0.2)"/>
-            <defs>
-              <linearGradient id="previewGrad" x1="148" y1="46" x2="262" y2="146" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#3b82f6" stop-opacity="0.55"/>
-                <stop offset="1" stop-color="#6366f1" stop-opacity="0.3"/>
-              </linearGradient>
-            </defs>
-          </svg>
+  <div class="services-list">
+
+    <div class="service-row">
+      <div class="service-row-main">
+        <h3 data-es="Páginas web que convierten" data-en="Websites that convert">Páginas web que convierten</h3>
+        <p data-es="Diseñamos y desarrollamos sitios rápidos, modernos y optimizados para convertir visitantes en clientes." data-en="We design and build fast, modern sites optimized to turn visitors into clients.">Diseñamos y desarrollamos sitios rápidos, modernos y optimizados para convertir visitantes en clientes.</p>
+        <div class="service-chips">
+          <span class="service-chip" data-es="Landing pages" data-en="Landing pages">Landing pages</span>
+          <span class="service-chip" data-es="Tiendas en línea" data-en="Online stores">Tiendas en línea</span>
+          <span class="service-chip" data-es="Sitios informativos" data-en="Informational sites">Sitios informativos</span>
+          <span class="service-chip" data-es="Portafolios" data-en="Portfolios">Portafolios</span>
         </div>
       </div>
+      <div class="service-row-price">
+        <span class="price-label" data-es="Desde" data-en="From">Desde</span>
+        <span class="price-amount">$350</span>
+        <span class="price-note" data-es="Pago único" data-en="One-time">Pago único</span>
+      </div>
+      <a href="#contact" class="service-cta"><span data-es="Ver servicio" data-en="View service">Ver servicio</span><span class="cta-arrow" aria-hidden="true">→</span></a>
     </div>
 
-    <!-- Atención al cliente 24/7 -->
-    <div class="service-card medium" icon-type-indigo>
-      <div class="service-card-header" onclick="toggleAccordion(this)">
-        <div class="service-icon icon-indigo"><svg style="color:#818cf8;width:22px;height:22px" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="7" width="14" height="10" rx="2"/><circle cx="7.5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12.5" cy="12" r="1.5" fill="currentColor" stroke="none"/><path d="M10 7V4M8 4h4"/><path d="M3 12H1M19 12h-2"/></svg></div>
-      <div class="service-card-header-text"><h3 data-es="Atención al cliente 24/7" data-en="24/7 customer support">Atención al cliente 24/7</h3></div>
-        <span class="accordion-arrow">▼</span>
-      </div>
-      <div class="service-card-body">
+    <div class="service-row">
+      <div class="service-row-main">
+        <h3 data-es="Atención al cliente 24/7" data-en="24/7 customer support">Atención al cliente 24/7</h3>
         <p data-es="Un asistente de IA que responde preguntas, agenda citas y captura clientes potenciales mientras tú haces crecer el negocio." data-en="An AI assistant that answers questions, books appointments and captures leads while you grow the business.">Un asistente de IA que responde preguntas, agenda citas y captura clientes potenciales mientras tú haces crecer el negocio.</p>
-        <div class="service-price-block">
-          <span class="price-label" data-es="Desde" data-en="From">Desde</span>
-          <span class="price-amount" data-es="$49/mes" data-en="$49/mo">$49/mes</span>
-          <span class="price-note" data-es="+ $150 instalación" data-en="+ $150 setup">+ $150 instalación</span>
+        <div class="service-chips">
+          <span class="service-chip" data-es="WhatsApp" data-en="WhatsApp">WhatsApp</span>
+          <span class="service-chip" data-es="Chat web" data-en="Web chat">Chat web</span>
+          <span class="service-chip" data-es="Reservas" data-en="Bookings">Reservas</span>
+          <span class="service-chip" data-es="Preguntas frecuentes" data-en="FAQ">Preguntas frecuentes</span>
         </div>
-        <a href="#contact" class="service-cta"><span data-es="Ver servicio" data-en="View service">Ver servicio</span><span class="cta-arrow" aria-hidden="true">→</span></a>
-      <div class="card-anim">
-        <svg class="anim-radar" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle class="wave" cx="26" cy="26" r="4" stroke="#818cf8" stroke-width="1.5" fill="none"/>
-          <circle class="wave" cx="26" cy="26" r="4" stroke="#818cf8" stroke-width="1.5" fill="none"/>
-          <circle class="wave" cx="26" cy="26" r="4" stroke="#818cf8" stroke-width="1.5" fill="none"/>
-          <circle cx="26" cy="26" r="5" fill="#6366f1"/>
-          <circle cx="26" cy="26" r="2.5" fill="#c7d2fe"/>
-        </svg>
       </div>
-        </div>
+      <div class="service-row-price">
+        <span class="price-label" data-es="Desde" data-en="From">Desde</span>
+        <span class="price-amount" data-es="$49/mes" data-en="$49/mo">$49/mes</span>
+        <span class="price-note" data-es="+ $150 instalación" data-en="+ $150 setup">+ $150 instalación</span>
+      </div>
+      <a href="#contact" class="service-cta"><span data-es="Ver servicio" data-en="View service">Ver servicio</span><span class="cta-arrow" aria-hidden="true">→</span></a>
     </div>
 
-    <!-- Automatización con IA (general, medium) -->
-    <div class="service-card medium" icon-type-sky>
-      <div class="service-card-header" onclick="toggleAccordion(this)">
-        <div class="service-icon icon-sky"><svg style="color:#38bdf8;width:22px;height:22px" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11,2 3,12 9,12 8,18 17,8 10,8 11,2"/></svg></div>
-      <div class="service-card-header-text"><h3 data-es="Automatización con IA" data-en="AI automation">Automatización con IA</h3></div>
-        <span class="accordion-arrow">▼</span>
-      </div>
-      <div class="service-card-body">
+    <div class="service-row">
+      <div class="service-row-main">
+        <h3 data-es="Automatización con IA" data-en="AI automation">Automatización con IA</h3>
         <p data-es="Automatiza correos, seguimientos, cotizaciones, facturas y tareas repetitivas." data-en="Automate emails, follow-ups, quotes, invoices and repetitive tasks.">Automatiza correos, seguimientos, cotizaciones, facturas y tareas repetitivas.</p>
-        <div class="service-price-block">
-          <span class="price-label" data-es="Desde" data-en="From">Desde</span>
-          <span class="price-amount" data-es="$39/mes" data-en="$39/mo">$39/mes</span>
+        <div class="service-chips">
+          <span class="service-chip" data-es="Facturación" data-en="Invoicing">Facturación</span>
+          <span class="service-chip" data-es="Seguimiento de clientes" data-en="Client follow-up">Seguimiento de clientes</span>
+          <span class="service-chip" data-es="Reportes" data-en="Reports">Reportes</span>
+          <span class="service-chip" data-es="Recordatorios" data-en="Reminders">Recordatorios</span>
         </div>
-        <a href="#contact" class="service-cta"><span data-es="Ver servicio" data-en="View service">Ver servicio</span><span class="cta-arrow" aria-hidden="true">→</span></a>
-      <div class="card-anim">
-        <svg class="anim-gear" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g class="gear-main">
-            <circle cx="20" cy="20" r="8" stroke="#38bdf8" stroke-width="2"/>
-            <circle cx="20" cy="20" r="3" fill="#38bdf8"/>
-            <rect x="18.5" y="8" width="3" height="5" rx="1.5" fill="#38bdf8"/>
-            <rect x="18.5" y="27" width="3" height="5" rx="1.5" fill="#38bdf8"/>
-            <rect x="8" y="18.5" width="5" height="3" rx="1.5" fill="#38bdf8"/>
-            <rect x="27" y="18.5" width="5" height="3" rx="1.5" fill="#38bdf8"/>
-          </g>
-          <g class="gear-small">
-            <circle cx="38" cy="34" r="5" stroke="#0ea5e9" stroke-width="1.5"/>
-            <circle cx="38" cy="34" r="2" fill="#0ea5e9"/>
-            <rect x="37.1" y="27.3" width="1.8" height="3.4" rx="0.9" fill="#0ea5e9"/>
-            <rect x="37.1" y="37.3" width="1.8" height="3.4" rx="0.9" fill="#0ea5e9"/>
-            <rect x="27.3" y="33.1" width="3.4" height="1.8" rx="0.9" fill="#0ea5e9"/>
-            <rect x="37.3" y="33.1" width="3.4" height="1.8" rx="0.9" fill="#0ea5e9"/>
-          </g>
-        </svg>
       </div>
-        </div>
+      <div class="service-row-price">
+        <span class="price-label" data-es="Desde" data-en="From">Desde</span>
+        <span class="price-amount" data-es="$39/mes" data-en="$39/mo">$39/mes</span>
+      </div>
+      <a href="#contact" class="service-cta"><span data-es="Ver servicio" data-en="View service">Ver servicio</span><span class="cta-arrow" aria-hidden="true">→</span></a>
     </div>
 
-    <!-- Software a Medida -->
-    <div class="service-card compact" icon-type-blue>
-      <div class="service-card-header" onclick="toggleAccordion(this)">
-        <div class="service-icon icon-blue"><svg style="color:#3b82f6;width:22px;height:22px" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 6L2 10l5 4"/><path d="M13 6l5 4-5 4"/></svg></div>
-      <div class="service-card-header-text"><h3 data-es="Software a medida" data-en="Custom software">Software a medida</h3></div>
-        <span class="accordion-arrow">▼</span>
-      </div>
-      <div class="service-card-body">
+    <div class="service-row">
+      <div class="service-row-main">
+        <h3 data-es="Software a medida" data-en="Custom software">Software a medida</h3>
         <p data-es="Sistemas y herramientas diseñados específicamente para la forma en que trabaja tu negocio." data-en="Systems and tools designed specifically for the way your business works.">Sistemas y herramientas diseñados específicamente para la forma en que trabaja tu negocio.</p>
-        <div class="service-price-block service-price-block--quote">
-          <span class="price-amount price-amount--text" data-es="Cotización personalizada" data-en="Custom quote">Cotización personalizada</span>
+        <div class="service-chips">
+          <span class="service-chip" data-es="CRM interno" data-en="Internal CRM">CRM interno</span>
+          <span class="service-chip" data-es="Paneles de control" data-en="Dashboards">Paneles de control</span>
+          <span class="service-chip" data-es="Integraciones" data-en="Integrations">Integraciones</span>
+          <span class="service-chip" data-es="Apps internas" data-en="Internal apps">Apps internas</span>
         </div>
-        <a href="#contact" class="service-cta"><span data-es="Solicitar cotización" data-en="Request a quote">Solicitar cotización</span><span class="cta-arrow" aria-hidden="true">→</span></a>
-      <div class="card-anim">
-        <svg class="anim-code" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="2" y="4" width="48" height="44" rx="4" stroke="rgba(37,99,235,0.4)" stroke-width="1.5"/>
-          <line class="code-line" x1="8" y1="16" x2="44" y2="16" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
-          <line class="code-line" x1="12" y1="23" x2="38" y2="23" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round"/>
-          <line class="code-line" x1="8" y1="30" x2="30" y2="30" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
-          <line class="code-line" x1="12" y1="37" x2="42" y2="37" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round"/>
-          <text x="6" y="14" fill="#1d4ed8" font-size="7" font-family="monospace">{'{'}</text>
-          <text x="6" y="42" fill="#1d4ed8" font-size="7" font-family="monospace">{'}'}</text>
-        </svg>
       </div>
-        </div>
+      <div class="service-row-price service-row-price--quote">
+        <span class="price-amount price-amount--text" data-es="Cotización personalizada" data-en="Custom quote">Cotización personalizada</span>
+      </div>
+      <a href="#contact" class="service-cta"><span data-es="Solicitar cotización" data-en="Request a quote">Solicitar cotización</span><span class="cta-arrow" aria-hidden="true">→</span></a>
     </div>
 
-    <!-- Contenido con IA -->
-    <div class="service-card compact" icon-type-indigo>
-      <div class="service-card-header" onclick="toggleAccordion(this)">
-        <div class="service-icon icon-indigo"><svg style="color:#818cf8;width:22px;height:22px" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l14-4v11L2 11V8z"/><path d="M9 13.5v2a1.5 1.5 0 01-2.9.5"/></svg></div>
-      <div class="service-card-header-text"><h3 data-es="Contenido con IA" data-en="AI content">Contenido con IA</h3></div>
-        <span class="accordion-arrow">▼</span>
-      </div>
-      <div class="service-card-body">
+    <div class="service-row">
+      <div class="service-row-main">
+        <h3 data-es="Contenido con IA" data-en="AI content">Contenido con IA</h3>
         <p data-es="Contenido para redes sociales, blogs y newsletters creado y programado automáticamente." data-en="Content for social media, blogs and newsletters created and scheduled automatically.">Contenido para redes sociales, blogs y newsletters creado y programado automáticamente.</p>
-        <div class="service-price-block">
-          <span class="price-label" data-es="Desde" data-en="From">Desde</span>
-          <span class="price-amount" data-es="$99/mes" data-en="$99/mo">$99/mes</span>
+        <div class="service-chips">
+          <span class="service-chip" data-es="Redes sociales" data-en="Social media">Redes sociales</span>
+          <span class="service-chip" data-es="Blog" data-en="Blog">Blog</span>
+          <span class="service-chip" data-es="Newsletters" data-en="Newsletters">Newsletters</span>
+          <span class="service-chip" data-es="Calendario editorial" data-en="Content calendar">Calendario editorial</span>
         </div>
-        <a href="#contact" class="service-cta"><span data-es="Ver servicio" data-en="View service">Ver servicio</span><span class="cta-arrow" aria-hidden="true">→</span></a>
-      <div class="card-anim">
-        <svg class="anim-social" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Thumb up -->
-          <g class="icon" style="transform-origin:10px 44px">
-            <path d="M4 38 Q4 32 8 30 L12 22 Q13 19 16 20 L16 30 L20 30 L20 44 L8 44 Q4 44 4 40Z" fill="#818cf8" opacity="0.9"/>
-          </g>
-          <!-- Heart -->
-          <g class="icon" style="transform-origin:26px 44px">
-            <path d="M26 42 Q18 36 18 30 Q18 26 22 26 Q24 26 26 28 Q28 26 30 26 Q34 26 34 30 Q34 36 26 42Z" fill="#f43f5e" opacity="0.9"/>
-          </g>
-          <!-- Share arrows -->
-          <g class="icon" style="transform-origin:42px 44px">
-            <path d="M36 38 L44 34 L36 30" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M44 34 Q44 42 36 42 L38 40" stroke="#6366f1" stroke-width="2" stroke-linecap="round"/>
-          </g>
-        </svg>
       </div>
-        </div>
+      <div class="service-row-price">
+        <span class="price-label" data-es="Desde" data-en="From">Desde</span>
+        <span class="price-amount" data-es="$99/mes" data-en="$99/mo">$99/mes</span>
+      </div>
+      <a href="#contact" class="service-cta"><span data-es="Ver servicio" data-en="View service">Ver servicio</span><span class="cta-arrow" aria-hidden="true">→</span></a>
     </div>
 
-    <!-- Email y seguimiento -->
-    <div class="service-card compact" icon-type-sky>
-      <div class="service-card-header" onclick="toggleAccordion(this)">
-        <div class="service-icon icon-sky"><svg style="color:#38bdf8;width:22px;height:22px" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="16" height="12" rx="2"/><path d="M2 5l8 6 8-6"/></svg></div>
-      <div class="service-card-header-text"><h3 data-es="Email y seguimiento" data-en="Email & follow-up">Email y seguimiento</h3></div>
-        <span class="accordion-arrow">▼</span>
-      </div>
-      <div class="service-card-body">
+    <div class="service-row">
+      <div class="service-row-main">
+        <h3 data-es="Email y seguimiento" data-en="Email & follow-up">Email y seguimiento</h3>
         <p data-es="Automatiza recordatorios, solicitudes de reseñas y seguimiento de clientes." data-en="Automate reminders, review requests and client follow-up.">Automatiza recordatorios, solicitudes de reseñas y seguimiento de clientes.</p>
-        <div class="service-price-block">
-          <span class="price-label" data-es="Desde" data-en="From">Desde</span>
-          <span class="price-amount" data-es="$39/mes" data-en="$39/mo">$39/mes</span>
-          <span class="price-note" data-es="+ $120 instalación" data-en="+ $120 setup">+ $120 instalación</span>
+        <div class="service-chips">
+          <span class="service-chip" data-es="Recordatorios" data-en="Reminders">Recordatorios</span>
+          <span class="service-chip" data-es="Reseñas" data-en="Reviews">Reseñas</span>
+          <span class="service-chip" data-es="Seguimiento post-venta" data-en="Post-sale follow-up">Seguimiento post-venta</span>
+          <span class="service-chip" data-es="Bienvenida automática" data-en="Automatic welcome">Bienvenida automática</span>
         </div>
-        <a href="#contact" class="service-cta"><span data-es="Ver servicio" data-en="View service">Ver servicio</span><span class="cta-arrow" aria-hidden="true">→</span></a>
-      <div class="card-anim">
-        <svg class="anim-email" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="14" width="44" height="30" rx="3" stroke="rgba(14,165,233,0.5)" stroke-width="1.5"/>
-          <polyline class="flap" points="4,14 26,32 48,14" stroke="#38bdf8" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-          <polyline class="check" points="16,32 23,39 36,24" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="40" cy="14" r="7" fill="#0b1120"/>
-          <polyline class="check" points="36,14 39,17 44,11" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        </svg>
       </div>
-        </div>
+      <div class="service-row-price">
+        <span class="price-label" data-es="Desde" data-en="From">Desde</span>
+        <span class="price-amount" data-es="$39/mes" data-en="$39/mo">$39/mes</span>
+        <span class="price-note" data-es="+ $120 instalación" data-en="+ $120 setup">+ $120 instalación</span>
+      </div>
+      <a href="#contact" class="service-cta"><span data-es="Ver servicio" data-en="View service">Ver servicio</span><span class="cta-arrow" aria-hidden="true">→</span></a>
     </div>
 
-    <!-- Flujos de trabajo personalizados -->
-    <div class="service-card compact" icon-type-sky>
-      <div class="service-card-header" onclick="toggleAccordion(this)">
-        <div class="service-icon icon-sky"><svg style="color:#38bdf8;width:22px;height:22px" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="5" r="2"/><circle cx="15" cy="5" r="2"/><circle cx="10" cy="16" r="2"/><path d="M5 7v1a2 2 0 002 2h1M15 7v1a2 2 0 01-2 2h-1M10 12v1"/></svg></div>
-      <div class="service-card-header-text"><h3 data-es="Flujos de trabajo" data-en="Custom workflows">Flujos de trabajo</h3></div>
-        <span class="accordion-arrow">▼</span>
-      </div>
-      <div class="service-card-body">
+    <div class="service-row">
+      <div class="service-row-main">
+        <h3 data-es="Flujos de trabajo" data-en="Custom workflows">Flujos de trabajo</h3>
         <p data-es="Conecta tus herramientas y elimina procesos manuales que consumen tiempo." data-en="Connect your tools and eliminate manual processes that waste time.">Conecta tus herramientas y elimina procesos manuales que consumen tiempo.</p>
-        <div class="service-price-block service-price-block--quote">
-          <span class="price-amount price-amount--text" data-es="Cotización personalizada" data-en="Custom quote">Cotización personalizada</span>
+        <div class="service-chips">
+          <span class="service-chip" data-es="Conexión de apps" data-en="App connections">Conexión de apps</span>
+          <span class="service-chip" data-es="Alertas" data-en="Alerts">Alertas</span>
+          <span class="service-chip" data-es="Reportes automáticos" data-en="Automatic reports">Reportes automáticos</span>
+          <span class="service-chip" data-es="Tareas repetitivas" data-en="Repetitive tasks">Tareas repetitivas</span>
         </div>
-        <a href="#contact" class="service-cta"><span data-es="Solicitar cotización" data-en="Request a quote">Solicitar cotización</span><span class="cta-arrow" aria-hidden="true">→</span></a>
-      <div class="card-anim">
-        <svg class="anim-flow" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="12" cy="12" r="4" fill="#38bdf8"/>
-          <circle cx="40" cy="12" r="4" fill="#0ea5e9"/>
-          <circle cx="26" cy="40" r="4" fill="#38bdf8"/>
-          <path d="M14 16 L23 36" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M38 16 L29 36" stroke="#0ea5e9" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M16 12 L36 12" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
-          <circle class="flow-pulse" r="2" fill="#e0f2fe" style="offset-path:path('M14 16 L23 36');animation-delay:0s"/>
-          <circle class="flow-pulse" r="2" fill="#e0f2fe" style="offset-path:path('M38 16 L29 36');animation-delay:0.35s"/>
-          <circle class="flow-pulse" r="2" fill="#e0f2fe" style="offset-path:path('M16 12 L36 12');animation-delay:0.7s"/>
-        </svg>
       </div>
-        </div>
+      <div class="service-row-price service-row-price--quote">
+        <span class="price-amount price-amount--text" data-es="Cotización personalizada" data-en="Custom quote">Cotización personalizada</span>
+      </div>
+      <a href="#contact" class="service-cta"><span data-es="Solicitar cotización" data-en="Request a quote">Solicitar cotización</span><span class="cta-arrow" aria-hidden="true">→</span></a>
     </div>
 
   </div>
@@ -1885,20 +1597,6 @@ document.addEventListener('DOMContentLoaded', function() {
     checkScroll();
   }, { passive: true });
 
-
-// ── ACCORDION (mobile services) ──────────────────────────────────
-window.toggleAccordion = function(header) {
-  if (window.innerWidth > 768) return;
-  var card = header.closest('.service-card');
-  var isOpen = card.classList.contains('open');
-  // Close all
-  document.querySelectorAll('.service-card.open').forEach(function(c) {
-    c.classList.remove('open');
-  });
-  // Open clicked if was closed
-  if (!isOpen) card.classList.add('open');
-};
-
 });
 
 // ── HOME BUTTON ───────────────────────────────────────────────────
@@ -2338,87 +2036,6 @@ function goHome(e) {
   #chat-send:hover{background:var(--accent-dark);transform:scale(1.05);}
   #chat-send:disabled{background:var(--border);cursor:not-allowed;transform:none;}
 
-  /* ══ SERVICES ACCORDION (MOBILE) ═════════════════════════════════ */
-  @media (max-width: 768px) {
-    .services-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border-radius: 16px;
-      overflow: hidden;
-    }
-
-    .service-card {
-      padding: 0;
-      border-bottom: 1px solid var(--border);
-      transform: none !important; /* disable hover lift on mobile */
-      cursor: pointer;
-    }
-    .service-card:last-child { border-bottom: none; }
-
-    /* Accordion header — always visible */
-    .service-card-header {
-      display: flex;
-      align-items: center;
-      gap: 0.85rem;
-      padding: 1rem 1.25rem;
-      user-select: none;
-    }
-    
-    .service-card-header-text {
-      flex: 1;
-    }
-    .service-card-header-text h3 {
-      font-size: 0.9rem;
-      margin-bottom: 0;
-    }
-    .accordion-arrow {
-      font-size: 0.75rem;
-      color: var(--muted);
-      transition: transform 0.3s ease;
-      flex-shrink: 0;
-    }
-    .service-card.open .accordion-arrow {
-      transform: rotate(180deg);
-    }
-
-    /* Accordion body — hidden by default */
-    .service-card-body {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease, padding 0.3s ease, background 0.3s ease;
-      padding: 0 1.25rem;
-    }
-    .service-card.open .service-card-body {
-      max-height: 200px;
-      padding: 0 1.25rem 1.25rem;
-    }
-    .service-card-body p {
-      font-size: 0.85rem;
-      line-height: 1.6;
-      margin-bottom: 0.75rem;
-    }
-
-    /* Color background when open — per icon type */
-    .service-card.open.icon-type-blue   { background: #eff6ff; }
-    .service-card.open.icon-type-indigo { background: #eef2ff; }
-    .service-card.open.icon-type-sky    { background: #f0f9ff; }
-
-    /* Icon bounce on open */
-    .service-card.open 
-
-    /* Disable desktop hover bar effects on mobile */
-    .service-card::before,
-    .service-card::after { display: none; }
-    .service-card:hover { transform: none; background: inherit; }
-    .service-card:hover h3 { color: inherit; }
-    .service-card:hover 
-  }
-
-  /* On desktop, hide the accordion structure — show normal layout */
-  
-
-
   /* ══ ROBOT MOBILE — HANGS FROM TOP OF PROCESS SECTION ══════════ */
   @media (max-width: 768px) {
     #robot-wrapper {
@@ -2522,163 +2139,6 @@ function goHome(e) {
   }
 
 
-
-  /* ══ SERVICE CARDS — PREMIUM HOVER ═══════════════════════════════
-     Subtle and restrained on purpose: a 3px lift, a soft blue border
-     glow, and a thin gradient line — not a bounce or a zoom. Should
-     read as an expensive SaaS product, not a game UI. */
-  .services-grid { transition: none; }
-  .service-card {
-    transition: transform 0.3s ease, background 0.35s ease, box-shadow 0.3s ease, z-index 0s;
-    z-index: 1;
-  }
-  .service-card:hover {
-    transform: translateY(-3px) !important;
-    z-index: 20 !important;
-    box-shadow: 0 10px 30px rgba(8,15,30,0.35), 0 0 0 1px rgba(59,130,246,0.45) !important;
-    overflow: visible !important;
-  }
-  /* Thin gradient line along the bottom edge */
-  .service-card::after {
-    content: '';
-    position: absolute; left: 1.75rem; right: 1.75rem; bottom: 0; height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(96,165,250,0.9), transparent);
-    transform: scaleX(0);
-    transition: transform 0.35s ease;
-    pointer-events: none;
-  }
-  .service-card:hover::after { transform: scaleX(1); }
-
-  /* ── SVG Animation container ── */
-  .card-anim {
-    position: absolute;
-    bottom: 0.75rem; right: 0.75rem;
-    width: 52px; height: 52px;
-    opacity: 0;
-    transition: opacity 0.4s ease 0.15s;
-    pointer-events: none;
-    z-index: 20;
-  }
-  @media (hover: hover) and (pointer: fine) {
-    .service-card:hover .card-anim {
-      opacity: 1;
-    }
-  }
-
-  /* ── 1. Browser window (Páginas web) ── */
-  @keyframes cursorBlink {
-    0%,49%{ opacity:1; } 50%,100%{ opacity:0; }
-  }
-  @keyframes drawLine {
-    from { stroke-dashoffset: 60; }
-    to   { stroke-dashoffset: 0; }
-  }
-  .anim-browser .line1 {
-    stroke-dasharray: 60; stroke-dashoffset: 60;
-    animation: drawLine 0.5s 0.1s ease forwards;
-  }
-  .anim-browser .line2 {
-    stroke-dasharray: 40; stroke-dashoffset: 40;
-    animation: drawLine 0.4s 0.35s ease forwards;
-  }
-  .anim-browser .line3 {
-    stroke-dasharray: 25; stroke-dashoffset: 25;
-    animation: drawLine 0.3s 0.55s ease forwards;
-  }
-  .anim-browser .cursor {
-    animation: cursorBlink 0.7s 0.6s infinite;
-  }
-
-  /* ── 2. Code typewriter (Software) ── */
-  @keyframes typeIn {
-    from { stroke-dashoffset: 80; }
-    to   { stroke-dashoffset: 0; }
-  }
-  .anim-code .code-line {
-    stroke-dasharray: 80; stroke-dashoffset: 80;
-  }
-  .anim-code .code-line:nth-child(1) { animation: typeIn 0.4s 0s ease forwards; }
-  .anim-code .code-line:nth-child(2) { animation: typeIn 0.4s 0.25s ease forwards; }
-  .anim-code .code-line:nth-child(3) { animation: typeIn 0.3s 0.5s ease forwards; }
-  .anim-code .code-line:nth-child(4) { animation: typeIn 0.35s 0.7s ease forwards; }
-
-  /* ── 3. Radar waves (Bot IA) ── */
-  @keyframes radarPulse {
-    0%   { r: 4;  opacity: 0.9; }
-    100% { r: 24; opacity: 0; }
-  }
-  .anim-radar .wave {
-    transform-origin: center;
-    animation: radarPulse 1.4s ease-out infinite;
-  }
-  .anim-radar .wave:nth-child(2) { animation-delay: 0.4s; }
-  .anim-radar .wave:nth-child(3) { animation-delay: 0.8s; }
-
-  /* ── 4. Floating likes (Contenido) ── */
-  @keyframes floatUp {
-    0%   { transform: translateY(0) scale(0.5); opacity: 0; }
-    20%  { opacity: 1; }
-    100% { transform: translateY(-36px) scale(1); opacity: 0; }
-  }
-  .anim-social .icon {
-    animation: floatUp 1.4s ease-out infinite;
-    transform-box: fill-box;
-  }
-  .anim-social .icon:nth-child(1) { animation-delay: 0s; }
-  .anim-social .icon:nth-child(2) { animation-delay: 0.4s; }
-  .anim-social .icon:nth-child(3) { animation-delay: 0.8s; }
-
-  /* ── 5. Envelope open + check (Automatización) ── */
-  @keyframes envelopeOpen {
-    0%,40%  { d: path("M4 14 L26 4 L48 14"); }
-    60%,100%{ d: path("M4 14 L26 24 L48 14"); }
-  }
-  @keyframes checkDraw {
-    from { stroke-dashoffset: 30; }
-    to   { stroke-dashoffset: 0; }
-  }
-  @keyframes checkAppear {
-    0%,50% { opacity:0; }
-    60%,100%{ opacity:1; }
-  }
-  .anim-email .flap {
-    animation: envelopeOpen 1.2s ease-in-out infinite;
-  }
-  .anim-email .check {
-    stroke-dasharray: 30; stroke-dashoffset: 30;
-    animation: checkDraw 0.4s 0.7s ease forwards, checkAppear 1.2s ease infinite;
-  }
-
-  /* ── 6. Interlocking gears (Automatización con IA) ── */
-  @keyframes gearSpinCW { to { transform: rotate(360deg); } }
-  @keyframes gearSpinCCW { to { transform: rotate(-360deg); } }
-  .anim-gear .gear-main {
-    transform-box: fill-box; transform-origin: center;
-    animation: gearSpinCW 4s linear infinite;
-  }
-  .anim-gear .gear-small {
-    transform-box: fill-box; transform-origin: center;
-    animation: gearSpinCCW 2.4s linear infinite;
-  }
-
-  /* ── 7. Data flowing through the graph (Flujos de trabajo) ── */
-  @keyframes flowTravel {
-    0% { offset-distance: 0%; opacity: 0; }
-    12% { opacity: 1; }
-    88% { opacity: 1; }
-    100% { offset-distance: 100%; opacity: 0; }
-  }
-  .anim-flow .flow-pulse {
-    animation: flowTravel 1.6s linear infinite;
-  }
-
-  /* Card icon animations are decorative and loop indefinitely once
-     revealed — gate them the same way as every other autoplay motion
-     on this page: no true hover means no reveal, and reduced-motion
-     means no spin/pulse at all (icons still show, just static). */
-  @media (prefers-reduced-motion: reduce) {
-    .card-anim * { animation: none !important; }
-  }
 
   /* ══ ROBOT MASCOT ══════════════════════════════════════════════ */
   #robot-wrapper {
@@ -2970,6 +2430,13 @@ function goHome(e) {
     document.getElementById('chat-send').disabled=false;
   }
 })();
+</script>
+
+<!-- Cal.com booking widget — opens as a popup so the flow stays on-site -->
+<script type="text/javascript">
+  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+  Cal("init", "30min", { origin: "https://cal.com" });
+  Cal.ns["30min"]("ui", { "styles": { "branding": { "brandColor": "#f2542d" } }, "hideEventTypeDetails": false, "layout": "month_view" });
 </script>
 </body>
 </html>
