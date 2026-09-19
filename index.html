@@ -807,20 +807,6 @@
   .mock-browser img { display: block; width: 100%; height: auto; }
   .mock-phone { width: 150px; max-width: 60%; margin-bottom: -34px; border: 5px solid #05070d; border-radius: 26px; overflow: hidden; background: #05070d; box-shadow: 0 18px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(244,246,251,0.12); }
   .mock-phone img { display: block; width: 100%; height: auto; border-radius: 20px; }
-  .mock-screen { padding: 10px 12px 14px; min-height: 150px; }
-  .mock-screen b, .mock-screen span, .mock-screen em, .mock-screen u, .mock-screen s, .mock-screen i { display: block; text-decoration: none; }
-  .ms-nav { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
-  .ms-nav b { width: 34px; height: 8px; border-radius: 4px; background: var(--accent-light); }
-  .ms-nav span { width: 22px; height: 5px; border-radius: 3px; background: rgba(244,246,251,0.22); }
-  .ms-nav em { margin-left: auto; width: 12px; height: 12px; border-radius: 50%; border: 2px solid rgba(244,246,251,0.4); }
-  .ms-hero { height: 46px; border-radius: 8px; padding: 9px 10px; margin-bottom: 10px; background: linear-gradient(120deg, rgba(37,99,235,0.55), rgba(14,165,233,0.25)); }
-  .ms-hero u { width: 60%; height: 7px; border-radius: 4px; background: rgba(255,255,255,0.85); margin-bottom: 6px; }
-  .ms-hero s { width: 36%; height: 5px; border-radius: 3px; background: rgba(255,255,255,0.45); }
-  .ms-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .ms-grid > div { border-radius: 7px; background: rgba(244,246,251,0.06); padding: 6px; }
-  .ms-grid i { height: 34px; border-radius: 5px; background: linear-gradient(135deg, rgba(59,130,246,0.5), rgba(14,165,233,0.3)); margin-bottom: 6px; }
-  .ms-grid u { width: 80%; height: 4px; border-radius: 2px; background: rgba(244,246,251,0.4); margin-bottom: 4px; }
-  .ms-grid s { width: 40%; height: 5px; border-radius: 3px; background: var(--energy); }
   .dt-card__body { display: flex; flex-direction: column; justify-content: center; gap: 0.7rem; padding: 2rem 1.75rem 2rem 1.25rem; }
   .dt-card__cat { display: inline-flex; align-items: center; gap: 0.7rem; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(244,246,251,0.6); }
   .dt-card__cat svg { width: 26px; height: 26px; color: var(--paper); }
@@ -1520,14 +1506,8 @@
         </div>
       </article>
       <article class="dt-card">
-        <div class="dt-card__media">
-          <div class="mock mock-browser" role="img" aria-label="Ilustración de una tienda en línea"><div class="mock-bar"><i></i><i></i><i></i></div>
-            <div class="mock-screen mock-shop" aria-hidden="true">
-              <div class="ms-nav"><b></b><span></span><span></span><span></span><em></em></div>
-              <div class="ms-hero"><u></u><s></s></div>
-              <div class="ms-grid"><div><i></i><u></u><s></s></div><div><i></i><u></u><s></s></div><div><i></i><u></u><s></s></div></div>
-            </div>
-          </div>
+        <div class="dt-card__media dt-card__media--img dt-card__media--flat" style="background:#040f20">
+          <img class="dt-card__img" src="img/productos/ecommerce.webp" alt="Tienda en línea de ejemplo vista en laptop y teléfono, con catálogo de productos y página de compra" width="1200" height="675" loading="lazy">
         </div>
         <div class="dt-card__body">
           <span class="dt-card__cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M3 4h2.5l2.2 11h10.6l2-8H6.5"/></svg><span data-es="Tiendas en línea" data-en="Online stores">Tiendas en línea</span></span>
