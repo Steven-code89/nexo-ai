@@ -538,30 +538,59 @@
   }
 
   /* ── CONTACT ── */
-  .cta-section { padding: 6rem 5vw; text-align: center; max-width: 680px; margin: 0 auto; }
-  .cta-section h2 { margin: 0 auto 1.25rem; max-width: none; }
-  .cta-section > p { color: var(--muted); margin-bottom: 2.5rem; font-weight: 400; }
-  .contact-form { display: flex; flex-direction: column; gap: 1rem; text-align: left; margin-top: 2rem; }
-  .contact-form input, .contact-form textarea, .contact-form select { width: 100%; padding: 0.85rem 1.1rem; border: 1.5px solid var(--border); border-radius: 12px; font-size: 0.95rem; font-family: 'Plus Jakarta Sans', sans-serif; background: var(--card-bg); color: var(--ink); transition: border-color 0.2s; outline: none; -webkit-appearance: none; }
-  .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
-  .contact-form textarea { min-height: 110px; resize: vertical; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .form-field-group { display: flex; flex-direction: column; gap: 0.6rem; }
-  .form-group-label { font-size: 0.82rem; font-weight: 600; color: var(--muted); }
+  /* Dark two-column contact block; the footer continues the same surface. */
+  .contact-section { background: var(--ink); color: var(--paper); padding: 6rem 5vw 5rem; }
+  .contact-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.25fr; gap: 4rem; align-items: start; }
+  .contact-aside h2 { color: var(--paper); margin: 0 0 1.25rem; max-width: 460px; }
+  .contact-lead { font-family: ui-monospace, 'Cascadia Code', 'SF Mono', Consolas, monospace; font-size: 0.85rem; color: rgba(244,246,251,0.6); line-height: 1.7; max-width: 400px; margin-bottom: 2.25rem; }
+  .contact-links { list-style: none; padding: 0; margin: 0 0 2.25rem; display: grid; gap: 1.1rem; }
+  .contact-link { display: inline-flex; align-items: center; gap: 0.85rem; font-size: 1.05rem; font-weight: 500; color: var(--paper); text-decoration: none; background: none; border: none; padding: 0; cursor: pointer; font-family: inherit; transition: color 0.2s; }
+  .contact-link svg { width: 20px; height: 20px; flex-shrink: 0; color: rgba(244,246,251,0.6); transition: color 0.2s; }
+  .contact-link:hover, .contact-link:hover svg { color: var(--energy-light); }
+  .contact-link:focus-visible, .copy-btn:focus-visible { outline: 2px solid var(--energy); outline-offset: 3px; border-radius: 4px; }
+  .copy-btn { background: none; border: none; cursor: pointer; padding: 0.35rem; margin-left: 0.4rem; color: rgba(244,246,251,0.45); font-size: 0.72rem; font-family: ui-monospace, Consolas, monospace; }
+  .copy-btn:hover { color: var(--energy-light); }
+  .contact-meta { font-family: ui-monospace, 'Cascadia Code', 'SF Mono', Consolas, monospace; font-size: 0.8rem; color: rgba(244,246,251,0.5); line-height: 1.9; }
+  .contact-form { display: flex; flex-direction: column; gap: 1.6rem; transition: opacity 0.2s ease; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem; }
+  .form-field { display: flex; flex-direction: column; gap: 0.3rem; }
+  .form-field label, .form-group-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--paper); }
+  .form-field label i { font-style: normal; color: var(--energy); margin-left: 0.25rem; }
+  .contact-form input:not([type=hidden]), .contact-form textarea {
+    width: 100%; padding: 0.55rem 0 0.7rem; border: none; border-bottom: 1px solid rgba(244,246,251,0.22); border-radius: 0; background: transparent;
+    color: var(--paper); font-family: ui-monospace, 'Cascadia Code', 'SF Mono', Consolas, monospace; font-size: 0.9rem; outline: none; transition: border-color 0.2s; -webkit-appearance: none;
+  }
+  .contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(244,246,251,0.35); }
+  .contact-form input:focus, .contact-form textarea:focus { border-bottom-color: var(--energy); }
+  .contact-form textarea { min-height: 96px; resize: vertical; }
+  .form-field-group { display: flex; flex-direction: column; gap: 0.75rem; }
   .chip-select { display: flex; flex-wrap: wrap; gap: 0.5rem; }
   .chip-option {
-    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.85rem; font-weight: 600;
-    color: var(--ink); background: var(--card-bg); border: 1.5px solid var(--border);
-    border-radius: 100px; padding: 0.55rem 1.05rem; cursor: pointer; transition: all 0.15s ease;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.78rem; font-weight: 600;
+    color: rgba(244,246,251,0.85); background: transparent; border: 1px solid rgba(244,246,251,0.25);
+    border-radius: 8px; padding: 0.5rem 0.85rem; cursor: pointer; transition: border-color 0.15s, background 0.15s, color 0.15s;
   }
-  .chip-option:hover { border-color: var(--accent); }
-  .chip-option.is-selected { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .chip-option:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  .form-success { background: #dbeafe; border-radius: 14px; padding: 1.5rem; text-align: center; display: none; opacity: 0; transition: opacity 0.25s ease; }
-  .contact-form { transition: opacity 0.2s ease; }
-  .form-success h3 { font-family: 'Space Grotesk', sans-serif; color: var(--accent-dark); margin-bottom: 0.4rem; }
-  .form-success p { font-size: 0.9rem; color: var(--accent-dark); }
-  .form-error { background: #fee2e2; border-radius: 12px; padding: 1rem 1.25rem; font-size: 0.875rem; color: #991b1b; display: none; margin-top: 0.5rem; }
+  .chip-option:hover { border-color: var(--energy-light); }
+  .chip-option.is-selected { background: rgba(242,84,45,0.16); border-color: var(--energy); color: #fff; }
+  .chip-option:focus-visible { outline: 2px solid var(--energy); outline-offset: 2px; }
+  .form-submit-row { display: flex; justify-content: flex-end; margin-top: 0.5rem; }
+  .contact-submit {
+    display: inline-flex; align-items: center; gap: 0.6rem; background: var(--energy); color: #fff; border: none; border-radius: 10px;
+    padding: 0.85rem 1.5rem; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.92rem; font-weight: 700; cursor: pointer; transition: background 0.2s, transform 0.15s;
+  }
+  .contact-submit:hover { background: var(--energy-dark); }
+  .contact-submit:active { transform: translateY(1px); }
+  .contact-submit:disabled { opacity: 0.6; cursor: wait; }
+  .contact-submit:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+  .form-success { border: 1px solid rgba(244,246,251,0.18); border-radius: 14px; padding: 2rem; display: none; opacity: 0; transition: opacity 0.25s ease; }
+  .form-success h3 { font-family: 'Space Grotesk', sans-serif; color: var(--paper); font-size: 1.4rem; margin-bottom: 0.5rem; }
+  .form-success p { font-size: 0.95rem; color: rgba(244,246,251,0.7); }
+  .form-error { border: 1px solid rgba(248,113,113,0.5); background: rgba(248,113,113,0.1); border-radius: 10px; padding: 0.85rem 1.1rem; font-size: 0.85rem; color: #fecaca; display: none; }
+  @media (max-width: 900px) {
+    .contact-grid { grid-template-columns: 1fr; gap: 2.75rem; }
+    .form-submit-row { justify-content: stretch; }
+    .contact-submit { width: 100%; justify-content: center; }
+  }
 
   /* ── Glass submit button: a dark pill with a small blurred glass chip
      tucked in the corner that expands to fill the whole pill on hover. ── */
@@ -595,7 +624,8 @@
   .btn-glass:active::after { transition: 0s; transform: translate(0, 5%); }
 
   /* ── FOOTER ── */
-  footer { border-top: 1px solid var(--border); padding: 2rem 5vw; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.8rem; color: var(--muted); }
+  footer { background: var(--ink); border-top: 1px solid rgba(244,246,251,0.12); padding: 2rem 5vw; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.8rem; color: rgba(244,246,251,0.55); }
+  footer .logo { color: var(--paper); }
   .footer-network { width: 15px; height: 15px; margin-left: 5px; vertical-align: -3px; opacity: 0.55; }
   .footer-network path { fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-linecap: round; }
   .footer-network circle { fill: var(--accent2); }
@@ -777,14 +807,87 @@
   .ind-card:nth-child(7) { top: 15.6rem; }
   .ind-card__icon { width: 26px; height: 26px; color: var(--accent); margin-bottom: 1.1rem; }
   .ind-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 0.6rem; }
+  .ind-card__link { color: inherit; text-decoration: none; }
+  .ind-card__link::before { content: ''; position: absolute; inset: 0; border-radius: 18px; }
+  .ind-card__link::after { content: '↗'; margin-left: 0.5rem; font-size: 0.85em; color: var(--muted); display: inline-block; transition: transform 0.2s ease, color 0.2s ease; }
+  .ind-card { transition: border-color 0.2s ease; }
+  .ind-card:has(.ind-card__link:focus-visible) { outline: 2px solid var(--energy); outline-offset: 3px; }
+  @media (hover: hover) and (pointer: fine) {
+    .ind-card:hover { border-color: var(--energy-light); }
+    .ind-card:hover .ind-card__link::after { transform: translate(2px, -2px); color: var(--energy); }
+  }
   .ind-card p { font-size: 0.95rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.25rem; max-width: 480px; }
   .ind-spacer { height: 16rem; }
   @media (max-width: 900px) {
     .ind-grid { grid-template-columns: 1fr; gap: 2rem; }
     .ind-aside { position: static; }
-    .ind-card { position: static; padding: 1.75rem; }
+    .ind-card { position: relative; padding: 1.75rem; }
     .ind-card + .ind-card { margin-top: 1rem; }
     .ind-spacer { display: none; }
+  }
+
+  /* ══ SERVICE DETAIL DRAWER (native <dialog>) ═══════════════════════
+     Right-hand drawer on desktop, bottom sheet on mobile. <dialog> gives
+     focus trapping + Esc for free; JS only orchestrates the slide. */
+  html.svc-lock { overflow: hidden; }
+  .svc-drawer {
+    border: none; padding: 0; margin: 0 0 0 auto; height: 100dvh; max-height: 100dvh; width: min(660px, 100vw); max-width: 100vw;
+    background: var(--paper); color: var(--ink); overflow: hidden;
+    box-shadow: -24px 0 60px rgba(11,17,32,0.18);
+    transform: translateX(100%); transition: transform 0.38s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .svc-drawer[open] { display: flex; flex-direction: column; }
+  .svc-drawer.is-open { transform: none; }
+  .svc-drawer::backdrop { background: rgba(11,17,32,0.5); opacity: 0; transition: opacity 0.3s ease; }
+  .svc-drawer.is-open::backdrop { opacity: 1; }
+  .svc-drawer__scroll { position: relative; flex: 1; overflow-y: auto; padding: 3rem 2.5rem 2rem; scroll-padding-bottom: 6rem; overscroll-behavior: contain; }
+  .svc-close {
+    position: sticky; top: 0; float: right; z-index: 2; width: 44px; height: 44px; margin: -1.25rem -1rem 0 0;
+    display: grid; place-items: center; border: 1px solid var(--border); border-radius: 50%;
+    background: var(--card-bg); color: var(--ink); cursor: pointer; transition: border-color 0.2s, color 0.2s;
+  }
+  .svc-close svg { width: 18px; height: 18px; }
+  .svc-close:hover { border-color: var(--energy); color: var(--energy); }
+  .svc-close:focus-visible, .svc-btn:focus-visible { outline: 2px solid var(--energy); outline-offset: 2px; }
+  .svc-head h3 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.7rem, 4vw, 2.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin: 0 3rem 0.85rem 0; }
+  .svc-head p { font-size: 1.02rem; color: var(--muted); line-height: 1.65; max-width: 520px; }
+  .svc-sec { margin-top: 2.25rem; padding-top: 1.75rem; border-top: 1px solid var(--border); }
+  .svc-sec h4 { font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 1rem; }
+  .svc-inc { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.7rem; }
+  .svc-inc li { position: relative; padding-left: 1.6rem; font-size: 0.95rem; line-height: 1.5; }
+  .svc-inc li::before { content: '✓'; position: absolute; left: 0; color: var(--energy); font-weight: 700; }
+  .svc-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1.75rem; }
+  .svc-opt { padding: 0.9rem 0; border-top: 1px solid var(--border); }
+  .svc-opt strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 0.98rem; margin-bottom: 0.2rem; }
+  .svc-opt span { font-size: 0.86rem; color: var(--muted); line-height: 1.5; }
+  .svc-time { display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 1.1rem; font-size: 0.92rem; color: var(--muted); }
+  .svc-time strong { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; color: var(--ink); }
+  .svc-steps { list-style: none; counter-reset: st; padding: 0; margin: 0; display: grid; gap: 0.8rem; }
+  .svc-steps li { counter-increment: st; position: relative; padding-left: 2.2rem; font-size: 0.95rem; line-height: 1.5; }
+  .svc-steps li::before { content: counter(st); position: absolute; left: 0; top: 0.05rem; width: 1.45rem; height: 1.45rem; border-radius: 50%; background: var(--ink); color: var(--paper); font-size: 0.75rem; font-weight: 700; display: grid; place-items: center; }
+  .svc-fit { font-size: 0.95rem; color: var(--muted); line-height: 1.6; }
+  .svc-drawer__bar {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+    padding: 1rem 2.5rem; background: var(--card-bg); border-top: 1px solid var(--border);
+  }
+  .svc-bar-price { display: flex; flex-direction: column; line-height: 1.15; }
+  .svc-bar-price small { font-size: 0.75rem; color: var(--muted); }
+  .svc-bar-price b { font-family: 'Space Grotesk', sans-serif; font-size: 1.35rem; letter-spacing: -0.02em; }
+  .svc-bar-actions { display: flex; gap: 0.6rem; }
+  .svc-btn { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.9rem; font-weight: 700; border-radius: 100px; padding: 0.75rem 1.3rem; cursor: pointer; border: 1.5px solid var(--border); background: transparent; color: var(--ink); transition: background 0.2s, color 0.2s, border-color 0.2s; }
+  .svc-btn--ghost:hover { border-color: var(--ink); }
+  .svc-btn--primary { background: var(--energy); border-color: var(--energy); color: #fff; }
+  .svc-btn--primary:hover { background: var(--energy-dark); border-color: var(--energy-dark); }
+  @media (max-width: 720px) {
+    .svc-drawer { margin: auto 0 0; width: 100%; height: 92dvh; max-height: 92dvh; border-radius: 22px 22px 0 0; transform: translateY(100%); box-shadow: 0 -20px 50px rgba(11,17,32,0.2); }
+    .svc-drawer__scroll { padding: 2.25rem 1.4rem 1.5rem; }
+    .svc-drawer__bar { padding: 0.9rem 1.4rem calc(0.9rem + env(safe-area-inset-bottom)); }
+    .svc-opts { grid-template-columns: 1fr; }
+    .svc-bar-actions { width: 100%; }
+    .svc-btn { flex: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .svc-drawer, .svc-drawer::backdrop { transition: none; }
   }
 
   /* ══ FAQ — CSS-ONLY ACCORDION ═════════════════════════════════════ */
@@ -1542,7 +1645,7 @@
     <div class="ind-stack">
       <article class="ind-card">
         <svg class="ind-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M9 8v3a1.5 1.5 0 0 0 3 0V8"/></svg>
-        <h3 data-es="Restaurantes y cafés" data-en="Restaurants & cafés">Restaurantes y cafés</h3>
+        <h3><a class="ind-card__link" href="/industrias/restaurantes-y-cafes.html" data-es="Restaurantes y cafés" data-en="Restaurants & cafés">Restaurantes y cafés</a></h3>
         <p data-es="Sistemas que ordenan negocios donde el día a día depende de pedidos, reservas y un menú siempre actualizado." data-en="Systems for businesses where the day-to-day depends on orders, reservations and a menu that's always up to date.">Sistemas que ordenan negocios donde el día a día depende de pedidos, reservas y un menú siempre actualizado.</p>
         <div class="service-chips">
           <span class="service-chip">Restaurantes</span><span class="service-chip">Cafeterías</span>
@@ -1552,7 +1655,7 @@
       </article>
       <article class="ind-card">
         <svg class="ind-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg>
-        <h3 data-es="Clínicas y consultorios" data-en="Clinics & practices">Clínicas y consultorios</h3>
+        <h3><a class="ind-card__link" href="/industrias/clinicas-y-consultorios.html" data-es="Clínicas y consultorios" data-en="Clinics & practices">Clínicas y consultorios</a></h3>
         <p data-es="Sistemas que ordenan citas, historiales y recordatorios para negocios donde la confianza y la puntualidad lo son todo." data-en="Systems for appointments, records and reminders for businesses where trust and punctuality matter most.">Sistemas que ordenan citas, historiales y recordatorios para negocios donde la confianza y la puntualidad lo son todo.</p>
         <div class="service-chips">
           <span class="service-chip">Médicos</span><span class="service-chip">Dentistas</span>
@@ -1562,7 +1665,7 @@
       </article>
       <article class="ind-card">
         <svg class="ind-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
-        <h3 data-es="Tiendas y retail" data-en="Shops & retail">Tiendas y retail</h3>
+        <h3><a class="ind-card__link" href="/industrias/tiendas-y-retail.html" data-es="Tiendas y retail" data-en="Shops & retail">Tiendas y retail</a></h3>
         <p data-es="Sistemas que ordenan inventario, catálogo y ventas para negocios que mueven producto todos los días." data-en="Systems for inventory, catalog and sales for businesses that move product every day.">Sistemas que ordenan inventario, catálogo y ventas para negocios que mueven producto todos los días.</p>
         <div class="service-chips">
           <span class="service-chip">Boutiques</span><span class="service-chip">Tiendas de barrio</span>
@@ -1572,7 +1675,7 @@
       </article>
       <article class="ind-card">
         <svg class="ind-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="11" rx="2"/><path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-        <h3 data-es="Servicios profesionales" data-en="Professional services">Servicios profesionales</h3>
+        <h3><a class="ind-card__link" href="/industrias/servicios-profesionales.html" data-es="Servicios profesionales" data-en="Professional services">Servicios profesionales</a></h3>
         <p data-es="Sistemas que ordenan negocios donde la operación gira alrededor de clientes, expedientes y horas facturables." data-en="Systems for businesses built around clients, case files and billable hours.">Sistemas que ordenan negocios donde la operación gira alrededor de clientes, expedientes y horas facturables.</p>
         <div class="service-chips">
           <span class="service-chip">Abogados</span><span class="service-chip">Contadores</span>
@@ -1582,7 +1685,7 @@
       </article>
       <article class="ind-card">
         <svg class="ind-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11 12 4l8 7"/><path d="M6 10v9h12v-9"/></svg>
-        <h3 data-es="Bienes raíces" data-en="Real estate">Bienes raíces</h3>
+        <h3><a class="ind-card__link" href="/industrias/bienes-raices.html" data-es="Bienes raíces" data-en="Real estate">Bienes raíces</a></h3>
         <p data-es="Sistemas que ordenan propiedades, visitas y seguimiento para negocios donde cada cliente potencial cuenta." data-en="Systems for listings, showings and follow-up for businesses where every lead counts.">Sistemas que ordenan propiedades, visitas y seguimiento para negocios donde cada cliente potencial cuenta.</p>
         <div class="service-chips">
           <span class="service-chip">Corredores</span><span class="service-chip">Desarrolladoras</span>
@@ -1591,7 +1694,7 @@
       </article>
       <article class="ind-card">
         <svg class="ind-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 6.5a4 4 0 0 0-5.4 4.8L4 16.4V19h2.6l5.1-5.1a4 4 0 0 0 4.8-5.4l-2.6 2.6-2-2 2.6-2.6Z"/></svg>
-        <h3 data-es="Talleres y servicios técnicos" data-en="Workshops & technical services">Talleres y servicios técnicos</h3>
+        <h3><a class="ind-card__link" href="/industrias/talleres-y-servicios-tecnicos.html" data-es="Talleres y servicios técnicos" data-en="Workshops & technical services">Talleres y servicios técnicos</a></h3>
         <p data-es="Sistemas que ordenan citas, cotizaciones y seguimiento para negocios donde el trabajo se hace con las manos." data-en="Systems for appointments, quotes and follow-up for hands-on, technical businesses.">Sistemas que ordenan citas, cotizaciones y seguimiento para negocios donde el trabajo se hace con las manos.</p>
         <div class="service-chips">
           <span class="service-chip">Talleres automotrices</span><span class="service-chip">Electricistas</span>
@@ -1600,7 +1703,7 @@
       </article>
       <article class="ind-card">
         <svg class="ind-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6M2 10v4M20 9v6M22 10v4M6 12h12"/></svg>
-        <h3 data-es="Gimnasios y bienestar" data-en="Gyms & wellness">Gimnasios y bienestar</h3>
+        <h3><a class="ind-card__link" href="/industrias/gimnasios-y-bienestar.html" data-es="Gimnasios y bienestar" data-en="Gyms & wellness">Gimnasios y bienestar</a></h3>
         <p data-es="Sistemas que ordenan negocios donde la operación gira alrededor de membresías, clases y agenda de citas." data-en="Systems for businesses built around memberships, classes and booking.">Sistemas que ordenan negocios donde la operación gira alrededor de membresías, clases y agenda de citas.</p>
         <div class="service-chips">
           <span class="service-chip">Gimnasios</span><span class="service-chip">Yoga y pilates</span>
@@ -1711,43 +1814,90 @@
   </div>
 </div>
 
-<div class="cta-section" id="contact">
-  <h2 data-es="Encontremos tu primera victoria digital" data-en="Let's find your first digital win">Encontremos tu primera victoria digital</h2>
-  <p data-es="Cuéntanos un poco sobre tu negocio y te respondemos en menos de 24 horas con ideas — completamente gratis, sin ningún compromiso." data-en="Tell us a bit about your business and we'll get back to you within 24 hours with ideas — completely free, no obligation.">Cuéntanos un poco sobre tu negocio y te respondemos en menos de 24 horas con ideas — completamente gratis, sin ningún compromiso.</p>
-  <div class="form-success" id="form-success">
-    <h3 data-es="¡Mensaje enviado! ✦" data-en="Message sent! ✦">¡Mensaje enviado! ✦</h3>
-    <p data-es="Te respondemos en menos de 24 horas. ¡Gracias por tu interés!" data-en="We'll get back to you within 24 hours. Thanks for reaching out!">Te respondemos en menos de 24 horas. ¡Gracias por tu interés!</p>
-  </div>
-  <form class="contact-form" id="contact-form" onsubmit="handleSubmit(event)">
-    <!-- Honeypot anti-spam: invisible para humanos, los bots lo rellenan -->
-    <input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;">
-    <div class="form-row">
-      <input type="text" id="f-nombre" data-ph-es="Tu nombre" data-ph-en="Your name" placeholder="Tu nombre" required>
-      <input type="text" id="f-negocio" data-ph-es="Nombre del negocio" data-ph-en="Business name" placeholder="Nombre del negocio">
+<section class="contact-section" id="contact">
+  <div class="contact-grid">
+    <div class="contact-aside">
+      <h2 data-es="Encontremos tu primera victoria digital" data-en="Let's find your first digital win">Encontremos tu primera victoria digital</h2>
+      <p class="contact-lead" data-es="Cuéntanos un poco sobre tu negocio y te respondemos en menos de 24 horas con ideas — gratis y sin compromiso." data-en="Tell us a bit about your business and we'll get back to you within 24 hours with ideas — free, no obligation.">Cuéntanos un poco sobre tu negocio y te respondemos en menos de 24 horas con ideas — gratis y sin compromiso.</p>
+      <ul class="contact-links">
+        <li id="contact-email-row" hidden>
+          <a class="contact-link" id="contact-email" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span></span></a>
+          <button type="button" class="copy-btn" id="contact-copy" data-es="copiar" data-en="copy">copiar</button>
+        </li>
+        <li id="contact-wa-row" hidden>
+          <a class="contact-link" id="contact-wa" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.4 7.8L3 21l1.3-4.4A9 9 0 1 1 21 12Z"/></svg><span data-es="Mandar WhatsApp" data-en="Send a WhatsApp">Mandar WhatsApp</span></a>
+        </li>
+        <li>
+          <button type="button" class="contact-link" id="contact-book"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span data-es="Agendar reunión" data-en="Book a meeting">Agendar reunión</span></button>
+        </li>
+      </ul>
+      <p class="contact-meta"><span data-es="Costa Rica · trabajo 100% remoto" data-en="Costa Rica · 100% remote work">Costa Rica · trabajo 100% remoto</span><br><span data-es="Respuesta en menos de 24 horas" data-en="Reply within 24 hours">Respuesta en menos de 24 horas</span></p>
     </div>
-    <div class="form-row">
-      <input type="email" id="f-correo" data-ph-es="Correo electrónico" data-ph-en="Email address" placeholder="Correo electrónico" required>
-      <input type="tel" id="f-telefono" data-ph-es="Teléfono (opcional)" data-ph-en="Phone (optional)" placeholder="Teléfono (opcional)">
-    </div>
-    <div class="form-field-group">
-      <span class="form-group-label" data-es="¿Qué necesitás?" data-en="What do you need?">¿Qué necesitás?</span>
-      <div class="chip-select" id="f-reto-chips" role="radiogroup" aria-label="¿Qué necesitás?">
-        <button type="button" class="chip-option" role="radio" aria-checked="false" data-value="Página web profesional" data-es="Página web profesional" data-en="Professional website">Página web profesional</button>
-        <button type="button" class="chip-option" role="radio" aria-checked="false" data-value="Software o sistema a medida" data-es="Software o sistema a medida" data-en="Custom software or system">Software o sistema a medida</button>
-        <button type="button" class="chip-option" role="radio" aria-checked="false" data-value="Chatbot o automatización con IA" data-es="Chatbot o automatización con IA" data-en="Chatbot or AI automation">Chatbot o automatización con IA</button>
-        <button type="button" class="chip-option" role="radio" aria-checked="false" data-value="Contenido para redes sociales" data-es="Contenido para redes sociales" data-en="Social media content">Contenido para redes sociales</button>
-        <button type="button" class="chip-option" role="radio" aria-checked="false" data-value="No sé por dónde empezar" data-es="No sé por dónde empezar" data-en="Not sure where to start">No sé por dónde empezar</button>
-        <button type="button" class="chip-option" role="radio" aria-checked="false" data-value="Algo más" data-es="Algo más" data-en="Something else">Algo más</button>
+    <div class="contact-main">
+      <div class="form-success" id="form-success">
+        <h3 data-es="¡Mensaje enviado! ✦" data-en="Message sent! ✦">¡Mensaje enviado! ✦</h3>
+        <p data-es="Te respondemos en menos de 24 horas. ¡Gracias por tu interés!" data-en="We'll get back to you within 24 hours. Thanks for reaching out!">Te respondemos en menos de 24 horas. ¡Gracias por tu interés!</p>
       </div>
-      <input type="hidden" id="f-reto">
+      <form class="contact-form" id="contact-form" onsubmit="handleSubmit(event)">
+        <!-- Honeypot anti-spam: invisible para humanos, los bots lo rellenan -->
+        <input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;">
+        <div class="form-row">
+          <div class="form-field"><label for="f-nombre"><span data-es="Nombre" data-en="Name">Nombre</span><i aria-hidden="true">•</i></label>
+            <input type="text" id="f-nombre" data-ph-es="Tu nombre" data-ph-en="Your name" placeholder="Tu nombre" autocomplete="name" required></div>
+          <div class="form-field"><label for="f-negocio" data-es="Negocio" data-en="Business">Negocio</label>
+            <input type="text" id="f-negocio" data-ph-es="Nombre de tu negocio (opcional)" data-ph-en="Your business name (optional)" placeholder="Nombre de tu negocio (opcional)" autocomplete="organization"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-field"><label for="f-correo"><span data-es="Correo" data-en="Email">Correo</span><i aria-hidden="true">•</i></label>
+            <input type="email" id="f-correo" data-ph-es="tu@correo.com" data-ph-en="you@email.com" placeholder="tu@correo.com" autocomplete="email" required></div>
+          <div class="form-field"><label for="f-telefono" data-es="WhatsApp / Teléfono" data-en="WhatsApp / Phone">WhatsApp / Teléfono</label>
+            <input type="tel" id="f-telefono" data-ph-es="+506 8888 8888 (opcional)" data-ph-en="+506 8888 8888 (optional)" placeholder="+506 8888 8888 (opcional)" autocomplete="tel"></div>
+        </div>
+        <div class="form-field-group">
+          <span class="form-group-label" data-es="¿Qué necesitas?" data-en="What do you need?">¿Qué necesitas?</span>
+          <div class="chip-select" id="f-reto-chips" data-hidden="f-reto" role="radiogroup" aria-label="¿Qué necesitas?">
+            <button type="button" class="chip-option" role="radio" aria-checked="false" data-value="Página web profesional" data-es="Página web" data-en="Website">Página web</button>
+            <button type="button" class="chip-option" role="radio" aria-checked="false" data-value="Software o sistema a medida" data-es="Software a medida" data-en="Custom software">Software a medida</button>
+            <button type="button" class="chip-option" role="radio" aria-checked="false" data-value="Chatbot o automatización con IA" data-es="Chatbot o automatización con IA" data-en="Chatbot or AI automation">Chatbot o automatización con IA</button>
+            <button type="button" class="chip-option" role="radio" aria-checked="false" data-value="Contenido para redes sociales" data-es="Contenido para redes" data-en="Social content">Contenido para redes</button>
+            <button type="button" class="chip-option" role="radio" aria-checked="false" data-value="No sé por dónde empezar" data-es="No sé por dónde empezar" data-en="Not sure where to start">No sé por dónde empezar</button>
+            <button type="button" class="chip-option" role="radio" aria-checked="false" data-value="Algo más" data-es="Otro" data-en="Other">Otro</button>
+          </div>
+          <input type="hidden" id="f-reto">
+        </div>
+        <div class="form-field-group">
+          <span class="form-group-label" data-es="¿Cómo te contactamos?" data-en="How should we reach you?">¿Cómo te contactamos?</span>
+          <div class="chip-select" id="f-via-chips" data-hidden="f-via" role="radiogroup" aria-label="¿Cómo te contactamos?">
+            <button type="button" class="chip-option" role="radio" aria-checked="false" data-value="Correo" data-es="Correo" data-en="Email">Correo</button>
+            <button type="button" class="chip-option" role="radio" aria-checked="false" data-value="WhatsApp" data-es="WhatsApp" data-en="WhatsApp">WhatsApp</button>
+            <button type="button" class="chip-option" role="radio" aria-checked="false" data-value="Llamada" data-es="Llamada" data-en="Call">Llamada</button>
+          </div>
+          <input type="hidden" id="f-via">
+        </div>
+        <div class="form-field"><label for="f-mensaje" data-es="Mensaje" data-en="Message">Mensaje</label>
+          <textarea id="f-mensaje" data-ph-es="Cuéntanos un poco sobre tu proyecto (opcional)" data-ph-en="Tell us a bit about your project (optional)" placeholder="Cuéntanos un poco sobre tu proyecto (opcional)"></textarea></div>
+        <div class="form-error" id="form-error" role="alert">Hubo un error al enviar. Por favor intenta de nuevo.</div>
+        <div class="form-submit-row"><button type="submit" class="contact-submit" id="submit-btn" data-es="Enviar mensaje" data-en="Send message">Enviar mensaje</button></div>
+      </form>
     </div>
-    <textarea id="f-mensaje" data-ph-es="Cuéntame más sobre tu negocio... (opcional)" data-ph-en="Tell me a bit more about your business... (optional)" placeholder="Cuéntame más sobre tu negocio... (opcional)"></textarea>
-    <div class="form-error" id="form-error">Hubo un error al enviar. Por favor intenta de nuevo.</div>
-    <button type="submit" class="btn-glass" id="submit-btn" style="align-self:center;" data-es="Enviar mi consulta gratis" data-en="Send my free request">Enviar mi consulta gratis</button>
-  </form>
-</div>
+  </div>
+</section>
 
 </main><!-- /main -->
+
+<dialog class="svc-drawer" id="svc-drawer" aria-labelledby="svc-title">
+  <div class="svc-drawer__scroll" id="svc-scroll">
+    <button type="button" class="svc-close" id="svc-close" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <div id="svc-body"></div>
+  </div>
+  <div class="svc-drawer__bar">
+    <div class="svc-bar-price" id="svc-bar-price"></div>
+    <div class="svc-bar-actions">
+      <button type="button" class="svc-btn svc-btn--ghost" id="svc-write"></button>
+      <button type="button" class="svc-btn svc-btn--primary" id="svc-book"></button>
+    </div>
+  </div>
+</dialog>
 
 <footer>
   <a class="logo" href="#" onclick="goHome(event)" aria-label="Nexo AI — Ir al inicio">Nexo<span class="logo-ai"> AI</span><svg class="footer-network" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 17 L12 7 L19 17"/><path d="M5 17 L19 17"/><circle cx="12" cy="7" r="1.7"/><circle cx="5" cy="17" r="1.7"/><circle cx="19" cy="17" r="1.7"/></svg></a>
@@ -1806,18 +1956,46 @@ function setLang(lang) {
   document.querySelectorAll('[data-ph-'+lang+']').forEach(function(el){ el.placeholder=el.getAttribute('data-ph-'+lang); });
 }
 
+// Single-select chip groups; each writes its value into the hidden input named by data-hidden.
 (function() {
-  var group = document.getElementById('f-reto-chips');
-  var hidden = document.getElementById('f-reto');
-  if (!group || !hidden) return;
-  group.querySelectorAll('.chip-option').forEach(function(chip) {
-    chip.addEventListener('click', function() {
-      group.querySelectorAll('.chip-option').forEach(function(c) {
-        c.classList.remove('is-selected'); c.setAttribute('aria-checked', 'false');
+  document.querySelectorAll('.chip-select').forEach(function(group) {
+    var hidden = document.getElementById(group.getAttribute('data-hidden'));
+    if (!hidden) return;
+    group.querySelectorAll('.chip-option').forEach(function(chip) {
+      chip.addEventListener('click', function() {
+        group.querySelectorAll('.chip-option').forEach(function(c) {
+          c.classList.remove('is-selected'); c.setAttribute('aria-checked', 'false');
+        });
+        chip.classList.add('is-selected'); chip.setAttribute('aria-checked', 'true');
+        hidden.value = chip.getAttribute('data-value');
       });
-      chip.classList.add('is-selected'); chip.setAttribute('aria-checked', 'true');
-      hidden.value = chip.getAttribute('data-value');
     });
+  });
+})();
+
+// Contact details shown beside the form. Empty values keep that row hidden.
+// email stays empty until the nexoai.com domain and mailbox exist (planned: hola@nexoai.com).
+var CONTACT = { email: '', whatsapp: '50660345933' }; // whatsapp: digits with country code
+(function() {
+  var rowE = document.getElementById('contact-email-row'), rowW = document.getElementById('contact-wa-row');
+  if (CONTACT.email && rowE) {
+    var a = document.getElementById('contact-email');
+    a.href = 'mailto:' + CONTACT.email; a.querySelector('span').textContent = CONTACT.email; rowE.hidden = false;
+    var copy = document.getElementById('contact-copy');
+    copy.addEventListener('click', function() {
+      if (!navigator.clipboard) return;
+      navigator.clipboard.writeText(CONTACT.email).then(function() {
+        copy.textContent = currentLang === 'es' ? '¡copiado!' : 'copied!';
+        setTimeout(function() { copy.textContent = copy.getAttribute('data-' + currentLang); }, 1600);
+      });
+    });
+  }
+  if (CONTACT.whatsapp && rowW) {
+    document.getElementById('contact-wa').href = 'https://wa.me/' + CONTACT.whatsapp; rowW.hidden = false;
+  }
+  var book = document.getElementById('contact-book');
+  if (book) book.addEventListener('click', function() {
+    if (window.Cal && Cal.ns && Cal.ns['30min']) Cal.ns['30min']('modal', { calLink: 'steven-jimenez-nexo/30min', config: { layout: 'month_view' } });
   });
 })();
 
@@ -1833,7 +2011,7 @@ async function handleSubmit(e) {
     correo:document.getElementById('f-correo').value.trim(),
     telefono:document.getElementById('f-telefono').value.trim(),
     reto:document.getElementById('f-reto').value,
-    mensaje:document.getElementById('f-mensaje').value.trim(),
+    mensaje:(document.getElementById('f-via').value ? 'Prefiere contacto por: '+document.getElementById('f-via').value+'\n\n' : '')+document.getElementById('f-mensaje').value.trim(),
     leido:false, created_at:new Date().toISOString()
   };
   if(!isConfigured){ showFormSuccess(); return; }
@@ -1845,7 +2023,7 @@ async function handleSubmit(e) {
   } catch(ex) {
     console.error(ex); err.style.display='block';
     err.textContent=currentLang==='es'?'Error al enviar. Intenta de nuevo.':'Error sending. Please try again.';
-    btn.textContent=currentLang==='es'?'Enviar mi consulta gratis':'Send my free request'; btn.disabled=false;
+    btn.textContent=currentLang==='es'?'Enviar mensaje':'Send message'; btn.disabled=false;
   }
 }
 
@@ -2325,6 +2503,159 @@ function goHome(e) {
       var panel = document.getElementById(tab.getAttribute('data-target'));
       if (panel) panel.classList.add('is-active');
     });
+  });
+})();
+
+// ── SERVICE DETAIL DRAWER ─────────────────────────────────────────
+// Content lives here (es/en pairs); the 7 "Ver servicio" links map to
+// these keys by DOM order. `chip` preselects the contact form option.
+(function() {
+  var SERVICES = [
+    { key: 'web', chip: 'Página web profesional',
+      t: ['Páginas web que convierten', 'Websites that convert'],
+      sum: ['Sitios rápidos y hechos a tu medida, pensados para que el visitante te escriba, te llame o compre.', 'Fast, tailor-made sites built so visitors message you, call you or buy.'],
+      price: { pre: ['Desde', 'From'], amt: '$350', note: ['Pago único', 'One-time'] },
+      inc: [['Diseño a medida, sin plantillas recicladas', 'Custom design, no recycled templates'], ['Adaptado a celular, tablet y computadora', 'Fully responsive on phone, tablet and desktop'], ['Formulario de contacto y botón de WhatsApp', 'Contact form and WhatsApp button'], ['Optimización básica para aparecer en Google', 'Basic SEO to show up on Google'], ['Dominio y hosting configurados', 'Domain and hosting set up'], ['Un mes de soporte incluido tras la entrega', 'One month of support after delivery']],
+      opt: [['Landing page', 'Landing page', 'Una sola página con un objetivo claro.', 'A single page with one clear goal.'], ['Sitio informativo', 'Informational site', 'Inicio, servicios, nosotros y contacto.', 'Home, services, about and contact.'], ['Tienda en línea', 'Online store', 'Catálogo, carrito y cobro. El precio varía según la cantidad de productos.', 'Catalog, cart and checkout. Price varies with the number of products.'], ['Portafolio', 'Portfolio', 'Galería de trabajos para profesionales y creativos.', 'A gallery of work for professionals and creatives.']],
+      time: ['1–2 semanas', '1–2 weeks'],
+      steps: [['Conversamos sobre tu negocio y definimos la estructura', 'We talk about your business and define the structure'], ['Diseñamos y desarrollamos; ves avances antes de publicar', 'We design and build; you see progress before launch'], ['Revisión final, publicación y capacitación para editarlo', 'Final review, launch and training to edit it yourself']],
+      fit: ['Negocios que hoy dependen solo de redes sociales y quieren una presencia propia y profesional.', 'Businesses that rely only on social media and want a professional presence of their own.'] },
+    { key: 'chat', chip: 'Chatbot o automatización con IA',
+      t: ['Atención al cliente 24/7', '24/7 customer support'],
+      sum: ['Un asistente de IA entrenado con la información de tu negocio que responde, agenda y captura clientes mientras tú trabajas.', 'An AI assistant trained on your business info that answers, books and captures leads while you work.'],
+      price: { pre: ['Desde', 'From'], amt: '$49/mes', note: ['+ $150 de instalación', '+ $150 setup'] },
+      inc: [['Asistente entrenado con tus servicios, precios y horarios', 'Assistant trained on your services, prices and hours'], ['Respuestas inmediatas a preguntas frecuentes', 'Instant answers to frequent questions'], ['Captura de datos de clientes potenciales', 'Lead capture'], ['Agenda de citas y reservas', 'Appointment and booking scheduling'], ['Traspaso a una persona cuando hace falta', 'Handoff to a human when needed'], ['Reporte mensual de conversaciones', 'Monthly conversation report']],
+      opt: [['Chat en tu sitio web', 'Website chat', 'Burbuja de chat integrada a tu página.', 'A chat bubble built into your site.'], ['WhatsApp', 'WhatsApp', 'Atención en el canal que ya usan tus clientes.', 'Support on the channel your customers already use.'], ['Reservas y citas', 'Bookings', 'El asistente agenda directo en tu calendario.', 'The assistant books straight into your calendar.'], ['Preguntas frecuentes', 'FAQ', 'Respuestas sobre precios, ubicación y servicios.', 'Answers about pricing, location and services.']],
+      time: ['1–2 semanas de instalación', '1–2 weeks to set up'],
+      steps: [['Reunimos la información de tu negocio', 'We gather your business information'], ['Entrenamos y probamos el asistente contigo', 'We train and test the assistant with you'], ['Lo activamos y lo mejoramos con conversaciones reales', 'We launch it and improve it with real conversations']],
+      fit: ['Negocios que reciben las mismas preguntas todos los días o pierden clientes por no responder a tiempo.', 'Businesses that get the same questions every day or lose customers by not replying in time.'] },
+    { key: 'auto', chip: 'Chatbot o automatización con IA',
+      t: ['Automatización con IA', 'AI automation'],
+      sum: ['Automatiza correos, seguimientos, cotizaciones, facturas y tareas repetitivas para recuperar horas cada semana.', 'Automate emails, follow-ups, quotes, invoices and repetitive tasks to win back hours every week.'],
+      price: { pre: ['Desde', 'From'], amt: '$39/mes', note: null },
+      inc: [['Análisis de qué tareas te consumen más tiempo', 'Review of which tasks eat up the most time'], ['Automatizaciones configuradas y probadas', 'Automations configured and tested'], ['Conexión con las herramientas que ya usas', 'Integration with the tools you already use'], ['Ajustes mientras la automatización esté activa', 'Adjustments while the automation is active'], ['Documentación simple de cómo funciona', 'Simple documentation of how it works']],
+      opt: [['Facturación y cobros', 'Invoicing and payments', 'Facturas y recordatorios de pago automáticos.', 'Automatic invoices and payment reminders.'], ['Seguimiento de clientes', 'Client follow-up', 'Correos y avisos en el momento justo.', 'Emails and nudges at the right moment.'], ['Cotizaciones', 'Quotes', 'Cotizaciones generadas a partir de un formulario.', 'Quotes generated from a form.'], ['Reportes', 'Reports', 'Resúmenes automáticos de ventas y actividad.', 'Automatic summaries of sales and activity.']],
+      time: ['1–3 semanas según la cantidad de procesos', '1–3 weeks depending on the number of processes'],
+      steps: [['Identificamos qué conviene automatizar primero', 'We identify what is worth automating first'], ['Construimos y probamos con datos reales', 'We build and test with real data'], ['Lo activamos y medimos el tiempo que ahorras', 'We switch it on and measure the time you save']],
+      fit: ['Negocios que hacen a mano tareas que se repiten: copiar datos, enviar recordatorios, armar reportes.', 'Businesses that do repeatable work by hand: copying data, sending reminders, building reports.'] },
+    { key: 'software', chip: 'Software o sistema a medida',
+      t: ['Software a medida', 'Custom software'],
+      sum: ['Sistemas y herramientas diseñados específicamente para la forma en que trabaja tu negocio.', 'Systems and tools designed specifically for the way your business works.'],
+      price: null,
+      inc: [['Análisis de tu flujo de trabajo real', 'Analysis of your real workflow'], ['Diseño de la interfaz pensado para tu equipo', 'Interface design built around your team'], ['Roles y permisos según quién usa el sistema', 'Roles and permissions for each user'], ['Integración con lo que ya utilizas', 'Integration with what you already use'], ['Capacitación y documentación', 'Training and documentation'], ['Soporte inicial tras el lanzamiento', 'Initial support after launch']],
+      opt: [['CRM interno', 'Internal CRM', 'Clientes, oportunidades y seguimiento en un solo lugar.', 'Customers, leads and follow-up in one place.'], ['Panel de control', 'Dashboard', 'Tus números clave, actualizados solos.', 'Your key numbers, always up to date.'], ['Sistema de gestión', 'Management system', 'Inventario, pedidos, citas o expedientes.', 'Inventory, orders, appointments or records.'], ['Integraciones', 'Integrations', 'Conecta sistemas que hoy no se hablan entre sí.', 'Connect systems that don’t talk to each other today.']],
+      time: ['3–6 semanas según el alcance', '3–6 weeks depending on scope'],
+      steps: [['Levantamos requisitos y acordamos el alcance', 'We gather requirements and agree on scope'], ['Construimos por etapas; validas cada una', 'We build in stages; you validate each one'], ['Lanzamos, capacitamos y damos seguimiento', 'We launch, train your team and follow up']],
+      fit: ['Negocios con procesos que ya no caben en hojas de cálculo ni en programas genéricos.', 'Businesses with processes that have outgrown spreadsheets and off-the-shelf software.'] },
+    { key: 'content', chip: 'Contenido para redes sociales',
+      t: ['Contenido con IA', 'AI content'],
+      sum: ['Contenido para redes sociales, blogs y newsletters creado y programado de forma automática, con tu revisión antes de salir.', 'Content for social media, blogs and newsletters created and scheduled automatically, reviewed by you before it goes out.'],
+      price: { pre: ['Desde', 'From'], amt: '$99/mes', note: null },
+      inc: [['Calendario editorial mensual', 'Monthly editorial calendar'], ['Textos adaptados a la voz de tu marca', 'Copy written in your brand’s voice'], ['Publicaciones programadas', 'Scheduled posts'], ['Tu aprobación antes de publicar', 'Your approval before publishing'], ['Informe mensual de resultados', 'Monthly results report']],
+      opt: [['Redes sociales', 'Social media', 'Publicaciones para las cuentas de tu negocio.', 'Posts for your business accounts.'], ['Blog', 'Blog', 'Artículos que ayudan a que te encuentren en Google.', 'Articles that help people find you on Google.'], ['Newsletter', 'Newsletter', 'Correos periódicos a tu lista de clientes.', 'Regular emails to your customer list.'], ['Calendario editorial', 'Content calendar', 'Qué publicar y cuándo, ya planificado.', 'What to post and when, already planned.']],
+      time: ['Primer calendario en la primera semana', 'First calendar within the first week'],
+      steps: [['Aprendemos la voz y los objetivos de tu marca', 'We learn your brand voice and goals'], ['Creamos el calendario y los primeros contenidos', 'We create the calendar and first pieces'], ['Apruebas, programamos y ajustamos cada mes', 'You approve, we schedule and adjust every month']],
+      fit: ['Negocios que saben que deben publicar, pero no tienen el tiempo de hacerlo con constancia.', 'Businesses that know they should post but don’t have the time to do it consistently.'] },
+    { key: 'email', chip: 'Chatbot o automatización con IA',
+      t: ['Email y seguimiento', 'Email & follow-up'],
+      sum: ['Automatiza recordatorios, solicitudes de reseñas y seguimiento de clientes para que nadie se quede sin respuesta.', 'Automate reminders, review requests and client follow-up so no one is left without a reply.'],
+      price: { pre: ['Desde', 'From'], amt: '$39/mes', note: ['+ $120 de instalación', '+ $120 setup'] },
+      inc: [['Plantillas de correo con la imagen de tu marca', 'Email templates with your branding'], ['Recordatorios de citas y pagos', 'Appointment and payment reminders'], ['Solicitud automática de reseñas', 'Automatic review requests'], ['Seguimiento después de cada venta', 'Follow-up after every sale'], ['Configuración y pruebas incluidas', 'Setup and testing included']],
+      opt: [['Recordatorios', 'Reminders', 'Menos citas perdidas y pagos olvidados.', 'Fewer missed appointments and forgotten payments.'], ['Reseñas', 'Reviews', 'Pide opiniones justo después del servicio.', 'Ask for feedback right after the service.'], ['Seguimiento post-venta', 'Post-sale follow-up', 'Mantén la relación con quien ya te compró.', 'Keep the relationship with customers who already bought.'], ['Bienvenida automática', 'Automatic welcome', 'Un buen primer mensaje para cada cliente nuevo.', 'A good first message for every new customer.']],
+      time: ['Aproximadamente 1 semana', 'About 1 week'],
+      steps: [['Definimos qué mensajes necesitas y cuándo salen', 'We define which messages you need and when they go out'], ['Diseñamos las plantillas y las conectamos', 'We design the templates and wire them up'], ['Probamos y lo dejamos funcionando solo', 'We test and leave it running on its own']],
+      fit: ['Negocios con clientes recurrentes o citas, donde el seguimiento hoy depende de acordarse.', 'Businesses with recurring clients or appointments, where follow-up today depends on remembering.'] },
+    { key: 'workflows', chip: 'Chatbot o automatización con IA',
+      t: ['Flujos de trabajo', 'Custom workflows'],
+      sum: ['Conecta tus herramientas y elimina procesos manuales que consumen tiempo.', 'Connect your tools and eliminate manual processes that waste time.'],
+      price: null,
+      inc: [['Mapeo de cómo trabajas hoy', 'Map of how you work today'], ['Conexión entre tus aplicaciones', 'Connections between your apps'], ['Alertas y avisos automáticos', 'Automatic alerts and notifications'], ['Reportes que se generan solos', 'Reports that build themselves'], ['Pruebas y documentación', 'Testing and documentation']],
+      opt: [['Conexión de apps', 'App connections', 'Que tus herramientas compartan datos sin copiar y pegar.', 'Let your tools share data without copy and paste.'], ['Alertas', 'Alerts', 'Avisos cuando algo requiere tu atención.', 'Notifications when something needs your attention.'], ['Reportes automáticos', 'Automatic reports', 'Informes listos sin armarlos a mano.', 'Reports ready without building them by hand.'], ['Tareas repetitivas', 'Repetitive tasks', 'Lo que hoy haces a mano, hecho por el sistema.', 'What you do by hand today, done by the system.']],
+      time: ['2–4 semanas según la cantidad de flujos', '2–4 weeks depending on the number of workflows'],
+      steps: [['Mapeamos tus procesos y elegimos por dónde empezar', 'We map your processes and pick where to start'], ['Construimos y probamos cada flujo', 'We build and test each workflow'], ['Lo activamos y lo documentamos para tu equipo', 'We switch it on and document it for your team']],
+      fit: ['Negocios que usan varias herramientas y pierden tiempo pasando información de una a otra.', 'Businesses that use several tools and lose time moving information between them.'] }
+  ];
+
+  var dlg = document.getElementById('svc-drawer');
+  if (!dlg || typeof dlg.showModal !== 'function') return;
+  var body = document.getElementById('svc-body');
+  var scroller = document.getElementById('svc-scroll');
+  var barPrice = document.getElementById('svc-bar-price');
+  var btnWrite = document.getElementById('svc-write');
+  var btnBook = document.getElementById('svc-book');
+  var current = null, opener = null, closing = false;
+
+  function lang() { return (typeof currentLang !== 'undefined' && currentLang === 'en') ? 1 : 0; }
+  var UI = {
+    inc: ['Qué incluye', 'What’s included'], opt: ['Opciones', 'Options'], scope: ['Alcance', 'Scope'],
+    time: ['Tiempo estimado', 'Estimated time'], fit: ['Ideal para', 'Great for'],
+    quote: ['Cotización personalizada', 'Custom quote'], quoteNote: ['Te respondo en menos de 24 horas', 'I reply within 24 hours'],
+    write: ['Escribirme', 'Write to me'], book: ['Agendar llamada', 'Book a call'], quoteBook: ['Hablar de mi proyecto', 'Talk about my project'],
+    close: ['Cerrar', 'Close']
+  };
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+  function render(s) {
+    var l = lang();
+    var h = '<div class="svc-head"><h3 id="svc-title">' + esc(s.t[l]) + '</h3><p>' + esc(s.sum[l]) + '</p></div>';
+    h += '<div class="svc-sec"><h4>' + UI.inc[l] + '</h4><ul class="svc-inc">' + s.inc.map(function(i) { return '<li>' + esc(i[l]) + '</li>'; }).join('') + '</ul></div>';
+    h += '<div class="svc-sec"><h4>' + UI.opt[l] + '</h4><div class="svc-opts">' + s.opt.map(function(o) { return '<div class="svc-opt"><strong>' + esc(o[l]) + '</strong><span>' + esc(o[2 + l]) + '</span></div>'; }).join('') + '</div></div>';
+    h += '<div class="svc-sec"><h4>' + UI.scope[l] + '</h4><div class="svc-time"><span>' + UI.time[l] + '</span><strong>' + esc(s.time[l]) + '</strong></div><ol class="svc-steps">' + s.steps.map(function(i) { return '<li>' + esc(i[l]) + '</li>'; }).join('') + '</ol></div>';
+    h += '<div class="svc-sec"><h4>' + UI.fit[l] + '</h4><p class="svc-fit">' + esc(s.fit[l]) + '</p></div>';
+    body.innerHTML = h;
+    if (s.price) {
+      barPrice.innerHTML = '<small>' + esc(s.price.pre[l]) + '</small><b>' + esc(s.price.amt) + '</b>' + (s.price.note ? '<small>' + esc(s.price.note[l]) + '</small>' : '');
+    } else {
+      barPrice.innerHTML = '<b>' + UI.quote[l] + '</b><small>' + UI.quoteNote[l] + '</small>';
+    }
+    btnWrite.textContent = UI.write[l];
+    btnBook.textContent = s.price ? UI.book[l] : UI.quoteBook[l];
+    document.getElementById('svc-close').setAttribute('aria-label', UI.close[l]);
+    scroller.scrollTop = 0;
+  }
+
+  function openDrawer(i, trigger) {
+    current = SERVICES[i]; opener = trigger; closing = false;
+    render(current);
+    dlg.showModal();
+    document.documentElement.classList.add('svc-lock');
+    requestAnimationFrame(function() { requestAnimationFrame(function() { dlg.classList.add('is-open'); }); });
+  }
+  function finishClose() {
+    dlg.close();
+    document.documentElement.classList.remove('svc-lock');
+    closing = false;
+  }
+  function closeDrawer(instant) {
+    if (closing || !dlg.open) return;
+    closing = true;
+    dlg.classList.remove('is-open');
+    if (instant || window.matchMedia('(prefers-reduced-motion: reduce)').matches) { finishClose(); return; }
+    setTimeout(finishClose, 380);
+  }
+
+  document.querySelectorAll('.service-row .service-cta').forEach(function(a, i) {
+    if (!SERVICES[i]) return;
+    a.setAttribute('aria-haspopup', 'dialog');
+    a.addEventListener('click', function(e) { e.preventDefault(); openDrawer(i, a); });
+  });
+  document.getElementById('svc-close').addEventListener('click', function() { closeDrawer(); });
+  dlg.addEventListener('cancel', function(e) { e.preventDefault(); closeDrawer(); });
+  dlg.addEventListener('click', function(e) { if (e.target === dlg) closeDrawer(); });
+
+  // The drawer sits in the top layer, so it must be gone before Cal.com's
+  // modal (or the contact section) can appear above the page.
+  btnBook.addEventListener('click', function() {
+    closeDrawer(true);
+    if (window.Cal && Cal.ns && Cal.ns['30min']) Cal.ns['30min']('modal', { calLink: 'steven-jimenez-nexo/30min', config: { layout: 'month_view' } });
+  });
+  btnWrite.addEventListener('click', function() {
+    var chipValue = current && current.chip;
+    closeDrawer(true);
+    var chip = chipValue && document.querySelector('.chip-option[data-value="' + chipValue + '"]');
+    if (chip) chip.click();
+    var contact = document.getElementById('contact');
+    if (contact) contact.scrollIntoView({ behavior: 'smooth' });
   });
 })();
 

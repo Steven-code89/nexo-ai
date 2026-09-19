@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Tiendas y retail — Software y sitios web a medida | Nexo AI</title>
+<meta name="description" content="Software, sitios web y automatización con IA a medida para tiendas y comercios. Sin enlatados ni plantillas.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://nnexoai.netlify.app/industrias/tiendas-y-retail.html">
+<meta property="og:title" content="Tiendas y retail — Software y sitios web a medida | Nexo AI">
+<meta property="og:description" content="Software, sitios web y automatización con IA a medida para tiendas y comercios. Sin enlatados ni plantillas.">
+<meta property="og:type" content="website">
+<link rel="preload" href="/fonts/plus-jakarta-sans-v12-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/space-grotesk-v22-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  @font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/plus-jakarta-sans-v12-latin-regular.woff2') format('woff2'); }
+  @font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/plus-jakarta-sans-v12-latin-700.woff2') format('woff2'); }
+  @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/space-grotesk-v22-latin-regular.woff2') format('woff2'); }
+  @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/space-grotesk-v22-latin-700.woff2') format('woff2'); }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #0b1120; --muted: #4a5568; --paper: #f4f6fb; --card-bg: #ffffff;
+    --accent: #2563eb; --accent-light: #3b82f6; --accent-dark: #1d4ed8;
+    --energy: #f2542d; --energy-dark: #d43e1a; --energy-light: #ff7a54;
+    --border: rgba(11,17,32,0.1);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.65; }
+  h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--energy); outline-offset: 3px; border-radius: 4px; }
+
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 5vw; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(244,246,251,0.92); backdrop-filter: blur(12px); z-index: 100; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--ink); font-weight: 700; font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem; }
+  .back-link:hover { color: var(--energy); }
+  .nav-brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--muted); text-decoration: none; }
+
+  .hero { position: relative; overflow: hidden; padding: 5.5rem 5vw 4.5rem; background: var(--ink); color: #fff; }
+  .hero-glow { position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(circle at 85% 30%, rgba(37,99,235,0.32), transparent 55%); }
+  .hero-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #93c5fd; margin-bottom: 1.25rem; }
+  .hero-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-light); }
+  .hero h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 700; line-height: 1.06; letter-spacing: -0.03em; margin-bottom: 1.25rem; max-width: 760px; }
+  .hero-sub { font-size: 1.05rem; color: rgba(244,246,251,0.8); max-width: 600px; margin-bottom: 1.75rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag { font-size: 0.78rem; font-weight: 700; color: rgba(244,246,251,0.85); border: 1px solid rgba(244,246,251,0.25); border-radius: 8px; padding: 0.4rem 0.8rem; }
+  .hero-icon { width: clamp(120px, 16vw, 200px); height: auto; color: rgba(244,246,251,0.85); }
+
+  .block { max-width: 1100px; margin: 0 auto; padding: 4.5rem 5vw; display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; align-items: start; border-bottom: 1px solid var(--border); }
+  .block h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
+  .prose { max-width: 640px; }
+  .prose p { color: var(--muted); font-size: 1.02rem; margin-bottom: 1.15rem; }
+  .prose p:last-child { margin-bottom: 0; }
+  .clear-note { margin-top: 1.75rem; background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 1.4rem 1.6rem; }
+  .clear-note strong { display: block; font-family: 'Space Grotesk', sans-serif; margin-bottom: 0.4rem; }
+  .clear-note p { font-size: 0.95rem; margin: 0; }
+
+  .block--dark { max-width: none; background: var(--ink); color: #fff; border-bottom: none; display: block; padding: 0; }
+  .block-inner { max-width: 1100px; margin: 0 auto; padding: 4.5rem 5vw; display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; align-items: start; }
+  .block--dark h2 { color: #fff; }
+  .roles { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .role { border-top: 1px solid rgba(244,246,251,0.2); padding-top: 1.25rem; }
+  .role strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; color: var(--energy-light); margin-bottom: 0.6rem; }
+  .role p { font-size: 0.95rem; color: rgba(244,246,251,0.78); }
+
+  .block--wide { grid-template-columns: 1fr; gap: 1.25rem; }
+  .lead { color: var(--muted); max-width: 620px; }
+  .build-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 3rem; margin-top: 1rem; }
+  .build-item { padding: 1.5rem 0; border-top: 1px solid var(--border); }
+  .build-item strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; margin-bottom: 0.4rem; }
+  .build-item p { font-size: 0.95rem; color: var(--muted); }
+  .others { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .others a { text-decoration: none; font-size: 0.9rem; font-weight: 700; border: 1px solid var(--border); background: var(--card-bg); border-radius: 100px; padding: 0.6rem 1.1rem; transition: border-color 0.2s, color 0.2s; }
+  .others a:hover { border-color: var(--energy); color: var(--energy); }
+
+  .cta { background: var(--ink); color: #fff; text-align: center; padding: 5rem 5vw; }
+  .cta h2 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); letter-spacing: -0.03em; margin-bottom: 0.9rem; }
+  .cta p { color: rgba(244,246,251,0.7); max-width: 520px; margin: 0 auto 2rem; }
+  .cta-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+  .btn { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.92rem; font-weight: 700; border-radius: 100px; padding: 0.85rem 1.6rem; cursor: pointer; text-decoration: none; border: 1.5px solid rgba(244,246,251,0.3); background: transparent; color: #fff; transition: background 0.2s, border-color 0.2s; }
+  .btn:hover { border-color: #fff; }
+  .btn--primary { background: var(--energy); border-color: var(--energy); }
+  .btn--primary:hover { background: var(--energy-dark); border-color: var(--energy-dark); }
+
+  footer { padding: 2rem 5vw; background: var(--ink); border-top: 1px solid rgba(244,246,251,0.12); display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; font-size: 0.82rem; color: rgba(244,246,251,0.55); }
+  footer a { text-decoration: none; font-weight: 700; font-family: 'Space Grotesk', sans-serif; color: #fff; }
+
+  @media (max-width: 860px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-icon { display: none; }
+    .block, .block-inner { grid-template-columns: 1fr; gap: 1.5rem; padding: 3rem 6vw; }
+    .roles, .build-grid { grid-template-columns: 1fr; }
+    .hero { padding: 4rem 6vw 3.25rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="back-link" href="/#industries">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg>
+    Industrias
+  </a>
+  <a class="nav-brand" href="/">Nexo AI</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div>
+      <span class="hero-eyebrow">Industrias</span>
+      <h1>Soluciones a medida para tiendas, comercios y retail</h1>
+      <p class="hero-sub">Sitios web, catálogos, tiendas en línea e inventario para boutiques, tiendas de barrio, ferreterías, librerías y tiendas de mascotas.</p>
+      <div class="tags"><span class="tag">Boutiques</span><span class="tag">Tiendas de barrio</span><span class="tag">Ferreterías</span><span class="tag">Librerías</span><span class="tag">Mascotas</span></div>
+    </div>
+    <svg class="hero-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+  </div>
+</header>
+
+<main>
+<section class="block">
+  <h2>Lo que hacemos</h2>
+  <div class="prose"><p>Ordenamos lo que pasa entre el producto en tu estante y la venta cerrada. Un catálogo que vive en WhatsApp o Instagram, un inventario que se lleva de memoria, ventas que se anotan a mano: lo llevamos a un sistema que te permita vender también cuando el local está cerrado.</p><p>Esto no cambia lo que vendes. Cambia cómo lo muestras, cómo te compran y cómo controlas lo que tienes: catálogo, stock, pedidos y clientes.</p><p>Da igual si tienes un local pequeño o varias tiendas. Lo que diseñamos se adapta al tamaño de tu negocio, con margen para crecer. No te vendemos plataformas enormes con funciones que nunca vas a usar.</p></div>
+</section>
+
+<section class="block">
+  <h2>Cómo se ve esto en el sector</h2>
+  <div class="prose">
+    <p>Suele pasar que el catálogo está disperso en fotos de redes sociales. Que el stock real no coincide con lo que se ofrece. Que los pedidos por mensaje se pierden entre conversaciones. Y que vender en línea parece complicado, así que se posterga.</p>
+    <p>No son problemas exclusivos de tiendas y comercios, pero juntos forman la combinación típica de este tipo de negocio.</p>
+    <div class="clear-note"><strong>Para ser claros</strong><p>No somos comerciantes ni conocemos tu clientela como tú. Eso es lo tuyo. Lo que sí hacemos es escuchar cómo vendes y armar herramientas que lo hagan más ordenado.</p></div>
+  </div>
+</section>
+
+<section class="block block--dark">
+  <div class="block-inner">
+    <h2>Cómo trabajamos juntos</h2>
+    <div class="roles">
+      <div class="role"><strong>Lo que pones tú</strong><p>Tus productos, precios, proveedores y clientes. Las decisiones comerciales: qué se vende en línea, cómo se entrega y cómo se cobra.</p></div>
+      <div class="role"><strong>Lo que ponemos nosotros</strong><p>La metodología para escuchar y entender tu operación en profundidad. El diseño y el desarrollo del sitio, del sistema o de lo que la solución necesite incluir. Y el acompañamiento durante la puesta en marcha, con soporte después.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block block--wide">
+  <h2>Algunas cosas que podríamos construir</h2>
+  <p class="lead">Son ejemplos de piezas que pueden formar parte de tu solución, juntas o por separado, según lo que necesites.</p>
+  <div class="build-grid"><div class="build-item"><strong>Tienda en línea</strong><p>Catálogo, carrito y cobro en línea para vender directo al cliente sin depender solo de las redes sociales.</p></div><div class="build-item"><strong>Catálogo con pedido por WhatsApp</strong><p>Un catálogo ordenado y fácil de compartir, con botón para pedir por WhatsApp.</p></div><div class="build-item"><strong>Control de inventario</strong><p>Un sistema que lleva el stock al día y avisa cuando un producto se está agotando.</p></div><div class="build-item"><strong>Cobros en línea</strong><p>Pagos con tarjeta o transferencia integrados, con confirmación automática al cliente.</p></div><div class="build-item"><strong>Asistente de IA</strong><p>Un asistente que responde disponibilidad, precios y horarios en tu sitio o por WhatsApp.</p></div></div>
+</section>
+
+<section class="block block--wide">
+  <h2>Otras industrias</h2>
+  <div class="others"><a href="/industrias/restaurantes-y-cafes.html">Restaurantes y cafés</a><a href="/industrias/clinicas-y-consultorios.html">Clínicas y consultorios</a><a href="/industrias/servicios-profesionales.html">Servicios profesionales</a><a href="/industrias/bienes-raices.html">Bienes raíces</a><a href="/industrias/talleres-y-servicios-tecnicos.html">Talleres y servicios técnicos</a><a href="/industrias/gimnasios-y-bienestar.html">Gimnasios y bienestar</a></div>
+</section>
+</main>
+
+<section class="cta">
+  <h2>Comencemos a trabajar hoy</h2>
+  <p>Cuéntanos cómo funciona tu negocio y te respondemos con ideas en menos de 24 horas — gratis y sin compromiso.</p>
+  <div class="cta-actions">
+    <button type="button" class="btn btn--primary" id="book">Agendar llamada</button>
+    <a href="/#contact" class="btn btn--ghost">Escribirme</a>
+    <a href="https://wa.me/50660345933" target="_blank" rel="noopener" class="btn btn--ghost">WhatsApp</a>
+  </div>
+</section>
+
+<footer>
+  <a href="/">Nexo AI</a>
+  <span>Software y sitios web a medida para negocios de Costa Rica.</span>
+</footer>
+
+<script>
+  document.getElementById('book').addEventListener('click', function () {
+    if (window.Cal && Cal.ns && Cal.ns['30min']) Cal.ns['30min']('modal', { calLink: 'steven-jimenez-nexo/30min', config: { layout: 'month_view' } });
+  });
+</script>
+<script>
+  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+  Cal("init", "30min", { origin: "https://cal.com" });
+  Cal.ns["30min"]("ui", { "styles": { "branding": { "brandColor": "#f2542d" } }, "hideEventTypeDetails": false, "layout": "month_view" });
+</script>
+</body>
+</html>
