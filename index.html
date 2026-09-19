@@ -751,35 +751,96 @@
     .wc-panel + .wc-panel { margin-top: 3rem; }
   }
 
-  /* ══ SITE TYPES — DARK TAB SWITCHER ════════════════════════════════ */
-  .dt-section { background: var(--ink); color: var(--paper); padding: 5rem 5vw; }
-  .dt-inner { max-width: 1100px; margin: 0 auto; }
-  .dt-inner h2 { color: var(--paper); }
-  .dt-grid { display: grid; grid-template-columns: 260px 1fr; gap: 2.5rem; align-items: start; }
-  .dt-tabs { display: flex; flex-direction: column; gap: 0.4rem; }
-  .dt-tab {
-    text-align: left; background: none; border: none; border-radius: 10px; cursor: pointer;
-    padding: 0.9rem 1rem; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.95rem; font-weight: 600;
-    color: rgba(244,246,251,0.55); transition: background 0.2s ease, color 0.2s ease;
+  /* ══ WHAT WE BUILD — DARK PRODUCT CARDS ═══════════════════════════ */
+  .dt-section { background: radial-gradient(900px 520px at 88% -6%, rgba(37,99,235,0.24), transparent 62%), var(--ink); color: var(--paper); padding: 5.5rem 5vw 5rem; }
+  .dt-inner { max-width: 1180px; margin: 0 auto; }
+  .dt-head { display: grid; grid-template-columns: 1fr auto; gap: 2rem 3rem; align-items: start; margin-bottom: 2.25rem; }
+  .dt-eyebrow { display: flex; align-items: center; gap: 0.85rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(244,246,251,0.6); margin-bottom: 1.1rem; }
+  .dt-eyebrow::before { content: ''; width: 40px; height: 1px; background: var(--accent-light); }
+  .dt-inner h2 { color: var(--paper); font-size: clamp(2.2rem, 4.6vw, 3.3rem); max-width: 720px; margin-bottom: 1rem; }
+  .dt-inner h2 em { font-style: normal; color: var(--accent-light); }
+  .dt-sub { font-size: 1.05rem; color: rgba(244,246,251,0.72); max-width: 520px; line-height: 1.6; }
+  .dt-strip { list-style: none; padding: 0; margin: 0.4rem 0 0; display: flex; align-items: stretch; }
+  .dt-strip li { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; padding: 0.3rem 1.15rem; font-size: 0.85rem; font-weight: 600; color: rgba(244,246,251,0.85); }
+  .dt-strip li + li { border-left: 1px solid rgba(244,246,251,0.12); }
+  .dt-strip svg { width: 22px; height: 22px; color: var(--accent-light); }
+
+  .dt-mode { display: inline-flex; gap: 0.5rem; padding: 0.3rem; border: 1px solid rgba(244,246,251,0.14); border-radius: 16px; margin-bottom: 1.75rem; }
+  .dt-mode-btn {
+    display: flex; align-items: center; gap: 0.8rem; text-align: left; cursor: pointer; background: none; border: 1px solid transparent;
+    border-radius: 13px; padding: 0.75rem 1.5rem 0.75rem 1.1rem; font-family: 'Plus Jakarta Sans', sans-serif; color: rgba(244,246,251,0.62);
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
   }
-  .dt-tab:hover { color: var(--paper); }
-  .dt-tab.is-active { background: rgba(244,246,251,0.08); color: var(--paper); }
-  .dt-tab:focus-visible { outline: 2px solid var(--accent-light); outline-offset: 2px; }
-  .dt-panels { position: relative; }
-  .dt-panel { display: none; background: rgba(244,246,251,0.03); border: 1px solid rgba(244,246,251,0.1); border-radius: 18px; padding: 2.5rem; }
-  .dt-panel.is-active { display: block; }
-  .dt-panel h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.85rem; }
-  .dt-panel > p { color: rgba(244,246,251,0.7); font-size: 0.98rem; line-height: 1.65; margin-bottom: 1.5rem; max-width: 560px; }
-  .dt-checklist { list-style: none; padding: 0; margin: 0 0 1.75rem; display: flex; flex-direction: column; gap: 0.75rem; }
-  .dt-checklist li { position: relative; padding-left: 1.6rem; font-size: 0.92rem; color: rgba(244,246,251,0.85); }
-  .dt-checklist li::before { content: '✓'; position: absolute; left: 0; color: var(--accent-light); font-weight: 700; }
-  .dt-fit { font-size: 0.88rem; color: rgba(244,246,251,0.6); border-top: 1px solid rgba(244,246,251,0.1); padding-top: 1.25rem; }
-  .dt-fit strong { color: var(--paper); }
+  .dt-mode-btn svg { width: 26px; height: 26px; flex-shrink: 0; }
+  .dt-mode-btn b { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 1rem; }
+  .dt-mode-btn small { display: block; font-size: 0.75rem; opacity: 0.8; }
+  .dt-mode-btn:hover { color: var(--paper); }
+  .dt-mode-btn.is-active { color: #fff; background: rgba(37,99,235,0.2); border-color: var(--accent); box-shadow: 0 0 26px rgba(37,99,235,0.35); }
+  .dt-mode-btn.is-active svg { color: var(--accent-light); }
+  .dt-mode-btn:focus-visible { outline: 2px solid var(--energy); outline-offset: 2px; }
+
+  .dt-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .dt-cards[hidden] { display: none; }
+  .dt-card {
+    position: relative; display: grid; grid-template-columns: 0.95fr 1fr; overflow: hidden; min-height: 270px;
+    border: 1px solid rgba(244,246,251,0.12); border-radius: 20px;
+    background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(244,246,251,0.02) 60%); transition: border-color 0.2s ease;
+  }
+  .dt-card__media { position: relative; display: flex; align-items: flex-end; justify-content: center; overflow: hidden; padding: 1.25rem 1.1rem 0; background: radial-gradient(circle at 50% 100%, rgba(59,130,246,0.22), transparent 70%); }
+  .mock { width: 100%; }
+  .mock-browser { max-width: 330px; border-radius: 10px 10px 0 0; overflow: hidden; background: #0d1626; border: 1px solid rgba(244,246,251,0.16); border-bottom: none; box-shadow: 0 18px 40px rgba(0,0,0,0.4); }
+  .mock-bar { display: flex; gap: 5px; padding: 8px 10px; background: #0d1626; }
+  .mock-bar i { width: 7px; height: 7px; border-radius: 50%; background: rgba(244,246,251,0.25); }
+  .mock-browser img { display: block; width: 100%; height: auto; }
+  .mock-phone { width: 150px; max-width: 60%; margin-bottom: -34px; border: 5px solid #05070d; border-radius: 26px; overflow: hidden; background: #05070d; box-shadow: 0 18px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(244,246,251,0.12); }
+  .mock-phone img { display: block; width: 100%; height: auto; border-radius: 20px; }
+  .mock-screen { padding: 10px 12px 14px; min-height: 150px; }
+  .mock-screen b, .mock-screen span, .mock-screen em, .mock-screen u, .mock-screen s, .mock-screen i { display: block; text-decoration: none; }
+  .ms-nav { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .ms-nav b { width: 34px; height: 8px; border-radius: 4px; background: var(--accent-light); }
+  .ms-nav span { width: 22px; height: 5px; border-radius: 3px; background: rgba(244,246,251,0.22); }
+  .ms-nav em { margin-left: auto; width: 12px; height: 12px; border-radius: 50%; border: 2px solid rgba(244,246,251,0.4); }
+  .ms-hero { height: 46px; border-radius: 8px; padding: 9px 10px; margin-bottom: 10px; background: linear-gradient(120deg, rgba(37,99,235,0.55), rgba(14,165,233,0.25)); }
+  .ms-hero u { width: 60%; height: 7px; border-radius: 4px; background: rgba(255,255,255,0.85); margin-bottom: 6px; }
+  .ms-hero s { width: 36%; height: 5px; border-radius: 3px; background: rgba(255,255,255,0.45); }
+  .ms-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .ms-grid > div { border-radius: 7px; background: rgba(244,246,251,0.06); padding: 6px; }
+  .ms-grid i { height: 34px; border-radius: 5px; background: linear-gradient(135deg, rgba(59,130,246,0.5), rgba(14,165,233,0.3)); margin-bottom: 6px; }
+  .ms-grid u { width: 80%; height: 4px; border-radius: 2px; background: rgba(244,246,251,0.4); margin-bottom: 4px; }
+  .ms-grid s { width: 40%; height: 5px; border-radius: 3px; background: var(--energy); }
+  .dt-card__body { display: flex; flex-direction: column; justify-content: center; gap: 0.7rem; padding: 2rem 1.75rem 2rem 1.25rem; }
+  .dt-card__cat { display: inline-flex; align-items: center; gap: 0.7rem; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(244,246,251,0.6); }
+  .dt-card__cat svg { width: 26px; height: 26px; color: var(--paper); }
+  .dt-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; color: #fff; line-height: 1.15; }
+  .dt-card p { font-size: 0.92rem; color: rgba(244,246,251,0.7); line-height: 1.6; }
+  .dt-card__more { align-self: flex-start; display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.4rem; background: none; border: none; padding: 0; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.92rem; font-weight: 700; color: var(--accent-light); transition: color 0.2s ease; }
+  .dt-card__more::after { content: ''; position: absolute; inset: 0; border-radius: 20px; }
+  .dt-card__more svg { width: 16px; height: 16px; transition: transform 0.2s ease; }
+  .dt-card:has(.dt-card__more:focus-visible) { outline: 2px solid var(--energy); outline-offset: 3px; }
+  @media (hover: hover) and (pointer: fine) {
+    .dt-card:hover { border-color: rgba(59,130,246,0.6); }
+    .dt-card:hover .dt-card__more svg { transform: translateX(4px); }
+    .dt-card:hover .dt-card__more { color: #fff; }
+  }
+  @media (max-width: 1000px) {
+    .dt-head { grid-template-columns: 1fr; }
+    .dt-strip { margin-top: 0; }
+    .dt-cards { grid-template-columns: 1fr; }
+  }
   @media (max-width: 720px) {
-    .dt-grid { grid-template-columns: 1fr; }
-    .dt-tabs { flex-direction: row; flex-wrap: wrap; }
-    .dt-panel { padding: 1.75rem; }
+    .dt-section { padding: 4rem 6vw 3.5rem; }
+    .dt-strip { display: grid; grid-template-columns: repeat(3, 1fr); row-gap: 1rem; }
+    .dt-strip li { padding: 0.3rem 0.4rem; }
+    .dt-strip li:nth-child(4) { border-left: none; }
+    .dt-mode { display: flex; }
+    .dt-mode-btn { flex: 1; padding: 0.7rem 0.75rem; gap: 0.55rem; }
+    .dt-mode-btn svg { width: 22px; height: 22px; }
+    .dt-card { grid-template-columns: 1fr; }
+    .dt-card__media { height: 230px; }
+    .mock-phone { align-self: flex-start; margin-bottom: 0; width: 140px; }
+    .dt-card__body { padding: 1.5rem 1.4rem 1.75rem; }
   }
+  @media (prefers-reduced-motion: reduce) { .dt-card, .dt-card__more svg, .dt-mode-btn { transition: none; } }
 
   /* ══ INDUSTRIES — STACKING CARDS (pure CSS sticky, no JS) ═════════
      Each .ind-card is sticky with a slightly larger `top` than the one
@@ -1386,60 +1447,121 @@
 
 <div class="dt-section" id="dt-section">
   <div class="dt-inner">
-    <h2 data-es="Tipos de página que puedo construir" data-en="Types of sites I can build">Tipos de página que puedo construir</h2>
-    <div class="dt-grid">
-      <div class="dt-tabs" role="tablist" aria-label="Tipos de página">
-        <button type="button" class="dt-tab is-active" role="tab" aria-selected="true" data-target="dt-panel-0" data-es="Landing page" data-en="Landing page">Landing page</button>
-        <button type="button" class="dt-tab" role="tab" aria-selected="false" data-target="dt-panel-1" data-es="Sitio informativo" data-en="Informational site">Sitio informativo</button>
-        <button type="button" class="dt-tab" role="tab" aria-selected="false" data-target="dt-panel-2" data-es="Tienda en línea" data-en="Online store">Tienda en línea</button>
-        <button type="button" class="dt-tab" role="tab" aria-selected="false" data-target="dt-panel-3" data-es="App o sistema a medida" data-en="Custom app or system">App o sistema a medida</button>
+    <header class="dt-head">
+      <div class="dt-head-text">
+        <p class="dt-eyebrow" data-es="Productos digitales" data-en="Digital products">Productos digitales</p>
+        <h2 data-es="De una idea a un <em>producto real.</em>" data-en="From an idea to a <em>real product.</em>">De una idea a un <em>producto real.</em></h2>
+        <p class="dt-sub" data-es="Diseñamos y desarrollamos experiencias digitales rápidas, modernas y pensadas para crecer contigo." data-en="We design and build fast, modern digital experiences made to grow with you.">Diseñamos y desarrollamos experiencias digitales rápidas, modernas y pensadas para crecer contigo.</p>
       </div>
-      <div class="dt-panels">
-        <div class="dt-panel is-active" id="dt-panel-0">
-          <h3 data-es="Landing page" data-en="Landing page">Landing page</h3>
-          <p data-es="Una sola página enfocada en un objetivo: que el visitante llame, escriba o compre. Ideal para lanzar rápido y medir qué tan bien convierte." data-en="A single page focused on one goal: getting the visitor to call, message or buy. Great for launching fast and measuring conversion.">Una sola página enfocada en un objetivo: que el visitante llame, escriba o compre. Ideal para lanzar rápido y medir qué tan bien convierte.</p>
-          <ul class="dt-checklist">
-            <li data-es="Carga en segundos" data-en="Loads in seconds">Carga en segundos</li>
-            <li data-es="Un solo llamado a la acción, claro" data-en="One clear call to action">Un solo llamado a la acción, claro</li>
-            <li data-es="Optimizada para anuncios y campañas" data-en="Optimized for ads and campaigns">Optimizada para anuncios y campañas</li>
-            <li data-es="Lista en 1-2 semanas" data-en="Ready in 1-2 weeks">Lista en 1-2 semanas</li>
-          </ul>
-          <div class="dt-fit"><strong data-es="Ideal para:" data-en="Great for:">Ideal para:</strong> <span data-es="negocios que necesitan validar una oferta o campaña rápido." data-en="businesses that need to validate an offer or campaign fast.">negocios que necesitan validar una oferta o campaña rápido.</span></div>
+      <ul class="dt-strip">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 4.7 4.7 1.8-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2 2.2.8-2.2.8L19 21l-.8-2.2-2.2-.8 2.2-.8z"/></svg><span data-es="Diseño" data-en="Design">Diseño</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg><span data-es="Desarrollo" data-en="Development">Desarrollo</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><span data-es="Integraciones" data-en="Integrations">Integraciones</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19H7a4 4 0 0 1-.6-7.96A6 6 0 0 1 18 10a4.5 4.5 0 0 1-.5 9Z"/></svg><span data-es="Cloud" data-en="Cloud">Cloud</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 20V11M12 20V5M18 20v-6"/></svg><span data-es="Analytics" data-en="Analytics">Analytics</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/></svg><span data-es="Soporte" data-en="Support">Soporte</span></li>
+      </ul>
+    </header>
+
+    <div class="dt-mode" role="tablist" aria-label="Qué construimos">
+      <button type="button" class="dt-mode-btn is-active" role="tab" aria-selected="true" data-mode="web">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+        <span><b data-es="Páginas web" data-en="Websites">Páginas web</b><small data-es="Sitios y tiendas" data-en="Sites and stores">Sitios y tiendas</small></span>
+      </button>
+      <button type="button" class="dt-mode-btn" role="tab" aria-selected="false" data-mode="software">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg>
+        <span><b data-es="Software a medida" data-en="Custom software">Software a medida</b><small data-es="CRM, ERP, portales y más" data-en="CRM, ERP, portals and more">CRM, ERP, portales y más</small></span>
+      </button>
+    </div>
+
+    <div class="dt-cards" data-group="web">
+      <article class="dt-card">
+        <div class="dt-card__media">
+          <div class="mock mock-browser"><div class="mock-bar"><i></i><i></i><i></i></div><img src="img/proyectos/nexo-hero.webp" alt="Landing page de Nexo AI" width="1000" height="610" loading="lazy"></div>
         </div>
-        <div class="dt-panel" id="dt-panel-1">
-          <h3 data-es="Sitio informativo" data-en="Informational site">Sitio informativo</h3>
-          <p data-es="Varias páginas (inicio, servicios, nosotros, contacto) para negocios que necesitan presencia completa y encontrarse en Google." data-en="Multiple pages (home, services, about, contact) for businesses that need a full presence and to be found on Google.">Varias páginas (inicio, servicios, nosotros, contacto) para negocios que necesitan presencia completa y encontrarse en Google.</p>
-          <ul class="dt-checklist">
-            <li data-es="Estructura pensada para SEO" data-en="Structure built for SEO">Estructura pensada para SEO</li>
-            <li data-es="Fácil de actualizar vos mismo" data-en="Easy to update yourself">Fácil de actualizar vos mismo</li>
-            <li data-es="Formulario de contacto integrado" data-en="Built-in contact form">Formulario de contacto integrado</li>
-            <li data-es="Crece con tu negocio" data-en="Grows with your business">Crece con tu negocio</li>
-          </ul>
-          <div class="dt-fit"><strong data-es="Ideal para:" data-en="Great for:">Ideal para:</strong> <span data-es="negocios que quieren una presencia profesional permanente." data-en="businesses that want a permanent professional presence.">negocios que quieren una presencia profesional permanente.</span></div>
+        <div class="dt-card__body">
+          <span class="dt-card__cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span data-es="Páginas web" data-en="Websites">Páginas web</span></span>
+          <h3 data-es="Landing pages" data-en="Landing pages">Landing pages</h3>
+          <p data-es="Convierte visitas en clientes. Diseñadas para una acción específica, con un enfoque claro, rápido y optimizado para campañas." data-en="Turn visits into customers. Built for one specific action, with a clear, fast focus optimized for campaigns.">Convierte visitas en clientes. Diseñadas para una acción específica, con un enfoque claro, rápido y optimizado para campañas.</p>
+          <button type="button" class="dt-card__more" data-product="web-landing"><span data-es="Ver detalles" data-en="View details">Ver detalles</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </div>
-        <div class="dt-panel" id="dt-panel-2">
-          <h3 data-es="Tienda en línea" data-en="Online store">Tienda en línea</h3>
-          <p data-es="Catálogo, carrito y cobro en línea para negocios que venden producto directo al cliente, sin depender solo de redes sociales." data-en="Catalog, cart and online checkout for businesses that sell direct to customers, not just through social media.">Catálogo, carrito y cobro en línea para negocios que venden producto directo al cliente, sin depender solo de redes sociales.</p>
-          <ul class="dt-checklist">
-            <li data-es="Inventario y catálogo administrable" data-en="Manageable inventory and catalog">Inventario y catálogo administrable</li>
-            <li data-es="Pagos en línea integrados" data-en="Built-in online payments">Pagos en línea integrados</li>
-            <li data-es="Notificaciones de pedidos automáticas" data-en="Automatic order notifications">Notificaciones de pedidos automáticas</li>
-            <li data-es="Funciona igual en celular" data-en="Works the same on mobile">Funciona igual en celular</li>
-          </ul>
-          <div class="dt-fit"><strong data-es="Ideal para:" data-en="Great for:">Ideal para:</strong> <span data-es="negocios que ya venden por WhatsApp o redes y quieren un canal propio." data-en="businesses that already sell over WhatsApp or social and want their own channel.">negocios que ya venden por WhatsApp o redes y quieren un canal propio.</span></div>
+      </article>
+      <article class="dt-card">
+        <div class="dt-card__media">
+          <div class="mock mock-browser"><div class="mock-bar"><i></i><i></i><i></i></div><img src="img/proyectos/pizotecr-home.webp" alt="Sitio web de PizoteCR" width="1000" height="625" loading="lazy"></div>
         </div>
-        <div class="dt-panel" id="dt-panel-3">
-          <h3 data-es="App o sistema a medida" data-en="Custom app or system">App o sistema a medida</h3>
-          <p data-es="Software hecho para tu operación específica: paneles, flujos internos o herramientas que ningún producto genérico resuelve igual." data-en="Software built for your specific operation: dashboards, internal workflows or tools no off-the-shelf product solves the same way.">Software hecho para tu operación específica: paneles, flujos internos o herramientas que ningún producto genérico resuelve igual.</p>
-          <ul class="dt-checklist">
-            <li data-es="Se adapta a tu flujo real de trabajo" data-en="Adapts to your real workflow">Se adapta a tu flujo real de trabajo</li>
-            <li data-es="Roles y permisos según tu equipo" data-en="Roles and permissions for your team">Roles y permisos según tu equipo</li>
-            <li data-es="Se integra con lo que ya usás" data-en="Integrates with what you already use">Se integra con lo que ya usás</li>
-            <li data-es="Evoluciona con el negocio" data-en="Evolves with the business">Evoluciona con el negocio</li>
-          </ul>
-          <div class="dt-fit"><strong data-es="Ideal para:" data-en="Great for:">Ideal para:</strong> <span data-es="negocios con procesos que ya no caben en hojas de cálculo." data-en="businesses with processes that have outgrown spreadsheets.">negocios con procesos que ya no caben en hojas de cálculo.</span></div>
+        <div class="dt-card__body">
+          <span class="dt-card__cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v16M14 9h5a1 1 0 0 1 1 1v11M3 21h18M8 8h2M8 12h2M8 16h2"/></svg><span data-es="Páginas web" data-en="Websites">Páginas web</span></span>
+          <h3 data-es="Sitios corporativos" data-en="Corporate sites">Sitios corporativos</h3>
+          <p data-es="Presencia profesional para tu marca. Sitios modernos, rápidos y optimizados para mostrar lo que haces." data-en="A professional presence for your brand. Modern, fast sites optimized to show what you do.">Presencia profesional para tu marca. Sitios modernos, rápidos y optimizados para mostrar lo que haces.</p>
+          <button type="button" class="dt-card__more" data-product="web-corp"><span data-es="Ver detalles" data-en="View details">Ver detalles</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </div>
-      </div>
+      </article>
+      <article class="dt-card">
+        <div class="dt-card__media">
+          <div class="mock mock-browser" role="img" aria-label="Ilustración de una tienda en línea"><div class="mock-bar"><i></i><i></i><i></i></div>
+            <div class="mock-screen mock-shop" aria-hidden="true">
+              <div class="ms-nav"><b></b><span></span><span></span><span></span><em></em></div>
+              <div class="ms-hero"><u></u><s></s></div>
+              <div class="ms-grid"><div><i></i><u></u><s></s></div><div><i></i><u></u><s></s></div><div><i></i><u></u><s></s></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="dt-card__body">
+          <span class="dt-card__cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M3 4h2.5l2.2 11h10.6l2-8H6.5"/></svg><span data-es="Tiendas en línea" data-en="Online stores">Tiendas en línea</span></span>
+          <h3 data-es="E-commerce" data-en="E-commerce">E-commerce</h3>
+          <p data-es="Tu negocio, vendiendo online. Tiendas modernas con pagos seguros, inventario y gestión de pedidos." data-en="Your business, selling online. Modern stores with secure payments, inventory and order management.">Tu negocio, vendiendo online. Tiendas modernas con pagos seguros, inventario y gestión de pedidos.</p>
+          <button type="button" class="dt-card__more" data-product="web-shop"><span data-es="Ver detalles" data-en="View details">Ver detalles</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </article>
+      <article class="dt-card">
+        <div class="dt-card__media"><div class="mock mock-phone"><img src="img/proyectos/greenforest-album/mapa.webp" alt="Plataforma web con mapa y datos en tiempo real" width="520" height="1044" loading="lazy"></div></div>
+        <div class="dt-card__body">
+          <span class="dt-card__cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg><span data-es="Software a medida" data-en="Custom software">Software a medida</span></span>
+          <h3 data-es="Web apps / Plataformas" data-en="Web apps / Platforms">Web apps / Plataformas</h3>
+          <p data-es="Sistemas personalizados para automatizar procesos, centralizar información y hacer tu operación más eficiente." data-en="Custom systems to automate processes, centralize information and make your operation more efficient.">Sistemas personalizados para automatizar procesos, centralizar información y hacer tu operación más eficiente.</p>
+          <button type="button" class="dt-card__more" data-product="web-apps"><span data-es="Ver detalles" data-en="View details">Ver detalles</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </article>
+    </div>
+
+    <div class="dt-cards" data-group="software" hidden>
+      <article class="dt-card">
+        <div class="dt-card__media"><div class="mock mock-phone"><img src="img/proyectos/voltix-album/dark-coach-clientes.webp" alt="Lista de clientes de un CRM a medida" width="520" height="1044" loading="lazy"></div></div>
+        <div class="dt-card__body">
+          <span class="dt-card__cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20a6 6 0 0 1 12 0M16 4.5a3.2 3.2 0 0 1 0 6M18 20a6 6 0 0 0-3-5.2"/></svg><span data-es="Software a medida" data-en="Custom software">Software a medida</span></span>
+          <h3 data-es="CRM a medida" data-en="Custom CRM">CRM a medida</h3>
+          <p data-es="Clientes, oportunidades y seguimiento en un solo lugar, construido alrededor de cómo vendes tú." data-en="Customers, leads and follow-up in one place, built around how you sell.">Clientes, oportunidades y seguimiento en un solo lugar, construido alrededor de cómo vendes tú.</p>
+          <button type="button" class="dt-card__more" data-product="sw-crm"><span data-es="Ver detalles" data-en="View details">Ver detalles</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </article>
+      <article class="dt-card">
+        <div class="dt-card__media"><div class="mock mock-phone"><img src="img/proyectos/greenforest-album/reporte-resumen.webp" alt="Reporte resumen de un sistema de gestión" width="520" height="1044" loading="lazy"></div></div>
+        <div class="dt-card__body">
+          <span class="dt-card__cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5Z"/><path d="M3 12.5l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg><span data-es="Software a medida" data-en="Custom software">Software a medida</span></span>
+          <h3 data-es="ERP y gestión" data-en="ERP and management">ERP y gestión</h3>
+          <p data-es="Inventario, compras, ventas y facturación por módulos y por etapas, sin pagar por lo que no usas." data-en="Inventory, purchasing, sales and invoicing by module and in stages, without paying for what you don’t use.">Inventario, compras, ventas y facturación por módulos y por etapas, sin pagar por lo que no usas.</p>
+          <button type="button" class="dt-card__more" data-product="sw-erp"><span data-es="Ver detalles" data-en="View details">Ver detalles</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </article>
+      <article class="dt-card">
+        <div class="dt-card__media"><div class="mock mock-phone"><img src="img/proyectos/voltix-album/dark-cliente-inicio.webp" alt="Portal de cliente con su panel de inicio" width="520" height="1044" loading="lazy"></div></div>
+        <div class="dt-card__body">
+          <span class="dt-card__cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 9v11"/></svg><span data-es="Software a medida" data-en="Custom software">Software a medida</span></span>
+          <h3 data-es="Portales y paneles" data-en="Portals and dashboards">Portales y paneles</h3>
+          <p data-es="Espacios privados para clientes, proveedores o tu equipo, con la información siempre al día." data-en="Private spaces for customers, suppliers or your team, with information always up to date.">Espacios privados para clientes, proveedores o tu equipo, con la información siempre al día.</p>
+          <button type="button" class="dt-card__more" data-product="sw-portal"><span data-es="Ver detalles" data-en="View details">Ver detalles</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </article>
+      <article class="dt-card">
+        <div class="dt-card__media"><div class="mock mock-phone"><img src="img/proyectos/greenforest-album/reporte-exportar.webp" alt="Pantalla para exportar reportes en PDF, Excel y CSV" width="520" height="1044" loading="lazy"></div></div>
+        <div class="dt-card__body">
+          <span class="dt-card__cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><span data-es="Software a medida" data-en="Custom software">Software a medida</span></span>
+          <h3 data-es="Integraciones y automatización" data-en="Integrations and automation">Integraciones y automatización</h3>
+          <p data-es="Conectamos tus herramientas y automatizamos lo repetitivo, con inteligencia artificial donde de verdad suma." data-en="We connect your tools and automate the repetitive work, with AI where it genuinely helps.">Conectamos tus herramientas y automatizamos lo repetitivo, con inteligencia artificial donde de verdad suma.</p>
+          <button type="button" class="dt-card__more" data-product="sw-integ"><span data-es="Ver detalles" data-en="View details">Ver detalles</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </article>
     </div>
   </div>
 </div>
@@ -2491,17 +2613,14 @@ function goHome(e) {
   update();
 })();
 
-// ── SITE TYPES TAB SWITCHER ───────────────────────────────────────
+// ── WHAT WE BUILD: WEB / SOFTWARE SWITCH ──────────────────────────
 (function() {
-  var tabs = document.querySelectorAll('.dt-tab');
-  if (!tabs.length) return;
-  tabs.forEach(function(tab) {
-    tab.addEventListener('click', function() {
-      tabs.forEach(function(t) { t.classList.remove('is-active'); t.setAttribute('aria-selected', 'false'); });
-      document.querySelectorAll('.dt-panel').forEach(function(p) { p.classList.remove('is-active'); });
-      tab.classList.add('is-active'); tab.setAttribute('aria-selected', 'true');
-      var panel = document.getElementById(tab.getAttribute('data-target'));
-      if (panel) panel.classList.add('is-active');
+  var modes = document.querySelectorAll('.dt-mode-btn'), groups = document.querySelectorAll('.dt-cards');
+  modes.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      modes.forEach(function(m) { m.classList.remove('is-active'); m.setAttribute('aria-selected', 'false'); });
+      btn.classList.add('is-active'); btn.setAttribute('aria-selected', 'true');
+      groups.forEach(function(g) { g.hidden = g.getAttribute('data-group') !== btn.getAttribute('data-mode'); });
     });
   });
 })();
@@ -2576,6 +2695,294 @@ function goHome(e) {
       fit: ['Negocios que usan varias herramientas y pierden tiempo pasando información de una a otra.', 'Businesses that use several tools and lose time moving information between them.'] }
   ];
 
+  // Product-type details reused by the "Ver detalles" cards in the build section.
+  var PRODUCTS = {
+ "web-landing": {
+  "t": [
+   "Landing pages",
+   "Landing pages"
+  ],
+  "sum": [
+   "Una sola página enfocada en un objetivo: que el visitante llame, escriba o compre. Ideal para lanzar rápido y medir qué tan bien convierte.",
+   "A single page focused on one goal: getting the visitor to call, message or buy. Great for launching fast and measuring conversion."
+  ],
+  "inc": [
+   [
+    "Carga en segundos",
+    "Loads in seconds"
+   ],
+   [
+    "Un solo llamado a la acción, claro",
+    "One clear call to action"
+   ],
+   [
+    "Optimizada para anuncios y campañas",
+    "Optimized for ads and campaigns"
+   ],
+   [
+    "Lista en 1-2 semanas",
+    "Ready in 1-2 weeks"
+   ]
+  ],
+  "fit": [
+   "negocios que necesitan validar una oferta o campaña rápido.",
+   "businesses that need to validate an offer or campaign fast."
+  ],
+  "chip": "Página web profesional"
+ },
+ "web-corp": {
+  "t": [
+   "Sitios corporativos",
+   "Corporate sites"
+  ],
+  "sum": [
+   "Varias páginas (inicio, servicios, nosotros, contacto) para negocios que necesitan presencia completa y encontrarse en Google.",
+   "Multiple pages (home, services, about, contact) for businesses that need a full presence and to be found on Google."
+  ],
+  "inc": [
+   [
+    "Estructura pensada para SEO",
+    "Structure built for SEO"
+   ],
+   [
+    "Fácil de actualizar tú mismo",
+    "Easy to update yourself"
+   ],
+   [
+    "Formulario de contacto integrado",
+    "Built-in contact form"
+   ],
+   [
+    "Crece con tu negocio",
+    "Grows with your business"
+   ]
+  ],
+  "fit": [
+   "negocios que quieren una presencia profesional permanente.",
+   "businesses that want a permanent professional presence."
+  ],
+  "chip": "Página web profesional"
+ },
+ "web-shop": {
+  "t": [
+   "E-commerce",
+   "E-commerce"
+  ],
+  "sum": [
+   "Catálogo, carrito y cobro en línea para negocios que venden producto directo al cliente, sin depender solo de redes sociales.",
+   "Catalog, cart and online checkout for businesses that sell direct to customers, not just through social media."
+  ],
+  "inc": [
+   [
+    "Inventario y catálogo administrable",
+    "Manageable inventory and catalog"
+   ],
+   [
+    "Pagos en línea integrados",
+    "Built-in online payments"
+   ],
+   [
+    "Notificaciones de pedidos automáticas",
+    "Automatic order notifications"
+   ],
+   [
+    "Funciona igual en celular",
+    "Works the same on mobile"
+   ]
+  ],
+  "fit": [
+   "negocios que ya venden por WhatsApp o redes y quieren un canal propio.",
+   "businesses that already sell over WhatsApp or social and want their own channel."
+  ],
+  "chip": "Página web profesional"
+ },
+ "web-apps": {
+  "t": [
+   "Web apps / Plataformas",
+   "Web apps / Platforms"
+  ],
+  "sum": [
+   "Sistemas personalizados para automatizar procesos, centralizar información y hacer tu operación más eficiente, accesibles desde cualquier navegador.",
+   "Custom systems to automate processes, centralize information and make your operation more efficient, accessible from any browser."
+  ],
+  "inc": [
+   [
+    "Accesible desde el navegador, sin instalar nada",
+    "Accessible from the browser, nothing to install"
+   ],
+   [
+    "Usuarios, roles y permisos según tu equipo",
+    "Users, roles and permissions for your team"
+   ],
+   [
+    "Paneles con tus datos siempre actualizados",
+    "Dashboards with your data always up to date"
+   ],
+   [
+    "Se conecta con las herramientas que ya usas",
+    "Connects with the tools you already use"
+   ],
+   [
+    "En la nube: disponible 24/7, con respaldos automáticos",
+    "In the cloud: available 24/7, with automatic backups"
+   ]
+  ],
+  "fit": [
+   "negocios que necesitan una plataforma propia para operar, no solo una página web.",
+   "businesses that need a platform of their own to operate, not just a website."
+  ],
+  "chip": "Software o sistema a medida"
+ },
+ "sw-crm": {
+  "t": [
+   "CRM a medida",
+   "Custom CRM"
+  ],
+  "sum": [
+   "Un sistema para centralizar tus clientes, oportunidades y seguimiento, construido alrededor de cómo vendes tú, no de cómo lo imaginó un software genérico.",
+   "A system to centralize your customers, leads and follow-up, built around how you sell — not around what a generic tool imagined."
+  ],
+  "inc": [
+   [
+    "Ficha de cada cliente con todo su historial",
+    "A record for each customer with their full history"
+   ],
+   [
+    "Embudo de ventas con tus propias etapas",
+    "Sales pipeline with your own stages"
+   ],
+   [
+    "Recordatorios y seguimiento automáticos",
+    "Automatic reminders and follow-up"
+   ],
+   [
+    "Reportes de ventas por persona y periodo",
+    "Sales reports by person and period"
+   ],
+   [
+    "En la nube: acceso desde cualquier dispositivo y respaldos automáticos",
+    "In the cloud: access from any device and automatic backups"
+   ]
+  ],
+  "fit": [
+   "equipos de ventas o atención que hoy llevan sus clientes en hojas de cálculo y chats.",
+   "sales or support teams that track customers in spreadsheets and chats today."
+  ],
+  "chip": "Software o sistema a medida"
+ },
+ "sw-erp": {
+  "t": [
+   "ERP y gestión",
+   "ERP and management"
+  ],
+  "sum": [
+   "Los módulos que tu negocio necesita para operar en un solo lugar: inventario, compras, ventas, facturación y reportes. Se construye por etapas, empezando por lo más urgente.",
+   "The modules your business needs to run from one place: inventory, purchasing, sales, invoicing and reporting. Built in stages, starting with what’s most urgent."
+  ],
+  "inc": [
+   [
+    "Inventario y compras siempre al día",
+    "Inventory and purchasing always up to date"
+   ],
+   [
+    "Ventas, cotizaciones y facturación",
+    "Sales, quotes and invoicing"
+   ],
+   [
+    "Cuentas por cobrar y por pagar",
+    "Accounts receivable and payable"
+   ],
+   [
+    "Roles y permisos por área",
+    "Roles and permissions by department"
+   ],
+   [
+    "En la nube: tu equipo trabaja desde donde esté, sin servidores propios",
+    "In the cloud: your team works from anywhere, no servers of your own"
+   ]
+  ],
+  "fit": [
+   "negocios que ya superaron las hojas de cálculo y no quieren un ERP enorme con módulos que nunca van a usar.",
+   "businesses that have outgrown spreadsheets and don’t want a huge ERP with modules they’ll never use."
+  ],
+  "chip": "Software o sistema a medida"
+ },
+ "sw-portal": {
+  "t": [
+   "Portales y paneles",
+   "Portals and dashboards"
+  ],
+  "sum": [
+   "Un espacio web privado para tus clientes, proveedores o tu equipo, con la información que cada uno necesita ver, siempre actualizada.",
+   "A private web space for your customers, suppliers or team, showing each one the information they need, always up to date."
+  ],
+  "inc": [
+   [
+    "Acceso con usuario y contraseña, por rol",
+    "Login with role-based access"
+   ],
+   [
+    "Estado de pedidos, casos o cuentas",
+    "Status of orders, cases or accounts"
+   ],
+   [
+    "Paneles con tus números clave",
+    "Dashboards with your key numbers"
+   ],
+   [
+    "Documentos y comprobantes descargables",
+    "Downloadable documents and receipts"
+   ],
+   [
+    "En la nube: disponible 24/7 desde cualquier navegador",
+    "In the cloud: available 24/7 from any browser"
+   ]
+  ],
+  "fit": [
+   "negocios que responden a diario la pregunta “¿cómo va lo mío?”.",
+   "businesses that answer “how’s my order doing?” every single day."
+  ],
+  "chip": "Software o sistema a medida"
+ },
+ "sw-integ": {
+  "t": [
+   "Integraciones y automatización",
+   "Integrations and automation"
+  ],
+  "sum": [
+   "Conectamos los sistemas y herramientas que ya usas y automatizamos lo repetitivo, con inteligencia artificial donde de verdad suma.",
+   "We connect the systems and tools you already use and automate the repetitive work, with AI where it genuinely helps."
+  ],
+  "inc": [
+   [
+    "Conexión entre tus aplicaciones y bases de datos",
+    "Connections between your apps and databases"
+   ],
+   [
+    "Flujos automáticos: alertas, reportes y correos",
+    "Automatic workflows: alerts, reports and emails"
+   ],
+   [
+    "Asistentes de IA conectados a tus datos",
+    "AI assistants connected to your data"
+   ],
+   [
+    "Migración de tus datos desde hojas de cálculo",
+    "Migration of your data from spreadsheets"
+   ],
+   [
+    "En la nube: todo corre y se respalda sin que lo administres",
+    "In the cloud: everything runs and is backed up without you managing it"
+   ]
+  ],
+  "fit": [
+   "negocios con varias herramientas que no se hablan entre sí.",
+   "businesses with several tools that don’t talk to each other."
+  ],
+  "chip": "Chatbot o automatización con IA"
+ }
+};
+
   var dlg = document.getElementById('svc-drawer');
   if (!dlg || typeof dlg.showModal !== 'function') return;
   var body = document.getElementById('svc-body');
@@ -2599,8 +3006,8 @@ function goHome(e) {
     var l = lang();
     var h = '<div class="svc-head"><h3 id="svc-title">' + esc(s.t[l]) + '</h3><p>' + esc(s.sum[l]) + '</p></div>';
     h += '<div class="svc-sec"><h4>' + UI.inc[l] + '</h4><ul class="svc-inc">' + s.inc.map(function(i) { return '<li>' + esc(i[l]) + '</li>'; }).join('') + '</ul></div>';
-    h += '<div class="svc-sec"><h4>' + UI.opt[l] + '</h4><div class="svc-opts">' + s.opt.map(function(o) { return '<div class="svc-opt"><strong>' + esc(o[l]) + '</strong><span>' + esc(o[2 + l]) + '</span></div>'; }).join('') + '</div></div>';
-    h += '<div class="svc-sec"><h4>' + UI.scope[l] + '</h4><div class="svc-time"><span>' + UI.time[l] + '</span><strong>' + esc(s.time[l]) + '</strong></div><ol class="svc-steps">' + s.steps.map(function(i) { return '<li>' + esc(i[l]) + '</li>'; }).join('') + '</ol></div>';
+    if (s.opt) h += '<div class="svc-sec"><h4>' + UI.opt[l] + '</h4><div class="svc-opts">' + s.opt.map(function(o) { return '<div class="svc-opt"><strong>' + esc(o[l]) + '</strong><span>' + esc(o[2 + l]) + '</span></div>'; }).join('') + '</div></div>';
+    if (s.steps) h += '<div class="svc-sec"><h4>' + UI.scope[l] + '</h4><div class="svc-time"><span>' + UI.time[l] + '</span><strong>' + esc(s.time[l]) + '</strong></div><ol class="svc-steps">' + s.steps.map(function(i) { return '<li>' + esc(i[l]) + '</li>'; }).join('') + '</ol></div>';
     h += '<div class="svc-sec"><h4>' + UI.fit[l] + '</h4><p class="svc-fit">' + esc(s.fit[l]) + '</p></div>';
     body.innerHTML = h;
     if (s.price) {
@@ -2614,8 +3021,8 @@ function goHome(e) {
     scroller.scrollTop = 0;
   }
 
-  function openDrawer(i, trigger) {
-    current = SERVICES[i]; opener = trigger; closing = false;
+  function openDrawer(data, trigger) {
+    current = data; opener = trigger; closing = false;
     render(current);
     dlg.showModal();
     document.documentElement.classList.add('svc-lock');
@@ -2637,7 +3044,13 @@ function goHome(e) {
   document.querySelectorAll('.service-row .service-cta').forEach(function(a, i) {
     if (!SERVICES[i]) return;
     a.setAttribute('aria-haspopup', 'dialog');
-    a.addEventListener('click', function(e) { e.preventDefault(); openDrawer(i, a); });
+    a.addEventListener('click', function(e) { e.preventDefault(); openDrawer(SERVICES[i], a); });
+  });
+  document.querySelectorAll('.dt-card__more').forEach(function(btn) {
+    var data = PRODUCTS[btn.getAttribute('data-product')];
+    if (!data) return;
+    btn.setAttribute('aria-haspopup', 'dialog');
+    btn.addEventListener('click', function() { openDrawer(data, btn); });
   });
   document.getElementById('svc-close').addEventListener('click', function() { closeDrawer(); });
   dlg.addEventListener('cancel', function(e) { e.preventDefault(); closeDrawer(); });
