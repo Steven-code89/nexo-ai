@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>PizoteCR — Demo de punto de venta e inventario | Nexo AI</title>
+<meta name="description" content="Prueba un demo interactivo de PizoteCR: punto de venta, inventario, ventas, cierre de caja, reportes y sucursales para pulperías, minisupers y distribuidoras en Costa Rica.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://nnexoai.netlify.app/demos/pizote-cr.html">
+<meta property="og:title" content="PizoteCR — Demo de punto de venta e inventario">
+<meta property="og:description" content="Navega un demo interactivo con datos ficticios: caja, inventario, ventas, cierre de caja y reportes.">
+<meta property="og:type" content="website">
+<link rel="preload" href="/fonts/plus-jakarta-sans-v12-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/space-grotesk-v22-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  @font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/plus-jakarta-sans-v12-latin-regular.woff2') format('woff2'); }
+  @font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/plus-jakarta-sans-v12-latin-700.woff2') format('woff2'); }
+  @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/space-grotesk-v22-latin-regular.woff2') format('woff2'); }
+  @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/space-grotesk-v22-latin-700.woff2') format('woff2'); }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #0b1120; --muted: #4a5568; --paper: #f4f6fb; --card-bg: #ffffff;
+    --accent: #2563eb; --accent-light: #3b82f6; --accent-dark: #1d4ed8;
+    --energy: #f2542d; --energy-dark: #d43e1a; --energy-light: #ff7a54;
+    --border: rgba(11,17,32,0.1);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.65; }
+  h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--energy); outline-offset: 3px; border-radius: 4px; }
+
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 5vw; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(244,246,251,0.92); backdrop-filter: blur(12px); z-index: 100; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--ink); font-weight: 700; font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem; }
+  .back-link:hover { color: var(--energy); }
+  .nav-brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--muted); text-decoration: none; }
+
+  .hero { position: relative; overflow: hidden; padding: 5.5rem 5vw 4.5rem; background: var(--ink); color: #fff; }
+  .hero-glow { position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(circle at 85% 30%, rgba(37,99,235,0.32), transparent 55%); }
+  .hero-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #93c5fd; margin-bottom: 1.25rem; }
+  .hero-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-light); }
+  .hero h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 700; line-height: 1.06; letter-spacing: -0.03em; margin-bottom: 1.25rem; max-width: 760px; }
+  .hero-sub { font-size: 1.05rem; color: rgba(244,246,251,0.8); max-width: 600px; margin-bottom: 1.75rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag { font-size: 0.78rem; font-weight: 700; color: rgba(244,246,251,0.85); border: 1px solid rgba(244,246,251,0.25); border-radius: 8px; padding: 0.4rem 0.8rem; }
+  .hero-icon { width: clamp(120px, 16vw, 200px); height: auto; color: rgba(244,246,251,0.85); }
+
+  .block { max-width: 1100px; margin: 0 auto; padding: 4.5rem 5vw; display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; align-items: start; border-bottom: 1px solid var(--border); }
+  .block h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
+  .prose { max-width: 640px; }
+  .prose p { color: var(--muted); font-size: 1.02rem; margin-bottom: 1.15rem; }
+  .prose p:last-child { margin-bottom: 0; }
+  .clear-note { margin-top: 1.75rem; background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 1.4rem 1.6rem; }
+  .clear-note strong { display: block; font-family: 'Space Grotesk', sans-serif; margin-bottom: 0.4rem; }
+  .clear-note p { font-size: 0.95rem; margin: 0; }
+
+  .block--dark { max-width: none; background: var(--ink); color: #fff; border-bottom: none; display: block; padding: 0; }
+  .block-inner { max-width: 1100px; margin: 0 auto; padding: 4.5rem 5vw; display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; align-items: start; }
+  .block--dark h2 { color: #fff; }
+  .roles { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .role { border-top: 1px solid rgba(244,246,251,0.2); padding-top: 1.25rem; }
+  .role strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; color: var(--energy-light); margin-bottom: 0.6rem; }
+  .role p { font-size: 0.95rem; color: rgba(244,246,251,0.78); }
+
+  .block--wide { grid-template-columns: 1fr; gap: 1.25rem; }
+  .lead { color: var(--muted); max-width: 620px; }
+  .build-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 3rem; margin-top: 1rem; }
+  .build-item { padding: 1.5rem 0; border-top: 1px solid var(--border); }
+  .build-item strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; margin-bottom: 0.4rem; }
+  .build-item p { font-size: 0.95rem; color: var(--muted); }
+  .others { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .others a { text-decoration: none; font-size: 0.9rem; font-weight: 700; border: 1px solid var(--border); background: var(--card-bg); border-radius: 100px; padding: 0.6rem 1.1rem; transition: border-color 0.2s, color 0.2s; }
+  .others a:hover { border-color: var(--energy); color: var(--energy); }
+
+  .cta { background: var(--ink); color: #fff; text-align: center; padding: 5rem 5vw; }
+  .cta h2 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); letter-spacing: -0.03em; margin-bottom: 0.9rem; }
+  .cta p { color: rgba(244,246,251,0.7); max-width: 520px; margin: 0 auto 2rem; }
+  .cta-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+  .btn { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.92rem; font-weight: 700; border-radius: 100px; padding: 0.85rem 1.6rem; cursor: pointer; text-decoration: none; border: 1.5px solid rgba(244,246,251,0.3); background: transparent; color: #fff; transition: background 0.2s, border-color 0.2s; }
+  .btn:hover { border-color: #fff; }
+  .btn--primary { background: var(--energy); border-color: var(--energy); }
+  .btn--primary:hover { background: var(--energy-dark); border-color: var(--energy-dark); }
+
+  footer { padding: 2rem 5vw; background: var(--ink); border-top: 1px solid rgba(244,246,251,0.12); display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; font-size: 0.82rem; color: rgba(244,246,251,0.55); }
+  footer a { text-decoration: none; font-weight: 700; font-family: 'Space Grotesk', sans-serif; color: #fff; }
+
+  @media (max-width: 860px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-icon { display: none; }
+    .block, .block-inner { grid-template-columns: 1fr; gap: 1.5rem; padding: 3rem 6vw; }
+    .roles, .build-grid { grid-template-columns: 1fr; }
+    .hero { padding: 4rem 6vw 3.25rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 0 0 1.75rem; }
+  .hero-inner--one { grid-template-columns: 1fr; }
+  .shot { max-width: 1100px; margin: -2.5rem auto 0; padding: 0 5vw; position: relative; z-index: 2; }
+  .frame { display: block; border-radius: 14px; overflow: hidden; background: #0d1626; border: 1px solid rgba(244,246,251,0.16); box-shadow: 0 30px 70px rgba(11,17,32,0.35); }
+  .frame .bar { display: flex; gap: 6px; padding: 10px 12px; background: #0d1626; }
+  .frame .bar i { width: 9px; height: 9px; border-radius: 50%; background: rgba(244,246,251,0.25); }
+  .frame img { display: block; width: 100%; height: auto; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .two h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; margin-bottom: 0.5rem; }
+  .two p { color: var(--muted); font-size: 0.98rem; }
+  .checks { list-style: none; display: grid; gap: 0.75rem; }
+  .checks li { position: relative; padding-left: 1.7rem; color: var(--muted); font-size: 0.98rem; }
+  .checks li strong { color: var(--ink); }
+  .checks li::before { content: '\2713'; position: absolute; left: 0; color: var(--energy); font-weight: 700; }
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 1rem; }
+  .gallery a { display: block; text-decoration: none; }
+  .gallery .frame { box-shadow: 0 14px 32px rgba(11,17,32,0.2); transition: transform 0.2s ease; }
+  .gallery a:hover .frame { transform: translateY(-3px); }
+  .gallery span { display: block; margin-top: 0.6rem; font-size: 0.85rem; font-weight: 700; }
+  .note { color: var(--muted); font-size: 0.9rem; margin-top: 1.25rem; }
+  @media (max-width: 860px) { .two, .gallery { grid-template-columns: 1fr; } .shot { margin-top: -1.5rem; } }
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="back-link" href="/#proyectos">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg>
+    Portafolio
+  </a>
+  <a class="nav-brand" href="/">Nexo AI</a>
+</nav>
+
+<header class="hero" style="padding-bottom:5.5rem">
+  <div class="hero-glow"></div>
+  <div class="hero-inner hero-inner--one">
+    <div>
+      <span class="hero-eyebrow">Sistema de demostración · Punto de venta e inventario</span>
+      <h1>PizoteCR</h1>
+      <p class="hero-sub">Ventas, inventario, cierre de caja y reportes de una pulpería, minisúper o distribuidora en un solo panel, con facturación electrónica para Costa Rica.</p>
+      <div class="hero-actions">
+        <a class="btn btn--primary" href="/demos/pizote/" target="_blank" rel="noopener">Navegar el demo →</a>
+        <button type="button" class="btn" id="book">Agendar llamada</button>
+      </div>
+      <div class="tags"><span class="tag">Pulperías</span><span class="tag">Minisupers</span><span class="tag">Distribuidoras</span><span class="tag">Una o varias sucursales</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="shot">
+  <a class="frame" href="/demos/pizote/" target="_blank" rel="noopener"><span class="bar" style="display:flex"><i></i><i></i><i></i></span><img src="/img/demos/pizote-dashboard.webp" alt="Dashboard del demo de PizoteCR con ventas del día, meta y alertas de inventario" width="1200" height="820" loading="lazy"></a>
+</div>
+
+<main>
+<section class="block">
+  <h2>La operación antes, y con el sistema</h2>
+  <div class="prose">
+    <div class="two">
+      <div><h3>Antes</h3><p>Ventas anotadas en un cuaderno, inventario que no coincide con lo que hay en el estante, facturas hechas a mano y un cierre de caja que se cuadra al final del día, con suerte.</p></div>
+      <div><h3>Con el sistema</h3><p>Cada venta descuenta el inventario al instante, los productos con poco stock avisan solos, el cierre de caja se calcula y la factura electrónica se genera junto con la venta.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <h2>Lo que cubre</h2>
+  <div class="prose">
+    <ul class="checks">
+      <li><strong>Punto de venta</strong> con efectivo, SINPE y tarjeta, vuelto y tiquete para el cliente.</li>
+      <li><strong>Inventario</strong> con stock mínimo, categorías, IVA por producto y código CABYS.</li>
+      <li><strong>Ventas</strong> con historial completo y anulación que puede restaurar el stock.</li>
+      <li><strong>Cierre de caja</strong> con conteo de efectivo y diferencia contra lo esperado.</li>
+      <li><strong>Reportes</strong> por período, por método de pago y por productos más vendidos.</li>
+      <li><strong>Sucursales</strong> con transferencia de stock entre ellas.</li>
+      <li><strong>Rutas de reparto</strong> con seguimiento GPS, para operaciones con entregas.</li>
+      <li><strong>Facturación electrónica</strong> integrada para Costa Rica.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="block block--wide">
+  <h2>Qué vas a encontrar en el demo</h2>
+  <p class="lead">Es una versión funcional con datos inventados. Puedes vender, anular, crear productos y cerrar caja sin que nada se guarde.</p>
+  <div class="gallery">
+    <div><a class="frame" href="/demos/pizote/" target="_blank" rel="noopener"><span class="bar" style="display:flex"><i></i><i></i><i></i></span><img src="/img/demos/pizote-pos.webp" alt="Punto de venta del demo con una orden armada" width="1200" height="820" loading="lazy"></a><span>Punto de venta: arma una orden y cóbrala</span></div>
+    <div><a class="frame" href="/demos/pizote/" target="_blank" rel="noopener"><span class="bar" style="display:flex"><i></i><i></i><i></i></span><img src="/img/demos/pizote-inventario.webp" alt="Inventario del demo con productos y alertas de stock" width="1200" height="820" loading="lazy"></a><span>Inventario: busca, filtra y crea productos</span></div>
+    <div><a class="frame" href="/demos/pizote/" target="_blank" rel="noopener"><span class="bar" style="display:flex"><i></i><i></i><i></i></span><img src="/img/demos/pizote-reportes.webp" alt="Reportes del demo con ventas por método de pago" width="1200" height="820" loading="lazy"></a><span>Reportes: ventas por período y método</span></div>
+  </div>
+  <ul class="checks" style="margin-top:1.75rem;max-width:720px">
+    <li><strong>Dashboard:</strong> ventas del día, meta, gráfico por período y alertas de inventario.</li>
+    <li><strong>Ventas:</strong> filtra, abre el detalle y anula una venta con o sin restaurar el stock.</li>
+    <li><strong>Cierre de caja:</strong> cuenta el efectivo y mira la diferencia al instante.</li>
+    <li><strong>Sucursales:</strong> crea una nueva y transfiere stock entre ellas.</li>
+  </ul>
+  <p class="note">Proveedores, Usuarios, Rutas y Configuración existen en el sistema completo, pero no están incluidos en el demo. Los datos se reinician con el botón «Reiniciar demo».</p>
+</section>
+
+<section class="block block--dark">
+  <div class="block-inner">
+    <h2>Para ser claros</h2>
+    <div class="roles" style="grid-template-columns:1fr">
+      <div class="role"><p>El demo es una simulación con datos ficticios: no se conecta con Hacienda ni con ninguna base de datos, y nada de lo que hagas queda guardado. Sirve para conocer cómo se ve y cómo se navega el sistema. Si quieres ver una parte que no está aquí, la revisamos juntos en una llamada.</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<section class="cta">
+  <h2>¿Quieres un sistema así para tu negocio?</h2>
+  <p>Cuéntanos cómo vendes hoy y te decimos qué te conviene: el POS tal cual o algo hecho a tu medida.</p>
+  <div class="cta-actions">
+    <a href="/demos/pizote/" target="_blank" rel="noopener" class="btn btn--primary">Navegar el demo →</a>
+    <button type="button" class="btn" id="book2">Agendar llamada</button>
+    <a href="/#contact" class="btn">Escribirme</a>
+  </div>
+</section>
+
+<footer>
+  <a href="/">Nexo AI</a>
+  <span>Software y sitios web a medida para negocios de Costa Rica.</span>
+</footer>
+
+<script>
+  function openCal() { if (window.Cal && Cal.ns && Cal.ns['30min']) Cal.ns['30min']('modal', { calLink: 'steven-jimenez-nexo/30min', config: { layout: 'month_view' } }); }
+  document.getElementById('book').addEventListener('click', openCal);
+  document.getElementById('book2').addEventListener('click', openCal);
+</script>
+<script>
+  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+  Cal("init", "30min", { origin: "https://cal.com" });
+  Cal.ns["30min"]("ui", { "styles": { "branding": { "brandColor": "#f2542d" } }, "hideEventTypeDetails": false, "layout": "month_view" });
+</script>
+</body>
+</html>

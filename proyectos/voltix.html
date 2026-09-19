@@ -36,6 +36,10 @@
   .hero { position: relative; overflow: hidden; padding: 5rem 5vw 4rem; background: var(--ink); color: #fff; }
   .hero-glow { position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(circle at 80% 20%, rgba(37,99,235,0.35), transparent 55%); }
   .hero-inner { position: relative; z-index: 1; max-width: 720px; }
+  /* Decorative loop, blended into the hero: dark UI pixels melt into the navy and the edges fade out. */
+  .hero-video { position: absolute; z-index: 0; right: 7%; top: 58%; height: 112%; aspect-ratio: 4 / 5; transform: translateY(-50%); pointer-events: none; mix-blend-mode: screen; opacity: 0.95;
+    -webkit-mask-image: radial-gradient(ellipse 60% 56% at 50% 50%, #000 38%, transparent 100%); mask-image: radial-gradient(ellipse 60% 56% at 50% 50%, #000 38%, transparent 100%); }
+  @media (max-width: 900px) { .hero-video { display: none; } }
   .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #93c5fd; margin-bottom: 1.25rem; }
   .hero-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-light); }
   .hero h1 { font-size: clamp(2.4rem, 5.5vw, 3.75rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 1.25rem; }
@@ -147,6 +151,10 @@
 
 <header class="hero">
   <div class="hero-glow"></div>
+  <video class="hero-video" id="hero-video" muted loop playsinline preload="none" poster="/img/proyectos/voltix-hero-poster.webp" aria-hidden="true" tabindex="-1" disablepictureinpicture disableremoteplayback>
+    <source src="/img/proyectos/voltix-hero.webm" type="video/webm">
+    <source src="/img/proyectos/voltix-hero.mp4" type="video/mp4">
+  </video>
   <div class="hero-inner">
     <span class="hero-eyebrow">Gestión de clientes · Rutinas y nutrición</span>
     <h1>Cada cliente, su rutina siempre a la mano.</h1>
@@ -342,5 +350,14 @@
   renderAlbum();
 </script>
 
+<script>
+  (function () {
+    var v = document.getElementById("hero-video");
+    if (!v) return;
+    var ok = function () { return !window.matchMedia("(prefers-reduced-motion: reduce)").matches && window.matchMedia("(min-width: 901px)").matches; };
+    if (!ok() || !("IntersectionObserver" in window)) return;
+    new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } else v.pause(); }); }, { threshold: 0.1 }).observe(v);
+  })();
+</script>
 </body>
 </html>

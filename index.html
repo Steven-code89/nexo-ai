@@ -782,11 +782,16 @@
   .dt-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
   .dt-cards[hidden] { display: none; }
   .dt-card {
-    position: relative; display: grid; grid-template-columns: 0.95fr 1fr; overflow: hidden; min-height: 270px;
+    position: relative; display: grid; grid-template-columns: 1.2fr 1fr; overflow: hidden; min-height: 270px;
     border: 1px solid rgba(244,246,251,0.12); border-radius: 20px;
     background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(244,246,251,0.02) 60%); transition: border-color 0.2s ease;
   }
   .dt-card__media { position: relative; display: flex; align-items: flex-end; justify-content: center; overflow: hidden; padding: 1.25rem 1.1rem 0; background: radial-gradient(circle at 50% 100%, rgba(59,130,246,0.22), transparent 70%); }
+  .dt-card__media--img { padding: 0; align-items: center; background: #0a0f1d; isolation: isolate; }
+  .dt-card__media--img::before { content: ''; position: absolute; inset: -24px; z-index: -1; background: var(--img) center / cover; filter: blur(26px) brightness(0.4) saturate(1.2); }
+  .dt-card__media--flat { background: #090d1a; }
+  .dt-card__media--flat::before { display: none; }
+  .dt-card__img { display: block; width: 100%; height: auto; max-height: 100%; object-fit: contain; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent); mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent); }
   .mock { width: 100%; }
   .mock-browser { max-width: 330px; border-radius: 10px 10px 0 0; overflow: hidden; background: #0d1626; border: 1px solid rgba(244,246,251,0.16); border-bottom: none; box-shadow: 0 18px 40px rgba(0,0,0,0.4); }
   .mock-bar { display: flex; gap: 5px; padding: 8px 10px; background: #0d1626; }
@@ -837,6 +842,8 @@
     .dt-mode-btn svg { width: 22px; height: 22px; }
     .dt-card { grid-template-columns: 1fr; }
     .dt-card__media { height: 230px; }
+    .dt-card__media--img { height: auto; aspect-ratio: 16 / 9; }
+    .dt-card__img { -webkit-mask-image: none; mask-image: none; }
     .mock-phone { align-self: flex-start; margin-bottom: 0; width: 140px; }
     .dt-card__body { padding: 1.5rem 1.4rem 1.75rem; }
   }
@@ -927,6 +934,13 @@
   .svc-steps li { counter-increment: st; position: relative; padding-left: 2.2rem; font-size: 0.95rem; line-height: 1.5; }
   .svc-steps li::before { content: counter(st); position: absolute; left: 0; top: 0.05rem; width: 1.45rem; height: 1.45rem; border-radius: 50%; background: var(--ink); color: var(--paper); font-size: 0.75rem; font-weight: 700; display: grid; place-items: center; }
   .svc-fit { font-size: 0.95rem; color: var(--muted); line-height: 1.6; }
+  .svc-links { display: grid; gap: 0.6rem; }
+  .svc-link { display: flex; align-items: center; justify-content: space-between; gap: 1rem; text-decoration: none; color: var(--ink); background: var(--card-bg); border: 1.5px solid var(--border); border-radius: 14px; padding: 0.95rem 1.15rem; transition: border-color 0.2s ease; }
+  .svc-link strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 1rem; }
+  .svc-link small { display: block; font-size: 0.85rem; color: var(--muted); margin-top: 0.15rem; }
+  .svc-link svg { width: 18px; height: 18px; color: var(--energy); flex-shrink: 0; transition: transform 0.2s ease; }
+  .svc-link:hover { border-color: var(--energy); } .svc-link:hover svg { transform: translateX(4px); }
+  .svc-link:focus-visible { outline: 2px solid var(--energy); outline-offset: 2px; }
   .svc-drawer__bar {
     display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
     padding: 1rem 2.5rem; background: var(--card-bg); border-top: 1px solid var(--border);
@@ -1470,14 +1484,14 @@
       </button>
       <button type="button" class="dt-mode-btn" role="tab" aria-selected="false" data-mode="software">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg>
-        <span><b data-es="Software a medida" data-en="Custom software">Software a medida</b><small data-es="CRM, ERP, portales y más" data-en="CRM, ERP, portals and more">CRM, ERP, portales y más</small></span>
+        <span><b data-es="Software a medida" data-en="Custom software">Software a medida</b><small data-es="CRM, ERP, apps móviles y más" data-en="CRM, ERP, mobile apps and more">CRM, ERP, apps móviles y más</small></span>
       </button>
     </div>
 
     <div class="dt-cards" data-group="web">
       <article class="dt-card">
-        <div class="dt-card__media">
-          <div class="mock mock-browser"><div class="mock-bar"><i></i><i></i><i></i></div><img src="img/proyectos/nexo-hero.webp" alt="Landing page de Nexo AI" width="1000" height="610" loading="lazy"></div>
+        <div class="dt-card__media dt-card__media--img" style="--img: url('img/productos/landing.webp')">
+          <img class="dt-card__img" src="img/productos/landing.webp" alt="Landing page de ejemplo vista en laptop y teléfono" width="1200" height="675" loading="lazy">
         </div>
         <div class="dt-card__body">
           <span class="dt-card__cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span data-es="Páginas web" data-en="Websites">Páginas web</span></span>
@@ -1515,9 +1529,11 @@
         </div>
       </article>
       <article class="dt-card">
-        <div class="dt-card__media"><div class="mock mock-phone"><img src="img/proyectos/greenforest-album/mapa.webp" alt="Plataforma web con mapa y datos en tiempo real" width="520" height="1044" loading="lazy"></div></div>
+        <div class="dt-card__media dt-card__media--img dt-card__media--flat">
+          <img class="dt-card__img" src="img/productos/webapps.webp" alt="Plataforma de punto de venta e inventario en laptop y teléfono" width="1200" height="675" loading="lazy">
+        </div>
         <div class="dt-card__body">
-          <span class="dt-card__cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg><span data-es="Software a medida" data-en="Custom software">Software a medida</span></span>
+          <span class="dt-card__cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg><span data-es="Aplicaciones web" data-en="Web apps">Aplicaciones web</span></span>
           <h3 data-es="Web apps / Plataformas" data-en="Web apps / Platforms">Web apps / Plataformas</h3>
           <p data-es="Sistemas personalizados para automatizar procesos, centralizar información y hacer tu operación más eficiente." data-en="Custom systems to automate processes, centralize information and make your operation more efficient.">Sistemas personalizados para automatizar procesos, centralizar información y hacer tu operación más eficiente.</p>
           <button type="button" class="dt-card__more" data-product="web-apps"><span data-es="Ver detalles" data-en="View details">Ver detalles</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
@@ -1545,12 +1561,14 @@
         </div>
       </article>
       <article class="dt-card">
-        <div class="dt-card__media"><div class="mock mock-phone"><img src="img/proyectos/voltix-album/dark-cliente-inicio.webp" alt="Portal de cliente con su panel de inicio" width="520" height="1044" loading="lazy"></div></div>
+        <div class="dt-card__media dt-card__media--img dt-card__media--flat">
+          <img class="dt-card__img" src="img/productos/moviles.webp" alt="Aplicaciones móviles a medida en teléfonos: control de parcelas, nutrición y rutinas" width="1200" height="675" loading="lazy">
+        </div>
         <div class="dt-card__body">
-          <span class="dt-card__cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 9v11"/></svg><span data-es="Software a medida" data-en="Custom software">Software a medida</span></span>
-          <h3 data-es="Portales y paneles" data-en="Portals and dashboards">Portales y paneles</h3>
-          <p data-es="Espacios privados para clientes, proveedores o tu equipo, con la información siempre al día." data-en="Private spaces for customers, suppliers or your team, with information always up to date.">Espacios privados para clientes, proveedores o tu equipo, con la información siempre al día.</p>
-          <button type="button" class="dt-card__more" data-product="sw-portal"><span data-es="Ver detalles" data-en="View details">Ver detalles</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <span class="dt-card__cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg><span data-es="Software a medida" data-en="Custom software">Software a medida</span></span>
+          <h3 data-es="Aplicaciones móviles" data-en="Mobile apps">Aplicaciones móviles</h3>
+          <p data-es="Apps para iOS y Android hechas a la medida de tu operación, para tus clientes o para tu equipo en campo." data-en="iOS and Android apps built around your operation, for your customers or your field team.">Apps para iOS y Android hechas a la medida de tu operación, para tus clientes o para tu equipo en campo.</p>
+          <button type="button" class="dt-card__more" data-product="sw-mobile"><span data-es="Ver detalles" data-en="View details">Ver detalles</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </div>
       </article>
       <article class="dt-card">
@@ -2831,6 +2849,7 @@ function goHome(e) {
    "negocios que necesitan una plataforma propia para operar, no solo una página web.",
    "businesses that need a platform of their own to operate, not just a website."
   ],
+  "demo": "/demos/pizote-cr.html",
   "chip": "Software o sistema a medida"
  },
  "sw-crm": {
@@ -2905,42 +2924,71 @@ function goHome(e) {
    "negocios que ya superaron las hojas de cálculo y no quieren un ERP enorme con módulos que nunca van a usar.",
    "businesses that have outgrown spreadsheets and don’t want a huge ERP with modules they’ll never use."
   ],
+  "demo": "/demos/pizote-cr.html",
   "chip": "Software o sistema a medida"
  },
- "sw-portal": {
+ "sw-mobile": {
   "t": [
-   "Portales y paneles",
-   "Portals and dashboards"
+   "Aplicaciones móviles",
+   "Mobile apps"
   ],
   "sum": [
-   "Un espacio web privado para tus clientes, proveedores o tu equipo, con la información que cada uno necesita ver, siempre actualizada.",
-   "A private web space for your customers, suppliers or team, showing each one the information they need, always up to date."
+   "Apps para iOS y Android hechas a la medida de tu operación: para tus clientes o para tu equipo en campo, con los datos siempre en la nube.",
+   "iOS and Android apps built around your operation: for your customers or your field team, with your data always in the cloud."
   ],
   "inc": [
    [
-    "Acceso con usuario y contraseña, por rol",
-    "Login with role-based access"
+    "Una sola app para iOS y Android",
+    "One app for iOS and Android"
    ],
    [
-    "Estado de pedidos, casos o cuentas",
-    "Status of orders, cases or accounts"
+    "Inicio de sesión y permisos por rol (cliente, equipo, administrador)",
+    "Login and role-based permissions (customer, team, admin)"
    ],
    [
-    "Paneles con tus números clave",
-    "Dashboards with your key numbers"
+    "Pensada para usarse en campo, desde el celular",
+    "Designed to be used in the field, from a phone"
    ],
    [
-    "Documentos y comprobantes descargables",
-    "Downloadable documents and receipts"
+    "Recordatorios automáticos por SMS o WhatsApp",
+    "Automatic reminders by SMS or WhatsApp"
    ],
    [
-    "En la nube: disponible 24/7 desde cualquier navegador",
-    "In the cloud: available 24/7 from any browser"
+    "Reportes en PDF, Excel o CSV desde la app",
+    "PDF, Excel or CSV reports from the app"
+   ],
+   [
+    "En la nube: tus datos respaldados y disponibles en cualquier dispositivo",
+    "In the cloud: your data backed up and available on any device"
    ]
   ],
   "fit": [
-   "negocios que responden a diario la pregunta “¿cómo va lo mío?”.",
-   "businesses that answer “how’s my order doing?” every single day."
+   "negocios con un equipo en campo, o con clientes que necesitan su información en el celular.",
+   "businesses with a field team, or with customers who need their information on their phone."
+  ],
+  "links": [
+   {
+    "t": [
+     "Ver proyecto Voltix",
+     "See the Voltix project"
+    ],
+    "d": [
+     "App para entrenadores personales y sus clientes",
+     "App for personal trainers and their clients"
+    ],
+    "href": "/proyectos/voltix.html"
+   },
+   {
+    "t": [
+     "Ver proyecto GreenForest",
+     "See the GreenForest project"
+    ],
+    "d": [
+     "Inventario forestal levantado en campo",
+     "Forest inventory captured in the field"
+    ],
+    "href": "/proyectos/greenforest.html"
+   }
   ],
   "chip": "Software o sistema a medida"
  },
@@ -2998,6 +3046,8 @@ function goHome(e) {
     time: ['Tiempo estimado', 'Estimated time'], fit: ['Ideal para', 'Great for'],
     quote: ['Cotización personalizada', 'Custom quote'], quoteNote: ['Te respondo en menos de 24 horas', 'I reply within 24 hours'],
     write: ['Escribirme', 'Write to me'], book: ['Agendar llamada', 'Book a call'], quoteBook: ['Hablar de mi proyecto', 'Talk about my project'],
+    links: ['Míralas en funcionamiento', 'See them in action'],
+    demo: ['Pruébalo tú mismo', 'Try it yourself'], demoTxt: ['Un demo interactivo, con datos ficticios, del punto de venta e inventario PizoteCR que construimos.', 'An interactive demo, with fictitious data, of the PizoteCR point-of-sale and inventory system we built.'], demoBtn: ['Ver demo de PizoteCR →', 'See the PizoteCR demo →'],
     close: ['Cerrar', 'Close']
   };
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
@@ -3005,10 +3055,12 @@ function goHome(e) {
   function render(s) {
     var l = lang();
     var h = '<div class="svc-head"><h3 id="svc-title">' + esc(s.t[l]) + '</h3><p>' + esc(s.sum[l]) + '</p></div>';
+    if (s.links) h += '<div class="svc-sec"><h4>' + UI.links[l] + '</h4><div class="svc-links">' + s.links.map(function(k) { return '<a class="svc-link" href="' + k.href + '"><span><strong>' + esc(k.t[l]) + '</strong><small>' + esc(k.d[l]) + '</small></span>' + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>'; }).join('') + '</div></div>';
     h += '<div class="svc-sec"><h4>' + UI.inc[l] + '</h4><ul class="svc-inc">' + s.inc.map(function(i) { return '<li>' + esc(i[l]) + '</li>'; }).join('') + '</ul></div>';
     if (s.opt) h += '<div class="svc-sec"><h4>' + UI.opt[l] + '</h4><div class="svc-opts">' + s.opt.map(function(o) { return '<div class="svc-opt"><strong>' + esc(o[l]) + '</strong><span>' + esc(o[2 + l]) + '</span></div>'; }).join('') + '</div></div>';
     if (s.steps) h += '<div class="svc-sec"><h4>' + UI.scope[l] + '</h4><div class="svc-time"><span>' + UI.time[l] + '</span><strong>' + esc(s.time[l]) + '</strong></div><ol class="svc-steps">' + s.steps.map(function(i) { return '<li>' + esc(i[l]) + '</li>'; }).join('') + '</ol></div>';
     h += '<div class="svc-sec"><h4>' + UI.fit[l] + '</h4><p class="svc-fit">' + esc(s.fit[l]) + '</p></div>';
+    if (s.demo) h += '<div class="svc-sec"><h4>' + UI.demo[l] + '</h4><p class="svc-fit">' + UI.demoTxt[l] + '</p><p style="margin-top:0.9rem"><a class="svc-btn svc-btn--primary" style="display:inline-block;text-decoration:none" href="' + s.demo + '">' + UI.demoBtn[l] + '</a></p></div>';
     body.innerHTML = h;
     if (s.price) {
       barPrice.innerHTML = '<small>' + esc(s.price.pre[l]) + '</small><b>' + esc(s.price.amt) + '</b>' + (s.price.note ? '<small>' + esc(s.price.note[l]) + '</small>' : '');
