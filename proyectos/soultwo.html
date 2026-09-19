@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>Soultwo | Mad Flava — Sitio web interactivo con música, video y entradas</title>
+<meta name="description" content="Caso de estudio: sitio web interactivo para Soultwo (Mad Flava), rapero de San José. Entrada con música, fondos de video, humo en 3D, discografía, fotos y venta de entradas para su festival.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://nnexoai.netlify.app/proyectos/soultwo.html">
+<meta property="og:title" content="Soultwo | Mad Flava — Caso de estudio">
+<meta property="og:description" content="Un sitio web que se escucha: música, video, humo en 3D y entradas para un festival.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://nnexoai.netlify.app/img/proyectos/soultwo-cover.webp">
+
+<link rel="preload" href="/fonts/plus-jakarta-sans-v12-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/space-grotesk-v22-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  @font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/plus-jakarta-sans-v12-latin-regular.woff2') format('woff2'); }
+  @font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/plus-jakarta-sans-v12-latin-700.woff2') format('woff2'); }
+  @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/space-grotesk-v22-latin-regular.woff2') format('woff2'); }
+  @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/space-grotesk-v22-latin-700.woff2') format('woff2'); }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #0b1120; --muted: #4a5568; --paper: #f4f6fb; --card-bg: #ffffff;
+    --accent: #2563eb; --accent-light: #3b82f6; --accent-dark: #1d4ed8;
+    --border: rgba(11,17,32,0.1);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.65; }
+  h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+  a { color: inherit; }
+
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 5vw; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(244,246,251,0.92); backdrop-filter: blur(12px); z-index: 100; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--ink); font-weight: 700; font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem; }
+  .back-link:hover { color: var(--accent); }
+  .nav-brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--muted); text-decoration: none; }
+
+  .hero { position: relative; overflow: hidden; padding: 5rem 5vw 4rem; background: var(--ink); color: #fff; }
+  .hero-glow { position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(circle at 80% 20%, rgba(37,99,235,0.35), transparent 55%); }
+  .hero-inner { position: relative; z-index: 1; max-width: 720px; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #93c5fd; margin-bottom: 1.25rem; }
+  .hero-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-light); }
+  .hero h1 { font-size: clamp(2.4rem, 5.5vw, 3.75rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 1.25rem; }
+  .hero-sub { font-size: 1.05rem; color: rgba(244,246,251,0.8); max-width: 540px; margin-bottom: 1.75rem; }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; align-items: center; font-size: 0.82rem; color: rgba(244,246,251,0.65); }
+  .status-pill { display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; font-size: 0.72rem; }
+  .status-pill::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--accent-light); box-shadow: 0 0 0 3px rgba(59,130,246,0.3); }
+
+  .facts-strip { display: flex; flex-wrap: wrap; background: var(--card-bg); border-bottom: 1px solid var(--border); padding: 1.1rem 5vw; gap: 1rem 2rem; }
+  .facts-strip div { flex: 1; min-width: 180px; font-size: 0.85rem; font-weight: 600; color: var(--ink); }
+
+  .section { padding: 4rem 5vw; max-width: 1100px; margin: 0 auto; }
+  .section h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+  .section-intro { color: var(--muted); font-size: 0.95rem; margin-bottom: 2rem; max-width: 560px; }
+
+  .shot-frame { background: var(--ink); border-radius: 22px; padding: 7px; box-shadow: 0 12px 30px rgba(11,17,32,0.18); }
+  .shot-frame img { display: block; width: 100%; height: auto; border-radius: 16px; }
+  .shot-caption { margin-top: 0.65rem; font-size: 0.8rem; font-weight: 600; color: var(--ink); text-align: center; }
+
+  /* ── Album: full screen gallery with a lightbox ── */
+  .album-tabs { display: flex; gap: 0.6rem; margin-bottom: 1.5rem; }
+  .album-tab {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.88rem;
+    padding: 0.55rem 1.1rem; border-radius: 100px; border: 1px solid var(--border);
+    background: var(--card-bg); color: var(--muted); cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    display: inline-flex; align-items: center; gap: 0.4rem;
+  }
+  .album-tab:hover { color: var(--ink); }
+  .album-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .album-tab-count { font-size: 0.75rem; opacity: 0.75; }
+
+  .album-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); gap: 1.25rem 1rem; }
+  .album-item { background: none; border: none; padding: 0; cursor: pointer; text-align: center; font-family: inherit; }
+  .album-item .shot-frame { border-radius: 16px; padding: 5px; transition: transform 0.25s cubic-bezier(0.23,1,0.32,1), box-shadow 0.25s; }
+  .album-item .shot-frame img { border-radius: 11px; }
+  .album-item:hover .shot-frame, .album-item:focus-visible .shot-frame { transform: translateY(-4px); box-shadow: 0 14px 26px rgba(11,17,32,0.22); }
+  .album-item:focus-visible .shot-frame { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .album-item .shot-caption { margin-top: 0.5rem; font-size: 0.74rem; color: var(--muted); }
+
+  .lightbox {
+    position: fixed; inset: 0; z-index: 5000; background: rgba(11,17,32,0.92);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
+  }
+  .lightbox.open { opacity: 1; pointer-events: auto; }
+  .lightbox-frame { max-width: min(360px, 78vw); max-height: 74vh; }
+  .lightbox-frame img { display: block; width: 100%; height: auto; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+  .lightbox-caption { position: absolute; bottom: 2.25rem; left: 0; right: 0; text-align: center; color: #fff; font-size: 0.9rem; font-weight: 600; }
+  .lightbox-close, .lightbox-nav {
+    position: absolute; border: none; background: rgba(255,255,255,0.1); color: #fff;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .lightbox-close:hover, .lightbox-nav:hover { background: rgba(255,255,255,0.22); }
+  .lightbox-close { top: 1.5rem; right: 1.5rem; width: 40px; height: 40px; border-radius: 50%; font-size: 1.3rem; }
+  .lightbox-nav { top: 50%; transform: translateY(-50%); width: 46px; height: 46px; border-radius: 50%; font-size: 1.6rem; }
+  .lightbox-prev { left: 1.5rem; }
+  .lightbox-next { right: 1.5rem; }
+  @media (max-width: 640px) {
+    .lightbox-nav { width: 38px; height: 38px; font-size: 1.3rem; }
+    .lightbox-prev { left: 0.5rem; }
+    .lightbox-next { right: 0.5rem; }
+    .lightbox-close { top: 1rem; right: 1rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lightbox, .album-item .shot-frame { transition: none; }
+  }
+
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; }
+  .feature h3 { font-size: 1rem; font-weight: 700; padding-bottom: 0.6rem; border-bottom: 1px solid var(--border); margin-bottom: 0.75rem; }
+  .feature p { font-size: 0.9rem; color: var(--muted); }
+
+  .stack-row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .stack-tag { font-size: 0.8rem; font-weight: 600; color: var(--accent-dark); background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.18); padding: 0.4rem 0.9rem; border-radius: 100px; }
+
+  .roles-section { background: var(--ink); color: #fff; }
+  .roles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+  .role-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 1.5rem; }
+  .role-card strong { display: block; color: #93c5fd; font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem; margin-bottom: 0.5rem; }
+  .role-card span { font-size: 0.85rem; color: rgba(244,246,251,0.75); }
+  .roles-section .section-intro { color: rgba(244,246,251,0.65); }
+  .roles-section h2 { color: #fff; }
+
+  .cta-section { text-align: center; padding: 4rem 5vw 5rem; }
+  .cta-section h2 { margin-bottom: 1rem; }
+  .cta-section p { color: var(--muted); margin-bottom: 1.75rem; }
+  .btn-primary { background: var(--accent); color: #fff; border: none; padding: 0.85rem 2rem; border-radius: 100px; font-size: 0.95rem; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.15s, transform 0.15s; }
+  .btn-primary:hover { background: var(--accent-dark); transform: translateY(-2px); }
+
+  footer { padding: 2rem 5vw; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; font-size: 0.82rem; color: var(--muted); }
+  footer a { text-decoration: none; font-weight: 700; font-family: 'Space Grotesk', sans-serif; color: var(--ink); }
+
+  @media (max-width: 640px) {
+    .facts-strip { padding: 1rem 6vw; }
+    .section { padding: 3rem 6vw; }
+  }
+
+  .hero-cover { position: absolute; z-index: 0; right: 4%; top: 50%; width: 46%; max-width: 640px; transform: translateY(-50%); pointer-events: none; opacity: 1;
+    -webkit-mask-image: radial-gradient(ellipse 74% 68% at 50% 50%, #000 52%, transparent 100%); mask-image: radial-gradient(ellipse 74% 68% at 50% 50%, #000 52%, transparent 100%); }
+  .hero-cover img { display: block; width: 100%; height: auto; }
+  @media (max-width: 900px) { .hero-cover { display: none; } }
+  .album-grid--wide { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+  .album-grid--wide .shot-frame { border-radius: 14px; padding: 5px; }
+  .album-grid--wide .shot-frame img { border-radius: 9px; }
+  .album-grid--phones { grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); }
+  .lightbox--wide .lightbox-frame { max-width: min(1080px, 92vw); max-height: 78vh; }
+  .lightbox--wide .lightbox-frame img { max-height: 78vh; width: auto; margin: 0 auto; }
+  .lightbox-frame img { max-height: 74vh; width: auto; margin: 0 auto; }
+  .cta-note { font-size: 0.85rem; color: var(--muted); margin-top: 1rem; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="back-link" href="/#proyectos">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg>
+    Portafolio
+  </a>
+  <a class="nav-brand" href="/">Nexo AI</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-cover" aria-hidden="true"><img src="/img/proyectos/soultwo-cover.webp" alt="" width="1200" height="675" fetchpriority="high"></div>
+  <div class="hero-inner">
+    <div>
+      <span class="hero-eyebrow">Sitio web interactivo · Música y eventos</span>
+      <h1>Una página que se escucha antes de leerse.</h1>
+      <p class="hero-sub">Sitio para Soultwo, rapero de San José y parte del sello Mad Flava: entrada con música, fondos de video, humo en 3D, discografía, fotos y venta de entradas para su festival.</p>
+      <div class="hero-meta">
+        <span class="status-pill">En desarrollo</span>
+        <span>Sitio web · Escritorio y móvil · Next.js</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="facts-strip">
+  <div>Pantalla de entrada con música y transición animada</div>
+  <div>Fondos de video y humo generado en 3D</div>
+  <div>Sección del festival con cartel, precios y compra</div>
+  <div>Adaptado a celular y a «reducir movimiento»</div>
+</div>
+
+<div class="section">
+  <h2>El sitio, sección por sección</h2>
+  <p class="section-intro">Recorrido por las pantallas reales del sitio: cambia entre escritorio y móvil, y haz clic en cualquiera para verla en grande.</p>
+  <div class="album-tabs" role="tablist" aria-label="Filtrar capturas por dispositivo">
+    <button type="button" class="album-tab active" data-group="escritorio" onclick="setAlbumGroup('escritorio')" role="tab" aria-selected="true">Escritorio <span class="album-tab-count">7</span></button>
+    <button type="button" class="album-tab" data-group="movil" onclick="setAlbumGroup('movil')" role="tab" aria-selected="false">Móvil <span class="album-tab-count">7</span></button>
+  </div>
+  <div class="album-grid album-grid--wide" id="album-grid"></div>
+</div>
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button type="button" class="lightbox-close" onclick="closeLightbox()" aria-label="Cerrar">✕</button>
+  <button type="button" class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)" aria-label="Pantalla anterior">‹</button>
+  <div class="lightbox-frame"><img id="lightbox-img" src="" alt=""></div>
+  <button type="button" class="lightbox-nav lightbox-next" onclick="navLightbox(1)" aria-label="Pantalla siguiente">›</button>
+  <p class="lightbox-caption" id="lightbox-caption"></p>
+</div>
+
+<div class="section">
+  <h2>Cómo está pensado</h2>
+  <p class="section-intro">Cuatro decisiones que hacen que el sitio se sienta como el artista.</p>
+  <div class="features-grid">
+    <div class="feature">
+      <h3>Una entrada que pone el tono</h3>
+      <p>La primera pantalla avisa que la página suena. Al entrar, la cámara avanza por la calle hacia el artista y aparece el sitio; el clic también activa el audio, que los navegadores no dejan iniciar solo.</p>
+    </div>
+    <div class="feature">
+      <h3>La música cambia con cada sección</h3>
+      <p>Tres fragmentos de canciones acompañan el recorrido, uno para Inicio y Biografía, otro para Música y Fotos y otro para el festival. El sonido se funde al pasar de una sección a otra.</p>
+    </div>
+    <div class="feature">
+      <h3>Video, humo e interferencia</h3>
+      <p>Cada sección tiene su propio fondo de video sin sonido, con humo generado en 3D que late al ritmo de la canción y una interferencia tipo VHS en las transiciones.</p>
+    </div>
+    <div class="feature">
+      <h3>Hecho para vender entradas</h3>
+      <p>La sección del festival muestra fecha, lugar y cartel, con los precios y dos formas de comprar: por WhatsApp o en la boletería en línea.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Stack técnico</h2>
+  <div class="stack-row">
+    <span class="stack-tag">Next.js</span>
+    <span class="stack-tag">React</span>
+    <span class="stack-tag">TypeScript</span>
+    <span class="stack-tag">three.js (shaders)</span>
+    <span class="stack-tag">GSAP</span>
+    <span class="stack-tag">Lenis</span>
+    <span class="stack-tag">YouTube y SoundCloud (API)</span>
+  </div>
+</div>
+
+<div class="section roles-section">
+  <h2>Seis secciones, un solo recorrido</h2>
+  <p class="section-intro">El sitio se navega de arriba abajo o desde el menú.</p>
+  <div class="roles-grid">
+    <div class="role-card"><strong>Inicio</strong><span>El nombre del artista, su sello y una frase de presentación.</span></div>
+    <div class="role-card"><strong>Biografía</strong><span>Su historia en tres párrafos cortos.</span></div>
+    <div class="role-card"><strong>Música</strong><span>Los lanzamientos con enlace directo y las plataformas para escucharlo.</span></div>
+    <div class="role-card"><strong>Fotos</strong><span>Una galería de imágenes del estudio, los shows y el sello.</span></div>
+    <div class="role-card"><strong>MF8</strong><span>El festival: fecha, lugar, invitados, cartel y actividades.</span></div>
+    <div class="role-card"><strong>Entradas</strong><span>Los precios y cómo comprar, por WhatsApp o en línea.</span></div>
+  </div>
+</div>
+
+<div class="cta-section">
+  <h2>¿Quieres una página con personalidad?</h2>
+  <p>Hablemos de tu proyecto: un artista, una marca o un evento.</p>
+  <a href="/#contact" class="btn-primary">Escríbeme</a>
+</div>
+
+<footer>
+  <a href="/">Nexo AI</a>
+  <span>Caso de estudio: sitio para un artista, en desarrollo.</span>
+</footer>
+
+<script>
+  var ALBUM = [
+    { name: 'entrada', caption: 'Pantalla de entrada: «Entrar al barrio»', group: 'escritorio' },
+    { name: 'inicio', caption: 'Inicio', group: 'escritorio' },
+    { name: 'biografia', caption: 'Biografía', group: 'escritorio' },
+    { name: 'musica', caption: 'Música: lanzamientos y plataformas', group: 'escritorio' },
+    { name: 'fotos', caption: 'Fotos', group: 'escritorio' },
+    { name: 'mf8', caption: 'Mad Flava Fest 8: fecha, lugar y cartel', group: 'escritorio' },
+    { name: 'entradas', caption: 'Entradas: precios y cómo comprar', group: 'escritorio' },
+    { name: 'entrada', caption: 'Pantalla de entrada: «Entrar al barrio»', group: 'movil' },
+    { name: 'inicio', caption: 'Inicio', group: 'movil' },
+    { name: 'biografia', caption: 'Biografía', group: 'movil' },
+    { name: 'musica', caption: 'Música: lanzamientos y plataformas', group: 'movil' },
+    { name: 'fotos', caption: 'Fotos', group: 'movil' },
+    { name: 'mf8', caption: 'Mad Flava Fest 8: fecha, lugar y cartel', group: 'movil' },
+    { name: 'entradas', caption: 'Entradas: precios y cómo comprar', group: 'movil' }
+  ];
+  var ALBUM_BASE = '/img/proyectos/soultwo-album/';
+  var PREFIX = { escritorio: 'd-', movil: 'm-' };
+  var albumGroup = 'escritorio';
+  var lightboxIndex = 0;
+
+  function fileFor(item) { return ALBUM_BASE + PREFIX[item.group] + item.name + '.webp'; }
+
+  function renderAlbum() {
+    var grid = document.getElementById('album-grid');
+    grid.innerHTML = '';
+    grid.className = 'album-grid ' + (albumGroup === 'escritorio' ? 'album-grid--wide' : 'album-grid--phones');
+    var dims = albumGroup === 'escritorio' ? 'width="1200" height="750"' : 'width="520" height="1126"';
+    ALBUM.forEach(function(item, i) {
+      if (item.group !== albumGroup) return;
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'album-item';
+      btn.setAttribute('aria-label', 'Ver pantalla: ' + item.caption);
+      btn.onclick = (function(index) { return function() { openLightbox(index); }; })(i);
+      btn.innerHTML = '<div class="shot-frame"><img src="' + fileFor(item) + '" ' + dims + ' loading="lazy" alt="' + item.caption + ' — Soultwo"></div><p class="shot-caption">' + item.caption + '</p>';
+      grid.appendChild(btn);
+    });
+  }
+
+  function setAlbumGroup(group) {
+    albumGroup = group;
+    document.querySelectorAll('.album-tab').forEach(function(t) {
+      var active = t.dataset.group === group;
+      t.classList.toggle('active', active);
+      t.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+    renderAlbum();
+  }
+
+  function currentGroupIndices() {
+    var out = [];
+    ALBUM.forEach(function(item, i) { if (item.group === albumGroup) out.push(i); });
+    return out;
+  }
+
+  function updateLightbox() {
+    var item = ALBUM[lightboxIndex];
+    document.getElementById('lightbox').classList.toggle('lightbox--wide', item.group === 'escritorio');
+    document.getElementById('lightbox-img').src = fileFor(item);
+    document.getElementById('lightbox-img').alt = item.caption + ' — Soultwo';
+    document.getElementById('lightbox-caption').textContent = item.caption;
+  }
+
+  function openLightbox(index) {
+    lightboxIndex = index;
+    updateLightbox();
+    var lb = document.getElementById('lightbox');
+    lb.classList.add('open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    var lb = document.getElementById('lightbox');
+    lb.classList.remove('open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  function navLightbox(dir) {
+    var indices = currentGroupIndices();
+    var pos = indices.indexOf(lightboxIndex);
+    lightboxIndex = indices[(pos + dir + indices.length) % indices.length];
+    updateLightbox();
+  }
+
+  document.addEventListener('keydown', function(e) {
+    var lb = document.getElementById('lightbox');
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') navLightbox(-1);
+    if (e.key === 'ArrowRight') navLightbox(1);
+  });
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target.id === 'lightbox') closeLightbox();
+  });
+
+  renderAlbum();
+</script>
+</body>
+</html>
