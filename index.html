@@ -73,6 +73,9 @@
 
   /* Space Grotesk */
   @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/space-grotesk-v22-latin-regular.woff2') format('woff2'); }
+  /* Instrument Serif (sección de productos) */
+  @font-face { font-family: 'Instrument Serif'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/instrument-serif-latin-regular.woff2') format('woff2'); }
+  @font-face { font-family: 'Instrument Serif'; font-style: italic; font-weight: 400; font-display: swap; src: url('/fonts/instrument-serif-latin-italic.woff2') format('woff2'); }
   @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/space-grotesk-v22-latin-700.woff2') format('woff2'); }
 </style>
 <style>
@@ -759,89 +762,64 @@
     .wc-panel + .wc-panel { margin-top: 3rem; }
   }
 
-  /* ══ WHAT WE BUILD — DARK PRODUCT CARDS ═══════════════════════════ */
-  .dt-section { background: radial-gradient(900px 520px at 88% -6%, rgba(37,99,235,0.24), transparent 62%), var(--ink); color: var(--paper); padding: 5.5rem 5vw 5rem; }
-  .dt-inner { max-width: 1180px; margin: 0 auto; }
-  .dt-head { display: grid; grid-template-columns: 1fr auto; gap: 2rem 3rem; align-items: start; margin-bottom: 2.25rem; }
-  .dt-eyebrow { display: flex; align-items: center; gap: 0.85rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(244,246,251,0.6); margin-bottom: 1.1rem; }
-  .dt-eyebrow::before { content: ''; width: 40px; height: 1px; background: var(--accent-light); }
-  .dt-inner h2 { color: var(--paper); font-size: clamp(2.2rem, 4.6vw, 3.3rem); max-width: 720px; margin-bottom: 1rem; }
-  .dt-inner h2 em { font-style: normal; color: var(--accent-light); }
-  .dt-sub { font-size: 1.05rem; color: rgba(244,246,251,0.72); max-width: 520px; line-height: 1.6; }
-  .dt-strip { list-style: none; padding: 0; margin: 0.4rem 0 0; display: flex; align-items: stretch; }
-  .dt-strip li { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; padding: 0.3rem 1.15rem; font-size: 0.85rem; font-weight: 600; color: rgba(244,246,251,0.85); }
-  .dt-strip li + li { border-left: 1px solid rgba(244,246,251,0.12); }
-  .dt-strip svg { width: 22px; height: 22px; color: var(--accent-light); }
+  /* ══ WHAT WE BUILD — PINNED PRODUCT SHOWCASE ═══════════════════════
+     The screen stays put while scrolling swaps the product sheets (JS
+     scrubs transform/opacity). Without JS, on mobile, or with reduced
+     motion it is a plain stacked list. */
+  .dt-section { --dt-nav: 76px; --dt-bg: #191513; --dt-bone: #efe8dd; --dt-mat: #e8e1d4; --dt-mut: #a89e92; --dt-line: rgba(239,232,221,0.16); background: var(--dt-bg); color: var(--dt-bone); }
+  .dt-wrap { max-width: 1320px; margin: 0 auto; padding: 0 4vw; }
+  .dt-head { display: grid; grid-template-columns: 1.4fr 1fr; gap: 3rem; align-items: end; padding: 6.5rem 0 3rem; }
+  .dt-section h2 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(3.2rem, 7.6vw, 6.6rem); line-height: 0.9; letter-spacing: -0.025em; color: var(--dt-bone); max-width: none; margin: 0; }
+  .dt-section h2 em { display: block; font-style: italic; color: inherit; }
+  .dt-sub { font-size: 1.08rem; line-height: 1.6; color: var(--dt-mut); max-width: 38ch; margin: 0 0 1.4rem; }
+  .dt-caps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: 1.5rem; }
+  .dt-caps li { display: flex; align-items: center; gap: 0.6rem; padding: 0.6rem 0; border-top: 1px solid var(--dt-line); font-weight: 600; font-size: 0.92rem; }
+  .dt-caps svg { width: 20px; height: 20px; flex-shrink: 0; color: var(--energy); }
 
-  .dt-mode { display: inline-flex; gap: 0.5rem; padding: 0.3rem; border: 1px solid rgba(244,246,251,0.14); border-radius: 16px; margin-bottom: 1.75rem; }
-  .dt-mode-btn {
-    display: flex; align-items: center; gap: 0.8rem; text-align: left; cursor: pointer; background: none; border: 1px solid transparent;
-    border-radius: 13px; padding: 0.75rem 1.5rem 0.75rem 1.1rem; font-family: 'Plus Jakarta Sans', sans-serif; color: rgba(244,246,251,0.62);
-    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
-  }
-  .dt-mode-btn svg { width: 26px; height: 26px; flex-shrink: 0; }
-  .dt-mode-btn b { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 1rem; }
-  .dt-mode-btn small { display: block; font-size: 0.75rem; opacity: 0.8; }
-  .dt-mode-btn:hover { color: var(--paper); }
-  .dt-mode-btn.is-active { color: #fff; background: rgba(37,99,235,0.2); border-color: var(--accent); box-shadow: 0 0 26px rgba(37,99,235,0.35); }
-  .dt-mode-btn.is-active svg { color: var(--accent-light); }
-  .dt-mode-btn:focus-visible { outline: 2px solid var(--energy); outline-offset: 2px; }
+  .dt-mode { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.2rem 1.1rem; }
+  .dt-sl { font-family: 'Instrument Serif', serif; font-size: clamp(1.7rem, 3vw, 2.5rem); color: var(--energy); line-height: 1; }
+  .dt-mode-btn { position: relative; background: none; border: 0; padding: 0 0 0.25rem; cursor: pointer; font-family: 'Instrument Serif', serif; font-size: clamp(1.7rem, 3vw, 2.5rem); line-height: 1; font-style: italic; color: var(--dt-mut); transition: color 0.2s ease; }
+  .dt-mode-btn sup { font: 600 0.72rem 'Space Grotesk', sans-serif; font-style: normal; margin-left: 0.3rem; vertical-align: top; position: relative; top: 0.25rem; }
+  .dt-mode-btn::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--energy); transform: scaleX(0); transform-origin: left; transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1); }
+  .dt-mode-btn.is-active { color: var(--dt-bone); font-style: normal; }
+  .dt-mode-btn.is-active::after { transform: scaleX(1); }
+  .dt-mode-btn:focus-visible, .dt-more:focus-visible, .dt-idx button:focus-visible { outline: 2px solid var(--energy); outline-offset: 5px; }
+  @media (hover: hover) and (pointer: fine) { .dt-mode-btn:hover { color: var(--dt-bone); } }
 
-  .dt-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-  .dt-cards[hidden] { display: none; }
-  .dt-card {
-    position: relative; display: grid; grid-template-columns: 1.2fr 1fr; overflow: hidden; min-height: 270px;
-    border: 1px solid rgba(244,246,251,0.12); border-radius: 20px;
-    background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(244,246,251,0.02) 60%); transition: border-color 0.2s ease;
-  }
-  .dt-card__media { position: relative; display: flex; align-items: flex-end; justify-content: center; overflow: hidden; padding: 1.25rem 1.1rem 0; background: radial-gradient(circle at 50% 100%, rgba(59,130,246,0.22), transparent 70%); }
-  .dt-card__media--img { padding: 0; align-items: center; background: #0a0f1d; isolation: isolate; }
-  .dt-card__media--img::before { content: ''; position: absolute; inset: -24px; z-index: -1; background: var(--img) center / cover; filter: blur(26px) brightness(0.4) saturate(1.2); }
-  .dt-card__media--flat { background: #090d1a; }
-  .dt-card__media--flat::before { display: none; }
-  .dt-card__img { display: block; width: 100%; height: auto; max-height: 100%; object-fit: contain; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent); mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent); }
-  .mock { width: 100%; }
-  .mock-browser { max-width: 330px; border-radius: 10px 10px 0 0; overflow: hidden; background: #0d1626; border: 1px solid rgba(244,246,251,0.16); border-bottom: none; box-shadow: 0 18px 40px rgba(0,0,0,0.4); }
-  .mock-bar { display: flex; gap: 5px; padding: 8px 10px; background: #0d1626; }
-  .mock-bar i { width: 7px; height: 7px; border-radius: 50%; background: rgba(244,246,251,0.25); }
-  .mock-browser img { display: block; width: 100%; height: auto; }
-  .mock-phone { width: 150px; max-width: 60%; margin-bottom: -34px; border: 5px solid #05070d; border-radius: 26px; overflow: hidden; background: #05070d; box-shadow: 0 18px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(244,246,251,0.12); }
-  .mock-phone img { display: block; width: 100%; height: auto; border-radius: 20px; }
-  .dt-card__body { display: flex; flex-direction: column; justify-content: center; gap: 0.7rem; padding: 2rem 1.75rem 2rem 1.25rem; }
-  .dt-card__cat { display: inline-flex; align-items: center; gap: 0.7rem; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(244,246,251,0.6); }
-  .dt-card__cat svg { width: 26px; height: 26px; color: var(--paper); }
-  .dt-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; color: #fff; line-height: 1.15; }
-  .dt-card p { font-size: 0.92rem; color: rgba(244,246,251,0.7); line-height: 1.6; }
-  .dt-card__more { align-self: flex-start; display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.4rem; background: none; border: none; padding: 0; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.92rem; font-weight: 700; color: var(--accent-light); transition: color 0.2s ease; }
-  .dt-card__more::after { content: ''; position: absolute; inset: 0; border-radius: 20px; }
-  .dt-card__more svg { width: 16px; height: 16px; transition: transform 0.2s ease; }
-  .dt-card:has(.dt-card__more:focus-visible) { outline: 2px solid var(--energy); outline-offset: 3px; }
-  @media (hover: hover) and (pointer: fine) {
-    .dt-card:hover { border-color: rgba(59,130,246,0.6); }
-    .dt-card:hover .dt-card__more svg { transform: translateX(4px); }
-    .dt-card:hover .dt-card__more { color: #fff; }
-  }
-  @media (max-width: 1000px) {
-    .dt-head { grid-template-columns: 1fr; }
-    .dt-strip { margin-top: 0; }
-    .dt-cards { grid-template-columns: 1fr; }
-  }
-  @media (max-width: 720px) {
-    .dt-section { padding: 4rem 6vw 3.5rem; }
-    .dt-strip { display: grid; grid-template-columns: repeat(3, 1fr); row-gap: 1rem; }
-    .dt-strip li { padding: 0.3rem 0.4rem; }
-    .dt-strip li:nth-child(4) { border-left: none; }
-    .dt-mode { display: flex; }
-    .dt-mode-btn { flex: 1; padding: 0.7rem 0.75rem; gap: 0.55rem; }
-    .dt-mode-btn svg { width: 22px; height: 22px; }
-    .dt-card { grid-template-columns: 1fr; }
-    .dt-card__media { height: 230px; }
-    .dt-card__media--img { height: auto; aspect-ratio: 16 / 9; }
-    .dt-card__img { -webkit-mask-image: none; mask-image: none; }
-    .mock-phone { align-self: flex-start; margin-bottom: 0; width: 140px; }
-    .dt-card__body { padding: 1.5rem 1.4rem 1.75rem; }
-  }
-  @media (prefers-reduced-motion: reduce) { .dt-card, .dt-card__more svg, .dt-mode-btn { transition: none; } }
+  /* base = static list */
+  .dt-stage { max-width: 1320px; margin: 0 auto; padding: 0 4vw 5rem; }
+  .dt-pin-top { padding: 1.2rem 0 1.4rem; border-bottom: 1px solid var(--dt-line); }
+  .dt-deck[hidden] { display: none; }
+  .dt-slide { display: grid; grid-template-columns: 1.9fr 1fr; gap: 3rem; align-items: center; padding: 2.4rem 0; border-bottom: 1px solid var(--dt-line); }
+  .dt-pic { background: var(--dt-mat); padding: 10px; border-radius: 3px; box-shadow: 0 26px 40px -22px rgba(0,0,0,0.75); cursor: pointer; }
+  .dt-shot { display: block; width: 100%; height: auto; border-radius: 1px; }
+  .dt-frame { aspect-ratio: 16 / 9; background: #05132b; overflow: hidden; display: flex; justify-content: center; }
+  .dt-ph { height: 88%; width: auto; margin-top: 7%; border: 4px solid #0b1120; border-bottom: 0; border-radius: 16px 16px 0 0; background: #0b1120; }
+  .dt-cat { display: block; font-size: 0.9rem; color: var(--energy); font-weight: 600; }
+  .dt-section h3 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(2.3rem, 4.2vw, 3.7rem); line-height: 0.98; letter-spacing: -0.02em; color: var(--dt-bone); margin: 0.55rem 0 0.9rem; }
+  .dt-txt p { color: var(--dt-mut); font-size: 1.02rem; line-height: 1.62; max-width: 40ch; margin: 0 0 1.4rem; }
+  .dt-more { background: none; border: 0; border-bottom: 2px solid var(--energy); padding: 0 0 0.2rem; cursor: pointer; font: 700 0.96rem 'Space Grotesk', sans-serif; color: var(--dt-bone); transition: padding 0.2s cubic-bezier(0.23, 1, 0.32, 1), color 0.2s ease; }
+  @media (hover: hover) and (pointer: fine) { .dt-more:hover { color: var(--energy-light); padding-right: 0.5rem; } }
+  .dt-idx { display: none; }
+  @media (max-width: 899px) { .dt-head { grid-template-columns: 1fr; padding-top: 5rem; } .dt-slide { grid-template-columns: 1fr; gap: 1.4rem; } }
+  @media (max-width: 520px) { .dt-caps { grid-template-columns: 1fr; } }
+
+  /* pinned mode: the screen holds, the sheets change */
+  .dt-stage.is-pinned { height: calc(100vh - var(--dt-nav) + 3 * 85vh + 28vh); padding-bottom: 0; }
+  .dt-stage.is-pinned .dt-pin { position: sticky; top: var(--dt-nav); height: calc(100vh - var(--dt-nav)); display: flex; flex-direction: column; padding: 1.3rem 0 1.5rem; }
+  .dt-stage.is-pinned .dt-pin-top { border: 0; padding: 0 0 0.6rem; }
+  .dt-stage.is-pinned .dt-decks { position: relative; flex: 1; min-height: 0; }
+  .dt-stage.is-pinned .dt-deck { position: absolute; inset: 0; }
+  .dt-stage.is-pinned .dt-slide { position: absolute; inset: 0; padding: 0; border: 0; pointer-events: none; align-content: center; }
+  .dt-stage.is-pinned .dt-slide.is-on { pointer-events: auto; }
+  .dt-stage.is-pinned .dt-pic, .dt-stage.is-pinned .dt-txt { will-change: transform, opacity; }
+  .dt-stage.is-pinned .dt-pic { transform-origin: 50% 100%; }
+  .dt-stage.is-pinned .dt-idx { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.6rem; padding-right: 5rem; }
+  .dt-idx button { position: relative; text-align: left; background: none; border: 0; border-top: 1px solid var(--dt-line); padding: 0.9rem 0 0; cursor: pointer; font: 600 0.95rem 'Plus Jakarta Sans', sans-serif; color: var(--dt-mut); transition: color 0.25s ease; }
+  .dt-idx button i { position: absolute; left: 0; top: -1px; height: 2px; width: 100%; background: var(--energy); transform-origin: left; transform: scaleX(0); }
+  .dt-idx button.is-on { color: var(--dt-bone); }
+  @media (hover: hover) and (pointer: fine) { .dt-idx button:hover { color: var(--dt-bone); } }
+  @media (prefers-reduced-motion: reduce) { .dt-mode-btn::after, .dt-more { transition: none; } }
 
   /* ══ INDUSTRIES — STACKING CARDS (pure CSS sticky, no JS) ═════════
      Each .ind-card is sticky with a slightly larger `top` than the one
@@ -1454,14 +1432,12 @@
 </div>
 
 <div class="dt-section" id="dt-section">
-  <div class="dt-inner">
+  <div class="dt-wrap">
     <header class="dt-head">
-      <div class="dt-head-text">
-        <p class="dt-eyebrow" data-es="Productos digitales" data-en="Digital products">Productos digitales</p>
-        <h2 data-es="De una idea a un <em>producto real.</em>" data-en="From an idea to a <em>real product.</em>">De una idea a un <em>producto real.</em></h2>
+      <h2 data-es="De una idea <em>a un producto real.</em>" data-en="From an idea <em>to a real product.</em>">De una idea <em>a un producto real.</em></h2>
+      <div>
         <p class="dt-sub" data-es="Diseñamos y desarrollamos experiencias digitales rápidas, modernas y pensadas para crecer contigo." data-en="We design and build fast, modern digital experiences made to grow with you.">Diseñamos y desarrollamos experiencias digitales rápidas, modernas y pensadas para crecer contigo.</p>
-      </div>
-      <ul class="dt-strip">
+        <ul class="dt-caps">
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 4.7 4.7 1.8-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2 2.2.8-2.2.8L19 21l-.8-2.2-2.2-.8 2.2-.8z"/></svg><span data-es="Diseño" data-en="Design">Diseño</span></li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg><span data-es="Desarrollo" data-en="Development">Desarrollo</span></li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><span data-es="Integraciones" data-en="Integrations">Integraciones</span></li>
@@ -1469,105 +1445,98 @@
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 20V11M12 20V5M18 20v-6"/></svg><span data-es="Analytics" data-en="Analytics">Analytics</span></li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/></svg><span data-es="Soporte" data-en="Support">Soporte</span></li>
       </ul>
+      </div>
     </header>
+  </div>
 
-    <div class="dt-mode" role="tablist" aria-label="Qué construimos">
-      <button type="button" class="dt-mode-btn is-active" role="tab" aria-selected="true" data-mode="web">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
-        <span><b data-es="Páginas web" data-en="Websites">Páginas web</b><small data-es="Sitios y tiendas" data-en="Sites and stores">Sitios y tiendas</small></span>
-      </button>
-      <button type="button" class="dt-mode-btn" role="tab" aria-selected="false" data-mode="software">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg>
-        <span><b data-es="Software a medida" data-en="Custom software">Software a medida</b><small data-es="CRM, ERP, apps móviles y más" data-en="CRM, ERP, mobile apps and more">CRM, ERP, apps móviles y más</small></span>
-      </button>
-    </div>
-
-    <div class="dt-cards" data-group="web">
-      <article class="dt-card">
-        <div class="dt-card__media dt-card__media--img" style="--img: url('img/productos/landing.webp')">
-          <img class="dt-card__img" src="img/productos/landing.webp" alt="Landing page de ejemplo vista en laptop y teléfono" width="1200" height="675" loading="lazy">
+  <div class="dt-stage" id="dt-stage">
+    <div class="dt-pin">
+      <div class="dt-pin-top">
+        <div class="dt-mode" role="tablist" aria-label="Qué construimos">
+          <button type="button" class="dt-mode-btn is-active" role="tab" aria-selected="true" data-mode="web"><span data-es="Páginas web" data-en="Websites">Páginas web</span><sup>4</sup></button>
+          <span class="dt-sl" aria-hidden="true">/</span>
+          <button type="button" class="dt-mode-btn" role="tab" aria-selected="false" tabindex="-1" data-mode="software"><span data-es="Software a medida" data-en="Custom software">Software a medida</span><sup>4</sup></button>
         </div>
-        <div class="dt-card__body">
-          <span class="dt-card__cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span data-es="Páginas web" data-en="Websites">Páginas web</span></span>
+      </div>
+      <div class="dt-decks">
+      <div class="dt-deck" data-group="web">
+      <article class="dt-slide">
+        <div class="dt-pic"><img class="dt-shot" src="img/productos/landing.webp" alt="Landing page de ejemplo vista en laptop y teléfono" width="1200" height="675" loading="lazy"></div>
+        <div class="dt-txt">
+          <span class="dt-cat" data-es="Páginas web" data-en="Websites">Páginas web</span>
           <h3 data-es="Landing pages" data-en="Landing pages">Landing pages</h3>
           <p data-es="Convierte visitas en clientes. Diseñadas para una acción específica, con un enfoque claro, rápido y optimizado para campañas." data-en="Turn visits into customers. Built for one specific action, with a clear, fast focus optimized for campaigns.">Convierte visitas en clientes. Diseñadas para una acción específica, con un enfoque claro, rápido y optimizado para campañas.</p>
-          <button type="button" class="dt-card__more" data-product="web-landing"><span data-es="Ver detalles" data-en="View details">Ver detalles</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <button type="button" class="dt-more" data-product="web-landing"><span data-es="Ver detalles" data-en="View details">Ver detalles</span></button>
         </div>
       </article>
-      <article class="dt-card">
-        <div class="dt-card__media">
-          <div class="mock mock-browser"><div class="mock-bar"><i></i><i></i><i></i></div><img src="img/proyectos/pizotecr-home.webp" alt="Sitio web de PizoteCR" width="1000" height="625" loading="lazy"></div>
-        </div>
-        <div class="dt-card__body">
-          <span class="dt-card__cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v16M14 9h5a1 1 0 0 1 1 1v11M3 21h18M8 8h2M8 12h2M8 16h2"/></svg><span data-es="Páginas web" data-en="Websites">Páginas web</span></span>
+      <article class="dt-slide">
+        <div class="dt-pic"><img class="dt-shot" src="img/productos/corporativo.webp" alt="Sitio corporativo de ejemplo en laptop y teléfono, con portada, equipo de trabajo y tarjetas de servicios" width="1200" height="675" loading="lazy"></div>
+        <div class="dt-txt">
+          <span class="dt-cat" data-es="Páginas web" data-en="Websites">Páginas web</span>
           <h3 data-es="Sitios corporativos" data-en="Corporate sites">Sitios corporativos</h3>
           <p data-es="Presencia profesional para tu marca. Sitios modernos, rápidos y optimizados para mostrar lo que haces." data-en="A professional presence for your brand. Modern, fast sites optimized to show what you do.">Presencia profesional para tu marca. Sitios modernos, rápidos y optimizados para mostrar lo que haces.</p>
-          <button type="button" class="dt-card__more" data-product="web-corp"><span data-es="Ver detalles" data-en="View details">Ver detalles</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <button type="button" class="dt-more" data-product="web-corp"><span data-es="Ver detalles" data-en="View details">Ver detalles</span></button>
         </div>
       </article>
-      <article class="dt-card">
-        <div class="dt-card__media dt-card__media--img dt-card__media--flat" style="background:#040f20">
-          <img class="dt-card__img" src="img/productos/ecommerce.webp" alt="Tienda en línea de ejemplo vista en laptop y teléfono, con catálogo de productos y página de compra" width="1200" height="675" loading="lazy">
-        </div>
-        <div class="dt-card__body">
-          <span class="dt-card__cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M3 4h2.5l2.2 11h10.6l2-8H6.5"/></svg><span data-es="Tiendas en línea" data-en="Online stores">Tiendas en línea</span></span>
+      <article class="dt-slide">
+        <div class="dt-pic"><img class="dt-shot" src="img/productos/ecommerce.webp" alt="Tienda en línea de ejemplo vista en laptop y teléfono, con catálogo de productos y página de compra" width="1200" height="675" loading="lazy"></div>
+        <div class="dt-txt">
+          <span class="dt-cat" data-es="Tiendas en línea" data-en="Online stores">Tiendas en línea</span>
           <h3 data-es="E-commerce" data-en="E-commerce">E-commerce</h3>
           <p data-es="Tu negocio, vendiendo online. Tiendas modernas con pagos seguros, inventario y gestión de pedidos." data-en="Your business, selling online. Modern stores with secure payments, inventory and order management.">Tu negocio, vendiendo online. Tiendas modernas con pagos seguros, inventario y gestión de pedidos.</p>
-          <button type="button" class="dt-card__more" data-product="web-shop"><span data-es="Ver detalles" data-en="View details">Ver detalles</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <button type="button" class="dt-more" data-product="web-shop"><span data-es="Ver detalles" data-en="View details">Ver detalles</span></button>
         </div>
       </article>
-      <article class="dt-card">
-        <div class="dt-card__media dt-card__media--img dt-card__media--flat">
-          <img class="dt-card__img" src="img/productos/webapps.webp" alt="Plataforma de punto de venta e inventario en laptop y teléfono" width="1200" height="675" loading="lazy">
-        </div>
-        <div class="dt-card__body">
-          <span class="dt-card__cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg><span data-es="Aplicaciones web" data-en="Web apps">Aplicaciones web</span></span>
+      <article class="dt-slide">
+        <div class="dt-pic"><img class="dt-shot" src="img/productos/webapps.webp" alt="Plataforma de punto de venta e inventario en laptop y teléfono" width="1200" height="675" loading="lazy"></div>
+        <div class="dt-txt">
+          <span class="dt-cat" data-es="Aplicaciones web" data-en="Web apps">Aplicaciones web</span>
           <h3 data-es="Web apps / Plataformas" data-en="Web apps / Platforms">Web apps / Plataformas</h3>
           <p data-es="Sistemas personalizados para automatizar procesos, centralizar información y hacer tu operación más eficiente." data-en="Custom systems to automate processes, centralize information and make your operation more efficient.">Sistemas personalizados para automatizar procesos, centralizar información y hacer tu operación más eficiente.</p>
-          <button type="button" class="dt-card__more" data-product="web-apps"><span data-es="Ver detalles" data-en="View details">Ver detalles</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <button type="button" class="dt-more" data-product="web-apps"><span data-es="Ver detalles" data-en="View details">Ver detalles</span></button>
         </div>
       </article>
-    </div>
-
-    <div class="dt-cards" data-group="software" hidden>
-      <article class="dt-card">
-        <div class="dt-card__media"><div class="mock mock-phone"><img src="img/proyectos/voltix-album/dark-coach-clientes.webp" alt="Lista de clientes de un CRM a medida" width="520" height="1044" loading="lazy"></div></div>
-        <div class="dt-card__body">
-          <span class="dt-card__cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20a6 6 0 0 1 12 0M16 4.5a3.2 3.2 0 0 1 0 6M18 20a6 6 0 0 0-3-5.2"/></svg><span data-es="Software a medida" data-en="Custom software">Software a medida</span></span>
+      </div>
+      <div class="dt-deck" data-group="software" hidden>
+      <article class="dt-slide">
+        <div class="dt-pic"><div class="dt-frame"><img class="dt-ph" src="img/proyectos/voltix-album/dark-coach-clientes.webp" alt="Lista de clientes de un CRM a medida" width="520" height="1044" loading="lazy"></div></div>
+        <div class="dt-txt">
+          <span class="dt-cat" data-es="Software a medida" data-en="Custom software">Software a medida</span>
           <h3 data-es="CRM a medida" data-en="Custom CRM">CRM a medida</h3>
           <p data-es="Clientes, oportunidades y seguimiento en un solo lugar, construido alrededor de cómo vendes tú." data-en="Customers, leads and follow-up in one place, built around how you sell.">Clientes, oportunidades y seguimiento en un solo lugar, construido alrededor de cómo vendes tú.</p>
-          <button type="button" class="dt-card__more" data-product="sw-crm"><span data-es="Ver detalles" data-en="View details">Ver detalles</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <button type="button" class="dt-more" data-product="sw-crm"><span data-es="Ver detalles" data-en="View details">Ver detalles</span></button>
         </div>
       </article>
-      <article class="dt-card">
-        <div class="dt-card__media"><div class="mock mock-phone"><img src="img/proyectos/greenforest-album/reporte-resumen.webp" alt="Reporte resumen de un sistema de gestión" width="520" height="1044" loading="lazy"></div></div>
-        <div class="dt-card__body">
-          <span class="dt-card__cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5Z"/><path d="M3 12.5l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg><span data-es="Software a medida" data-en="Custom software">Software a medida</span></span>
+      <article class="dt-slide">
+        <div class="dt-pic"><div class="dt-frame"><img class="dt-ph" src="img/proyectos/greenforest-album/reporte-resumen.webp" alt="Reporte resumen de un sistema de gestión" width="520" height="1044" loading="lazy"></div></div>
+        <div class="dt-txt">
+          <span class="dt-cat" data-es="Software a medida" data-en="Custom software">Software a medida</span>
           <h3 data-es="ERP y gestión" data-en="ERP and management">ERP y gestión</h3>
           <p data-es="Inventario, compras, ventas y facturación por módulos y por etapas, sin pagar por lo que no usas." data-en="Inventory, purchasing, sales and invoicing by module and in stages, without paying for what you don’t use.">Inventario, compras, ventas y facturación por módulos y por etapas, sin pagar por lo que no usas.</p>
-          <button type="button" class="dt-card__more" data-product="sw-erp"><span data-es="Ver detalles" data-en="View details">Ver detalles</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <button type="button" class="dt-more" data-product="sw-erp"><span data-es="Ver detalles" data-en="View details">Ver detalles</span></button>
         </div>
       </article>
-      <article class="dt-card">
-        <div class="dt-card__media dt-card__media--img dt-card__media--flat">
-          <img class="dt-card__img" src="img/productos/moviles.webp" alt="Aplicaciones móviles a medida en teléfonos: control de parcelas, nutrición y rutinas" width="1200" height="675" loading="lazy">
-        </div>
-        <div class="dt-card__body">
-          <span class="dt-card__cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg><span data-es="Software a medida" data-en="Custom software">Software a medida</span></span>
+      <article class="dt-slide">
+        <div class="dt-pic"><img class="dt-shot" src="img/productos/moviles.webp" alt="Aplicaciones móviles a medida en teléfonos: control de parcelas, nutrición y rutinas" width="1200" height="675" loading="lazy"></div>
+        <div class="dt-txt">
+          <span class="dt-cat" data-es="Software a medida" data-en="Custom software">Software a medida</span>
           <h3 data-es="Aplicaciones móviles" data-en="Mobile apps">Aplicaciones móviles</h3>
           <p data-es="Apps para iOS y Android hechas a la medida de tu operación, para tus clientes o para tu equipo en campo." data-en="iOS and Android apps built around your operation, for your customers or your field team.">Apps para iOS y Android hechas a la medida de tu operación, para tus clientes o para tu equipo en campo.</p>
-          <button type="button" class="dt-card__more" data-product="sw-mobile"><span data-es="Ver detalles" data-en="View details">Ver detalles</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <button type="button" class="dt-more" data-product="sw-mobile"><span data-es="Ver detalles" data-en="View details">Ver detalles</span></button>
         </div>
       </article>
-      <article class="dt-card">
-        <div class="dt-card__media"><div class="mock mock-phone"><img src="img/proyectos/greenforest-album/reporte-exportar.webp" alt="Pantalla para exportar reportes en PDF, Excel y CSV" width="520" height="1044" loading="lazy"></div></div>
-        <div class="dt-card__body">
-          <span class="dt-card__cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><span data-es="Software a medida" data-en="Custom software">Software a medida</span></span>
+      <article class="dt-slide">
+        <div class="dt-pic"><div class="dt-frame"><img class="dt-ph" src="img/proyectos/greenforest-album/reporte-exportar.webp" alt="Pantalla para exportar reportes en PDF, Excel y CSV" width="520" height="1044" loading="lazy"></div></div>
+        <div class="dt-txt">
+          <span class="dt-cat" data-es="Software a medida" data-en="Custom software">Software a medida</span>
           <h3 data-es="Integraciones y automatización" data-en="Integrations and automation">Integraciones y automatización</h3>
           <p data-es="Conectamos tus herramientas y automatizamos lo repetitivo, con inteligencia artificial donde de verdad suma." data-en="We connect your tools and automate the repetitive work, with AI where it genuinely helps.">Conectamos tus herramientas y automatizamos lo repetitivo, con inteligencia artificial donde de verdad suma.</p>
-          <button type="button" class="dt-card__more" data-product="sw-integ"><span data-es="Ver detalles" data-en="View details">Ver detalles</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <button type="button" class="dt-more" data-product="sw-integ"><span data-es="Ver detalles" data-en="View details">Ver detalles</span></button>
         </div>
       </article>
+      </div>
+      </div>
+      <div class="dt-idx" aria-label="Ir a un producto"></div>
     </div>
   </div>
 </div>
@@ -2100,6 +2069,7 @@ function setLang(lang) {
     if(t.indexOf('<')!==-1) el.innerHTML=t; else el.textContent=t;
   });
   document.querySelectorAll('[data-ph-'+lang+']').forEach(function(el){ el.placeholder=el.getAttribute('data-ph-'+lang); });
+  if (window.dtRefreshIdx) window.dtRefreshIdx();
 }
 
 // Single-select chip groups; each writes its value into the hidden input named by data-hidden.
@@ -2637,16 +2607,92 @@ function goHome(e) {
   update();
 })();
 
-// ── WHAT WE BUILD: WEB / SOFTWARE SWITCH ──────────────────────────
+// ── WHAT WE BUILD: PINNED PRODUCT SHOWCASE ────────────────────────
+// Scroll progress (in "product units") scrubs each sheet's transform and
+// opacity; at rest it settles on the nearest sheet. Static list on mobile,
+// with reduced motion, or without JS.
 (function() {
-  var modes = document.querySelectorAll('.dt-mode-btn'), groups = document.querySelectorAll('.dt-cards');
-  modes.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      modes.forEach(function(m) { m.classList.remove('is-active'); m.setAttribute('aria-selected', 'false'); });
-      btn.classList.add('is-active'); btn.setAttribute('aria-selected', 'true');
-      groups.forEach(function(g) { g.hidden = g.getAttribute('data-group') !== btn.getAttribute('data-mode'); });
+  var stage = document.getElementById('dt-stage');
+  if (!stage) return;
+  var N = 4, UNIT = 0.85;
+  var nav = document.querySelector('nav[aria-label="Navegación principal"]');
+  var decks = [].slice.call(stage.querySelectorAll('.dt-deck'));
+  var modes = [].slice.call(document.querySelectorAll('.dt-mode-btn'));
+  var idx = stage.querySelector('.dt-idx');
+  var mqW = matchMedia('(min-width: 900px)'), mqR = matchMedia('(prefers-reduced-motion: reduce)');
+  var slides = [], idxBtns = [], raf = 0, snapT = 0, navH = 76;
+  function clamp(v, a, b) { return Math.min(b, Math.max(a, v)); }
+  function easeOut(t) { return 1 - Math.pow(1 - t, 4); }
+  function enabled() { return mqW.matches && !mqR.matches; }
+  function measureNav() { navH = nav ? Math.round(nav.getBoundingClientRect().height) : 76; document.getElementById('dt-section').style.setProperty('--dt-nav', navH + 'px'); }
+  function labels() { idxBtns.forEach(function(b, i) { b.lastChild.textContent = slides[i].querySelector('h3').textContent; }); }
+  function buildIdx() {
+    idx.innerHTML = ''; idxBtns = [];
+    slides.forEach(function(sl, i) {
+      var b = document.createElement('button'); b.type = 'button';
+      b.appendChild(document.createElement('i')); b.appendChild(document.createTextNode(''));
+      b.addEventListener('click', function() { go(i); });
+      idx.appendChild(b); idxBtns.push(b);
+    });
+    labels();
+  }
+  window.dtRefreshIdx = labels;
+  function pick(g) {
+    var cur = decks.filter(function(d) { return d.getAttribute('data-group') === g; })[0];
+    decks.forEach(function(d) { d.hidden = d !== cur; });
+    slides = [].slice.call(cur.querySelectorAll('.dt-slide')); buildIdx(); update();
+  }
+  function top0() { return stage.getBoundingClientRect().top + scrollY; }
+  function sNow() { return clamp((scrollY - (top0() - navH)) / (UNIT * innerHeight), 0, N - 1); }
+  function go(i) { scrollTo({ top: top0() - navH + i * UNIT * innerHeight + 1, behavior: mqR.matches ? 'auto' : 'smooth' }); }
+  function update() {
+    raf = 0;
+    if (!enabled()) {
+      stage.classList.remove('is-pinned');
+      slides.forEach(function(sl) { sl.classList.remove('is-on'); sl.inert = false; [].forEach.call(sl.children, function(c) { c.style.transform = ''; c.style.opacity = ''; }); });
+      return;
+    }
+    stage.classList.add('is-pinned');
+    var s = sNow();
+    slides.forEach(function(sl, i) {
+      var e = i === 0 ? 1 : easeOut(clamp((s - (i - 0.45)) / 0.45, 0, 1));
+      var x = i === N - 1 ? 0 : clamp((s - (i + 0.55)) / 0.45, 0, 1);
+      var pic = sl.children[0], txt = sl.children[1];
+      pic.style.transform = 'translate3d(0,' + ((1 - e) * 46) + 'vh,0) rotate(' + ((1 - e) * 3.2) + 'deg) scale(' + (1 - x * 0.07) + ')';
+      pic.style.opacity = (e * (1 - x)).toFixed(3);
+      var te = clamp((e - 0.55) / 0.45, 0, 1), tx = clamp(1 - x * 3, 0, 1);
+      txt.style.transform = 'translate3d(0,' + ((1 - te) * 34 - (1 - tx) * 22) + 'px,0)';
+      txt.style.opacity = Math.min(te, tx).toFixed(3);
+      var on = Math.round(s) === i; sl.classList.toggle('is-on', on); sl.inert = !on;
+    });
+    idxBtns.forEach(function(b, i) {
+      var f = i === 0 ? 1 : clamp((s - (i - 0.45)) / 0.45, 0, 1);
+      b.firstChild.style.transform = 'scaleX(' + f + ')'; b.classList.toggle('is-on', Math.round(s) === i);
+    });
+    clearTimeout(snapT);
+    snapT = setTimeout(function() {
+      var s2 = sNow(), edge = s2 <= 0.001 || s2 >= N - 1 - 0.001;
+      if (!edge && enabled() && Math.abs(s2 - Math.round(s2)) > 0.02) go(Math.round(s2));
+    }, 160);
+  }
+  function req() { if (!raf) raf = requestAnimationFrame(update); }
+  addEventListener('scroll', req, { passive: true });
+  addEventListener('resize', function() { measureNav(); req(); });
+  mqW.addEventListener('change', req); mqR.addEventListener('change', req);
+  modes.forEach(function(b, i) {
+    b.addEventListener('click', function() {
+      modes.forEach(function(m) { var on = m === b; m.classList.toggle('is-active', on); m.setAttribute('aria-selected', on); m.tabIndex = on ? 0 : -1; });
+      pick(b.getAttribute('data-mode'));
+    });
+    b.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { var n = modes[(i + (e.key === 'ArrowRight' ? 1 : modes.length - 1)) % modes.length]; n.focus(); n.click(); }
     });
   });
+  stage.addEventListener('click', function(e) {
+    var pic = e.target.closest('.dt-pic');
+    if (pic) { var btn = pic.parentNode.querySelector('.dt-more'); if (btn) btn.click(); }
+  });
+  measureNav(); pick('web');
 })();
 
 // ── SERVICE DETAIL DRAWER ─────────────────────────────────────────
@@ -3104,7 +3150,7 @@ function goHome(e) {
     a.setAttribute('aria-haspopup', 'dialog');
     a.addEventListener('click', function(e) { e.preventDefault(); openDrawer(SERVICES[i], a); });
   });
-  document.querySelectorAll('.dt-card__more').forEach(function(btn) {
+  document.querySelectorAll('.dt-more').forEach(function(btn) {
     var data = PRODUCTS[btn.getAttribute('data-product')];
     if (!data) return;
     btn.setAttribute('aria-haspopup', 'dialog');
