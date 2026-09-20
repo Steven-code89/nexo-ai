@@ -22,7 +22,7 @@
   :root {
     --ink: #0b1120; --muted: #4a5568; --paper: #f4f6fb; --card-bg: #ffffff;
     --accent: #2563eb; --accent-light: #3b82f6; --accent-dark: #1d4ed8;
-    --energy: #f2542d; --energy-dark: #d43e1a; --energy-light: #ff7a54;
+    --energy: #f2542d; --dark: #08080a; --dark-bg: radial-gradient(110% 90% at 80% 0%, #17171c 0%, #0b0b0e 55%, #050507 100%); --dark-end: #050507; --energy-dark: #d43e1a; --energy-light: #ff7a54;
     --border: rgba(11,17,32,0.1);
   }
   html { scroll-behavior: smooth; }
@@ -36,11 +36,11 @@
   .back-link:hover { color: var(--energy); }
   .nav-brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--muted); text-decoration: none; }
 
-  .hero { position: relative; overflow: hidden; padding: 5.5rem 5vw 4.5rem; background: var(--ink); color: #fff; }
-  .hero-glow { position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(circle at 85% 30%, rgba(37,99,235,0.32), transparent 55%); }
+  .hero { position: relative; overflow: hidden; padding: 5.5rem 5vw 4.5rem; background: var(--dark-bg); color: #fff; }
+  .hero-glow { position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(circle at 85% 30%, rgba(255,255,255,0.05), transparent 55%); }
   .hero-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; }
-  .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #93c5fd; margin-bottom: 1.25rem; }
-  .hero-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-light); }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--energy-light); margin-bottom: 1.25rem; }
+  .hero-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--energy); }
   .hero h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 700; line-height: 1.06; letter-spacing: -0.03em; margin-bottom: 1.25rem; max-width: 760px; }
   .hero-sub { font-size: 1.05rem; color: rgba(244,246,251,0.8); max-width: 600px; margin-bottom: 1.75rem; }
   .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
@@ -56,7 +56,7 @@
   .clear-note strong { display: block; font-family: 'Space Grotesk', sans-serif; margin-bottom: 0.4rem; }
   .clear-note p { font-size: 0.95rem; margin: 0; }
 
-  .block--dark { max-width: none; background: var(--ink); color: #fff; border-bottom: none; display: block; padding: 0; }
+  .block--dark { max-width: none; background: var(--dark-bg); color: #fff; border-bottom: none; display: block; padding: 0; }
   .block-inner { max-width: 1100px; margin: 0 auto; padding: 4.5rem 5vw; display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; align-items: start; }
   .block--dark h2 { color: #fff; }
   .roles { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
@@ -74,7 +74,7 @@
   .others a { text-decoration: none; font-size: 0.9rem; font-weight: 700; border: 1px solid var(--border); background: var(--card-bg); border-radius: 100px; padding: 0.6rem 1.1rem; transition: border-color 0.2s, color 0.2s; }
   .others a:hover { border-color: var(--energy); color: var(--energy); }
 
-  .cta { background: var(--ink); color: #fff; text-align: center; padding: 5rem 5vw; }
+  .cta { background: var(--dark-bg); color: #fff; text-align: center; padding: 5rem 5vw; }
   .cta h2 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); letter-spacing: -0.03em; margin-bottom: 0.9rem; }
   .cta p { color: rgba(244,246,251,0.7); max-width: 520px; margin: 0 auto 2rem; }
   .cta-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
@@ -83,7 +83,7 @@
   .btn--primary { background: var(--energy); border-color: var(--energy); }
   .btn--primary:hover { background: var(--energy-dark); border-color: var(--energy-dark); }
 
-  footer { padding: 2rem 5vw; background: var(--ink); border-top: 1px solid rgba(244,246,251,0.12); display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; font-size: 0.82rem; color: rgba(244,246,251,0.55); }
+  footer { padding: 2rem 5vw; background: var(--dark-end); border-top: 1px solid rgba(244,246,251,0.12); display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; font-size: 0.82rem; color: rgba(244,246,251,0.55); }
   footer a { text-decoration: none; font-weight: 700; font-family: 'Space Grotesk', sans-serif; color: #fff; }
 
   @media (max-width: 860px) {
@@ -122,8 +122,8 @@
 
 <main>
 <section class="block">
-  <h2>Lo que hacemos</h2>
-  <div class="prose"><p>Ordenamos lo que pasa entre la llamada del cliente y el trabajo entregado. Cotizaciones armadas a mano, citas anotadas en una libreta, clientes que preguntan si ya está listo: lo llevamos a un sistema que te ayude a verte serio, cotizar rápido y mantener informado al cliente.</p><p>Esto no cambia cómo trabajas. Cambia cómo te encuentran, cómo cotizas y cómo das seguimiento: citas, presupuestos, trabajos en curso y comunicación.</p><p>Da igual si trabajas solo o tienes un taller con varias personas. Lo que diseñamos se adapta al tamaño de tu negocio, con margen para crecer.</p></div>
+  <h2>Lo que hago</h2>
+  <div class="prose"><p>Ordeno lo que pasa entre la llamada del cliente y el trabajo entregado. Cotizaciones armadas a mano, citas anotadas en una libreta, clientes que preguntan si ya está listo: lo llevo a un sistema que te ayude a verte serio, cotizar rápido y mantener informado al cliente.</p><p>Esto no cambia cómo trabajas. Cambia cómo te encuentran, cómo cotizas y cómo das seguimiento: citas, presupuestos, trabajos en curso y comunicación.</p><p>Da igual si trabajas solo o tienes un taller con varias personas. Lo que diseño se adapta al tamaño de tu negocio, con margen para crecer.</p></div>
 </section>
 
 <section class="block">
@@ -131,22 +131,22 @@
   <div class="prose">
     <p>Suele pasar que los clientes te encuentran por recomendación pero no hay dónde ver tus trabajos. Que las cotizaciones se arman tarde y sin formato. Que el seguimiento de cada trabajo vive en mensajes sueltos. Y que se pierden clientes por no contestar a tiempo mientras estás con las manos ocupadas.</p>
     <p>No son problemas exclusivos de talleres y servicios técnicos, pero juntos forman la combinación típica de este tipo de negocio.</p>
-    <div class="clear-note"><strong>Para ser claros</strong><p>No somos técnicos ni mecánicos; tu oficio es tuyo. Lo que hacemos es escuchar cómo trabajas y crear herramientas que te quiten el papeleo.</p></div>
+    <div class="clear-note"><strong>Para ser claros</strong><p>No soy técnico ni mecánico; tu oficio es tuyo. Lo que hago es escuchar cómo trabajas y crear herramientas que te quiten el papeleo.</p></div>
   </div>
 </section>
 
 <section class="block block--dark">
   <div class="block-inner">
-    <h2>Cómo trabajamos juntos</h2>
+    <h2>Cómo trabajo juntos</h2>
     <div class="roles">
       <div class="role"><strong>Lo que pones tú</strong><p>Tu experiencia técnica, tus tarifas, tus tiempos y las zonas donde trabajas. Qué trabajos aceptas y cómo los garantizas.</p></div>
-      <div class="role"><strong>Lo que ponemos nosotros</strong><p>La metodología para escuchar y entender tu operación en profundidad. El diseño y el desarrollo del sitio, del sistema o de lo que la solución necesite incluir. Y el acompañamiento durante la puesta en marcha, con soporte después.</p></div>
+      <div class="role"><strong>Lo que pongo yo</strong><p>La metodología para escuchar y entender tu operación en profundidad. El diseño y el desarrollo del sitio, del sistema o de lo que la solución necesite incluir. Y el acompañamiento durante la puesta en marcha, con soporte después.</p></div>
     </div>
   </div>
 </section>
 
 <section class="block block--wide">
-  <h2>Algunas cosas que podríamos construir</h2>
+  <h2>Algunas cosas que podría construir</h2>
   <p class="lead">Son ejemplos de piezas que pueden formar parte de tu solución, juntas o por separado, según lo que necesites.</p>
   <div class="build-grid"><div class="build-item"><strong>Sitio web con galería de trabajos</strong><p>Un sitio que muestra tus trabajos, tus servicios y un botón directo para escribirte o llamarte.</p></div><div class="build-item"><strong>Cotizaciones digitales</strong><p>Presupuestos con formato profesional que se generan en minutos y se envían por WhatsApp o correo.</p></div><div class="build-item"><strong>Agenda y recordatorios</strong><p>Un calendario de citas con aviso automático al cliente el día anterior.</p></div><div class="build-item"><strong>Seguimiento de trabajos</strong><p>Avisos automáticos de estado al cliente: recibido, en proceso, listo para entregar.</p></div><div class="build-item"><strong>Asistente de IA</strong><p>Un asistente que atiende consultas y toma datos cuando estás ocupado con las manos.</p></div></div>
 </section>
@@ -158,8 +158,8 @@
 </main>
 
 <section class="cta">
-  <h2>Comencemos a trabajar hoy</h2>
-  <p>Cuéntanos cómo funciona tu negocio y te respondemos con ideas en menos de 24 horas — gratis y sin compromiso.</p>
+  <h2>Empecemos a trabajar hoy</h2>
+  <p>Cuéntame cómo funciona tu negocio y te respondo con ideas en menos de 24 horas — gratis y sin compromiso.</p>
   <div class="cta-actions">
     <button type="button" class="btn btn--primary" id="book">Agendar llamada</button>
     <a href="/#contact" class="btn btn--ghost">Escribirme</a>

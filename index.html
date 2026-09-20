@@ -7,7 +7,7 @@
 <title>Nexo AI — Páginas Web, Software e IA para Pequeños Negocios en Costa Rica</title>
 
 <!-- META DESCRIPTION: aparece debajo del título en Google. Máx 155 caracteres. -->
-<meta name="description" content="Nexo AI ayuda a pequeños negocios en Costa Rica a crecer con páginas web profesionales, software a medida e inteligencia artificial. Consulta gratis de 20 minutos.">
+<meta name="description" content="Nexo AI ayuda a pequeños negocios en Costa Rica a crecer con páginas web profesionales, software a medida e inteligencia artificial. Llamada gratis de 30 minutos.">
 
 <!-- KEYWORDS: útiles para Bing y otros motores -->
 <meta name="keywords" content="páginas web Costa Rica, inteligencia artificial negocios, chatbot IA, automatización, software a medida, diseño web Alajuela">
@@ -22,7 +22,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nnexoai.netlify.app/">
 <meta property="og:title" content="Nexo AI — Tecnología Inteligente para tu Negocio">
-<meta property="og:description" content="Páginas web, software a medida e IA para pequeños negocios en Costa Rica. Consulta gratis de 20 minutos, sin compromisos.">
+<meta property="og:description" content="Páginas web, software a medida e IA para pequeños negocios en Costa Rica. Llamada gratis de 30 minutos, sin compromiso.">
 <meta property="og:image" content="https://nnexoai.netlify.app/og-image.png">
 <meta property="og:locale" content="es_CR">
 <meta property="og:site_name" content="Nexo AI">
@@ -82,6 +82,9 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
     --ink: #0b1120;
+    --dark: #08080a; /* the single dark surface: Products, Process, Contact, footer */
+    --dark-bg: radial-gradient(110% 70% at 78% 0%, #17171c 0%, #0b0b0e 52%, #050507 100%); /* soft black gradient; ends on the footer color */
+    --dark-end: #050507;
     --paper: #f4f6fb;
     --accent: #2563eb;
     --accent-light: #3b82f6;
@@ -103,7 +106,7 @@
     position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
     overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
   }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; scroll-padding-top: 76px; }
   body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--paper); color: var(--ink); font-size: 16px; line-height: 1.65; }
 
   /* ── LANG SWITCHER ── */
@@ -129,6 +132,32 @@
   .logo .logo-ai { color: var(--accent); }
   .nav-right { display: flex; gap: 1.5rem; align-items: center; }
   .nav-links-text { display: flex; gap: 2rem; align-items: center; }
+  .nav-links-text a:not(.cta-small) { position: relative; }
+  .nav-links-text a:not(.cta-small)::after { content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; background: var(--energy); transform: scaleX(0); transform-origin: left; transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1); }
+  .nav-links-text a.is-current::after { transform: scaleX(1); }
+  .nav-toggle { display: none; width: 44px; height: 44px; margin-right: -8px; background: none; border: 0; border-radius: 10px; cursor: pointer; position: relative; }
+  .nav-toggle span { position: absolute; left: 12px; right: 12px; height: 2px; background: var(--ink); border-radius: 2px; transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.2s ease; }
+  .nav-toggle span:nth-child(1) { top: 15px; } .nav-toggle span:nth-child(2) { top: 21px; } .nav-toggle span:nth-child(3) { top: 27px; }
+  nav.menu-open .nav-toggle span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  nav.menu-open .nav-toggle span:nth-child(2) { opacity: 0; }
+  nav.menu-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+  .nav-toggle:focus-visible { outline: 2px solid var(--energy); outline-offset: 2px; }
+  @media (max-width: 1100px) {
+    .nav-toggle { display: block; }
+    .nav-right { gap: 0.75rem; }
+    .nav-links-text {
+      position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0;
+      padding: 0.5rem 5vw 1.5rem; background: var(--paper); border-bottom: 1px solid var(--border);
+      opacity: 0; visibility: hidden; transform: translateY(-8px); pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), visibility 0s linear 0.25s;
+    }
+    nav.menu-open .nav-links-text { opacity: 1; visibility: visible; transform: none; pointer-events: auto; transition-delay: 0s; }
+    .nav-links-text a:not(.cta-small) { font-size: 1.1rem; font-weight: 600; padding: 0.95rem 0; border-top: 1px solid var(--border); }
+    .nav-links-text a:not(.cta-small)::after { display: none; }
+    .nav-links-text a.is-current { color: var(--energy); }
+    .nav-links-text .cta-small { text-align: center; margin-top: 1rem; padding: 0.85rem 1.25rem; font-size: 0.95rem !important; }
+  }
+  @media (prefers-reduced-motion: reduce) { .nav-links-text, .nav-toggle span, .nav-links-text a::after { transition: none !important; } }
   nav a { text-decoration: none; color: var(--muted); font-size: 0.875rem; font-weight: 400; transition: color 0.2s; }
   nav a:hover { color: var(--ink); }
   .cta-small { background: var(--accent) !important; color: #fff !important; padding: 0.5rem 1.25rem; border-radius: 100px; font-size: 0.85rem !important; font-weight: 600 !important; transition: background 0.2s, transform 0.1s !important; }
@@ -256,7 +285,8 @@
 
   /* ── SECTIONS ── */
   .section { padding: 5rem 5vw; max-width: 1100px; margin: 0 auto; }
-  h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 3.5rem; max-width: 560px; }
+  h2 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(2.7rem, 5vw, 4.1rem); letter-spacing: -0.02em; line-height: 0.98; margin-bottom: 3.5rem; max-width: 620px; text-wrap: balance; }
+  #login-panel h2, .admin-header h2 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
 
   /* ── SERVICES ── */
   
@@ -265,7 +295,7 @@
   
 
   /* ── HOW IT WORKS ── */
-  .how-section { background: var(--ink); color: var(--paper); padding: 5rem 5vw; }
+  .how-section { background: var(--dark-bg); color: var(--paper); padding: 5rem 5vw; }
   .how-inner { max-width: 1100px; margin: 0 auto; }
   .how-inner h2 { color: var(--paper); }
   .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 3rem; margin-top: 3rem; position: relative; }
@@ -278,7 +308,7 @@
     .steps-ball {
       display: block; position: absolute; z-index: 2; pointer-events: none;
       top: -2.25rem; left: 0; width: 11px; height: 11px; border-radius: 50%;
-      background: #60a5fa; box-shadow: 0 0 8px rgba(96,165,250,0.9), 0 0 18px rgba(96,165,250,0.5);
+      background: var(--energy-light); box-shadow: 0 0 8px rgba(255,122,84,0.9), 0 0 18px rgba(242,84,45,0.5);
       opacity: 0; transition: opacity 0.3s ease;
     }
     .steps-ball.is-active { opacity: 1; }
@@ -286,22 +316,14 @@
   @media (prefers-reduced-motion: reduce) {
     .steps-ball { display: none; }
   }
-  .step-num { font-family: 'Space Grotesk', sans-serif; font-size: 3.5rem; font-weight: 700; color: #ffffff; line-height: 1; margin-bottom: 1rem; text-shadow: 0 0 20px rgba(96,165,250,0.8), 0 2px 8px rgba(0,0,0,0.5); }
+  .step-num { font-family: 'Space Grotesk', sans-serif; font-size: 3.5rem; font-weight: 700; color: #ffffff; line-height: 1; margin-bottom: 1rem; text-shadow: 0 0 20px rgba(242,84,45,0.5), 0 2px 8px rgba(0,0,0,0.5); }
   .step h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
   .step p { font-size: 0.875rem; color: rgba(244,246,251,0.55); line-height: 1.7; }
-
-  /* ── PRICING ── */
-  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
-  .price-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 2rem; position: relative; }
-
-  .featured-badge { display: none; }
-  .plan-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.05rem; margin-bottom: 0.75rem; color: var(--muted); letter-spacing: -0.01em; }
-  .plan-price { font-family: 'Space Grotesk', sans-serif; font-size: 2.75rem; font-weight: 700; letter-spacing: -0.04em; line-height: 1; margin-bottom: 0.35rem; color: var(--ink); }
-  .plan-price sup { font-size: 1.2rem; vertical-align: top; margin-top: 0.5rem; display: inline-block; }
-  .plan-period { font-size: 0.8rem; color: var(--muted); margin-bottom: 1.5rem; }
-  .plan-features { list-style: none; margin-bottom: 2rem; }
-  .plan-features li { font-size: 0.875rem; color: var(--muted); padding: 0.45rem 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.6rem; }
-  .plan-features li::before { content: ''; width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0; background: #dbeafe url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8l3 3 7-7' stroke='%232563eb' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+  .how-stack { position: relative; z-index: 1; display: flex; align-items: center; flex-wrap: wrap; gap: 0.9rem 1.4rem; margin-top: 3.5rem; padding-top: 1.75rem; border-top: 1px solid rgba(244,246,251,0.14); }
+  .how-stack__label { font-size: 0.85rem; font-weight: 700; color: var(--paper); }
+  .how-stack ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0; margin: 0; }
+  .how-stack li { font-family: ui-monospace, 'Cascadia Code', 'SF Mono', Consolas, monospace; font-size: 0.74rem; font-weight: 600; color: rgba(244,246,251,0.85); border: 1px solid rgba(244,246,251,0.25); border-radius: 8px; padding: 0.3rem 0.65rem; }
+  .how-stack__note { font-size: 0.82rem; color: rgba(244,246,251,0.55); }
 
   /* ── PROJECTS — 2×2 bento: illustrated preview + info, equal weight ──
      Each card leads with a small illustrated scene (not a screenshot)
@@ -404,153 +426,15 @@
     .project-link.hn-pulse:hover { color: var(--energy-dark); }
   }
   .projects-footer-note { margin-top: 2rem; font-size: 0.9rem; color: var(--muted); text-align: center; }
-  .projects-footer-note a { color: var(--accent); font-weight: 700; text-decoration: none; }
-  .projects-footer-note a:hover { color: var(--accent-dark); }
+  .projects-footer-note a { color: var(--energy); font-weight: 700; text-decoration: none; }
+  .projects-footer-note a:hover { color: var(--energy-dark); }
 
 
 
-
-  /* ══ PRICING CARD HOVER EFFECTS ══════════════════════════════════ */
-
-  /* Base upgrade for all price cards */
-  .price-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden;
-  }
-  .price-card:hover {
-    transform: translateY(-6px);
-  }
-
-  /* ── INICIAL: Typing cursor effect — like writing code ── */
-  .price-card.plan-inicial {
-    position: relative;
-  }
-  .price-card.plan-inicial::before {
-    content: '< / >';
-    position: absolute; top: 1rem; right: 1rem;
-    font-family: monospace; font-size: 0.7rem; font-weight: 700;
-    color: rgba(37,99,235,0.08); letter-spacing: 0.1em;
-    transition: color 0.3s, transform 0.3s;
-    transform: scale(0.8);
-  }
-  .price-card.plan-inicial::after {
-    content: '';
-    position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    transform: scaleX(0);
-    transition: transform 0.4s ease;
-  }
-  .price-card.plan-inicial:hover::before {
-    color: rgba(37,99,235,0.5);
-    transform: scale(1) rotate(5deg);
-  }
-  .price-card.plan-inicial:hover::after {
-    transform: scaleX(1);
-  }
-  .price-card.plan-inicial:hover {
-    box-shadow: 0 12px 40px rgba(37,99,235,0.15);
-    border-color: rgba(37,99,235,0.4);
-  }
-  .price-card.plan-inicial:hover .plan-price {
-    color: var(--accent);
-    transition: color 0.3s;
-  }
-
-  /* ── CRECIMIENTO: Neural network pulse — glowing nodes ── */
-  .price-card.plan-crecimiento {
-    position: relative;
-  }
-  @keyframes neuralPulse {
-    0%,100% { box-shadow: 0 0 0 0 rgba(37,99,235,0), 0 12px 40px rgba(37,99,235,0.2); }
-    50%      { box-shadow: 0 0 0 8px rgba(37,99,235,0.08), 0 20px 50px rgba(37,99,235,0.35); }
-  }
-  .price-card.plan-crecimiento:hover {
-    border-color: var(--accent);
-  }
-  @media (hover: hover) and (pointer: fine) {
-    .price-card.plan-crecimiento:hover { animation: neuralPulse 2s ease-in-out infinite; }
-  }
-  .price-card.plan-crecimiento::before {
-    content: '· · ·';
-    position: absolute; top: 0.75rem; right: 0.85rem;
-    font-size: 0.6rem; letter-spacing: 0.3em;
-    color: rgba(37,99,235,0.08);
-    transition: color 0.4s, letter-spacing 0.4s;
-  }
-  .price-card.plan-crecimiento:hover::before {
-    color: rgba(37,99,235,0.4);
-    letter-spacing: 0.5em;
-  }
-  .price-card.plan-crecimiento:hover .plan-name {
-    color: var(--muted); /* keep plan name color neutral */
-    transition: color 0.3s;
-  }
-  .price-card.plan-crecimiento:hover .plan-price {
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    transition: background 0.3s, color 0.3s;
-  }
-
-  /* ── EMPRESARIAL: Holographic shimmer ── */
-  @keyframes shimmer {
-    0%   { background-position: -200% center; }
-    100% { background-position:  200% center; }
-  }
-  .price-card.plan-empresarial {
-    position: relative;
-  }
-  .price-card.plan-empresarial::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(
-      105deg,
-      transparent 20%,
-      rgba(37,99,235,0.04) 30%,
-      rgba(147,197,253,0.12) 45%,
-      rgba(96,165,250,0.08) 50%,
-      rgba(37,99,235,0.04) 60%,
-      transparent 70%
-    );
-    background-size: 200% auto;
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-    border-radius: 20px;
-  }
-  .price-card.plan-empresarial:hover::after {
-    opacity: 1;
-  }
-  @media (hover: hover) and (pointer: fine) {
-    .price-card.plan-empresarial:hover::after { animation: shimmer 2s linear infinite; }
-  }
-  .price-card.plan-empresarial:hover {
-    box-shadow: 0 16px 50px rgba(37,99,235,0.2), 0 0 0 1px rgba(37,99,235,0.2);
-    border-color: rgba(147,197,253,0.6);
-  }
-  .price-card.plan-empresarial::before {
-    content: '✦';
-    position: absolute; top: 0.85rem; right: 1rem;
-    font-size: 1rem; color: rgba(37,99,235,0.1);
-    transition: color 0.3s, transform 0.5s;
-    transform: rotate(0deg);
-  }
-  .price-card.plan-empresarial:hover::before {
-    color: rgba(37,99,235,0.5);
-    transform: rotate(180deg);
-  }
-  .price-card.plan-empresarial:hover .plan-price {
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    transition: background 0.3s, color 0.3s;
-  }
 
   /* ── CONTACT ── */
   /* Dark two-column contact block; the footer continues the same surface. */
-  .contact-section { background: var(--ink); color: var(--paper); padding: 6rem 5vw 5rem; }
+  .contact-section { background: var(--dark-bg); color: var(--paper); padding: 6rem 5vw 5rem; }
   .contact-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.25fr; gap: 4rem; align-items: start; }
   .contact-aside h2 { color: var(--paper); margin: 0 0 1.25rem; max-width: 460px; }
   .contact-lead { font-family: ui-monospace, 'Cascadia Code', 'SF Mono', Consolas, monospace; font-size: 0.85rem; color: rgba(244,246,251,0.6); line-height: 1.7; max-width: 400px; margin-bottom: 2.25rem; }
@@ -635,7 +519,11 @@
   .btn-glass:active::after { transition: 0s; transform: translate(0, 5%); }
 
   /* ── FOOTER ── */
-  footer { background: var(--ink); border-top: 1px solid rgba(244,246,251,0.12); padding: 2rem 5vw; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.8rem; color: rgba(244,246,251,0.55); }
+  footer { background: var(--dark-end); border-top: 1px solid rgba(244,246,251,0.12); padding: 2rem 5vw; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.8rem; color: rgba(244,246,251,0.55); }
+  .footer-links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; }
+  .footer-links a { color: rgba(244,246,251,0.7); text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: color 0.2s ease; }
+  .footer-links a:hover { color: var(--energy-light); }
+  .footer-links a:focus-visible { outline: 2px solid var(--energy); outline-offset: 3px; border-radius: 3px; }
   footer .logo { color: var(--paper); }
   .footer-network { width: 15px; height: 15px; margin-left: 5px; vertical-align: -3px; opacity: 0.55; }
   .footer-network path { fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-linecap: round; }
@@ -652,10 +540,10 @@
   #services .services-network { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: visible; opacity: 0.5; }
   .services-network .sn-line { fill: none; stroke: var(--accent); stroke-width: 1; stroke-linecap: round; opacity: 0.14; }
   .services-network .sn-node { fill: var(--accent2); opacity: 0.22; }
-  #services h2 { margin-bottom: 0.75rem; margin-left: auto; margin-right: auto; text-align: center; }
-  .section-sub { color: var(--muted); font-size: 0.98rem; max-width: 560px; margin: 0 auto 1.75rem; text-align: center; }
+  #services h2 { margin-bottom: 0.9rem; }
+  .section-sub { color: var(--muted); font-size: 0.98rem; max-width: 560px; margin: 0 0 1.75rem; }
 
-  .services-list { max-width: 880px; margin: 3rem auto 0; }
+  .services-list { margin: 3rem 0 0; }
   .service-row {
     display: grid;
     grid-template-columns: 1fr 10rem 10rem;
@@ -731,42 +619,11 @@
   }
 
 
-  /* ══ WHAT'S BEHIND EACH PROJECT — PINNED HORIZONTAL SCROLL ════════
-     .wc-tall provides scroll distance; .wc-pin sticks at 100vh while
-     .wc-track is translated horizontally by JS in proportion to scroll
-     progress. Falls back to a normal stacked layout on mobile/reduced
-     motion (see media queries below and the JS guard). */
-  .wc-tall { position: relative; height: 220vh; }
-  .wc-pin { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--paper); padding: 4vh 5vw; box-sizing: border-box; }
-  .wc-frame {
-    position: relative; width: min(1100px, 100%); height: min(560px, 88vh);
-    border: 1px solid var(--border); border-radius: 24px; background: var(--card-bg);
-    box-shadow: 0 24px 60px rgba(11,17,32,0.08); overflow: hidden;
-  }
-  .wc-frame__bg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.5; pointer-events: none; }
-  .wc-frame__bg .sn-line { fill: none; stroke: var(--accent); stroke-width: 1; stroke-linecap: round; opacity: 0.16; }
-  .wc-frame__bg .sn-node { fill: var(--accent2); opacity: 0.28; }
-  .wc-track { display: flex; height: 100%; will-change: transform; }
-  .wc-panel { position: relative; width: 100%; flex-shrink: 0; box-sizing: border-box; padding: 3.5rem 4rem; display: flex; flex-direction: column; justify-content: center; }
-  .wc-panel__num { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; font-weight: 700; color: var(--accent); margin-bottom: 1rem; }
-  .wc-panel h3 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.6rem, 3.2vw, 2.2rem); font-weight: 700; letter-spacing: -0.02em; color: var(--ink); max-width: 480px; margin-bottom: 1rem; }
-  .wc-panel p { font-size: 1.02rem; color: var(--muted); line-height: 1.65; max-width: 460px; margin-bottom: 1.5rem; }
-  .wc-panel__tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  @media (max-width: 899px), (prefers-reduced-motion: reduce) {
-    .wc-tall { height: auto !important; }
-    .wc-pin { position: static !important; height: auto !important; overflow: visible !important; display: block !important; padding: 3rem 0; }
-    .wc-frame { width: 100% !important; height: auto !important; border: none; box-shadow: none; border-radius: 0; }
-    .wc-frame__bg { display: none; }
-    .wc-track { display: block !important; transform: none !important; height: auto; }
-    .wc-panel { width: 100% !important; padding: 0; }
-    .wc-panel + .wc-panel { margin-top: 3rem; }
-  }
-
   /* ══ WHAT WE BUILD — PINNED PRODUCT SHOWCASE ═══════════════════════
      The screen stays put while scrolling swaps the product sheets (JS
      scrubs transform/opacity). Without JS, on mobile, or with reduced
      motion it is a plain stacked list. */
-  .dt-section { --dt-nav: 76px; --dt-bg: #191513; --dt-bone: #efe8dd; --dt-mat: #e8e1d4; --dt-mut: #a89e92; --dt-line: rgba(239,232,221,0.16); background: var(--dt-bg); color: var(--dt-bone); }
+  .dt-section { --dt-nav: 76px; --dt-bg: var(--dark-bg); --dt-bone: #f2f0ec; --dt-mat: #e9e6df; --dt-mut: #a8a7a4; --dt-line: rgba(242,240,236,0.16); background: var(--dt-bg); color: var(--dt-bone); }
   .dt-wrap { max-width: 1320px; margin: 0 auto; padding: 0 4vw; }
   .dt-head { display: grid; grid-template-columns: 1.4fr 1fr; gap: 3rem; align-items: end; padding: 6.5rem 0 3rem; }
   .dt-section h2 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(3.2rem, 7.6vw, 6.6rem); line-height: 0.9; letter-spacing: -0.025em; color: var(--dt-bone); max-width: none; margin: 0; }
@@ -966,80 +823,8 @@
     .faq-a-inner p { padding-right: 1.5rem; }
   }
 
-  /* ══ PRICING MOBILE — COMPACT ════════════════════════════════════ */
-  @media (max-width: 768px) {
-    .pricing-grid {
-      grid-template-columns: 1fr !important;
-      gap: 1rem !important;
-    }
-    .price-card {
-      padding: 1.25rem !important;
-    }
-    .plan-price {
-      font-size: 2rem !important;
-    }
-    .plan-features {
-      display: flex !important;
-      flex-wrap: wrap !important;
-      gap: 0.4rem !important;
-      margin-bottom: 1.25rem !important;
-    }
-    .plan-features li {
-      font-size: 0.75rem !important;
-      padding: 0.3rem 0.7rem !important;
-      border: 1px solid var(--border) !important;
-      border-bottom: 1px solid var(--border) !important;
-      border-radius: 100px !important;
-      background: var(--paper) !important;
-      width: auto !important;
-      gap: 0.35rem !important;
-    }
-    .plan-features li::before {
-      width: 12px !important;
-      height: 12px !important;
-    }
-    .price-card.plan-crecimiento,
-    .price-card.plan-inicial,
-    .price-card.plan-empresarial {
-      animation: none !important;
-    }
-  }
-
-  /* ══ HOW SECTION — ANIMATED BACKGROUND ═══════════════════════════ */
-
-  /* Animated gradient background */
-  @keyframes gradientShift {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  .how-section {
-    background: linear-gradient(-45deg, #0b1120, #0f1a2e, #111827, #0d1527, #0b1120, #131f35);
-    background-size: 600% 600%;
-    position: relative;
-    overflow: hidden;
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    .how-section { animation: gradientShift 8s ease infinite; }
-  }
-
-  /* Floating particles in background */
-  .how-section::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image:
-      radial-gradient(circle at 20% 30%, rgba(30,58,138,0.25) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(15,23,42,0.4) 0%, transparent 50%),
-      radial-gradient(circle at 50% 50%, rgba(17,24,39,0.3) 0%, transparent 60%);
-    pointer-events: none;
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    .how-section::before { animation: particleFloat 8s ease-in-out infinite alternate; }
-  }
-  @keyframes particleFloat {
-    0%   { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(10px, -15px) scale(1.05); }
-  }
+  /* ══ HOW SECTION — static graphite, same dark surface as Products / Contact ══ */
+  .how-section { position: relative; overflow: hidden; }
 
   /* Step numbers — glow + count-up feel on hover */
   .step-num {
@@ -1052,7 +837,7 @@
   .step:hover .step-num,
   .step.step-active .step-num {
     transform: scale(1.15) translateY(-4px);
-    text-shadow: 0 0 30px rgba(147,197,253,1), 0 0 60px rgba(96,165,250,0.7), 0 2px 8px rgba(0,0,0,0.5);
+    text-shadow: 0 0 30px rgba(255,170,140,0.9), 0 0 60px rgba(242,84,45,0.6), 0 2px 8px rgba(0,0,0,0.5);
   }
 
   /* Step card hover — also toggled programmatically (.step-active) when
@@ -1080,7 +865,7 @@
     position: absolute;
     bottom: -3px; left: 0;
     width: 0; height: 2px;
-    background: var(--accent-light);
+    background: var(--energy);
     transition: width 0.4s ease;
     border-radius: 2px;
   }
@@ -1147,7 +932,6 @@
 
   @media (max-width: 600px) {
     .form-row { grid-template-columns: 1fr; }
-    .nav-links-text { display: none; }
     .admin-body { padding: 1.5rem 1rem; }
   }
 </style>
@@ -1187,16 +971,19 @@
 <nav aria-label="Navegación principal">
   <a class="logo" href="#" onclick="goHome(event)" aria-label="Nexo AI — Ir al inicio">Nexo<span class="logo-ai"> AI</span><svg class="footer-network" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 17 L12 7 L19 17"/><path d="M5 17 L19 17"/><circle cx="12" cy="7" r="1.7"/><circle cx="5" cy="17" r="1.7"/><circle cx="19" cy="17" r="1.7"/></svg></a>
   <div class="nav-right">
-    <div class="nav-links-text">
+    <div class="nav-links-text" id="nav-links">
+      <a href="#dt-section" data-es="Productos" data-en="Products">Productos</a>
       <a href="#services" data-es="Servicios" data-en="Services">Servicios</a>
       <a href="#proyectos" data-es="Proyectos" data-en="Projects">Proyectos</a>
-      <a href="#pricing" data-es="Precios" data-en="Pricing">Precios</a>
-      <a href="#contact" class="cta-small" data-es="Auditoría gratis" data-en="Free audit">Auditoría gratis</a>
+      <a href="#industries" data-es="Industrias" data-en="Industries">Industrias</a>
+      <a href="#faq" data-es="Preguntas" data-en="FAQ">Preguntas</a>
+      <a href="#contact" class="cta-small" onclick="event.preventDefault(); Cal.ns['30min']('modal', {calLink:'steven-jimenez-nexo/30min', config:{layout:'month_view'}});" data-es="Llamada gratis" data-en="Free call">Llamada gratis</a>
     </div>
     <div class="lang-switcher">
       <button class="lang-btn active" onclick="setLang('es')" aria-label="Ver en español">ES</button>
       <button class="lang-btn" onclick="setLang('en')" aria-label="View in English">EN</button>
     </div>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Abrir menú"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
@@ -1222,213 +1009,13 @@
   </svg>
   <div class="hero-tag"><span class="hero-tag-text" data-es="Tecnología inteligente para negocios locales" data-en="Smart technology for local business">Tecnología inteligente para negocios locales</span></div>
   <h1 fetchpriority="high" data-es="Tu negocio, <em>conectado al futuro</em> con IA." data-en="Your business, <em>connected to the future</em> with AI.">Tu negocio, <em>conectado al futuro</em> con IA.</h1>
-  <p class="hero-sub" data-es="Ayudamos a pequeñas empresas a ahorrar tiempo, atraer más clientes y crecer — con páginas web profesionales, software a medida e inteligencia artificial." data-en="We help small businesses save time, attract more clients and grow — with professional websites, custom software and artificial intelligence.">Ayudamos a pequeñas empresas a ahorrar tiempo, atraer más clientes y crecer — con páginas web profesionales, software a medida e inteligencia artificial.</p>
+  <p class="hero-sub" data-es="Ayudo a pequeñas empresas a ahorrar tiempo, atraer más clientes y crecer — con páginas web profesionales, software a medida e inteligencia artificial." data-en="I help small businesses save time, attract more clients and grow — with professional websites, custom software and artificial intelligence.">Ayudo a pequeñas empresas a ahorrar tiempo, atraer más clientes y crecer — con páginas web profesionales, software a medida e inteligencia artificial.</p>
   <div class="hero-actions">
-    <a href="#contact" class="btn-primary btn-primary--energy" onclick="event.preventDefault(); Cal.ns['30min']('modal', {calLink:'steven-jimenez-nexo/30min', config:{layout:'month_view'}});" data-es="Agenda una llamada gratis de 20 min" data-en="Book a free 20-min call">Agenda una llamada gratis de 20 min</a>
-    <a href="#services" class="btn-ghost" data-es="Ver mis servicios" data-en="See what I offer">Ver mis servicios</a>
+    <a href="#contact" class="btn-primary btn-primary--energy" onclick="event.preventDefault(); Cal.ns['30min']('modal', {calLink:'steven-jimenez-nexo/30min', config:{layout:'month_view'}});" data-es="Agenda una llamada gratis de 30 min" data-en="Book a free 30-min call">Agenda una llamada gratis de 30 min</a>
+    <a href="#dt-section" class="btn-ghost" data-es="Ver lo que construyo" data-en="See what I build">Ver lo que construyo</a>
   </div>
   <p class="hero-note" data-es="Sin tecnicismos. Sin contratos largos. Solo resultados." data-en="No tech jargon. No long contracts. Just results.">Sin tecnicismos. Sin contratos largos. Solo resultados.</p>
   <div class="hero-glow" aria-hidden="true"></div>
-</div>
-
-<div class="section" id="services">
-  <svg class="services-network" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-    <path class="sn-line" d="M860,50 L955,125"/>
-    <path class="sn-line" d="M860,50 L790,145"/>
-    <path class="sn-line" d="M790,145 L955,125"/>
-    <circle class="sn-node" cx="860" cy="50" r="4"/>
-    <circle class="sn-node" cx="955" cy="125" r="4"/>
-    <circle class="sn-node" cx="790" cy="145" r="4"/>
-    <path class="sn-line" d="M55,615 L145,555"/>
-    <path class="sn-line" d="M145,555 L35,490"/>
-    <circle class="sn-node" cx="55" cy="615" r="4"/>
-    <circle class="sn-node" cx="145" cy="555" r="4"/>
-    <circle class="sn-node" cx="35" cy="490" r="4"/>
-  </svg>
-  <h2 data-es="Soluciones digitales que hacen avanzar tu negocio" data-en="Digital solutions that move your business forward">Soluciones digitales que hacen avanzar tu negocio</h2>
-  <p class="section-sub" data-es="Diseño, desarrollo y automatización para convertir más, ahorrar tiempo y trabajar mejor." data-en="Design, development and automation to convert more, save time and work better.">Diseño, desarrollo y automatización para convertir más, ahorrar tiempo y trabajar mejor.</p>
-
-  <div class="services-list">
-
-    <div class="service-row">
-      <div class="service-row-main">
-        <h3 data-es="Páginas web que convierten" data-en="Websites that convert">Páginas web que convierten</h3>
-        <p data-es="Diseñamos y desarrollamos sitios rápidos, modernos y optimizados para convertir visitantes en clientes." data-en="We design and build fast, modern sites optimized to turn visitors into clients.">Diseñamos y desarrollamos sitios rápidos, modernos y optimizados para convertir visitantes en clientes.</p>
-        <div class="service-chips">
-          <span class="service-chip" data-es="Landing pages" data-en="Landing pages">Landing pages</span>
-          <span class="service-chip" data-es="Tiendas en línea" data-en="Online stores">Tiendas en línea</span>
-          <span class="service-chip" data-es="Sitios informativos" data-en="Informational sites">Sitios informativos</span>
-          <span class="service-chip" data-es="Portafolios" data-en="Portfolios">Portafolios</span>
-        </div>
-      </div>
-      <div class="service-row-price">
-        <span class="price-label" data-es="Desde" data-en="From">Desde</span>
-        <span class="price-amount">$350</span>
-        <span class="price-note" data-es="Pago único" data-en="One-time">Pago único</span>
-      </div>
-      <a href="#contact" class="service-cta"><span data-es="Ver servicio" data-en="View service">Ver servicio</span><span class="cta-arrow" aria-hidden="true">→</span></a>
-    </div>
-
-    <div class="service-row">
-      <div class="service-row-main">
-        <h3 data-es="Atención al cliente 24/7" data-en="24/7 customer support">Atención al cliente 24/7</h3>
-        <p data-es="Un asistente de IA que responde preguntas, agenda citas y captura clientes potenciales mientras tú haces crecer el negocio." data-en="An AI assistant that answers questions, books appointments and captures leads while you grow the business.">Un asistente de IA que responde preguntas, agenda citas y captura clientes potenciales mientras tú haces crecer el negocio.</p>
-        <div class="service-chips">
-          <span class="service-chip" data-es="WhatsApp" data-en="WhatsApp">WhatsApp</span>
-          <span class="service-chip" data-es="Chat web" data-en="Web chat">Chat web</span>
-          <span class="service-chip" data-es="Reservas" data-en="Bookings">Reservas</span>
-          <span class="service-chip" data-es="Preguntas frecuentes" data-en="FAQ">Preguntas frecuentes</span>
-        </div>
-      </div>
-      <div class="service-row-price">
-        <span class="price-label" data-es="Desde" data-en="From">Desde</span>
-        <span class="price-amount" data-es="$49/mes" data-en="$49/mo">$49/mes</span>
-        <span class="price-note" data-es="+ $150 instalación" data-en="+ $150 setup">+ $150 instalación</span>
-      </div>
-      <a href="#contact" class="service-cta"><span data-es="Ver servicio" data-en="View service">Ver servicio</span><span class="cta-arrow" aria-hidden="true">→</span></a>
-    </div>
-
-    <div class="service-row">
-      <div class="service-row-main">
-        <h3 data-es="Automatización con IA" data-en="AI automation">Automatización con IA</h3>
-        <p data-es="Automatiza correos, seguimientos, cotizaciones, facturas y tareas repetitivas." data-en="Automate emails, follow-ups, quotes, invoices and repetitive tasks.">Automatiza correos, seguimientos, cotizaciones, facturas y tareas repetitivas.</p>
-        <div class="service-chips">
-          <span class="service-chip" data-es="Facturación" data-en="Invoicing">Facturación</span>
-          <span class="service-chip" data-es="Seguimiento de clientes" data-en="Client follow-up">Seguimiento de clientes</span>
-          <span class="service-chip" data-es="Reportes" data-en="Reports">Reportes</span>
-          <span class="service-chip" data-es="Recordatorios" data-en="Reminders">Recordatorios</span>
-        </div>
-      </div>
-      <div class="service-row-price">
-        <span class="price-label" data-es="Desde" data-en="From">Desde</span>
-        <span class="price-amount" data-es="$39/mes" data-en="$39/mo">$39/mes</span>
-      </div>
-      <a href="#contact" class="service-cta"><span data-es="Ver servicio" data-en="View service">Ver servicio</span><span class="cta-arrow" aria-hidden="true">→</span></a>
-    </div>
-
-    <div class="service-row">
-      <div class="service-row-main">
-        <h3 data-es="Software a medida" data-en="Custom software">Software a medida</h3>
-        <p data-es="Sistemas y herramientas diseñados específicamente para la forma en que trabaja tu negocio." data-en="Systems and tools designed specifically for the way your business works.">Sistemas y herramientas diseñados específicamente para la forma en que trabaja tu negocio.</p>
-        <div class="service-chips">
-          <span class="service-chip" data-es="CRM interno" data-en="Internal CRM">CRM interno</span>
-          <span class="service-chip" data-es="Paneles de control" data-en="Dashboards">Paneles de control</span>
-          <span class="service-chip" data-es="Integraciones" data-en="Integrations">Integraciones</span>
-          <span class="service-chip" data-es="Apps internas" data-en="Internal apps">Apps internas</span>
-        </div>
-      </div>
-      <div class="service-row-price service-row-price--quote">
-        <span class="price-amount price-amount--text" data-es="Cotización personalizada" data-en="Custom quote">Cotización personalizada</span>
-      </div>
-      <a href="#contact" class="service-cta"><span data-es="Solicitar cotización" data-en="Request a quote">Solicitar cotización</span><span class="cta-arrow" aria-hidden="true">→</span></a>
-    </div>
-
-    <div class="service-row">
-      <div class="service-row-main">
-        <h3 data-es="Contenido con IA" data-en="AI content">Contenido con IA</h3>
-        <p data-es="Contenido para redes sociales, blogs y newsletters creado y programado automáticamente." data-en="Content for social media, blogs and newsletters created and scheduled automatically.">Contenido para redes sociales, blogs y newsletters creado y programado automáticamente.</p>
-        <div class="service-chips">
-          <span class="service-chip" data-es="Redes sociales" data-en="Social media">Redes sociales</span>
-          <span class="service-chip" data-es="Blog" data-en="Blog">Blog</span>
-          <span class="service-chip" data-es="Newsletters" data-en="Newsletters">Newsletters</span>
-          <span class="service-chip" data-es="Calendario editorial" data-en="Content calendar">Calendario editorial</span>
-        </div>
-      </div>
-      <div class="service-row-price">
-        <span class="price-label" data-es="Desde" data-en="From">Desde</span>
-        <span class="price-amount" data-es="$99/mes" data-en="$99/mo">$99/mes</span>
-      </div>
-      <a href="#contact" class="service-cta"><span data-es="Ver servicio" data-en="View service">Ver servicio</span><span class="cta-arrow" aria-hidden="true">→</span></a>
-    </div>
-
-    <div class="service-row">
-      <div class="service-row-main">
-        <h3 data-es="Email y seguimiento" data-en="Email & follow-up">Email y seguimiento</h3>
-        <p data-es="Automatiza recordatorios, solicitudes de reseñas y seguimiento de clientes." data-en="Automate reminders, review requests and client follow-up.">Automatiza recordatorios, solicitudes de reseñas y seguimiento de clientes.</p>
-        <div class="service-chips">
-          <span class="service-chip" data-es="Recordatorios" data-en="Reminders">Recordatorios</span>
-          <span class="service-chip" data-es="Reseñas" data-en="Reviews">Reseñas</span>
-          <span class="service-chip" data-es="Seguimiento post-venta" data-en="Post-sale follow-up">Seguimiento post-venta</span>
-          <span class="service-chip" data-es="Bienvenida automática" data-en="Automatic welcome">Bienvenida automática</span>
-        </div>
-      </div>
-      <div class="service-row-price">
-        <span class="price-label" data-es="Desde" data-en="From">Desde</span>
-        <span class="price-amount" data-es="$39/mes" data-en="$39/mo">$39/mes</span>
-        <span class="price-note" data-es="+ $120 instalación" data-en="+ $120 setup">+ $120 instalación</span>
-      </div>
-      <a href="#contact" class="service-cta"><span data-es="Ver servicio" data-en="View service">Ver servicio</span><span class="cta-arrow" aria-hidden="true">→</span></a>
-    </div>
-
-    <div class="service-row">
-      <div class="service-row-main">
-        <h3 data-es="Flujos de trabajo" data-en="Custom workflows">Flujos de trabajo</h3>
-        <p data-es="Conecta tus herramientas y elimina procesos manuales que consumen tiempo." data-en="Connect your tools and eliminate manual processes that waste time.">Conecta tus herramientas y elimina procesos manuales que consumen tiempo.</p>
-        <div class="service-chips">
-          <span class="service-chip" data-es="Conexión de apps" data-en="App connections">Conexión de apps</span>
-          <span class="service-chip" data-es="Alertas" data-en="Alerts">Alertas</span>
-          <span class="service-chip" data-es="Reportes automáticos" data-en="Automatic reports">Reportes automáticos</span>
-          <span class="service-chip" data-es="Tareas repetitivas" data-en="Repetitive tasks">Tareas repetitivas</span>
-        </div>
-      </div>
-      <div class="service-row-price service-row-price--quote">
-        <span class="price-amount price-amount--text" data-es="Cotización personalizada" data-en="Custom quote">Cotización personalizada</span>
-      </div>
-      <a href="#contact" class="service-cta"><span data-es="Solicitar cotización" data-en="Request a quote">Solicitar cotización</span><span class="cta-arrow" aria-hidden="true">→</span></a>
-    </div>
-
-  </div>
-
-  <div class="services-trust">
-    <h3 data-es="¿No sabes qué necesitas?" data-en="Not sure what you need?">¿No sabes qué necesitas?</h3>
-    <p data-es="Cuéntame qué quieres mejorar en tu negocio y te digo qué solución tiene más sentido." data-en="Tell me what you want to improve in your business and I'll tell you which solution makes the most sense.">Cuéntame qué quieres mejorar en tu negocio y te digo qué solución tiene más sentido.</p>
-    <a href="#contact" class="service-cta service-cta--ghost"><span data-es="Hablar sobre mi proyecto" data-en="Talk about my project">Hablar sobre mi proyecto</span><span class="cta-arrow" aria-hidden="true">→</span></a>
-  </div>
-</div>
-
-<div class="wc-tall" id="wc-tall">
-  <div class="wc-pin">
-    <div class="wc-frame" id="wc-frame">
-      <svg class="wc-frame__bg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-        <path class="sn-line" d="M60,420 L220,300 L400,360 L560,180 L740,240"/>
-        <path class="sn-line" d="M220,300 L260,120"/>
-        <path class="sn-line" d="M400,360 L620,420"/>
-        <circle class="sn-node" cx="60" cy="420" r="4"/>
-        <circle class="sn-node" cx="220" cy="300" r="4"/>
-        <circle class="sn-node" cx="260" cy="120" r="4"/>
-        <circle class="sn-node" cx="400" cy="360" r="4"/>
-        <circle class="sn-node" cx="560" cy="180" r="4"/>
-        <circle class="sn-node" cx="620" cy="420" r="4"/>
-        <circle class="sn-node" cx="740" cy="240" r="4"/>
-      </svg>
-      <div class="wc-track">
-      <div class="wc-panel">
-        <span class="wc-panel__num">01</span>
-        <h3 data-es="Construido para cargar rápido" data-en="Built to load fast">Construido para cargar rápido</h3>
-        <p data-es="Sitios en HTML, CSS y JavaScript puro: sin frameworks pesados ni procesos de build que se puedan romper. Lo que ves es exactamente lo que se sirve al navegador." data-en="Sites in plain HTML, CSS and JavaScript: no heavy frameworks or build steps that can break. What you see is exactly what gets served to the browser.">Sitios en HTML, CSS y JavaScript puro: sin frameworks pesados ni procesos de build que se puedan romper. Lo que ves es exactamente lo que se sirve al navegador.</p>
-        <div class="wc-panel__tags">
-          <span class="service-chip">HTML5</span><span class="service-chip">CSS3</span><span class="service-chip">JavaScript</span>
-        </div>
-      </div>
-      <div class="wc-panel">
-        <span class="wc-panel__num">02</span>
-        <h3 data-es="Con backend real cuando lo necesitás" data-en="With a real backend when you need one">Con backend real cuando lo necesitás</h3>
-        <p data-es="Formularios, bases de datos y autenticación con Supabase; hosting y despliegue continuo con Netlify. La misma base que usa este sitio." data-en="Forms, databases and auth with Supabase; hosting and continuous deployment with Netlify. The same setup running this site.">Formularios, bases de datos y autenticación con Supabase; hosting y despliegue continuo con Netlify. La misma base que usa este sitio.</p>
-        <div class="wc-panel__tags">
-          <span class="service-chip">Supabase</span><span class="service-chip">Netlify</span>
-        </div>
-      </div>
-      <div class="wc-panel">
-        <span class="wc-panel__num">03</span>
-        <h3 data-es="Con inteligencia artificial donde suma" data-en="With AI where it actually helps">Con inteligencia artificial donde suma</h3>
-        <p data-es="Chatbots y automatizaciones conectados a modelos de IA para responder, agendar y dar seguimiento sin que tengas que estar pendiente todo el día." data-en="Chatbots and automations connected to AI models to answer, book and follow up without you having to watch it all day.">Chatbots y automatizaciones conectados a modelos de IA para responder, agendar y dar seguimiento sin que tengas que estar pendiente todo el día.</p>
-        <div class="wc-panel__tags">
-          <span class="service-chip">Chatbot IA</span><span class="service-chip">Automatización</span>
-        </div>
-      </div>
-      </div>
-    </div>
-  </div>
 </div>
 
 <div class="dt-section" id="dt-section">
@@ -1436,7 +1023,7 @@
     <header class="dt-head">
       <h2 data-es="De una idea <em>a un producto real.</em>" data-en="From an idea <em>to a real product.</em>">De una idea <em>a un producto real.</em></h2>
       <div>
-        <p class="dt-sub" data-es="Diseñamos y desarrollamos experiencias digitales rápidas, modernas y pensadas para crecer contigo." data-en="We design and build fast, modern digital experiences made to grow with you.">Diseñamos y desarrollamos experiencias digitales rápidas, modernas y pensadas para crecer contigo.</p>
+        <p class="dt-sub" data-es="Diseño y desarrollo experiencias digitales rápidas, modernas y pensadas para crecer contigo." data-en="I design and build fast, modern digital experiences made to grow with you.">Diseño y desarrollo experiencias digitales rápidas, modernas y pensadas para crecer contigo.</p>
         <ul class="dt-caps">
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 4.7 4.7 1.8-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2 2.2.8-2.2.8L19 21l-.8-2.2-2.2-.8 2.2-.8z"/></svg><span data-es="Diseño" data-en="Design">Diseño</span></li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg><span data-es="Desarrollo" data-en="Development">Desarrollo</span></li>
@@ -1530,7 +1117,7 @@
         <div class="dt-txt">
           <span class="dt-cat" data-es="Software a medida" data-en="Custom software">Software a medida</span>
           <h3 data-es="Integraciones y automatización" data-en="Integrations and automation">Integraciones y automatización</h3>
-          <p data-es="Conectamos tus herramientas y automatizamos lo repetitivo, con inteligencia artificial donde de verdad suma." data-en="We connect your tools and automate the repetitive work, with AI where it genuinely helps.">Conectamos tus herramientas y automatizamos lo repetitivo, con inteligencia artificial donde de verdad suma.</p>
+          <p data-es="Conecto tus herramientas y automatizo lo repetitivo, con inteligencia artificial donde de verdad suma." data-en="I connect your tools and automate the repetitive work, with AI where it genuinely helps.">Conecto tus herramientas y automatizo lo repetitivo, con inteligencia artificial donde de verdad suma.</p>
           <button type="button" class="dt-more" data-product="sw-integ"><span data-es="Ver detalles" data-en="View details">Ver detalles</span></button>
         </div>
       </article>
@@ -1541,21 +1128,110 @@
   </div>
 </div>
 
-<div class="how-section">
-  <div class="how-inner">
-    <h2 data-es="Simple desde el inicio hasta los resultados" data-en="Simple from start to results">Simple desde el inicio hasta los resultados</h2>
-    <div class="steps">
-      <div class="steps-ball" aria-hidden="true"></div>
-      <div class="step"><div class="step-num">1</div><h3 data-es="Llamada de diagnóstico gratis" data-en="Free audit call">Llamada de diagnóstico gratis</h3><p data-es="Hablamos 20 minutos sobre tu negocio. Identificamos dónde la tecnología puede ahorrarte más tiempo o dinero." data-en="We talk for 20 minutes about your business. We identify where technology can save you the most time or money.">Hablamos 20 minutos sobre tu negocio. Identificamos dónde la tecnología puede ahorrarte más tiempo o dinero.</p></div>
-      <div class="step"><div class="step-num">2</div><h3 data-es="Propuesta en 48 horas" data-en="Proposal in 48h">Propuesta en 48 horas</h3><p data-es="Recibes un plan claro con las herramientas, el tiempo y el costo exacto. Sin sorpresas." data-en="You get a clear plan with exact tools, timeline, and cost. No surprises.">Recibes un plan claro con las herramientas, el tiempo y el costo exacto. Sin sorpresas.</p></div>
-      <div class="step"><div class="step-num">3</div><h3 data-es="Configuración y lanzamiento" data-en="Setup & launch">Configuración y lanzamiento</h3><p data-es="Construimos y probamos todo. Recibes una explicación completa para que entiendas qué está pasando." data-en="We build and test everything. You get a full walkthrough so you understand what's happening.">Construimos y probamos todo. Recibes una explicación completa para que entiendas qué está pasando.</p></div>
-      <div class="step"><div class="step-num">4</div><h3 data-es="Soporte continuo" data-en="Ongoing support">Soporte continuo</h3><p data-es="Revisiones mensuales, ajustes y mejoras incluidas. Siempre estamos a un mensaje de distancia." data-en="Monthly check-ins, tweaks and improvements included. We're always one message away.">Revisiones mensuales, ajustes y mejoras incluidas. Siempre estamos a un mensaje de distancia.</p></div>
+<div class="section" id="services">
+  <svg class="services-network" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+    <path class="sn-line" d="M860,50 L955,125"/>
+    <path class="sn-line" d="M860,50 L790,145"/>
+    <path class="sn-line" d="M790,145 L955,125"/>
+    <circle class="sn-node" cx="860" cy="50" r="4"/>
+    <circle class="sn-node" cx="955" cy="125" r="4"/>
+    <circle class="sn-node" cx="790" cy="145" r="4"/>
+    <path class="sn-line" d="M55,615 L145,555"/>
+    <path class="sn-line" d="M145,555 L35,490"/>
+    <circle class="sn-node" cx="55" cy="615" r="4"/>
+    <circle class="sn-node" cx="145" cy="555" r="4"/>
+    <circle class="sn-node" cx="35" cy="490" r="4"/>
+  </svg>
+  <h2 data-es="Servicios mensuales que trabajan por ti" data-en="Monthly services that work for you">Servicios mensuales que trabajan por ti</h2>
+  <p class="section-sub" data-es="Asistentes, automatizaciones y contenido con IA, con precio claro y sin contratos largos." data-en="AI assistants, automations and content, with clear pricing and no long contracts.">Asistentes, automatizaciones y contenido con IA, con precio claro y sin contratos largos.</p>
+
+  <div class="services-list">
+
+    <div class="service-row">
+      <div class="service-row-main">
+        <h3 data-es="Atención al cliente 24/7" data-en="24/7 customer support">Atención al cliente 24/7</h3>
+        <p data-es="Un asistente de IA que responde preguntas, agenda citas y captura clientes potenciales mientras tú haces crecer el negocio." data-en="An AI assistant that answers questions, books appointments and captures leads while you grow the business.">Un asistente de IA que responde preguntas, agenda citas y captura clientes potenciales mientras tú haces crecer el negocio.</p>
+        <div class="service-chips">
+          <span class="service-chip" data-es="WhatsApp" data-en="WhatsApp">WhatsApp</span>
+          <span class="service-chip" data-es="Chat web" data-en="Web chat">Chat web</span>
+          <span class="service-chip" data-es="Reservas" data-en="Bookings">Reservas</span>
+          <span class="service-chip" data-es="Preguntas frecuentes" data-en="FAQ">Preguntas frecuentes</span>
+        </div>
+      </div>
+      <div class="service-row-price">
+        <span class="price-label" data-es="Desde" data-en="From">Desde</span>
+        <span class="price-amount" data-es="$49/mes" data-en="$49/mo">$49/mes</span>
+        <span class="price-note" data-es="+ $150 instalación" data-en="+ $150 setup">+ $150 instalación</span>
+      </div>
+      <a href="#contact" class="service-cta" data-svc="chat"><span data-es="Ver servicio" data-en="View service">Ver servicio</span><span class="cta-arrow" aria-hidden="true">→</span></a>
     </div>
+
+    <div class="service-row">
+      <div class="service-row-main">
+        <h3 data-es="Automatización con IA" data-en="AI automation">Automatización con IA</h3>
+        <p data-es="Automatiza correos, seguimientos, cotizaciones, facturas y tareas repetitivas." data-en="Automate emails, follow-ups, quotes, invoices and repetitive tasks.">Automatiza correos, seguimientos, cotizaciones, facturas y tareas repetitivas.</p>
+        <div class="service-chips">
+          <span class="service-chip" data-es="Facturación" data-en="Invoicing">Facturación</span>
+          <span class="service-chip" data-es="Seguimiento de clientes" data-en="Client follow-up">Seguimiento de clientes</span>
+          <span class="service-chip" data-es="Reportes" data-en="Reports">Reportes</span>
+          <span class="service-chip" data-es="Recordatorios" data-en="Reminders">Recordatorios</span>
+        </div>
+      </div>
+      <div class="service-row-price">
+        <span class="price-label" data-es="Desde" data-en="From">Desde</span>
+        <span class="price-amount" data-es="$39/mes" data-en="$39/mo">$39/mes</span>
+      </div>
+      <a href="#contact" class="service-cta" data-svc="auto"><span data-es="Ver servicio" data-en="View service">Ver servicio</span><span class="cta-arrow" aria-hidden="true">→</span></a>
+    </div>
+
+    <div class="service-row">
+      <div class="service-row-main">
+        <h3 data-es="Contenido con IA" data-en="AI content">Contenido con IA</h3>
+        <p data-es="Contenido para redes sociales, blogs y newsletters creado y programado automáticamente." data-en="Content for social media, blogs and newsletters created and scheduled automatically.">Contenido para redes sociales, blogs y newsletters creado y programado automáticamente.</p>
+        <div class="service-chips">
+          <span class="service-chip" data-es="Redes sociales" data-en="Social media">Redes sociales</span>
+          <span class="service-chip" data-es="Blog" data-en="Blog">Blog</span>
+          <span class="service-chip" data-es="Newsletters" data-en="Newsletters">Newsletters</span>
+          <span class="service-chip" data-es="Calendario editorial" data-en="Content calendar">Calendario editorial</span>
+        </div>
+      </div>
+      <div class="service-row-price">
+        <span class="price-label" data-es="Desde" data-en="From">Desde</span>
+        <span class="price-amount" data-es="$99/mes" data-en="$99/mo">$99/mes</span>
+      </div>
+      <a href="#contact" class="service-cta" data-svc="content"><span data-es="Ver servicio" data-en="View service">Ver servicio</span><span class="cta-arrow" aria-hidden="true">→</span></a>
+    </div>
+
+    <div class="service-row">
+      <div class="service-row-main">
+        <h3 data-es="Email y seguimiento" data-en="Email & follow-up">Email y seguimiento</h3>
+        <p data-es="Automatiza recordatorios, solicitudes de reseñas y seguimiento de clientes." data-en="Automate reminders, review requests and client follow-up.">Automatiza recordatorios, solicitudes de reseñas y seguimiento de clientes.</p>
+        <div class="service-chips">
+          <span class="service-chip" data-es="Recordatorios" data-en="Reminders">Recordatorios</span>
+          <span class="service-chip" data-es="Reseñas" data-en="Reviews">Reseñas</span>
+          <span class="service-chip" data-es="Seguimiento post-venta" data-en="Post-sale follow-up">Seguimiento post-venta</span>
+          <span class="service-chip" data-es="Bienvenida automática" data-en="Automatic welcome">Bienvenida automática</span>
+        </div>
+      </div>
+      <div class="service-row-price">
+        <span class="price-label" data-es="Desde" data-en="From">Desde</span>
+        <span class="price-amount" data-es="$39/mes" data-en="$39/mo">$39/mes</span>
+        <span class="price-note" data-es="+ $120 instalación" data-en="+ $120 setup">+ $120 instalación</span>
+      </div>
+      <a href="#contact" class="service-cta" data-svc="email"><span data-es="Ver servicio" data-en="View service">Ver servicio</span><span class="cta-arrow" aria-hidden="true">→</span></a>
+    </div>
+
+  </div>
+
+  <div class="services-trust">
+    <h3 data-es="¿No sabes qué necesitas?" data-en="Not sure what you need?">¿No sabes qué necesitas?</h3>
+    <p data-es="Cuéntame qué quieres mejorar en tu negocio y te digo qué solución tiene más sentido." data-en="Tell me what you want to improve in your business and I'll tell you which solution makes the most sense.">Cuéntame qué quieres mejorar en tu negocio y te digo qué solución tiene más sentido.</p>
+    <a href="#contact" class="service-cta service-cta--ghost"><span data-es="Hablar sobre mi proyecto" data-en="Talk about my project">Hablar sobre mi proyecto</span><span class="cta-arrow" aria-hidden="true">→</span></a>
   </div>
 </div>
 
 <div class="section" id="proyectos">
-  <h2 data-es="Un ejemplo de lo que puedo construir" data-en="An example of what I can build">Un ejemplo de lo que puedo construir</h2>
+  <h2 data-es="Proyectos que he construido" data-en="Projects I've built">Proyectos que he construido</h2>
   <div class="projects-grid">
     <div class="project-card project-nexo">
       <div class="project-visual">
@@ -1830,46 +1506,22 @@
   </div>
 </div>
 
-<div class="section" id="pricing">
-  <h2 data-es="Planes claros, sin tarifas ocultas" data-en="Straightforward plans, no hidden fees">Planes claros, sin tarifas ocultas</h2>
-  <div class="pricing-grid">
-    <div class="price-card plan-inicial">
-      <div class="plan-name" data-es="Inicial" data-en="Starter">Inicial</div>
-      <div class="plan-price"><sup>$</sup>99</div>
-      <div class="plan-period" data-es="por mes" data-en="per month">por mes</div>
-      <ul class="plan-features">
-        <li data-es="1 automatización con IA configurada" data-en="1 AI automation set up">1 automatización con IA configurada</li>
-        <li data-es="Soporte por correo electrónico" data-en="Email support">Soporte por correo electrónico</li>
-        <li data-es="Reporte mensual de rendimiento" data-en="Monthly performance report">Reporte mensual de rendimiento</li>
-        <li data-es="Cancela cuando quieras" data-en="Cancel anytime">Cancela cuando quieras</li>
-      </ul>
-      <a href="#contact" class="btn-ghost" style="display:block;text-align:center;" data-es="Comenzar" data-en="Get started">Comenzar</a>
+<div class="how-section">
+  <div class="how-inner">
+    <h2 data-es="Simple desde el inicio hasta los resultados" data-en="Simple from start to results">Simple desde el inicio hasta los resultados</h2>
+    <div class="steps">
+      <div class="steps-ball" aria-hidden="true"></div>
+      <div class="step"><div class="step-num">1</div><h3 data-es="Llamada gratis" data-en="Free call">Llamada gratis</h3><p data-es="Hablamos 30 minutos sobre tu negocio. Identifico dónde la tecnología puede ahorrarte más tiempo o dinero." data-en="We talk for 30 minutes about your business. I identify where technology can save you the most time or money.">Hablamos 30 minutos sobre tu negocio. Identifico dónde la tecnología puede ahorrarte más tiempo o dinero.</p></div>
+      <div class="step"><div class="step-num">2</div><h3 data-es="Propuesta en 48 horas" data-en="Proposal in 48h">Propuesta en 48 horas</h3><p data-es="Recibes un plan claro con las herramientas, el tiempo y el costo exacto. Sin sorpresas." data-en="You get a clear plan with exact tools, timeline, and cost. No surprises.">Recibes un plan claro con las herramientas, el tiempo y el costo exacto. Sin sorpresas.</p></div>
+      <div class="step"><div class="step-num">3</div><h3 data-es="Configuración y lanzamiento" data-en="Setup & launch">Configuración y lanzamiento</h3><p data-es="Construyo y pruebo todo. Recibes una explicación completa para que entiendas qué está pasando." data-en="I build and test everything. You get a full walkthrough so you understand what's happening.">Construyo y pruebo todo. Recibes una explicación completa para que entiendas qué está pasando.</p></div>
+      <div class="step"><div class="step-num">4</div><h3 data-es="Soporte continuo" data-en="Ongoing support">Soporte continuo</h3><p data-es="Revisiones mensuales, ajustes y mejoras incluidas. Siempre estoy a un mensaje de distancia." data-en="Monthly check-ins, tweaks and improvements included. I'm always one message away.">Revisiones mensuales, ajustes y mejoras incluidas. Siempre estoy a un mensaje de distancia.</p></div>
     </div>
-    <div class="price-card plan-crecimiento featured">
-      <div class="plan-name" data-es="Crecimiento" data-en="Growth">Crecimiento</div>
-      <div class="plan-price"><sup>$</sup>249</div>
-      <div class="plan-period" data-es="por mes" data-en="per month">por mes</div>
-      <ul class="plan-features">
-        <li data-es="3 automatizaciones con IA" data-en="3 AI automations">3 automatizaciones con IA</li>
-        <li data-es="Chatbot incluido" data-en="Chatbot included">Chatbot incluido</li>
-        <li data-es="Soporte prioritario (mismo día)" data-en="Priority support (same day)">Soporte prioritario (mismo día)</li>
-        <li data-es="Llamada quincenal de seguimiento" data-en="Bi-weekly check-in call">Llamada quincenal de seguimiento</li>
-        <li data-es="Reporte mensual de rendimiento" data-en="Monthly performance report">Reporte mensual de rendimiento</li>
+    <div class="how-stack">
+      <span class="how-stack__label" data-es="Con qué lo construyo" data-en="What I build with">Con qué lo construyo</span>
+      <ul>
+        <li>HTML5</li><li>CSS3</li><li>JavaScript</li><li>Supabase</li><li>Netlify</li><li data-es="Chatbot con IA" data-en="AI chatbot">Chatbot con IA</li>
       </ul>
-      <a href="#contact" class="btn-ghost" style="display:block;text-align:center;" data-es="Comenzar" data-en="Get started">Comenzar</a>
-    </div>
-    <div class="price-card plan-empresarial">
-      <div class="plan-name" data-es="Empresarial" data-en="Business">Empresarial</div>
-      <div class="plan-price"><sup>$</sup>449</div>
-      <div class="plan-period" data-es="por mes" data-en="per month">por mes</div>
-      <ul class="plan-features">
-        <li data-es="Automatizaciones ilimitadas" data-en="Unlimited automations">Automatizaciones ilimitadas</li>
-        <li data-es="Desarrollo web incluido" data-en="Web development included">Desarrollo web incluido</li>
-        <li data-es="Soporte por canal dedicado" data-en="Dedicated support channel">Soporte por canal dedicado</li>
-        <li data-es="Llamada estratégica semanal" data-en="Weekly strategy call">Llamada estratégica semanal</li>
-        <li data-es="Panel de analíticas completo" data-en="Full analytics dashboard">Panel de analíticas completo</li>
-      </ul>
-      <a href="#contact" class="btn-ghost" style="display:block;text-align:center;" data-es="Comenzar" data-en="Get started">Comenzar</a>
+      <span class="how-stack__note" data-es="La misma base que hace funcionar este sitio." data-en="The same base that runs this site.">La misma base que hace funcionar este sitio.</span>
     </div>
   </div>
 </div>
@@ -1882,7 +1534,7 @@
         <span data-es="¿Cuánto tiempo tarda un proyecto?" data-en="How long does a project take?">¿Cuánto tiempo tarda un proyecto?</span>
         <span class="faq-icon" aria-hidden="true"></span>
       </button>
-      <div class="faq-a"><div class="faq-a-inner"><p data-es="Depende del alcance: una página informativa suele estar lista en 1-2 semanas. Un sistema con automatización o software a medida toma entre 3 y 6 semanas. Te doy un tiempo exacto después de la llamada de diagnóstico." data-en="It depends on scope: an informational site is usually ready in 1-2 weeks. A system with automation or custom software takes 3 to 6 weeks. I'll give you an exact timeline after the diagnostic call.">Depende del alcance: una página informativa suele estar lista en 1-2 semanas. Un sistema con automatización o software a medida toma entre 3 y 6 semanas. Te doy un tiempo exacto después de la llamada de diagnóstico.</p></div></div>
+      <div class="faq-a"><div class="faq-a-inner"><p data-es="Depende del alcance: una página informativa suele estar lista en 1-2 semanas. Un sistema con automatización o software a medida toma entre 3 y 6 semanas. Te doy un tiempo exacto después de la llamada gratis." data-en="It depends on scope: an informational site is usually ready in 1-2 weeks. A system with automation or custom software takes 3 to 6 weeks. I'll give you an exact timeline after the free call.">Depende del alcance: una página informativa suele estar lista en 1-2 semanas. Un sistema con automatización o software a medida toma entre 3 y 6 semanas. Te doy un tiempo exacto después de la llamada gratis.</p></div></div>
     </div>
     <div class="faq-item">
       <button type="button" class="faq-q" aria-expanded="false">
@@ -1896,14 +1548,14 @@
         <span data-es="¿Quién hace los textos y las imágenes?" data-en="Who writes the copy and creates the images?">¿Quién hace los textos y las imágenes?</span>
         <span class="faq-icon" aria-hidden="true"></span>
       </button>
-      <div class="faq-a"><div class="faq-a-inner"><p data-es="Te ayudo a estructurar y redactar el contenido con IA a partir de la información de tu negocio. Si ya tenés fotos o textos propios los uso directamente; si no, buscamos juntos las mejores opciones." data-en="I help structure and write the content with AI based on your business info. If you already have your own photos or copy I use them directly; if not, we find the best options together.">Te ayudo a estructurar y redactar el contenido con IA a partir de la información de tu negocio. Si ya tenés fotos o textos propios los uso directamente; si no, buscamos juntos las mejores opciones.</p></div></div>
+      <div class="faq-a"><div class="faq-a-inner"><p data-es="Te ayudo a estructurar y redactar el contenido con IA a partir de la información de tu negocio. Si ya tienes fotos o textos propios los uso directamente; si no, buscamos juntos las mejores opciones." data-en="I help structure and write the content with AI based on your business info. If you already have your own photos or copy I use them directly; if not, we find the best options together.">Te ayudo a estructurar y redactar el contenido con IA a partir de la información de tu negocio. Si ya tienes fotos o textos propios los uso directamente; si no, buscamos juntos las mejores opciones.</p></div></div>
     </div>
     <div class="faq-item">
       <button type="button" class="faq-q" aria-expanded="false">
         <span data-es="¿Qué pasa después de que entregas el sitio?" data-en="What happens after the site is delivered?">¿Qué pasa después de que entregas el sitio?</span>
         <span class="faq-icon" aria-hidden="true"></span>
       </button>
-      <div class="faq-a"><div class="faq-a-inner"><p data-es="Queda funcionando y con soporte incluido durante el primer mes para ajustes menores. Después podés contratar soporte continuo o pedirme cambios puntuales cuando los necesites." data-en="It stays live with support included for the first month for minor adjustments. After that you can hire ongoing support or ask for one-off changes whenever you need them.">Queda funcionando y con soporte incluido durante el primer mes para ajustes menores. Después podés contratar soporte continuo o pedirme cambios puntuales cuando los necesites.</p></div></div>
+      <div class="faq-a"><div class="faq-a-inner"><p data-es="Queda funcionando y con soporte incluido durante el primer mes para ajustes menores. Después puedes contratar soporte continuo o pedirme cambios puntuales cuando los necesites." data-en="It stays live with support included for the first month for minor adjustments. After that you can hire ongoing support or ask for one-off changes whenever you need them.">Queda funcionando y con soporte incluido durante el primer mes para ajustes menores. Después puedes contratar soporte continuo o pedirme cambios puntuales cuando los necesites.</p></div></div>
     </div>
     <div class="faq-item">
       <button type="button" class="faq-q" aria-expanded="false">
@@ -1917,11 +1569,11 @@
         <span data-es="¿Qué pasa con el dominio y el hosting?" data-en="What about the domain and hosting?">¿Qué pasa con el dominio y el hosting?</span>
         <span class="faq-icon" aria-hidden="true"></span>
       </button>
-      <div class="faq-a"><div class="faq-a-inner"><p data-es="Podés usar un dominio que ya tengas o te ayudo a comprarlo. El hosting queda a tu nombre desde el día uno — no dependés de mí para mantener tu sitio en línea." data-en="You can use a domain you already have or I'll help you buy one. Hosting is in your name from day one — you're not dependent on me to keep your site online.">Podés usar un dominio que ya tengas o te ayudo a comprarlo. El hosting queda a tu nombre desde el día uno — no dependés de mí para mantener tu sitio en línea.</p></div></div>
+      <div class="faq-a"><div class="faq-a-inner"><p data-es="Puedes usar un dominio que ya tengas o te ayudo a comprarlo. El hosting queda a tu nombre desde el día uno — no dependés de mí para mantener tu sitio en línea." data-en="You can use a domain you already have or I'll help you buy one. Hosting is in your name from day one — you're not dependent on me to keep your site online.">Puedes usar un dominio que ya tengas o te ayudo a comprarlo. El hosting queda a tu nombre desde el día uno — no dependés de mí para mantener tu sitio en línea.</p></div></div>
     </div>
     <div class="faq-item">
       <button type="button" class="faq-q" aria-expanded="false">
-        <span data-es="¿Trabajás con negocios fuera de Costa Rica?" data-en="Do you work with businesses outside Costa Rica?">¿Trabajás con negocios fuera de Costa Rica?</span>
+        <span data-es="¿Trabajas con negocios fuera de Costa Rica?" data-en="Do you work with businesses outside Costa Rica?">¿Trabajas con negocios fuera de Costa Rica?</span>
         <span class="faq-icon" aria-hidden="true"></span>
       </button>
       <div class="faq-a"><div class="faq-a-inner"><p data-es="Sí, todo el trabajo se hace en remoto: llamadas, entregas y soporte funcionan igual sin importar dónde estés." data-en="Yes, all the work happens remotely: calls, delivery and support work the same no matter where you are.">Sí, todo el trabajo se hace en remoto: llamadas, entregas y soporte funcionan igual sin importar dónde estés.</p></div></div>
@@ -1933,7 +1585,7 @@
   <div class="contact-grid">
     <div class="contact-aside">
       <h2 data-es="Encontremos tu primera victoria digital" data-en="Let's find your first digital win">Encontremos tu primera victoria digital</h2>
-      <p class="contact-lead" data-es="Cuéntanos un poco sobre tu negocio y te respondemos en menos de 24 horas con ideas — gratis y sin compromiso." data-en="Tell us a bit about your business and we'll get back to you within 24 hours with ideas — free, no obligation.">Cuéntanos un poco sobre tu negocio y te respondemos en menos de 24 horas con ideas — gratis y sin compromiso.</p>
+      <p class="contact-lead" data-es="Cuéntame un poco sobre tu negocio y te respondo en menos de 24 horas con ideas — gratis y sin compromiso." data-en="Tell me a bit about your business and I'll get back to you within 24 hours with ideas — free, no obligation.">Cuéntame un poco sobre tu negocio y te respondo en menos de 24 horas con ideas — gratis y sin compromiso.</p>
       <ul class="contact-links">
         <li id="contact-email-row" hidden>
           <a class="contact-link" id="contact-email" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span></span></a>
@@ -1951,7 +1603,7 @@
     <div class="contact-main">
       <div class="form-success" id="form-success">
         <h3 data-es="¡Mensaje enviado! ✦" data-en="Message sent! ✦">¡Mensaje enviado! ✦</h3>
-        <p data-es="Te respondemos en menos de 24 horas. ¡Gracias por tu interés!" data-en="We'll get back to you within 24 hours. Thanks for reaching out!">Te respondemos en menos de 24 horas. ¡Gracias por tu interés!</p>
+        <p data-es="Te respondo en menos de 24 horas. ¡Gracias por tu interés!" data-en="I'll get back to you within 24 hours. Thanks for reaching out!">Te respondo en menos de 24 horas. ¡Gracias por tu interés!</p>
       </div>
       <form class="contact-form" id="contact-form" onsubmit="handleSubmit(event)">
         <!-- Honeypot anti-spam: invisible para humanos, los bots lo rellenan -->
@@ -1990,7 +1642,7 @@
           <input type="hidden" id="f-via">
         </div>
         <div class="form-field"><label for="f-mensaje" data-es="Mensaje" data-en="Message">Mensaje</label>
-          <textarea id="f-mensaje" data-ph-es="Cuéntanos un poco sobre tu proyecto (opcional)" data-ph-en="Tell us a bit about your project (optional)" placeholder="Cuéntanos un poco sobre tu proyecto (opcional)"></textarea></div>
+          <textarea id="f-mensaje" data-ph-es="Cuéntame un poco sobre tu proyecto (opcional)" data-ph-en="Tell me a bit about your project (optional)" placeholder="Cuéntame un poco sobre tu proyecto (opcional)"></textarea></div>
         <div class="form-error" id="form-error" role="alert">Hubo un error al enviar. Por favor intenta de nuevo.</div>
         <div class="form-submit-row"><button type="submit" class="contact-submit" id="submit-btn" data-es="Enviar mensaje" data-en="Send message">Enviar mensaje</button></div>
       </form>
@@ -2016,7 +1668,15 @@
 
 <footer>
   <a class="logo" href="#" onclick="goHome(event)" aria-label="Nexo AI — Ir al inicio">Nexo<span class="logo-ai"> AI</span><svg class="footer-network" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 17 L12 7 L19 17"/><path d="M5 17 L19 17"/><circle cx="12" cy="7" r="1.7"/><circle cx="5" cy="17" r="1.7"/><circle cx="19" cy="17" r="1.7"/></svg></a>
-  <span data-es="© 2025 Nexo AI. Todos los derechos reservados." data-en="© 2025 Nexo AI. All rights reserved.">© 2025 Nexo AI. Todos los derechos reservados.</span>
+  <div class="footer-links" role="navigation" aria-label="Enlaces del pie de página">
+    <a href="#dt-section" data-es="Productos" data-en="Products">Productos</a>
+    <a href="#services" data-es="Servicios" data-en="Services">Servicios</a>
+    <a href="#proyectos" data-es="Proyectos" data-en="Projects">Proyectos</a>
+    <a href="#industries" data-es="Industrias" data-en="Industries">Industrias</a>
+    <a href="#faq" data-es="Preguntas" data-en="FAQ">Preguntas</a>
+    <a href="#contact" data-es="Contacto" data-en="Contact">Contacto</a>
+  </div>
+  <span data-es="© 2026 Nexo AI. Todos los derechos reservados." data-en="© 2026 Nexo AI. All rights reserved.">© 2026 Nexo AI. Todos los derechos reservados.</span>
   <span style="cursor:pointer;opacity:0.25;padding:10px;margin:-10px;display:inline-flex;" onclick="openAdmin()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openAdmin();}" role="button" tabindex="0" aria-label="Admin" title="Admin"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" style="width:14px;height:14px;vertical-align:middle"><circle cx="8" cy="8" r="2"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.1 3.1l1.4 1.4M11.5 11.5l1.4 1.4M3.1 12.9l1.4-1.4M11.5 4.5l1.4-1.4"/></svg></span>
 </footer>
 
@@ -2070,6 +1730,7 @@ function setLang(lang) {
   });
   document.querySelectorAll('[data-ph-'+lang+']').forEach(function(el){ el.placeholder=el.getAttribute('data-ph-'+lang); });
   if (window.dtRefreshIdx) window.dtRefreshIdx();
+  var nt=document.querySelector('.nav-toggle'); if(nt) nt.setAttribute('aria-label', document.querySelector('nav.menu-open')?(lang==='es'?'Cerrar menú':'Close menu'):(lang==='es'?'Abrir menú':'Open menu'));
 }
 
 // Single-select chip groups; each writes its value into the hidden input named by data-hidden.
@@ -2580,33 +2241,6 @@ function goHome(e) {
   sectionObserver.observe(container);
 })();
 
-// ── PINNED HORIZONTAL SCROLL ("lo que hay detrás") ────────────────
-(function() {
-  var tall = document.getElementById('wc-tall');
-  var frame = document.getElementById('wc-frame');
-  var track = document.querySelector('.wc-track');
-  if (!tall || !frame || !track) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (!window.matchMedia('(min-width: 900px)').matches) return;
-
-  var ticking = false;
-  function update() {
-    ticking = false;
-    var rect = tall.getBoundingClientRect();
-    var scrollableDist = tall.offsetHeight - window.innerHeight;
-    if (scrollableDist <= 0) return;
-    var progress = Math.min(Math.max(-rect.top / scrollableDist, 0), 1);
-    var maxTranslate = track.scrollWidth - frame.clientWidth;
-    track.style.transform = 'translateX(-' + Math.max(progress * maxTranslate, 0) + 'px)';
-  }
-  function onScroll() {
-    if (!ticking) { requestAnimationFrame(update); ticking = true; }
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
-  update();
-})();
-
 // ── WHAT WE BUILD: PINNED PRODUCT SHOWCASE ────────────────────────
 // Scroll progress (in "product units") scrubs each sheet's transform and
 // opacity; at rest it settles on the nearest sheet. Static list on mobile,
@@ -2700,15 +2334,6 @@ function goHome(e) {
 // these keys by DOM order. `chip` preselects the contact form option.
 (function() {
   var SERVICES = [
-    { key: 'web', chip: 'Página web profesional',
-      t: ['Páginas web que convierten', 'Websites that convert'],
-      sum: ['Sitios rápidos y hechos a tu medida, pensados para que el visitante te escriba, te llame o compre.', 'Fast, tailor-made sites built so visitors message you, call you or buy.'],
-      price: { pre: ['Desde', 'From'], amt: '$350', note: ['Pago único', 'One-time'] },
-      inc: [['Diseño a medida, sin plantillas recicladas', 'Custom design, no recycled templates'], ['Adaptado a celular, tablet y computadora', 'Fully responsive on phone, tablet and desktop'], ['Formulario de contacto y botón de WhatsApp', 'Contact form and WhatsApp button'], ['Optimización básica para aparecer en Google', 'Basic SEO to show up on Google'], ['Dominio y hosting configurados', 'Domain and hosting set up'], ['Un mes de soporte incluido tras la entrega', 'One month of support after delivery']],
-      opt: [['Landing page', 'Landing page', 'Una sola página con un objetivo claro.', 'A single page with one clear goal.'], ['Sitio informativo', 'Informational site', 'Inicio, servicios, nosotros y contacto.', 'Home, services, about and contact.'], ['Tienda en línea', 'Online store', 'Catálogo, carrito y cobro. El precio varía según la cantidad de productos.', 'Catalog, cart and checkout. Price varies with the number of products.'], ['Portafolio', 'Portfolio', 'Galería de trabajos para profesionales y creativos.', 'A gallery of work for professionals and creatives.']],
-      time: ['1–2 semanas', '1–2 weeks'],
-      steps: [['Conversamos sobre tu negocio y definimos la estructura', 'We talk about your business and define the structure'], ['Diseñamos y desarrollamos; ves avances antes de publicar', 'We design and build; you see progress before launch'], ['Revisión final, publicación y capacitación para editarlo', 'Final review, launch and training to edit it yourself']],
-      fit: ['Negocios que hoy dependen solo de redes sociales y quieren una presencia propia y profesional.', 'Businesses that rely only on social media and want a professional presence of their own.'] },
     { key: 'chat', chip: 'Chatbot o automatización con IA',
       t: ['Atención al cliente 24/7', '24/7 customer support'],
       sum: ['Un asistente de IA entrenado con la información de tu negocio que responde, agenda y captura clientes mientras tú trabajas.', 'An AI assistant trained on your business info that answers, books and captures leads while you work.'],
@@ -2716,7 +2341,7 @@ function goHome(e) {
       inc: [['Asistente entrenado con tus servicios, precios y horarios', 'Assistant trained on your services, prices and hours'], ['Respuestas inmediatas a preguntas frecuentes', 'Instant answers to frequent questions'], ['Captura de datos de clientes potenciales', 'Lead capture'], ['Agenda de citas y reservas', 'Appointment and booking scheduling'], ['Traspaso a una persona cuando hace falta', 'Handoff to a human when needed'], ['Reporte mensual de conversaciones', 'Monthly conversation report']],
       opt: [['Chat en tu sitio web', 'Website chat', 'Burbuja de chat integrada a tu página.', 'A chat bubble built into your site.'], ['WhatsApp', 'WhatsApp', 'Atención en el canal que ya usan tus clientes.', 'Support on the channel your customers already use.'], ['Reservas y citas', 'Bookings', 'El asistente agenda directo en tu calendario.', 'The assistant books straight into your calendar.'], ['Preguntas frecuentes', 'FAQ', 'Respuestas sobre precios, ubicación y servicios.', 'Answers about pricing, location and services.']],
       time: ['1–2 semanas de instalación', '1–2 weeks to set up'],
-      steps: [['Reunimos la información de tu negocio', 'We gather your business information'], ['Entrenamos y probamos el asistente contigo', 'We train and test the assistant with you'], ['Lo activamos y lo mejoramos con conversaciones reales', 'We launch it and improve it with real conversations']],
+      steps: [['Reúno la información de tu negocio', 'I gather your business information'], ['Entreno y pruebo el asistente contigo', 'I train and test the assistant with you'], ['Lo activo y lo mejoro con conversaciones reales', 'I launch it and improve it with real conversations']],
       fit: ['Negocios que reciben las mismas preguntas todos los días o pierden clientes por no responder a tiempo.', 'Businesses that get the same questions every day or lose customers by not replying in time.'] },
     { key: 'auto', chip: 'Chatbot o automatización con IA',
       t: ['Automatización con IA', 'AI automation'],
@@ -2725,17 +2350,8 @@ function goHome(e) {
       inc: [['Análisis de qué tareas te consumen más tiempo', 'Review of which tasks eat up the most time'], ['Automatizaciones configuradas y probadas', 'Automations configured and tested'], ['Conexión con las herramientas que ya usas', 'Integration with the tools you already use'], ['Ajustes mientras la automatización esté activa', 'Adjustments while the automation is active'], ['Documentación simple de cómo funciona', 'Simple documentation of how it works']],
       opt: [['Facturación y cobros', 'Invoicing and payments', 'Facturas y recordatorios de pago automáticos.', 'Automatic invoices and payment reminders.'], ['Seguimiento de clientes', 'Client follow-up', 'Correos y avisos en el momento justo.', 'Emails and nudges at the right moment.'], ['Cotizaciones', 'Quotes', 'Cotizaciones generadas a partir de un formulario.', 'Quotes generated from a form.'], ['Reportes', 'Reports', 'Resúmenes automáticos de ventas y actividad.', 'Automatic summaries of sales and activity.']],
       time: ['1–3 semanas según la cantidad de procesos', '1–3 weeks depending on the number of processes'],
-      steps: [['Identificamos qué conviene automatizar primero', 'We identify what is worth automating first'], ['Construimos y probamos con datos reales', 'We build and test with real data'], ['Lo activamos y medimos el tiempo que ahorras', 'We switch it on and measure the time you save']],
+      steps: [['Identifico qué conviene automatizar primero', 'I identify what is worth automating first'], ['Construyo y pruebo con datos reales', 'I build and test with real data'], ['Lo activo y mido el tiempo que ahorras', 'I switch it on and measure the time you save']],
       fit: ['Negocios que hacen a mano tareas que se repiten: copiar datos, enviar recordatorios, armar reportes.', 'Businesses that do repeatable work by hand: copying data, sending reminders, building reports.'] },
-    { key: 'software', chip: 'Software o sistema a medida',
-      t: ['Software a medida', 'Custom software'],
-      sum: ['Sistemas y herramientas diseñados específicamente para la forma en que trabaja tu negocio.', 'Systems and tools designed specifically for the way your business works.'],
-      price: null,
-      inc: [['Análisis de tu flujo de trabajo real', 'Analysis of your real workflow'], ['Diseño de la interfaz pensado para tu equipo', 'Interface design built around your team'], ['Roles y permisos según quién usa el sistema', 'Roles and permissions for each user'], ['Integración con lo que ya utilizas', 'Integration with what you already use'], ['Capacitación y documentación', 'Training and documentation'], ['Soporte inicial tras el lanzamiento', 'Initial support after launch']],
-      opt: [['CRM interno', 'Internal CRM', 'Clientes, oportunidades y seguimiento en un solo lugar.', 'Customers, leads and follow-up in one place.'], ['Panel de control', 'Dashboard', 'Tus números clave, actualizados solos.', 'Your key numbers, always up to date.'], ['Sistema de gestión', 'Management system', 'Inventario, pedidos, citas o expedientes.', 'Inventory, orders, appointments or records.'], ['Integraciones', 'Integrations', 'Conecta sistemas que hoy no se hablan entre sí.', 'Connect systems that don’t talk to each other today.']],
-      time: ['3–6 semanas según el alcance', '3–6 weeks depending on scope'],
-      steps: [['Levantamos requisitos y acordamos el alcance', 'We gather requirements and agree on scope'], ['Construimos por etapas; validas cada una', 'We build in stages; you validate each one'], ['Lanzamos, capacitamos y damos seguimiento', 'We launch, train your team and follow up']],
-      fit: ['Negocios con procesos que ya no caben en hojas de cálculo ni en programas genéricos.', 'Businesses with processes that have outgrown spreadsheets and off-the-shelf software.'] },
     { key: 'content', chip: 'Contenido para redes sociales',
       t: ['Contenido con IA', 'AI content'],
       sum: ['Contenido para redes sociales, blogs y newsletters creado y programado de forma automática, con tu revisión antes de salir.', 'Content for social media, blogs and newsletters created and scheduled automatically, reviewed by you before it goes out.'],
@@ -2743,7 +2359,7 @@ function goHome(e) {
       inc: [['Calendario editorial mensual', 'Monthly editorial calendar'], ['Textos adaptados a la voz de tu marca', 'Copy written in your brand’s voice'], ['Publicaciones programadas', 'Scheduled posts'], ['Tu aprobación antes de publicar', 'Your approval before publishing'], ['Informe mensual de resultados', 'Monthly results report']],
       opt: [['Redes sociales', 'Social media', 'Publicaciones para las cuentas de tu negocio.', 'Posts for your business accounts.'], ['Blog', 'Blog', 'Artículos que ayudan a que te encuentren en Google.', 'Articles that help people find you on Google.'], ['Newsletter', 'Newsletter', 'Correos periódicos a tu lista de clientes.', 'Regular emails to your customer list.'], ['Calendario editorial', 'Content calendar', 'Qué publicar y cuándo, ya planificado.', 'What to post and when, already planned.']],
       time: ['Primer calendario en la primera semana', 'First calendar within the first week'],
-      steps: [['Aprendemos la voz y los objetivos de tu marca', 'We learn your brand voice and goals'], ['Creamos el calendario y los primeros contenidos', 'We create the calendar and first pieces'], ['Apruebas, programamos y ajustamos cada mes', 'You approve, we schedule and adjust every month']],
+      steps: [['Aprendo la voz y los objetivos de tu marca', 'I learn your brand voice and goals'], ['Creo el calendario y los primeros contenidos', 'I create the calendar and first pieces'], ['Apruebas, programo y ajusto cada mes', 'You approve, I schedule and adjust every month']],
       fit: ['Negocios que saben que deben publicar, pero no tienen el tiempo de hacerlo con constancia.', 'Businesses that know they should post but don’t have the time to do it consistently.'] },
     { key: 'email', chip: 'Chatbot o automatización con IA',
       t: ['Email y seguimiento', 'Email & follow-up'],
@@ -2752,22 +2368,15 @@ function goHome(e) {
       inc: [['Plantillas de correo con la imagen de tu marca', 'Email templates with your branding'], ['Recordatorios de citas y pagos', 'Appointment and payment reminders'], ['Solicitud automática de reseñas', 'Automatic review requests'], ['Seguimiento después de cada venta', 'Follow-up after every sale'], ['Configuración y pruebas incluidas', 'Setup and testing included']],
       opt: [['Recordatorios', 'Reminders', 'Menos citas perdidas y pagos olvidados.', 'Fewer missed appointments and forgotten payments.'], ['Reseñas', 'Reviews', 'Pide opiniones justo después del servicio.', 'Ask for feedback right after the service.'], ['Seguimiento post-venta', 'Post-sale follow-up', 'Mantén la relación con quien ya te compró.', 'Keep the relationship with customers who already bought.'], ['Bienvenida automática', 'Automatic welcome', 'Un buen primer mensaje para cada cliente nuevo.', 'A good first message for every new customer.']],
       time: ['Aproximadamente 1 semana', 'About 1 week'],
-      steps: [['Definimos qué mensajes necesitas y cuándo salen', 'We define which messages you need and when they go out'], ['Diseñamos las plantillas y las conectamos', 'We design the templates and wire them up'], ['Probamos y lo dejamos funcionando solo', 'We test and leave it running on its own']],
-      fit: ['Negocios con clientes recurrentes o citas, donde el seguimiento hoy depende de acordarse.', 'Businesses with recurring clients or appointments, where follow-up today depends on remembering.'] },
-    { key: 'workflows', chip: 'Chatbot o automatización con IA',
-      t: ['Flujos de trabajo', 'Custom workflows'],
-      sum: ['Conecta tus herramientas y elimina procesos manuales que consumen tiempo.', 'Connect your tools and eliminate manual processes that waste time.'],
-      price: null,
-      inc: [['Mapeo de cómo trabajas hoy', 'Map of how you work today'], ['Conexión entre tus aplicaciones', 'Connections between your apps'], ['Alertas y avisos automáticos', 'Automatic alerts and notifications'], ['Reportes que se generan solos', 'Reports that build themselves'], ['Pruebas y documentación', 'Testing and documentation']],
-      opt: [['Conexión de apps', 'App connections', 'Que tus herramientas compartan datos sin copiar y pegar.', 'Let your tools share data without copy and paste.'], ['Alertas', 'Alerts', 'Avisos cuando algo requiere tu atención.', 'Notifications when something needs your attention.'], ['Reportes automáticos', 'Automatic reports', 'Informes listos sin armarlos a mano.', 'Reports ready without building them by hand.'], ['Tareas repetitivas', 'Repetitive tasks', 'Lo que hoy haces a mano, hecho por el sistema.', 'What you do by hand today, done by the system.']],
-      time: ['2–4 semanas según la cantidad de flujos', '2–4 weeks depending on the number of workflows'],
-      steps: [['Mapeamos tus procesos y elegimos por dónde empezar', 'We map your processes and pick where to start'], ['Construimos y probamos cada flujo', 'We build and test each workflow'], ['Lo activamos y lo documentamos para tu equipo', 'We switch it on and document it for your team']],
-      fit: ['Negocios que usan varias herramientas y pierden tiempo pasando información de una a otra.', 'Businesses that use several tools and lose time moving information between them.'] }
+      steps: [['Defino qué mensajes necesitas y cuándo salen', 'I define which messages you need and when they go out'], ['Diseño las plantillas y las conecto', 'I design the templates and wire them up'], ['Pruebo y lo dejo funcionando solo', 'I test and leave it running on its own']],
+      fit: ['Negocios con clientes recurrentes o citas, donde el seguimiento hoy depende de acordarse.', 'Businesses with recurring clients or appointments, where follow-up today depends on remembering.'] }
   ];
 
   // Product-type details reused by the "Ver detalles" cards in the build section.
   var PRODUCTS = {
  "web-landing": {
+ "price": { "pre": ["Desde", "From"], "amt": "$350", "note": ["Pago único", "One-time"] },
+ 
   "t": [
    "Landing pages",
    "Landing pages"
@@ -2801,6 +2410,8 @@ function goHome(e) {
   "chip": "Página web profesional"
  },
  "web-corp": {
+ "price": { "pre": ["Desde", "From"], "amt": "$350", "note": ["Pago único", "One-time"] },
+ 
   "t": [
    "Sitios corporativos",
    "Corporate sites"
@@ -3145,10 +2756,11 @@ function goHome(e) {
     setTimeout(finishClose, 380);
   }
 
-  document.querySelectorAll('.service-row .service-cta').forEach(function(a, i) {
-    if (!SERVICES[i]) return;
+  document.querySelectorAll('.service-row .service-cta').forEach(function(a) {
+    var svc = SERVICES.filter(function(k) { return k.key === a.getAttribute('data-svc'); })[0];
+    if (!svc) return;
     a.setAttribute('aria-haspopup', 'dialog');
-    a.addEventListener('click', function(e) { e.preventDefault(); openDrawer(SERVICES[i], a); });
+    a.addEventListener('click', function(e) { e.preventDefault(); openDrawer(svc, a); });
   });
   document.querySelectorAll('.dt-more').forEach(function(btn) {
     var data = PRODUCTS[btn.getAttribute('data-product')];
@@ -3174,6 +2786,34 @@ function goHome(e) {
     var contact = document.getElementById('contact');
     if (contact) contact.scrollIntoView({ behavior: 'smooth' });
   });
+})();
+
+// ── NAV: mobile menu + current-section marker ─────────────────────
+(function() {
+  var nav = document.querySelector('nav[aria-label="Navegación principal"]');
+  if (!nav) return;
+  var btn = nav.querySelector('.nav-toggle'), panel = nav.querySelector('.nav-links-text');
+  var links = [].slice.call(panel.querySelectorAll('a[href^="#"]:not(.cta-small)'));
+  function label(open) { var es = (typeof currentLang === 'undefined') || currentLang === 'es'; return open ? (es ? 'Cerrar menú' : 'Close menu') : (es ? 'Abrir menú' : 'Open menu'); }
+  function setOpen(open) { nav.classList.toggle('menu-open', open); btn.setAttribute('aria-expanded', open); btn.setAttribute('aria-label', label(open)); }
+  btn.addEventListener('click', function() { setOpen(!nav.classList.contains('menu-open')); });
+  links.forEach(function(a) { a.addEventListener('click', function() { setOpen(false); }); });
+  panel.querySelector('.cta-small').addEventListener('click', function() { setOpen(false); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && nav.classList.contains('menu-open')) { setOpen(false); btn.focus(); } });
+  document.addEventListener('click', function(e) { if (nav.classList.contains('menu-open') && !nav.contains(e.target)) setOpen(false); });
+  matchMedia('(min-width: 1101px)').addEventListener('change', function(e) { if (e.matches) setOpen(false); });
+
+  if (!('IntersectionObserver' in window)) return;
+  var byId = {};
+  links.forEach(function(a) { var t = document.querySelector(a.getAttribute('href')); if (t) byId[t.id] = a; });
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(en) {
+      var a = byId[en.target.id]; if (!a) return;
+      if (en.isIntersecting) { links.forEach(function(l) { l.classList.remove('is-current'); l.removeAttribute('aria-current'); }); a.classList.add('is-current'); a.setAttribute('aria-current', 'true'); }
+      else if (a.classList.contains('is-current')) { a.classList.remove('is-current'); a.removeAttribute('aria-current'); }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  Object.keys(byId).forEach(function(id) { io.observe(document.getElementById(id)); });
 })();
 
 // ── FAQ ACCORDION ───────────────────────────────────────────────
@@ -3645,11 +3285,10 @@ function goHome(e) {
 (function(){
   window.chatOpen=false; var chatHistory=[], isTyping=false, qrStep=0;
 
-  var SYSTEM = "Eres Nexo, el asistente virtual de Nexo AI, empresa de tecnología e IA para pequeños negocios en Costa Rica.\n\nSERVICIOS:\n- Páginas web profesionales (desde $350)\n- Software a medida (desde $500)\n- Chatbot de IA 24/7 (desde $150 instalación + $49/mes)\n- Contenido redes sociales con IA (desde $99/mes)\n- Automatización de correos (desde $120 + $39/mes)\n- Flujos de trabajo personalizados (cotización)\n\nPLANES MENSUALES:\n- Inicial $99/mes: 1 automatización, soporte correo\n- Crecimiento $249/mes: 3 automatizaciones, chatbot, soporte prioritario\n- Empresarial $449/mes: todo ilimitado, desarrollo web incluido\n\nPROCESO: llamada gratis 20min → propuesta 48h → configuración → soporte continuo.\n\nPERSONALIDAD: amigable, directo, respuestas cortas (máx 3-4 líneas). Español por defecto, inglés si el usuario escribe en inglés. Si muestran interés, invita a agendar la llamada gratis con nuestro equipo. Eres la demostración en vivo del producto.";
 
   var QR = [
     ['¿Qué servicios ofrecen?','¿Cuánto cuesta una web?','¿Cómo funciona el chatbot?'],
-    ['¿Tienen planes mensuales?','¿Cuánto tardan en instalar?','Quiero una llamada gratis']
+    ['¿Cuánto cuesta el chatbot?','¿Cuánto tardan en instalar?','Quiero una llamada gratis']
   ];
 
   window.toggleChat = function(){
