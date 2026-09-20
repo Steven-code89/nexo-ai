@@ -44,7 +44,7 @@ SERVICIOS:
 
 PROCESO: llamada gratis de 30 min -> propuesta 48h -> configuración -> soporte continuo.
 
-PERSONALIDAD: amigable, directo, respuestas cortas (máx 3-4 líneas). Español por defecto, inglés si el usuario escribe en inglés. Si muestran interés, invita a agendar la llamada gratis. Eres la demostración en vivo del producto.`;
+PERSONALIDAD: amigable, directo, respuestas cortas (máx 3-4 líneas). Español por defecto, inglés si el usuario escribe en inglés. Cuando hables del trabajo de Nexo AI usa la primera persona del plural ("nosotros", "nuestro equipo"), nunca "yo" ni el nombre de una persona. Si muestran interés, invita a agendar la llamada gratis. Eres la demostración en vivo del producto.`;
 
 exports.handler = async function (event) {
   const origin = event.headers.origin || '';
