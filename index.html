@@ -295,7 +295,7 @@
   
 
   /* ── HOW IT WORKS ── */
-  .how-section { background: var(--dark-bg); color: var(--paper); padding: 5rem 5vw; }
+  .how-section { background: var(--dark-end); color: var(--paper); padding: 5rem 5vw; }
   .how-inner { max-width: 1100px; margin: 0 auto; }
   .how-inner h2 { color: var(--paper); }
   .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 3rem; margin-top: 3rem; position: relative; }
@@ -682,17 +682,22 @@
      Each .ind-card is sticky with a slightly larger `top` than the one
      before it, so as you scroll each new card settles a bit lower than
      the last instead of covering it — a "peeking deck" effect. */
-  #industries { max-width: 1100px; }
+  /* Dark section: the page dims into black as you scroll down into it. The
+     fade lives in the section's own top padding (::before), so it is driven
+     by scroll position alone and no text ever sits on the mid-tone. */
+  #industries { --ind-fade: clamp(9rem, 34vh, 17rem); position: relative; max-width: none; color: var(--paper); background: linear-gradient(180deg, #0b0b0e 0%, var(--dark-end) 100%); padding-top: var(--ind-fade); padding-inline: max(5vw, calc((100% - 1100px) / 2 + 5vw)); scroll-margin-top: -22vh; }
+  #industries::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: var(--ind-fade); pointer-events: none; background: linear-gradient(to bottom, var(--paper) 0%, rgba(244,246,251,0.9) 12%, rgba(244,246,251,0.72) 28%, rgba(244,246,251,0.45) 48%, rgba(244,246,251,0.2) 70%, rgba(244,246,251,0.06) 88%, rgba(244,246,251,0) 100%); }
+  #industries > * { position: relative; }
   .ind-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: start; }
   .ind-aside { position: sticky; top: 6rem; align-self: start; }
-  .ind-aside h2 { text-align: left; margin: 0 0 1rem 0; max-width: none; }
-  .ind-aside p { color: var(--muted); font-size: 0.98rem; max-width: 380px; margin: 0 0 1.5rem; }
-  .ind-count { display: inline-block; font-family: 'Space Grotesk', sans-serif; font-size: 0.78rem; font-weight: 700; color: var(--accent); letter-spacing: 0.02em; padding-top: 0.75rem; border-top: 2px solid var(--accent); }
+  .ind-aside h2 { text-align: left; margin: 0 0 1rem 0; max-width: none; color: var(--paper); }
+  .ind-aside p { color: rgba(244,246,251,0.68); font-size: 0.98rem; max-width: 380px; margin: 0 0 1.5rem; }
+  .ind-count { display: inline-block; font-family: 'Space Grotesk', sans-serif; font-size: 0.78rem; font-weight: 700; color: var(--energy-light); letter-spacing: 0.02em; padding-top: 0.75rem; border-top: 2px solid var(--energy); }
   .ind-stack { display: flex; flex-direction: column; }
   .ind-card {
     position: sticky;
     background: var(--card-bg); border: 1px solid var(--border); border-radius: 18px;
-    padding: 2.25rem; box-shadow: 0 16px 40px rgba(11,17,32,0.07);
+    padding: 2.25rem; box-shadow: 0 16px 40px rgba(0,0,0,0.55);
   }
   .ind-card + .ind-card { margin-top: 1.5rem; }
   .ind-card:nth-child(1) { top: 6rem; }
